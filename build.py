@@ -46,6 +46,12 @@ for label,f in files:
             text-indent: -2em;
             padding-left: 2em;
         }""")
+        # 「提倡包容性與多元語言」卡片加說明連結，點選開啟無偏見語言面板（sources/apa_bias_free.html）
+        a='規範性別、種族、身心障礙等議題的客觀用語，強調去偏見與包容性的學術溝通方式。</p>'
+        assert h.count(a)==1; h=h.replace(a,a+'''
+                    <button type="button" onclick="openBiasFree()" class="mt-3 inline-flex items-center text-xs font-semibold text-brand-600 hover:text-brand-700 hover:underline"><i class="fa-solid fa-circle-info mr-1.5"></i>了解更多：無偏見語言指引<i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i></button>''')
+        assert h.count('</body>')==1
+        h=h.replace('</body>',open(U+'apa_bias_free.html',encoding='utf-8').read()+'</body>')
     if f=='Natural_Intelligence_in_Design_answer.html':
         a='Natural intelligence in design, Design Studies, 20, 25-39.'
         assert h.count(a)==2; h=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>, 25–39.')
@@ -59,7 +65,7 @@ for label,f in files:
 # 各分頁更新紀錄（新的在後面）
 LOG=[
  [('2026/09/23','加入網站'),('2026/09/23','修正 Background 四點說明')],
- [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框')],
+ [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明')],
  [('2026/09/23','加入網站')],
  [('2026/09/23','加入網站')],
  [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）')],

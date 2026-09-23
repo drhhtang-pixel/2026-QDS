@@ -1,0 +1,117 @@
+<!-- 無偏見語言說明面板：由 build.py 插入 apa.html 的 </body> 之前 -->
+<style>
+    .bf-avoid { color: #be123c; background: #fff1f2; text-decoration: line-through; text-decoration-color: #fda4af; padding: 0.05em 0.35em; border-radius: 0.25rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; white-space: nowrap; }
+    .bf-use { color: #047857; background: #ecfdf5; padding: 0.05em 0.35em; border-radius: 0.25rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; white-space: nowrap; }
+    .bf-term { color: #035485; background: #f0f7ff; padding: 0.05em 0.35em; border-radius: 0.25rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; white-space: nowrap; }
+    #biasFreeModal ul > li { position: relative; padding-left: 1.1em; }
+    #biasFreeModal ul > li::before { content: ""; position: absolute; left: 0.2em; top: 0.7em; width: 0.35em; height: 0.35em; border-radius: 9999px; background: #0284c7; }
+</style>
+<div id="biasFreeModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="biasFreeTitle">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeBiasFree()"></div>
+    <div class="relative mx-auto my-4 sm:my-10 w-[calc(100%-2rem)] max-w-3xl max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-5rem)] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-gradient-to-r from-brand-900 to-slate-900 text-white px-6 py-5 flex items-start justify-between gap-4 shrink-0">
+            <div>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-brand-500/20 text-brand-100 border border-brand-400/30 mb-2">
+                    <i class="fa-solid fa-heart mr-1.5"></i>APA 7th 手冊第 5 章
+                </span>
+                <h2 id="biasFreeTitle" class="text-xl sm:text-2xl font-bold leading-tight">無偏見語言指引</h2>
+                <p class="text-xs text-slate-300 mt-1">Bias-Free Language Guidelines</p>
+            </div>
+            <button onclick="closeBiasFree()" class="shrink-0 w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 transition flex items-center justify-center" aria-label="關閉">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="overflow-y-auto px-6 py-6 space-y-6 text-sm text-slate-700 leading-relaxed">
+            <p>這句話指的是 APA 第七版特別加強的<strong class="text-slate-900">「無偏見語言指引」（Bias-Free Language Guidelines）</strong>，在手冊第 5 章。它要求寫學術文章時，描述人或群體所用的字詞要<strong class="text-slate-900">準確、尊重、不帶刻板印象</strong>。背後的理念是：用詞本身就可能傳遞偏見，而學術寫作應該避免這種無意間的貶低或排除。</p>
+
+            <div class="bg-brand-50 border border-brand-100 rounded-xl p-4 text-brand-900">
+                講義上的「包容性與多元語言」，<strong>「多元」</strong>指的是承認人的多樣性，<strong>「包容」</strong>指的是不讓任何群體因為用詞而被邊緣化。以下用幾個常見議題舉例。
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                <span>圖例：</span>
+                <span><span class="bf-avoid">避免</span> 應避免的用詞</span>
+                <span><span class="bf-use">建議</span> 建議改用的用詞</span>
+            </div>
+
+            <section class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+                <h3 class="text-brand-600 font-bold text-base mb-3 flex items-center"><i class="fa-solid fa-venus-mars mr-2"></i>性別</h3>
+                <ul class="space-y-2">
+                    <li>用單數的 <span class="bf-use">they</span> 指稱性別未知或不願透露性別的人，取代 <span class="bf-avoid">he/she</span> 或 <span class="bf-avoid">he or she</span>。例如：<span class="bf-term" style="white-space: normal;">Each participant completed their survey.</span></li>
+                    <li>避免預設性別的職稱，例如用 <span class="bf-use">chairperson</span> 取代 <span class="bf-avoid">chairman</span>，用 <span class="bf-use">firefighter</span> 取代 <span class="bf-avoid">fireman</span>。</li>
+                    <li>區分 <span class="bf-term">sex</span>（生理性別）與 <span class="bf-term">gender</span>（社會性別），不混用。</li>
+                </ul>
+            </section>
+
+            <section class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+                <h3 class="text-brand-600 font-bold text-base mb-3 flex items-center"><i class="fa-solid fa-earth-asia mr-2"></i>種族與族裔</h3>
+                <ul class="space-y-2">
+                    <li><span class="bf-term">Black</span>、<span class="bf-term">White</span>、<span class="bf-term">Asian</span> 等種族名稱首字母大寫，因為它們是專有名詞。</li>
+                    <li>盡量寫得具體，例如寫 <span class="bf-use">Taiwanese American</span>、<span class="bf-use">Korean American</span>，而不是籠統的 <span class="bf-avoid">Asian</span>。</li>
+                    <li>避免 <span class="bf-avoid">minority</span>（少數族群）這類帶有位階意味的說法，可以改用 <span class="bf-use">people of color</span> 或直接寫出具體群體。</li>
+                </ul>
+            </section>
+
+            <section class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+                <h3 class="text-brand-600 font-bold text-base mb-3 flex items-center"><i class="fa-solid fa-universal-access mr-2"></i>身心障礙</h3>
+                <p class="mb-3">APA 接受兩種寫法，視族群偏好選用：</p>
+                <div class="grid sm:grid-cols-2 gap-3 mb-3">
+                    <div class="bg-white border border-slate-200 rounded-lg p-3">
+                        <div class="font-bold text-slate-800 mb-1">以人為先（person-first）</div>
+                        <div class="mb-1"><span class="bf-use">people with disabilities</span>、<span class="bf-use">a person with autism</span></div>
+                        <div class="text-slate-500 text-xs">強調「人」而不是障礙。</div>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-3">
+                        <div class="font-bold text-slate-800 mb-1">以身分為先（identity-first）</div>
+                        <div class="mb-1"><span class="bf-use">autistic people</span>、<span class="bf-use">Deaf people</span></div>
+                        <div class="text-slate-500 text-xs">部分社群偏好這種寫法，視障礙為身分認同的一部分。</div>
+                    </div>
+                </div>
+                <p>但要避免負面或同情式的用語，例如 <span class="bf-avoid">suffering from</span>（受…所苦）、<span class="bf-avoid">wheelchair-bound</span>（被綁在輪椅上）、<span class="bf-avoid">victim of</span>（…的受害者）。可以改寫為 <span class="bf-use">uses a wheelchair</span>、<span class="bf-use">has multiple sclerosis</span>。</p>
+            </section>
+
+            <section class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+                <h3 class="text-brand-600 font-bold text-base mb-3 flex items-center"><i class="fa-solid fa-users mr-2"></i>其他議題</h3>
+                <ul class="space-y-2">
+                    <li><strong class="text-slate-800">年齡：</strong>用 <span class="bf-use">older adults</span> 取代 <span class="bf-avoid">the elderly</span> 或 <span class="bf-avoid">senior citizens</span>。</li>
+                    <li><strong class="text-slate-800">性傾向：</strong>用 <span class="bf-use">sexual orientation</span> 取代 <span class="bf-avoid">sexual preference</span>，因為 preference 暗示是自主選擇。</li>
+                    <li><strong class="text-slate-800">社經地位：</strong>用 <span class="bf-use">people with low income</span> 取代 <span class="bf-avoid">the poor</span>。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3 class="text-slate-900 font-bold text-base mb-3 flex items-center"><i class="fa-solid fa-compass text-brand-600 mr-2"></i>核心原則</h3>
+                <p class="mb-3">可以歸納成三點：</p>
+                <ol class="grid sm:grid-cols-3 gap-3">
+                    <li class="bg-white border border-slate-200 rounded-xl p-4"><div class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center mb-2">1</div>只在與研究相關時才提及這些特徵，無關的就不寫。</li>
+                    <li class="bg-white border border-slate-200 rounded-xl p-4"><div class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center mb-2">2</div>描述要具體精確，不籠統歸類。</li>
+                    <li class="bg-white border border-slate-200 rounded-xl p-4"><div class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center mb-2">3</div>尊重當事群體自己偏好的稱呼。</li>
+                </ol>
+            </section>
+
+            <p>所謂「客觀用語」並不是政治正確的口號，而是為了讓研究描述更精確，也避免讀者因用詞而產生偏誤的推論。</p>
+
+            <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-4 text-amber-900 flex items-start">
+                <i class="fa-solid fa-lightbulb text-amber-600 mt-0.5 mr-3"></i>
+                <p>對質性設計研究來說，這點特別重要。訪談、觀察的對象往往就是具體的人，寫研究方法和結果時，描述受訪者的方式本身就會影響研究的可信度與倫理品質。</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openBiasFree() {
+        document.getElementById('biasFreeModal').classList.remove('hidden');
+        document.documentElement.style.overflow = 'hidden';
+    }
+    function closeBiasFree() {
+        document.getElementById('biasFreeModal').classList.add('hidden');
+        document.documentElement.style.overflow = '';
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !document.getElementById('biasFreeModal').classList.contains('hidden')) {
+            e.stopPropagation();
+            closeBiasFree();
+        }
+    }, true);
+</script>

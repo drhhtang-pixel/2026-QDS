@@ -22,6 +22,7 @@
 └── sources/         ← 各份講義原始檔
     ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方)
     ├── apa.html
+    ├── apa_bias_free.html   (APA「無偏見語言指引」說明面板，build.py 插入 apa.html；可直接編輯)
     ├── Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html
     ├── AI質化研究工具與平台全覽指南.html
     ├── Natural_Intelligence_in_Design_answer.html
@@ -77,6 +78,8 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html
 - 頁尾顯示「本頁最後更新」日期與「更新紀錄」面板，**各分頁日期各自獨立**。
 - 分頁 5 參考文獻標點依 APA 修正：`Natural intelligence in design. *Design Studies, 20*, 25–39.`（老師同意）。
 - 建立 GitHub repository 並啟用 Pages（見下方）。
+- 分頁 2：參考文獻範例首行超出外框 → 懸掛縮排改套在每筆 `<p>`（補丁）。
+- 分頁 2：「提倡包容性與多元語言」卡片加「了解更多：無偏見語言指引」按鈕，開啟頁內說明面板（內容在 `sources/apa_bias_free.html`）。
 
 ## 更新紀錄規則（重要）
 
