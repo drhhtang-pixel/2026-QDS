@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>第三堂課講義</title>
+<title>/*TITLE*/</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -39,6 +39,10 @@ header{background:var(--bar);border-bottom:1px solid var(--line);flex:none}
   padding:.8rem 1.25rem .35rem;
 }
 .top h1{font-size:1.05rem;font-weight:700;margin:0;letter-spacing:.02em}
+.home{font-size:.8rem;color:var(--accent);text-decoration:none;white-space:nowrap;align-self:center}
+.home::before{content:"‹ "}
+.home:hover{text-decoration:underline}
+.home:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 .top p{margin:0;font-size:.85rem;color:var(--muted)}
 nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 nav::-webkit-scrollbar{display:none}
@@ -96,7 +100,8 @@ footer{
 <body>
 <header>
   <div class="top">
-    <h1>第三堂課講義</h1>
+    <a class="home" href="../" aria-label="回課程目錄">課程目錄</a>
+    <h1>/*TITLE*/</h1>
     <p>依上課講述順序排列</p>
     <div class="pager">
       <button id="prev" type="button" aria-label="上一份講義">上一份</button>
@@ -155,7 +160,7 @@ footer{
     btns[i].scrollIntoView({block:'nearest',inline:'nearest'});
     document.getElementById('prev').disabled=i===0;
     document.getElementById('next').disabled=i===D.docs.length-1;
-    document.title=D.docs[i].t+'｜第三堂課講義';
+    document.title=D.docs[i].t+'｜'+D.title;
     var lg=D.docs[i].log||[];
     document.getElementById('updated').textContent=lg.length?lg[lg.length-1][0]:'—';
     var ol=document.getElementById('logList');ol.innerHTML='';
@@ -164,7 +169,7 @@ footer{
       t.textContent=e[0];sp.textContent=e[1];li.appendChild(t);li.appendChild(sp);ol.appendChild(li);
     });
     if(push){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
-    try{localStorage.setItem('lesson3-tab',String(i))}catch(e){}
+    try{localStorage.setItem(D.key+'-tab',String(i))}catch(e){}
   }
   var logEl=document.getElementById('log'),logBtn=document.getElementById('logBtn');
   function setLog(open){logEl.hidden=!open;logBtn.setAttribute('aria-expanded',open?'true':'false');logBtn.textContent=open?'關閉紀錄':'更新紀錄'}
@@ -174,7 +179,7 @@ footer{
   document.getElementById('next').onclick=function(){if(cur<D.docs.length-1)show(cur+1,true)};
   var start=parseInt((location.hash||'').slice(1),10)-1;
   if(!(start>=0&&start<D.docs.length)){
-    try{start=parseInt(localStorage.getItem('lesson3-tab'),10)}catch(e){start=0}
+    try{start=parseInt(localStorage.getItem(D.key+'-tab'),10)}catch(e){start=0}
     if(!(start>=0&&start<D.docs.length))start=0;
   }
   show(start,false);
