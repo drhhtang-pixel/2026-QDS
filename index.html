@@ -16,17 +16,26 @@ if(/^#\d+$/.test(location.hash))location.replace('week03/'+location.hash);
   --bg:#EEF1F4; --bar:#FFFFFF; --ink:#1B2533; --muted:#5F6B7A; --line:#D5DBE2;
   --accent:#1F5F8B; --accent-soft:#E3EDF5; --num:#8A96A5;
   --hero1:#0c3b5e; --hero2:#0f172a;
+  --lit:#2F7D4F; --lit-soft:#E4F2E9; --int:#8A5A3B; --int-soft:#F4EAE2;
+  --case:#5F6B7A; --case-soft:#E9ECF0; --verbal:#1F5F8B; --verbal-soft:#E3EDF5;
+  --guest:#6B4FA0; --guest-soft:#EEE8F7; --now:#C2410C; --now-soft:#FFEDD5;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#12171E; --bar:#1A212B; --ink:#E4E9EF; --muted:#9AA6B4; --line:#2C3542;
     --accent:#7FB6DE; --accent-soft:#223244; --num:#6D7A8A; color-scheme:dark;
+    --lit:#7FD1A0; --lit-soft:#1C3326; --int:#E0AE8A; --int-soft:#3A2A20;
+    --case:#AEB8C4; --case-soft:#2A313B; --verbal:#7FB6DE; --verbal-soft:#223244;
+    --guest:#C3AEF2; --guest-soft:#2E2544; --now:#FDBA74; --now-soft:#43260F;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12171E; --bar:#1A212B; --ink:#E4E9EF; --muted:#9AA6B4; --line:#2C3542;
   --accent:#7FB6DE; --accent-soft:#223244; --num:#6D7A8A; color-scheme:dark;
+  --lit:#7FD1A0; --lit-soft:#1C3326; --int:#E0AE8A; --int-soft:#3A2A20;
+  --case:#AEB8C4; --case-soft:#2A313B; --verbal:#7FB6DE; --verbal-soft:#223244;
+  --guest:#C3AEF2; --guest-soft:#2E2544; --now:#FDBA74; --now-soft:#43260F;
 }
 *,*::before,*::after{box-sizing:border-box}
 body{
@@ -48,37 +57,53 @@ body{
 .hero h1{margin:0;font-size:clamp(1.5rem,4vw,2.1rem);font-weight:700;letter-spacing:.01em}
 .hero p{margin:.5rem 0 0;color:#CBD5E1;font-size:.95rem}
 main.wrap{padding-top:1.75rem;padding-bottom:3rem}
-.sec{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1rem}
-.sec h2{margin:0;font-size:1.05rem}
+.sec{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.25rem}
+.sec h2{margin:0;font-size:1.15rem}
 .sec span{font-size:.85rem;color:var(--muted)}
-.grid{list-style:none;margin:0;padding:0;display:grid;gap:.85rem;grid-template-columns:repeat(auto-fill,minmax(15.5rem,1fr));align-items:start}
+.unit{--u:var(--accent);--us:var(--accent-soft);margin:0 0 2rem}
+.u-lit{--u:var(--lit);--us:var(--lit-soft)}
+.u-int{--u:var(--int);--us:var(--int-soft)}
+.u-case{--u:var(--case);--us:var(--case-soft)}
+.u-verbal{--u:var(--verbal);--us:var(--verbal-soft)}
+.unit-h{display:flex;align-items:center;gap:.6rem;margin:0 0 .75rem}
+.unit-h .dot{width:.7rem;height:.7rem;border-radius:3px;background:var(--u);flex:none}
+.unit-h h2{margin:0;font-size:1rem;color:var(--ink)}
+.unit-h span{font-size:.8rem;color:var(--muted)}
+.grid{list-style:none;margin:0;padding:0;display:grid;gap:.85rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));align-items:start}
 .card{
-  display:flex;flex-direction:column;height:100%;
-  background:var(--bar);border:1px solid var(--line);border-radius:12px;
-  padding:1rem 1.1rem;color:inherit;text-decoration:none;
+  display:flex;flex-direction:column;
+  background:var(--bar);border:1px solid var(--line);border-top:3px solid var(--u);border-radius:12px;
+  padding:.9rem 1.05rem 1rem;color:inherit;text-decoration:none;
   transition:border-color .15s,box-shadow .15s,transform .15s;
 }
-a.card:hover{border-color:var(--accent);box-shadow:0 6px 20px rgba(20,40,70,.12);transform:translateY(-1px)}
-a.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a.card:hover{border-color:var(--u);box-shadow:0 6px 20px rgba(20,40,70,.12);transform:translateY(-1px)}
+a.card:focus-visible{outline:2px solid var(--u);outline-offset:2px}
 .head{display:flex;align-items:center;gap:.65rem}
 .no{
-  flex:none;width:2.4rem;height:2.4rem;border-radius:10px;display:grid;place-items:center;
-  font-weight:700;font-variant-numeric:tabular-nums;background:var(--accent);color:var(--bar);
+  flex:none;width:2.3rem;height:2.3rem;border-radius:9px;display:grid;place-items:center;
+  font-weight:700;font-variant-numeric:tabular-nums;background:var(--us);color:var(--u);
 }
-.head b{font-size:1rem}
-.head small{display:block;font-size:.78rem;color:var(--muted);margin-top:.1rem}
-.new{
-  margin-left:auto;font-size:.7rem;font-weight:700;color:var(--accent);
-  background:var(--accent-soft);border-radius:999px;padding:.15rem .55rem;
+a.card .no{background:var(--u);color:var(--bar)}
+.when b{font-size:.9rem;display:block}
+.when small{display:block;font-size:.78rem;color:var(--muted);margin-top:.05rem;font-variant-numeric:tabular-nums}
+.now{
+  display:none;margin-left:auto;font-size:.7rem;font-weight:700;color:var(--now);
+  background:var(--now-soft);border-radius:999px;padding:.15rem .55rem;white-space:nowrap;
 }
-.card ol{margin:.85rem 0 0;padding:0;list-style:none;counter-reset:d;font-size:.85rem;line-height:1.5}
-.card ol li{counter-increment:d;display:flex;gap:.5rem;padding:.12rem 0}
+.card.is-now{box-shadow:0 0 0 2px var(--now)}
+.card.is-now .now{display:inline-block}
+.card h3{margin:.7rem 0 .45rem;font-size:1rem;line-height:1.45}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;font-size:.72rem}
+.tags span{border-radius:6px;padding:.12rem .45rem;background:var(--bg);color:var(--muted)}
+.tags .type{background:var(--us);color:var(--u);font-weight:700}
+.tags .guest{background:var(--guest-soft);color:var(--guest)}
+.tags .guest b{margin-right:.35rem}
+.card ol{margin:.8rem 0 0;padding:.7rem 0 0;border-top:1px dashed var(--line);list-style:none;counter-reset:d;font-size:.82rem;line-height:1.5}
+.card ol li{counter-increment:d;display:flex;gap:.5rem;padding:.1rem 0}
 .card ol li::before{content:counter(d);flex:none;width:1.1rem;color:var(--num);font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
-.meta{margin-top:auto;padding-top:.85rem;font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;gap:.5rem}
-.meta em{font-style:normal;color:var(--accent);font-weight:500}
-.card.off{background:transparent;border-style:dashed}
-.card.off .no{background:var(--accent-soft);color:var(--num)}
-.card.off .head b{color:var(--muted);font-weight:500}
+.meta{margin-top:.8rem;font-size:.76rem;color:var(--muted);display:flex;justify-content:space-between;gap:.5rem}
+.meta em{font-style:normal;color:var(--u);font-weight:700}
+.card.off .meta{margin-top:.7rem}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;padding:1rem 0 1.5rem}
 @media (max-width:560px){.grid{grid-template-columns:1fr}}
 </style>
@@ -88,64 +113,137 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;paddi
   <div class="wrap">
     <span class="tag">QDS 2026</span>
     <h1>Qualitative Design Studies 課程講義</h1>
-    <p>授課：唐玄輝 Hsien-Hui TANG</p>
+    <p>授課：唐玄輝 Hsien-Hui TANG｜2026/09/09 – 2027/01/06・每週三</p>
   </div>
 </header>
 <main class="wrap">
-  <div class="sec"><h2>各堂講義</h2><span>已開放 1 / 16 堂</span></div>
-  <ol class="grid">
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">01</span><div><b>第 1 堂</b><small>尚未開放</small></div></div>
+  <div class="sec"><h2>課程進度</h2><span>講義已開放 1 / 16 堂</span></div>
+  <section class="unit u-lit">
+    <div class="unit-h"><span class="dot"></span><h2>單元一　文獻理論探討</h2><span>第 1–4 堂</span></div>
+    <ol class="grid">
+    <li><div class="card off" data-date="2026-09-09">
+      <div class="head"><span class="no">01</span><div class="when"><b>第 1 堂</b><small>2026/09/09（三）</small></div><span class="now">本週</span></div>
+      <h3>介紹質化設計研究 QDS</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">02</span><div><b>第 2 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-09-16">
+      <div class="head"><span class="no">02</span><div class="when"><b>第 2 堂</b><small>2026/09/16（三）</small></div><span class="now">本週</span></div>
+      <h3>介紹研究架構</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><a class="card" href="week03/">
-      <div class="head"><span class="no">03</span><div><b>第 3 堂</b><small>7 份講義</small></div><span class="new">最新</span></div>
+    <li><a class="card" href="week03/" data-date="2026-09-23">
+      <div class="head"><span class="no">03</span><div class="when"><b>第 3 堂</b><small>2026/09/23（三）</small></div><span class="now">本週</span></div>
+      <h3>文獻與理論推導 I</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who">台科大唐玄輝教授</span></div>
       <ol><li>Critical Form 閱讀論文的秘訣</li><li>APA 第七版格式指南</li><li>學術資料庫比較</li><li>AI 質化研究工具</li><li>Natural Intelligence 解答 by drhhtang</li><li>Natural Intelligence 解答 by AI</li><li>商學院學術資料庫</li></ol>
-      <div class="meta"><span>最後更新 2026/09/23</span><em>進入 →</em></div>
+      <div class="meta"><span>7 份講義・更新 2026/09/23</span><em>進入 →</em></div>
     </a></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">04</span><div><b>第 4 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-09-30">
+      <div class="head"><span class="no">04</span><div class="when"><b>第 4 堂</b><small>2026/09/30（三）</small></div><span class="now">本週</span></div>
+      <h3>文獻搜尋 Design Prototype</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">05</span><div><b>第 5 堂</b><small>尚未開放</small></div></div>
+    </ol>
+  </section>
+  <section class="unit u-int">
+    <div class="unit-h"><span class="dot"></span><h2>單元二　訪談</h2><span>第 5–8 堂</span></div>
+    <ol class="grid">
+    <li><div class="card off" data-date="2026-10-07">
+      <div class="head"><span class="no">05</span><div class="when"><b>第 5 堂</b><small>2026/10/07（三）</small></div><span class="now">本週</span></div>
+      <h3>訪談</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">06</span><div><b>第 6 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-10-14">
+      <div class="head"><span class="no">06</span><div class="when"><b>第 6 堂</b><small>2026/10/14（三）</small></div><span class="now">本週</span></div>
+      <h3>創造力</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">07</span><div><b>第 7 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-10-21">
+      <div class="head"><span class="no">07</span><div class="when"><b>第 7 堂</b><small>2026/10/21（三）</small></div><span class="now">本週</span></div>
+      <h3>訪談實務</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who guest"><b>業師</b>奧沃林宛瑩執行長</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">08</span><div><b>第 8 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-10-28">
+      <div class="head"><span class="no">08</span><div class="when"><b>第 8 堂</b><small>2026/10/28（三）</small></div><span class="now">本週</span></div>
+      <h3>訪談</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">09</span><div><b>第 9 堂</b><small>尚未開放</small></div></div>
+    </ol>
+  </section>
+  <section class="unit u-case">
+    <div class="unit-h"><span class="dot"></span><h2>單元三　個案研究</h2><span>第 9–12 堂</span></div>
+    <ol class="grid">
+    <li><div class="card off" data-date="2026-11-04">
+      <div class="head"><span class="no">09</span><div class="when"><b>第 9 堂</b><small>2026/11/04（三）</small></div><span class="now">本週</span></div>
+      <h3>Case Study</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">10</span><div><b>第 10 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-11-11">
+      <div class="head"><span class="no">10</span><div class="when"><b>第 10 堂</b><small>2026/11/11（三）</small></div><span class="now">本週</span></div>
+      <h3>個案</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">11</span><div><b>第 11 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-11-18">
+      <div class="head"><span class="no">11</span><div class="when"><b>第 11 堂</b><small>2026/11/18（三）</small></div><span class="now">本週</span></div>
+      <h3>商業研究方法</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who guest"><b>業師</b>唐碩陳羿霖執行策略師</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">12</span><div><b>第 12 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-11-25">
+      <div class="head"><span class="no">12</span><div class="when"><b>第 12 堂</b><small>2026/11/25（三）</small></div><span class="now">本週</span></div>
+      <h3>使用者趨勢研究與案例</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">13</span><div><b>第 13 堂</b><small>尚未開放</small></div></div>
+    </ol>
+  </section>
+  <section class="unit u-verbal">
+    <div class="unit-h"><span class="dot"></span><h2>單元四　口語分析</h2><span>第 13–16 堂</span></div>
+    <ol class="grid">
+    <li><div class="card off" data-date="2026-12-09">
+      <div class="head"><span class="no">13</span><div class="when"><b>第 13 堂</b><small>2026/12/09（三）</small></div><span class="now">本週</span></div>
+      <h3>用戶體驗研究方法</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who guest"><b>業師</b>悠識數位林蕙如總監</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">14</span><div><b>第 14 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-12-16">
+      <div class="head"><span class="no">14</span><div class="when"><b>第 14 堂</b><small>2026/12/16（三）</small></div><span class="now">本週</span></div>
+      <h3>口語分析</h3>
+      <div class="tags"><span class="type">Lecture</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">15</span><div><b>第 15 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2026-12-23">
+      <div class="head"><span class="no">15</span><div class="when"><b>第 15 堂</b><small>2026/12/23（三）</small></div><span class="now">本週</span></div>
+      <h3>口語分析</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">16</span><div><b>第 16 堂</b><small>尚未開放</small></div></div>
+    <li><div class="card off" data-date="2027-01-06">
+      <div class="head"><span class="no">16</span><div class="when"><b>第 16 堂</b><small>2027/01/06（三）</small></div><span class="now">本週</span></div>
+      <h3>口語分析</h3>
+      <div class="tags"><span class="type">Paper Discussion</span><span class="who">台科大唐玄輝教授</span></div>
+      <div class="meta"><span>講義尚未開放</span></div>
     </div></li>
-  </ol>
+    </ol>
+  </section>
 </main>
 <footer><div class="wrap">網站最後更新：2026/09/23</div></footer>
+<script>
+// 標出「本週」：今天（含）之後最近的一堂
+(function(){
+  var d=new Date(),t=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  var cs=document.querySelectorAll('.card[data-date]');
+  for(var i=0;i<cs.length;i++){if(cs[i].getAttribute('data-date')>=t){cs[i].classList.add('is-now');break}}
+})();
+</script>
 </body>
 </html>

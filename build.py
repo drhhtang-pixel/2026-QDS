@@ -1,8 +1,32 @@
-import re,json,gzip,base64,html
+import re,json,gzip,base64,html,datetime
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 SRC=ROOT/'sources'
 TOTAL=16          # 本學期總堂數
+
+# 2026 課程進度表（來源：Notion「2026 Course Schedule Master」，2026/09/23 老師提供截圖）
+# Notion 改了就同步改這裡。順序＝堂次。(日期, 主題, 研究方法, 教師, Type)
+SCHEDULE=[
+ ('2026/09/09','介紹質化設計研究 QDS','文獻理論探討','台科大唐玄輝教授','Lecture'),
+ ('2026/09/16','介紹研究架構','文獻理論探討','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/09/23','文獻與理論推導 I','文獻理論探討','台科大唐玄輝教授','Lecture'),
+ ('2026/09/30','文獻搜尋 Design Prototype','文獻理論探討','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/10/07','訪談','訪談','台科大唐玄輝教授','Lecture'),
+ ('2026/10/14','創造力','訪談','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/10/21','訪談實務','訪談','奧沃林宛瑩執行長','Lecture'),
+ ('2026/10/28','訪談','訪談','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/11/04','Case Study','個案研究','台科大唐玄輝教授','Lecture'),
+ ('2026/11/11','個案','個案研究','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/11/18','商業研究方法','個案研究','唐碩陳羿霖執行策略師','Lecture'),
+ ('2026/11/25','使用者趨勢研究與案例','個案研究','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/12/09','用戶體驗研究方法','口語分析','悠識數位林蕙如總監','Lecture'),
+ ('2026/12/16','口語分析','口語分析','台科大唐玄輝教授','Lecture'),
+ ('2026/12/23','口語分析','口語分析','台科大唐玄輝教授','Paper Discussion'),
+ ('2027/01/06','口語分析','口語分析','台科大唐玄輝教授','Paper Discussion'),
+]
+assert len(SCHEDULE)==TOTAL
+HOST='台科大唐玄輝教授'
+UNITS={'文獻理論探討':'lit','訪談':'int','個案研究':'case','口語分析':'verbal'}   # 研究方法 → 色標
 FAMARK='<!--FA_INLINE-->'
 UUID=r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 
@@ -100,12 +124,12 @@ CN='零一二三四五六七八九十'
 def cn(n): return CN[n] if n<=10 else '十'+(CN[n-10] if n>10 else '')
 
 shell=read(ROOT/'shell.html')
-cards=[]; built={}
+built={}
 for n in range(1,TOTAL+1):
     if n in WEEKS:
         docs=WEEKS[n]()
         for t,h,lg in docs: assert lg,t
-        title='第%s堂課講義'%cn(n); key='week%02d'%n
+        title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1]); key='week%02d'%n
         payload=json.dumps({'title':title,'key':key,'fa':FA,'mark':FAMARK,
             'docs':[{'t':t,'h':h,'log':lg} for t,h,lg in docs]},ensure_ascii=False).replace('</','<\\/')
         out=ROOT/key/'index.html'; out.parent.mkdir(exist_ok=True)
@@ -114,22 +138,42 @@ for n in range(1,TOTAL+1):
         upd=max(d for _,_,lg in docs for d,_ in lg)
         built[n]=(key,docs,upd)
         print('%s/index.html  %d 份講義  %.2f MB'%(key,len(docs),len(page)/1e6))
-latest=max(built)
-for n in range(1,TOTAL+1):
+WD='一二三四五六日'
+def card(n):
+    date,topic,method,who,typ=SCHEDULE[n-1]
+    d=datetime.date(*map(int,date.split('/')))
+    whohtml=('<span class="who">%s</span>'%html.escape(who) if who==HOST
+             else '<span class="who guest"><b>業師</b>%s</span>'%html.escape(who))
+    head='''<div class="head"><span class="no">%02d</span><div class="when"><b>第 %d 堂</b><small>%s（%s）</small></div><span class="now">本週</span></div>
+      <h3>%s</h3>
+      <div class="tags"><span class="type">%s</span>%s</div>'''%(n,n,date,WD[d.weekday()],html.escape(topic),html.escape(typ),whohtml)
     if n in built:
         key,docs,upd=built[n]
         items=''.join('<li>%s</li>'%html.escape(t) for t,_,_ in docs)
-        cards.append('''    <li><a class="card" href="%s/">
-      <div class="head"><span class="no">%02d</span><div><b>第 %d 堂</b><small>%d 份講義</small></div>%s</div>
+        return '''    <li><a class="card" href="%s/" data-date="%s">
+      %s
       <ol>%s</ol>
-      <div class="meta"><span>最後更新 %s</span><em>進入 →</em></div>
-    </a></li>'''%(key,n,n,len(docs),'<span class="new">最新</span>' if n==latest else '',items,upd))
-    else:
-        cards.append('''    <li><div class="card off" aria-disabled="true">
-      <div class="head"><span class="no">%02d</span><div><b>第 %d 堂</b><small>尚未開放</small></div></div>
-    </div></li>'''%(n,n))
-home=read(ROOT/'home.html').replace('/*WEEKS*/','\n'.join(cards))
-home=home.replace('/*SUMMARY*/','已開放 %d / %d 堂'%(len(built),TOTAL))
+      <div class="meta"><span>%d 份講義・更新 %s</span><em>進入 →</em></div>
+    </a></li>'''%(key,d.isoformat(),head,items,len(docs),upd)
+    return '''    <li><div class="card off" data-date="%s">
+      %s
+      <div class="meta"><span>講義尚未開放</span></div>
+    </div></li>'''%(d.isoformat(),head)
+CN_UNIT='一二三四五六'
+units=[]
+for m,cls in UNITS.items():
+    ns=[n for n in range(1,TOTAL+1) if SCHEDULE[n-1][2]==m]
+    assert ns and ns==list(range(ns[0],ns[-1]+1)),m
+    units.append('''  <section class="unit u-%s">
+    <div class="unit-h"><span class="dot"></span><h2>單元%s　%s</h2><span>第 %d–%d 堂</span></div>
+    <ol class="grid">
+%s
+    </ol>
+  </section>'''%(cls,CN_UNIT[len(units)],m,ns[0],ns[-1],'\n'.join(card(n) for n in ns)))
+assert sum(1 for m in (r[2] for r in SCHEDULE) if m in UNITS)==TOTAL
+home=read(ROOT/'home.html').replace('/*UNITS*/','\n'.join(units))
+home=home.replace('/*SUMMARY*/','講義已開放 %d / %d 堂'%(len(built),TOTAL))
+home=home.replace('/*RANGE*/','%s – %s・每週三'%(SCHEDULE[0][0],SCHEDULE[-1][0]))
 home=home.replace('/*UPDATED*/',max(u for _,_,u in built.values()))
 (ROOT/'index.html').write_text(home,encoding='utf-8')
 print('index.html  課程目錄')
