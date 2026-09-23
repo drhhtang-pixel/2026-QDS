@@ -99,7 +99,7 @@ def week03():
                 </div>
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">課後小測驗</h2>
-                    <p class="text-sm text-slate-500">2 題，檢查你是否看懂期刊參考文獻的卷期年份與大寫規則。</p>
+                    <p class="text-sm text-slate-500">4 題，檢查你是否看懂參考文獻的卷期年份、大寫規則與文獻類型。</p>
                 </div>
             </div>
             <button type="button" onclick="openApaQuiz()" class="shrink-0 inline-flex items-center justify-center px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-sm transition">開始小測驗<i class="fa-solid fa-arrow-right ml-2"></i></button>
@@ -121,7 +121,7 @@ def week03():
      ('Critical Form 閱讀論文的秘訣',tpl,
       [('2026/09/23','加入網站'),('2026/09/23','修正 Background 四點說明')]),
      ('APA 第七版格式指南',apa,
-      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗'),('2026/09/23','小測驗第 1 題改問期刊創刊年（一年一卷推算）；Takishita 範例頁碼改用 en dash')]),
+      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗'),('2026/09/23','小測驗第 1 題改問期刊創刊年（一年一卷推算）；Takishita 範例頁碼改用 en dash'),('2026/09/23','小測驗新增第 3、4 題（判斷參考文獻類型）')]),
      ('學術資料庫比較',plain(U/'Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html'),
       [('2026/09/23','加入網站')]),
      ('AI 質化研究工具',plain(U/'AI質化研究工具與平台全覽指南.html'),

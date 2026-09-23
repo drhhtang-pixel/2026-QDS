@@ -124,6 +124,8 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 小測驗 Q1 依老師要求：「如果一年出一卷，《The Indexer》是哪一年創刊？」答案 **1978**（1997−20+1；
   陷阱 1977 忘了 +1）。解說附延伸：實際 1958 年創刊（Society of Indexers 官網 History 頁），早期一卷約兩年。
   Takishita 範例頁碼改 en dash（補丁）。
+- 小測驗新增 Q3（Baker & Lancaster 1991 → 圖書）、Q4（Kass 1978 → 會議），選項用講義參考書目的分類名稱，
+  解說附「看講義範例」按鈕（關閉面板、切到該分類 tab、捲到 #reference-list）。
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
 
 ## 更新紀錄規則（重要）
