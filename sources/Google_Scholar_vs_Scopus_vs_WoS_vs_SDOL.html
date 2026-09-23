@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學術文獻平台差異對照與分析</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen pb-12">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 shadow-md">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="inline-block px-3 py-1 bg-indigo-500/30 text-indigo-300 rounded-full text-sm font-medium mb-3 border border-indigo-400/30">
+                學術研究工具指南
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                Google Scholar vs Scopus vs WoS vs SDOL
+            </h1>
+            <p class="text-slate-300 max-w-3xl mx-auto text-base sm:text-lg">
+                四大主流學術平台的核心差異、數據庫定位與研究檢索策略全面剖析
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 space-y-12">
+
+        <!-- Section 1: Quick Summary Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Google Scholar -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                        <i class="fa-solid me-0 fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900">Google Scholar</h3>
+                        <span class="text-xs px-2 py-0.5 bg-green-100 text-green-700 rounded-full font-medium">免費搜尋引擎</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600">全網自動爬取，覆蓋範圍最廣，適合初步探索與獲取免費全文。</p>
+            </div>
+
+            <!-- Scopus -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-orange-50 text-orange-600 rounded-lg">
+                        <i class="fa-solid fa-layer-group text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900">Scopus</h3>
+                        <span class="text-xs px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full font-medium">Elsevier 旗下引文庫</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600">收錄廣泛且均衡，強大的引文網絡分析與學者/機構分析功能。</p>
+            </div>
+
+            <!-- Web of Science -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-purple-50 text-purple-600 rounded-lg">
+                        <i class="fa-solid fa-award text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900">Web of Science</h3>
+                        <span class="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full font-medium">Clarivate 旗下引文庫</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600">採精兵政策，收錄極為嚴格，提供 Impact Factor (JCR) 權威指標。</p>
+            </div>
+
+            <!-- ScienceDirect -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-3 bg-teal-50 text-teal-600 rounded-lg">
+                        <i class="fa-solid fa-book-open text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900">ScienceDirect (SDOL)</h3>
+                        <span class="text-xs px-2 py-0.5 bg-teal-100 text-teal-700 rounded-full font-medium">Elsevier 出版全文庫</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600">僅限 Elsevier 出版物，提供高清晰度全文 PDF、附錄及原創內容。</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Comparison Table -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-table-cells text-indigo-600"></i>
+                    四大學術平台核心差異對照表
+                </h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-600 border-collapse">
+                    <thead class="bg-slate-100 text-slate-800 uppercase text-xs font-semibold tracking-wider">
+                        <tr>
+                            <th scope="col" class="py-4 px-6 border-b w-1/6">比較維度</th>
+                            <th scope="col" class="py-4 px-6 border-b w-1/5 bg-blue-50/50 text-blue-900">Google Scholar</th>
+                            <th scope="col" class="py-4 px-6 border-b w-1/5 bg-orange-50/50 text-orange-900">Scopus</th>
+                            <th scope="col" class="py-4 px-6 border-b w-1/5 bg-purple-50/50 text-purple-900">Web of Science (WoS)</th>
+                            <th scope="col" class="py-4 px-6 border-b w-1/5 bg-teal-50/50 text-teal-900">ScienceDirect (SDOL)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">本質屬性</td>
+                            <td class="py-4 px-6">學術搜索引擎</td>
+                            <td class="py-4 px-6">綜合引文數據庫<br><span class="text-xs text-slate-400">（Elsevier 旗下）</span></td>
+                            <td class="py-4 px-6">綜合引文數據庫<br><span class="text-xs text-slate-400">（Clarivate 旗下）</span></td>
+                            <td class="py-4 px-6">出版商全文數據庫<br><span class="text-xs text-slate-400">（Elsevier 旗下）</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">主要功能</td>
+                            <td class="py-4 px-6">全網文獻檢索、獲取免費/預印本全文</td>
+                            <td class="py-4 px-6">廣泛文獻檢索、引文網絡分析、學者/機構產出評估</td>
+                            <td class="py-4 px-6">核心高影響力文獻檢索、嚴格引文追蹤、期刊評價</td>
+                            <td class="py-4 px-6">閱讀與下載 Elsevier 旗下期刊/圖書全文</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">收錄範圍</td>
+                            <td class="py-4 px-6">最廣<span class="block text-xs text-slate-400 mt-1">（期刊、會議、學位論文、專利、預印本等）</span></td>
+                            <td class="py-4 px-6">廣泛國際期刊、會議論文、叢書<span class="block text-xs text-slate-400 mt-1">（收錄量大於 WoS）</span></td>
+                            <td class="py-4 px-6">嚴選高質量期刊<span class="block text-xs text-slate-400 mt-1">（含 SCIE, SSCI, AHCI 等核心合集）</span></td>
+                            <td class="py-4 px-6">僅限 Elsevier 所出版之期刊與書籍</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">品質控制</td>
+                            <td class="py-4 px-6"><span class="text-amber-600 font-medium">無人工審查</span><br><span class="text-xs text-slate-400">（網絡自動爬取，品質參差不齊）</span></td>
+                            <td class="py-4 px-6"><span class="text-emerald-600 font-medium">嚴格同儕審查</span><br><span class="text-xs text-slate-400">（門檻略低於 WoS，覆蓋面更廣）</span></td>
+                            <td class="py-4 px-6"><span class="text-emerald-700 font-medium">極為嚴格</span><br><span class="text-xs text-slate-400">（具備嚴謹同儕審查與定期剔除機制）</span></td>
+                            <td class="py-4 px-6"><span class="text-emerald-600 font-medium">Elsevier 出版品質</span><br><span class="text-xs text-slate-400">（全數經正規同儕審查）</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">核心指標</td>
+                            <td class="py-4 px-6">被引用次數、h-index、h5 指數</td>
+                            <td class="py-4 px-6 font-medium text-slate-800">CiteScore、SJR、SNIP、FWCI</td>
+                            <td class="py-4 px-6 font-medium text-slate-800">期刊影響因子 (Impact Factor/JIF)、ESI 高被引</td>
+                            <td class="py-4 px-6">單篇閱讀與下載量、CiteScore/IF<br><span class="text-xs text-slate-400">（引自 Scopus/JCR）</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">歷史數據</td>
+                            <td class="py-4 px-6">無時間限制<br><span class="text-xs text-slate-400">（視網路公開資料而定）</span></td>
+                            <td class="py-4 px-6">收錄自 1966 年起<br><span class="text-xs text-slate-400">（引文分析自 1996 年起）</span></td>
+                            <td class="py-4 px-6"><span class="font-medium text-slate-800">最悠久</span><br><span class="text-xs text-slate-400">（核心數據庫可追溯至 1900 年）</span></td>
+                            <td class="py-4 px-6">視 Elsevier 各期刊創刊時間而定</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-6 font-semibold text-slate-900 bg-slate-50/30">存取權限</td>
+                            <td class="py-4 px-6"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-800">完全免費開放</span></td>
+                            <td class="py-4 px-6"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 text-slate-800">機構付費訂閱</span></td>
+                            <td class="py-4 px-6"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 text-slate-800">機構付費訂閱</span></td>
+                            <td class="py-4 px-6"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 text-slate-800">機構付費訂閱</span><br><span class="text-xs text-slate-400">（部分 OA 文章免費）</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Detailed Analysis -->
+        <section class="space-y-6">
+            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass-chart text-indigo-600"></i>
+                詳細比較分析
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg mb-4">
+                        1
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">核心定位與數據庫屬性</h3>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong class="text-slate-800">Google Scholar（搜尋引擎）：</strong>本質為爬蟲類型的搜尋引擎而非數據庫。它抓取網路上所有符合學術格式的文本，目標是極大化「搜尋覆蓋率」，讓使用者能快速找到可能的文獻或開放獲取（OA）資源。</li>
+                        <li><strong class="text-slate-800">Scopus 與 WoS（第三方引文數據庫）：</strong>兩者均為「二次文獻數據庫（Abstract & Citation Databases）」，本身不直接出版論文，而是索引全球數千家出版商（如 IEEE、Nature、Springer、Elsevier 等）的論文摘要與引用關係，專注於學術數據分析與文獻評價。</li>
+                        <li><strong class="text-slate-800">SDOL（出版商全文數據庫）：</strong>屬於「一次文獻數據庫（Full-text Database）」，是 Elsevier 出版社自營的線上平台。SDOL 僅收錄 Elsevier 旗下出版的期刊（如 <em>Cell</em>、<em>The Lancet</em>）與圖書，提供單篇文章的完整 PDF 下載。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg mb-4">
+                        2
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">收錄範圍與篩選機制</h3>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong class="text-slate-800">Web of Science：</strong>採「精兵政策」，收錄標準極高。其 Core Collection（核心合集）被全球學術界視為高品質研究的指標，適合尋找經典、權威的文獻。</li>
+                        <li><strong class="text-slate-800">Scopus：</strong>採「廣度與質量並重」策略，收錄的期刊數量高於 WoS。對非英語系國家期刊、人文社會科學及新興交叉學科的覆蓋度優於 WoS。</li>
+                        <li><strong class="text-slate-800">Google Scholar：</strong>無篩選門檻，爬蟲會一併抓取未經同儕審查的預印本（Preprints）、學生論文、報告甚至掠奪性期刊，因此引文計數通常最高，但資料噪訊較多。</li>
+                        <li><strong class="text-slate-800">SDOL：</strong>僅收錄 Elsevier 自家產品，雖不具備跨出版社的完整性，但收錄的內容均經過正規出版審核，品質穩定。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg mb-4">
+                        3
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">學術評價與指標體系</h3>
+                    <ul class="text-sm text-slate-600 space-y-3">
+                        <li><strong class="text-slate-800">WoS：</strong>獨家提供 <strong>JCR (Journal Citation Reports)</strong> 評定的 <strong>Impact Factor (IF，影響因子)</strong> 以及 <strong>ESI 高被引論文</strong>，是多數高校評定職稱與學術獎勵的主要依據。</li>
+                        <li><strong class="text-slate-800">Scopus：</strong>提供 <strong>CiteScore</strong>、<strong>SJR (SCImago Journal Rank)</strong> 及 <strong>FWCI (領域歸一化引用影響力)</strong>，在評估跨領域影響力與作者個人檔案（Author Profile）自動整合上比 WoS 更快速靈活。</li>
+                        <li><strong class="text-slate-800">Google Scholar：</strong>僅提供簡易的個人 h-index 與 <strong>h5 指數</strong>，缺少細緻的領域權重修正，數據易受到非同儕審查文獻的拉高。</li>
+                        <li><strong class="text-slate-800">SDOL：</strong>側重於單篇文章的閱讀量、下載熱度等微觀使用數據，期刊指標則直接引用 Scopus 或 JCR 的數據。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Workflow Recommendations -->
+        <section class="bg-gradient-to-br from-indigo-900 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-md">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-compass text-indigo-400"></i>
+                研究流程中的使用策略建議
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white/10 backdrop-blur border border-white/10 rounded-xl p-5 hover:bg-white/15 transition-colors">
+                    <div class="text-xs font-semibold text-indigo-300 uppercase tracking-wider mb-2">Step 1</div>
+                    <h3 class="font-bold text-base mb-2">初步研究與主題探索</h3>
+                    <p class="text-xs text-slate-300">使用 <span class="text-blue-300 font-semibold">Google Scholar</span> 進行大規模搜尋，快速掌握關鍵字、獲取開放存取（OA）文獻或預印本全文。</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur border border-white/10 rounded-xl p-5 hover:bg-white/15 transition-colors">
+                    <div class="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-2">Step 2</div>
+                    <h3 class="font-bold text-base mb-2">權威文獻篩選</h3>
+                    <p class="text-xs text-slate-300">使用 <span class="text-purple-300 font-semibold">Web of Science</span>，鎖定領域內最具影響力的頂尖期刊論文，追蹤歷史引用脈絡。</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur border border-white/10 rounded-xl p-5 hover:bg-white/15 transition-colors">
+                    <div class="text-xs font-semibold text-orange-300 uppercase tracking-wider mb-2">Step 3</div>
+                    <h3 class="font-bold text-base mb-2">跨領域檢索與計量分析</h3>
+                    <p class="text-xs text-slate-300">使用 <span class="text-orange-300 font-semibold">Scopus</span>，獲得更全貌性的文獻數據，並進行作者、機構或特定主題的學術產出趨勢分析。</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur border border-white/10 rounded-xl p-5 hover:bg-white/15 transition-colors">
+                    <div class="text-xs font-semibold text-teal-300 uppercase tracking-wider mb-2">Step 4</div>
+                    <h3 class="font-bold text-base mb-2">精準閱讀與全文下載</h3>
+                    <p class="text-xs text-slate-300">當確定需要的文獻屬於 Elsevier 旗下出版物時，直接進入 <span class="text-teal-300 font-semibold">ScienceDirect (SDOL)</span> 下載高品質 PDF、附錄數據與高解析度圖表。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-12 text-center text-xs text-slate-400">
+        <p>學術研究資源整合整理網頁</p>
+    </footer>
+
+</body>
+</html>

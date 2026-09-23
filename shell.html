@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>第三堂課講義</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --bar:#FFFFFF; --ink:#1B2533; --muted:#5F6B7A; --line:#D5DBE2;
+  --accent:#1F5F8B; --accent-soft:#E3EDF5; --num:#8A96A5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12171E; --bar:#1A212B; --ink:#E4E9EF; --muted:#9AA6B4; --line:#2C3542;
+    --accent:#7FB6DE; --accent-soft:#223244; --num:#6D7A8A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12171E; --bar:#1A212B; --ink:#E4E9EF; --muted:#9AA6B4; --line:#2C3542;
+  --accent:#7FB6DE; --accent-soft:#223244; --num:#6D7A8A; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  height:100%;margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  display:flex;flex-direction:column;
+}
+header{background:var(--bar);border-bottom:1px solid var(--line);flex:none}
+.top{
+  display:flex;align-items:baseline;gap:.75rem;
+  padding:.8rem 1.25rem .35rem;
+}
+.top h1{font-size:1.05rem;font-weight:700;margin:0;letter-spacing:.02em}
+.top p{margin:0;font-size:.85rem;color:var(--muted)}
+nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+[role=tablist]{display:flex;gap:.25rem;padding:0 .9rem;min-width:max-content}
+[role=tab]{
+  appearance:none;border:0;background:none;cursor:pointer;font:inherit;color:var(--muted);
+  display:flex;align-items:center;gap:.5rem;
+  padding:.6rem .7rem .7rem;font-size:.9rem;white-space:nowrap;
+  border-bottom:3px solid transparent;
+}
+[role=tab] .n{
+  font-size:.75rem;font-weight:700;color:var(--num);
+  width:1.35rem;height:1.35rem;border-radius:50%;
+  display:inline-grid;place-items:center;border:1px solid var(--line);
+}
+[role=tab]:hover{color:var(--ink)}
+[role=tab][aria-selected=true]{color:var(--ink);font-weight:700;border-bottom-color:var(--accent)}
+[role=tab][aria-selected=true] .n{background:var(--accent);border-color:var(--accent);color:var(--bar)}
+[role=tab]:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:4px}
+main{flex:1;min-height:0;position:relative}
+iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+iframe[hidden]{display:none}
+.pager{display:flex;gap:.4rem;margin-left:auto}
+.pager button{
+  font:inherit;font-size:.8rem;color:var(--ink);background:var(--accent-soft);
+  border:0;border-radius:6px;padding:.3rem .65rem;cursor:pointer;
+}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){.top p{display:none}.top{padding:.7rem 1rem .25rem}}
+footer{
+  flex:none;background:var(--bar);border-top:1px solid var(--line);
+  font-size:.8rem;color:var(--muted);position:relative;
+}
+.foot{display:flex;align-items:center;gap:.75rem;padding:.45rem 1.25rem}
+.foot b{color:var(--ink);font-weight:500}
+.foot button{
+  margin-left:auto;font:inherit;color:var(--accent);background:none;border:0;cursor:pointer;padding:.2rem .3rem;border-radius:4px;
+}
+.foot button:focus-visible{outline:2px solid var(--accent)}
+#log{
+  position:absolute;right:1rem;bottom:calc(100% + .4rem);z-index:5;
+  width:min(26rem,calc(100vw - 2rem));max-height:50vh;overflow:auto;
+  background:var(--bar);border:1px solid var(--line);border-radius:8px;
+  box-shadow:0 6px 24px rgba(20,30,45,.18);padding:.75rem 1rem;
+}
+#log h2{font-size:.85rem;margin:0 0 .5rem;color:var(--ink)}
+#log ol{list-style:none;margin:0;padding:0}
+#log li{display:flex;gap:.75rem;padding:.35rem 0;border-top:1px solid var(--line);color:var(--ink);line-height:1.5}
+#log li:first-child{border-top:0}
+#log time{flex:none;color:var(--muted);font-variant-numeric:tabular-nums}
+@media (max-width:560px){.foot{padding:.45rem 1rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>第三堂課講義</h1>
+    <p>依上課講述順序排列</p>
+    <div class="pager">
+      <button id="prev" type="button" aria-label="上一份講義">上一份</button>
+      <button id="next" type="button" aria-label="下一份講義">下一份</button>
+    </div>
+  </div>
+  <nav aria-label="講義列表"><div role="tablist" id="tabs"></div></nav>
+</header>
+<main id="stage"></main>
+<footer>
+  <div id="log" hidden role="dialog" aria-label="本頁更新紀錄"><h2>本頁更新紀錄</h2><ol id="logList"></ol></div>
+  <div class="foot">
+    <span>本頁最後更新：<b id="updated"></b></span>
+    <button id="logBtn" type="button" aria-expanded="false" aria-controls="log">更新紀錄</button>
+  </div>
+</footer>
+<script id="data" type="application/json">/*PAYLOAD*/</script>
+<script>
+(function(){
+  var D=JSON.parse(document.getElementById('data').textContent);
+  var faTag='<style>'+D.fa+'</style>';
+  var tabs=document.getElementById('tabs'),stage=document.getElementById('stage');
+  var frames=[],btns=[],cur=-1;
+  D.docs.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.type='button';b.setAttribute('role','tab');b.id='tab'+i;
+    b.setAttribute('aria-controls','doc'+i);
+    b.innerHTML='<span class="n">'+(i+1)+'</span><span></span>';
+    b.lastChild.textContent=d.t;
+    b.addEventListener('click',function(){show(i,true)});
+    b.addEventListener('keydown',function(e){
+      var k=e.key,j=null;
+      if(k==='ArrowRight')j=(i+1)%D.docs.length;
+      else if(k==='ArrowLeft')j=(i-1+D.docs.length)%D.docs.length;
+      else if(k==='Home')j=0; else if(k==='End')j=D.docs.length-1;
+      if(j!==null){e.preventDefault();show(j,true);btns[j].focus();}
+    });
+    tabs.appendChild(b);btns.push(b);
+  });
+  function frameFor(i){
+    if(frames[i])return frames[i];
+    var f=document.createElement('iframe');
+    f.id='doc'+i;f.title=D.docs[i].t;f.setAttribute('role','tabpanel');
+    f.setAttribute('aria-labelledby','tab'+i);
+    f.srcdoc=D.docs[i].h.split(D.mark).join(faTag);
+    stage.appendChild(f);frames[i]=f;return f;
+  }
+  function show(i,push){
+    if(i===cur)return;cur=i;
+    var f=frameFor(i);
+    frames.forEach(function(x){if(x)x.hidden=(x!==f)});
+    btns.forEach(function(b,j){
+      b.setAttribute('aria-selected',j===i?'true':'false');
+      b.tabIndex=j===i?0:-1;
+    });
+    btns[i].scrollIntoView({block:'nearest',inline:'nearest'});
+    document.getElementById('prev').disabled=i===0;
+    document.getElementById('next').disabled=i===D.docs.length-1;
+    document.title=D.docs[i].t+'｜第三堂課講義';
+    var lg=D.docs[i].log||[];
+    document.getElementById('updated').textContent=lg.length?lg[lg.length-1][0]:'—';
+    var ol=document.getElementById('logList');ol.innerHTML='';
+    lg.slice().reverse().forEach(function(e){
+      var li=document.createElement('li'),t=document.createElement('time'),sp=document.createElement('span');
+      t.textContent=e[0];sp.textContent=e[1];li.appendChild(t);li.appendChild(sp);ol.appendChild(li);
+    });
+    if(push){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+    try{localStorage.setItem('lesson3-tab',String(i))}catch(e){}
+  }
+  var logEl=document.getElementById('log'),logBtn=document.getElementById('logBtn');
+  function setLog(open){logEl.hidden=!open;logBtn.setAttribute('aria-expanded',open?'true':'false');logBtn.textContent=open?'關閉紀錄':'更新紀錄'}
+  logBtn.onclick=function(){setLog(logEl.hidden)};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!logEl.hidden){setLog(false);logBtn.focus()}});
+  document.getElementById('prev').onclick=function(){if(cur>0)show(cur-1,true)};
+  document.getElementById('next').onclick=function(){if(cur<D.docs.length-1)show(cur+1,true)};
+  var start=parseInt((location.hash||'').slice(1),10)-1;
+  if(!(start>=0&&start<D.docs.length)){
+    try{start=parseInt(localStorage.getItem('lesson3-tab'),10)}catch(e){start=0}
+    if(!(start>=0&&start<D.docs.length))start=0;
+  }
+  show(start,false);
+  window.addEventListener('hashchange',function(){
+    var h=parseInt(location.hash.slice(1),10)-1;
+    if(h>=0&&h<D.docs.length)show(h,false);
+  });
+})();
+</script>
+</body>
+</html>

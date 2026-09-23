@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 輔助質化研究工具與服務平台指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen pb-16">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 shadow-lg">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                <span class="px-3 py-1 bg-indigo-500/30 text-indigo-300 rounded-full text-xs font-semibold tracking-wide border border-indigo-400/30">
+                    <i class="fa-solid fa-graduation-cap mr-1"></i> 研究所質化研究課程專用教學指南
+                </span>
+                <span class="text-xs text-slate-400">更新於 2026 年最新 AI 研究工具地圖</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+                AI 輔助質化研究服務平台與工具全景圖
+            </h1>
+            <p class="text-slate-300 max-w-3xl text-sm sm:text-base leading-relaxed">
+                涵蓋研究前期的「問題發想與文獻盤點」、中期的「語音轉譯與質性編碼分析 (CAQDAS)」，至後期的「文本合成與視覺化展示」，幫助研究生兼顧研究效率與學術嚴謹度。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-10">
+
+        <!-- Stage Navigation Tabs -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-2 flex flex-wrap gap-2 sticky top-4 z-20 backdrop-blur bg-white/90">
+            <button onclick="filterStage('all')" id="btn-all" class="stage-btn px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-indigo-600 text-white shadow-sm">
+                全景覽表 (All)
+            </button>
+            <button onclick="filterStage('pre')" id="btn-pre" class="stage-btn px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-compass mr-1 text-blue-500"></i> 前期：題目與文獻設計
+            </button>
+            <button onclick="filterStage('mid')" id="btn-mid" class="stage-btn px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-microscope mr-1 text-emerald-500"></i> 中期：轉譯、編碼與主題分析
+            </button>
+            <button onclick="filterStage('post')" id="btn-post" class="stage-btn px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-pen-nib mr-1 text-purple-500"></i> 後期：寫作合成與視覺化
+            </button>
+            <button onclick="filterStage('ethics')" id="btn-ethics" class="stage-btn px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-shield-halved mr-1 text-amber-500"></i> 研究倫理與信實度反思
+            </button>
+        </div>
+
+        <!-- Stage 1: Pre-Research -->
+        <section id="stage-pre" class="stage-section space-y-4">
+            <div class="border-l-4 border-blue-600 pl-4 py-1 bg-blue-50/50 rounded-r-lg">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-blue-600"></i>
+                    研究前期：概念發想、質化文獻梳理與架構形成
+                </h2>
+                <p class="text-xs text-slate-600 mt-1">
+                    質化研究前期重點在於找尋研究缺口（Research Gap）、建立概念架構（Conceptual Framework）及準備訪談大綱。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Elicit -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">Elicit</h3>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded">文獻智能提取</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            輸入質化研究問題（如 "How do nurses experience burnout?"），自動提煉相關論文的質化發現、樣本規模、研究方法與核心結論。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 文獻回顧 / 方法比較</span>
+                        <span class="font-medium text-slate-700">免費 + 付費版</span>
+                    </div>
+                </div>
+
+                <!-- Consensus -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">Consensus</h3>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded">學術共識搜尋引擎</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            基於真實文獻進行語意檢索，能分析同領域學者對於某一質化現象或議題的爭論與共識程度，避免生成式 AI 的虛構瑕疵。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 學術共識 / 觀點歸納</span>
+                        <span class="font-medium text-slate-700">免費 + 付費版</span>
+                    </div>
+                </div>
+
+                <!-- Google NotebookLM -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow border-2 border-indigo-100">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">Google NotebookLM</h3>
+                            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded">文獻庫閉環問答 (推薦)</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            上傳研究者自己收集的數十篇質化文獻，僅基於這些指定文本進行概念交叉分析、摘要生成，嚴格杜絕模型幻想，並可產出對話式音訊討論。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 封閉式語意分析 / 訪談備單</span>
+                        <span class="font-medium text-emerald-600">免費使用</span>
+                    </div>
+                </div>
+
+                <!-- ResearchRabbit -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">ResearchRabbit</h3>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded">文獻網絡關聯圖</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            以網絡視覺化方式展示質化理論或權威學者的引用脈絡（Citation Network），幫助快速追溯特定質化學派或方法的演進歷程。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 理脈地圖 / 權威學者追蹤</span>
+                        <span class="font-medium text-emerald-600">免費</span>
+                    </div>
+                </div>
+
+                <!-- SciSpace (Typeset) -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">SciSpace (Copilot)</h3>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded">精讀助理</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            在閱讀複雜質化論文（如現象學、紮根理論論文）時，即時解釋專有名詞、總結論文中的研究方法細節與研究限制。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 論文深度閱讀 / 方法論解析</span>
+                        <span class="font-medium text-slate-700">免費 + 付費版</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stage 2: Mid-Research -->
+        <section id="stage-mid" class="stage-section space-y-4">
+            <div class="border-l-4 border-emerald-600 pl-4 py-1 bg-emerald-50/50 rounded-r-lg">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-microscope text-emerald-600"></i>
+                    研究中期：逐字稿轉譯、質性編碼 (Coding) 與主題分析 (CAQDAS)
+                </h2>
+                <p class="text-xs text-slate-600 mt-1">
+                    質化研究最耗時的核心環節，AI 在此階段主要提供語音高精準度轉譯、輔助編碼建議與歸納主題（Themes/Categories）。
+                </p>
+            </div>
+
+            <!-- CAQDAS Explanation Banner -->
+            <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 text-white rounded-2xl p-6 shadow-md border border-emerald-800/50 space-y-3">
+                <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs tracking-wider uppercase">
+                    <i class="fa-solid fa-circle-info"></i>
+                    質化研究核心概念解密：什麼是 CAQDAS？
+                </div>
+                <h3 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                    CAQDAS (Computer-Assisted Qualitative Data Analysis Software)
+                    <span class="text-xs px-2.5 py-0.5 bg-emerald-800/80 text-emerald-200 font-normal rounded-full">電腦輔助質性資料分析軟體</span>
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <strong>CAQDAS</strong> 是質化研究者用於管理、檢索、標記編碼（Coding）及建構理論體系的專用軟體系統。須注意：CAQDAS <strong>不會自動替研究者完成思考與分析</strong>，其本質是提供結構化的工具環境，幫助研究者處理龐大的文本/影音資料，並維護嚴謹的<strong>「審計軌跡 (Audit Trail)」</strong>。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs">
+                    <div class="bg-slate-800/70 p-3 rounded-xl border border-slate-700/80 space-y-1">
+                        <div class="font-bold text-emerald-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-folder-tree"></i> 1. 資料組織與屬性管理
+                        </div>
+                        <p class="text-slate-300 leading-normal">集中管理數十份逐字稿、田野筆記與影音，可設定受訪者背景變數（如年齡、職業）進行交叉比較。</p>
+                    </div>
+                    <div class="bg-slate-800/70 p-3 rounded-xl border border-slate-700/80 space-y-1">
+                        <div class="font-bold text-emerald-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-code-merge"></i> 2. 編碼樹與研究備忘錄
+                        </div>
+                        <p class="text-slate-300 leading-normal">建立多層次編碼簿 (Codebook)，即時撰寫 Memo 紀錄研究者隨筆與反思，確保分析脈絡可追蹤。</p>
+                    </div>
+                    <div class="bg-slate-800/70 p-3 rounded-xl border border-slate-700/80 space-y-1">
+                        <div class="font-bold text-emerald-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> 3. 生成式 AI 轉型賦能
+                        </div>
+                        <p class="text-slate-300 leading-normal">現代 CAQDAS 結合大語言模型，可進行「自動語意聚類」、「初級開放編碼建議」與多國語言摘要生成。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category A: Speech-to-Text -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <h3 class="text-md font-bold text-slate-900 flex items-center gap-2 border-b pb-3">
+                    <i class="fa-solid fa-microphone text-emerald-600"></i>
+                    (一) 語音與訪談逐字稿轉譯工具 (Audio/Video Transcription)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-slate-900">OpenAI Whisper / MacWhisper</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-medium">離線本地保密推薦</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-2">開源的高精準度語音轉文字模型。搭配 MacWhisper 或 Whisper Desktop 可進行「完全本地離線轉譯」，防止受訪者資訊上傳雲端洩密。</p>
+                        <span class="text-xs text-slate-400">適用：具極高隱私要求的 IRB 訪談研究</span>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-slate-900">Good Tape / Veed.io</span>
+                            <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded">多國語言/含方言</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-2">基於 Whisper 的優化雲端服務，能極佳處理含雜音、多國語言混合（如中英夾雜、台語）的質化訪談錄音檔。</p>
+                        <span class="text-xs text-slate-400">適用：跨語言、多方言口述歷史與訪談</span>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-slate-900">Otter.ai / Descript</span>
+                            <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded">發言人辨識</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-2">自動區分不同說話者（Speaker Diarization），適用於焦點團體訪談（Focus Group Discussion, FGD）的時間軸對齊。</p>
+                        <span class="text-xs text-slate-400">適用：多人焦點團體與會議討論記錄</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category B: AI-Enhanced CAQDAS -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <h3 class="text-md font-bold text-slate-900 flex items-center gap-2 border-b pb-3">
+                    <i class="fa-solid fa-tags text-emerald-600"></i>
+                    (二) AI 輔助質性分析軟體 (AI-Driven CAQDAS & Coding Tools)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                    <!-- ATLAS.ti -->
+                    <div class="p-4 bg-emerald-50/40 rounded-xl border border-emerald-200">
+                        <div class="font-bold text-slate-900 mb-1">ATLAS.ti (AI Coding)</div>
+                        <span class="text-xs text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-medium inline-block mb-2">傳統 CAQDAS 龍頭</span>
+                        <p class="text-xs text-slate-600 mb-3">全面整合 OpenAI 模型，提供「AI 自動編碼 (AI Coding)」、「意圖識別 (Intent Recognition)」與摘要生成，能極速從數十份訪談中提煉初級編碼。</p>
+                        <span class="text-xs text-slate-500 font-semibold">付費（教育優惠）</span>
+                    </div>
+
+                    <!-- MAXQDA -->
+                    <div class="p-4 bg-emerald-50/40 rounded-xl border border-emerald-200">
+                        <div class="font-bold text-slate-900 mb-1">MAXQDA (AI Assist)</div>
+                        <span class="text-xs text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-medium inline-block mb-2">傳統 CAQDAS 龍頭</span>
+                        <p class="text-xs text-slate-600 mb-3">內建 AI Assist 功能，協助研究者為已編碼的文字段落自動撰寫備忘錄（Memos）、歸納主題、清理轉譯內容與自動進行文字翻譯。</p>
+                        <span class="text-xs text-slate-500 font-semibold">付費（教育優惠）</span>
+                    </div>
+
+                    <!-- Delve Qualitative -->
+                    <div class="p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-300">
+                        <div class="font-bold text-slate-900 mb-1">Delve Qualitative</div>
+                        <span class="text-xs text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-medium inline-block mb-2">雲端輕量化分析</span>
+                        <p class="text-xs text-slate-600 mb-3">專為主題分析（Thematic Analysis）與紮根理論設計的線上輕量軟體，具備智能標籤建議，適合入門學習者與團隊協同編碼。</p>
+                        <span class="text-xs text-slate-500 font-semibold">訂閱制</span>
+                    </div>
+
+                    <!-- Dovetail / Qualtrics -->
+                    <div class="p-4 bg-white rounded-xl border border-slate-200 hover:border-emerald-300">
+                        <div class="font-bold text-slate-900 mb-1">Dovetail AI</div>
+                        <span class="text-xs text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-medium inline-block mb-2">應用質化/UX研究</span>
+                        <p class="text-xs text-slate-600 mb-3">強大的雲端質化資料庫，能自動進行影音逐字稿標記、情感分析（Sentiment Analysis）與跨訪談主題聚類。</p>
+                        <span class="text-xs text-slate-500 font-semibold">免費試用 + 付費</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category C: LLM Prompt-driven qualitative analysis with 3 Coding Stages -->
+            <div class="bg-indigo-950 text-white rounded-2xl p-6 shadow-xl border border-indigo-800/80 space-y-6">
+                <div class="flex flex-wrap items-center justify-between border-b border-indigo-800 pb-4 gap-2">
+                    <div>
+                        <span class="px-2.5 py-0.5 bg-indigo-500/30 text-indigo-300 rounded text-xs font-semibold uppercase tracking-wider border border-indigo-400/20">
+                            前沿實務教學
+                        </span>
+                        <h3 class="text-xl font-bold text-white mt-1 flex items-center gap-2">
+                            <i class="fa-solid fa-terminal text-indigo-400"></i>
+                            (三) 大語言模型 (LLM) 質化編碼三階段提示詞實戰 (Claude 3.5 Sonnet / ChatGPT)
+                        </h3>
+                    </div>
+                    <span class="text-xs px-3 py-1 bg-indigo-800 text-indigo-200 rounded-full font-medium">
+                        紮根理論 (Grounded Theory) 專用提示詞工程
+                    </span>
+                </div>
+
+                <p class="text-xs sm:text-sm text-indigo-200 leading-relaxed">
+                    在嚴格遵守<strong>資料去識別化（Anonymization）</strong>的前提下，大語言模型（如 Claude 3.5 Sonnet、ChatGPT-4o）能扮演高效的質化研究對話夥伴。以下詳細解構紮根理論的三個編碼階段（開放、主軸、選擇編碼），並提供可直接複製使用的提示詞範本與邏輯設計：
+                </p>
+
+                <!-- Three Coding Stages Detailed Breakdown -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-slate-800">
+                    
+                    <!-- Step 1: Open Coding -->
+                    <div class="bg-slate-900 rounded-xl p-5 border border-indigo-700/60 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 bg-blue-500/20 text-blue-300 text-xs font-bold rounded border border-blue-400/30">Step 1</span>
+                                <span class="text-xs text-indigo-300 font-mono">Concept & Labeling</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-scissors text-blue-400"></i>
+                                開放編碼 (Open Coding)
+                            </h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+                                <strong>核心目的：</strong>打散原始資料（Disaggregating），針對文本進行逐行/逐段拆解、概念化（Conceptualizing）與命名，提煉出初級概念標籤（Codes）。
+                            </p>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 space-y-1.5">
+                                <div class="text-blue-400 font-bold"><i class="fa-solid fa-robot mr-1"></i> AI 角色與優勢：</div>
+                                <p class="text-slate-400">極速辨識受訪者常用詞（In Vivo Codes）、進行意圖標籤建議，避免研究者單一視角偏誤。</p>
+                            </div>
+                        </div>
+
+                        <!-- Prompt Box -->
+                        <div class="space-y-1.5">
+                            <div class="text-xs font-bold text-indigo-300 flex items-center justify-between">
+                                <span><i class="fa-solid fa-code"></i> 提示詞範本 (Open Coding)</span>
+                            </div>
+                            <div class="bg-indigo-950 p-3 rounded-lg border border-indigo-800/80 font-mono text-[11px] text-indigo-200 space-y-1.5 leading-relaxed overflow-x-auto">
+                                <p class="text-emerald-400">"你是一位專業質化研究員。請對以下逐字稿進行【開放編碼】：</p>
+                                <p class="text-slate-400 italic">[貼上去識別化逐字稿段落]</p>
+                                <p class="text-indigo-300">請執行以下任務：</p>
+                                <p>1. 提煉 5-8 個初級概念（Concept Label），並附上【原文字詞引言】。</p>
+                                <p>2. 為每個編碼提供【編碼定義】。</p>
+                                <p>3. 格式請以 Markdown 表格呈現（欄位：編碼名稱｜原文字詞｜編碼定義）。"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Axial Coding -->
+                    <div class="bg-slate-900 rounded-xl p-5 border border-indigo-700/60 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-xs font-bold rounded border border-emerald-400/30">Step 2</span>
+                                <span class="text-xs text-indigo-300 font-mono">Category Relationships</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-diagram-project text-emerald-400"></i>
+                                主軸編碼 (Axial Coding)
+                            </h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+                                <strong>核心目的：</strong>重組資料，將開放編碼產出的概念聚類為「主範疇 (Categories)」與「次範疇 (Subcategories)」，並建立範疇間的有機連結（如 Strauss & Corbin 典範模型）。
+                            </p>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 space-y-1.5">
+                                <div class="text-emerald-400 font-bold"><i class="fa-solid fa-robot mr-1"></i> AI 角色與優勢：</div>
+                                <p class="text-slate-400">推演「因果條件、脈絡環境、行動策略與結果 (Paradigm Model)」架構，驗證編碼關聯。</p>
+                            </div>
+                        </div>
+
+                        <!-- Prompt Box -->
+                        <div class="space-y-1.5">
+                            <div class="text-xs font-bold text-indigo-300 flex items-center justify-between">
+                                <span><i class="fa-solid fa-code"></i> 提示詞範本 (Axial Coding)</span>
+                            </div>
+                            <div class="bg-indigo-950 p-3 rounded-lg border border-indigo-800/80 font-mono text-[11px] text-indigo-200 space-y-1.5 leading-relaxed overflow-x-auto">
+                                <p class="text-emerald-400">"我們已完成開放編碼，清單如下：[貼上開放編碼清單]。</p>
+                                <p class="text-indigo-300">請協助進行【主軸編碼】：</p>
+                                <p>1. 將上述開放編碼歸納為 3-4 個高階『主範疇』與其對應的『次範疇』。</p>
+                                <p>2. 運用紮根理論典範模型分析，嘗試梳理出：(a) 前置因果 (b) 脈絡背景 (c) 受訪者採取的因應策略 (d) 產生的結果。</p>
+                                <p>3. 請說明每個範疇間的邏輯連結推論。"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Selective Coding -->
+                    <div class="bg-slate-900 rounded-xl p-5 border border-indigo-700/60 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs font-bold rounded border border-purple-400/30">Step 3</span>
+                                <span class="text-xs text-indigo-300 font-mono">Storyline & Theory</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-crown text-purple-400"></i>
+                                選擇編碼 (Selective Coding)
+                            </h4>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+                                <strong>核心目的：</strong>選擇並確定「核心範疇 (Core Category)」，將其系統化地與其他所有範疇連結，貫穿整體現象，撰寫「故事線 (Storyline)」並建構理論模型。
+                            </p>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 space-y-1.5">
+                                <div class="text-purple-400 font-bold"><i class="fa-solid fa-robot mr-1"></i> AI 角色與優勢：</div>
+                                <p class="text-slate-400">合成嚴謹的學術敘事故事線（Thick Description），並產出 Mermaid.js 概念架構圖程式碼。</p>
+                            </div>
+                        </div>
+
+                        <!-- Prompt Box -->
+                        <div class="space-y-1.5">
+                            <div class="text-xs font-bold text-indigo-300 flex items-center justify-between">
+                                <span><i class="fa-solid fa-code"></i> 提示詞範本 (Selective Coding)</span>
+                            </div>
+                            <div class="bg-indigo-950 p-3 rounded-lg border border-indigo-800/80 font-mono text-[11px] text-indigo-200 space-y-1.5 leading-relaxed overflow-x-auto">
+                                <p class="text-emerald-400">"根據前述的主軸編碼分析結果：[貼上主軸範疇]。</p>
+                                <p class="text-indigo-300">請協助進行【選擇編碼與理論合成】：</p>
+                                <p>1. 提煉出 1 個能貫穿全貌的『核心範疇 (Core Category)』並說明理由。</p>
+                                <p>2. 撰寫一段 300 字學術級的『現象故事線 (Storyline)』，說明核心範疇如何主導其他範疇之互動。</p>
+                                <p>3. 以 Mermaid.js 語法繪製理論架構流程圖代碼。"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Methodological Best Practices Box -->
+                <div class="bg-slate-900/90 rounded-xl p-4 border border-amber-500/40 flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg flex-shrink-0">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-amber-300 text-sm">研究生人機協同 (Human-in-the-loop) 核心原則：</div>
+                            <p class="text-slate-300 mt-0.5">
+                                AI 產出的提示詞回應僅為<strong>「輔助建議（Suggestions）」</strong>而非最終結論。研究者必須進行「理論敏感度 (Theoretical Sensitivity)」檢核，避免 AI 的幻覺或過度泛化（Over-generalization），並在研究論文中紀錄 Prompt 演進軌跡。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Stage 3: Post-Research -->
+        <section id="stage-post" class="stage-section space-y-4">
+            <div class="border-l-4 border-purple-600 pl-4 py-1 bg-purple-50/50 rounded-r-lg">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-nib text-purple-600"></i>
+                    研究後期：論文寫作、研究發現合成與概念模型視覺化
+                </h2>
+                <p class="text-xs text-slate-600 mt-1">
+                    將質化分析結果轉化為嚴謹的學術敘事、撰寫「研究發現 (Findings)」章節，並將複雜的理論架構繪製成直觀圖表。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Claude 3.5 Sonnet -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">Claude 3.5 Sonnet</h3>
+                            <span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-semibold rounded">質化論述寫作首選</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            具備極佳的學術文風與長文本脈絡理解力，非常擅長協助將碎片化的質化編碼與引言（Quotes）編織成具備故事性與邏輯性的脈絡化寫作（Thick Description）。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 質化敘事 / 論點潤飾</span>
+                        <span class="font-medium text-slate-700">免費 + 付費</span>
+                    </div>
+                </div>
+
+                <!-- Paperpal / Writefull -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">Paperpal / Writefull</h3>
+                            <span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-semibold rounded">學術英文潤飾</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            專為學術論文設計的 AI 寫作助手，能精準修正非母語研究者在撰寫質化論文時的學術語氣、被動句型與論文投稿格式規範。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 英文潤飾 / 投稿檢查</span>
+                        <span class="font-medium text-slate-700">免費 + 付費</span>
+                    </div>
+                </div>
+
+                <!-- Mermaid.js / ChatMind -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-lg text-slate-900">Mermaid AI / Napkin.ai</h3>
+                            <span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-semibold rounded">質化架構圖表生成</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">
+                            能將文字描述的質化概念模型（Conceptual Model）、主範疇與次範疇演進關係，自動轉化為標準的系統流程圖與心智圖。
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                        <span><i class="fa-solid fa-tag"></i> 概念模型 / 流程視覺化</span>
+                        <span class="font-medium text-emerald-600">免費工具</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stage 4: Ethics & Methodological Reflections -->
+        <section id="stage-ethics" class="stage-section space-y-4">
+            <div class="border-l-4 border-amber-500 pl-4 py-1 bg-amber-50/50 rounded-r-lg">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-500"></i>
+                    質化研究導入 AI 的關鍵倫理與學術信實度（Trustworthiness）注意事項
+                </h2>
+                <p class="text-xs text-slate-600 mt-1">
+                    研究所教學極為強調的方法論反思：AI 僅為研究助理，無法取代研究者的「主體性」與「反思性（Reflexivity）」。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Data Privacy & IRB -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-amber-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
+                            1
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900">研究倫理審查 (IRB) 與數據資安</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5 leading-relaxed">
+                        <li><strong class="text-slate-800">未匿名化嚴禁上傳公有雲：</strong>研究個案、訪談對象的姓名、機構、敏感個人經驗（如病歷、犯罪紀錄）在未進行去識別化（Anonymization）前，切勿上傳至 ChatGPT 或公有 AI 平台。</li>
+                        <li><strong class="text-slate-800">使用離線/閉環模型：</strong>建議使用本地端執行的 Whisper 進行轉譯，或簽署資料不作為訓練集（Opt-out of training）的企業級 API。</li>
+                    </ul>
+                </div>
+
+                <!-- Reflexivity -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-amber-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
+                            2
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900">研究者反思性 (Reflexivity) 與同理心</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5 leading-relaxed">
+                        <li><strong class="text-slate-800">AI 缺乏情境感知力：</strong>AI 無法解讀訪談現場受訪者的肢體語言、微表情、長默（Pauses）與情緒轉折。研究者必須親自聆聽原始音訊。</li>
+                        <li><strong class="text-slate-800">質化編碼不是統計次數：</strong>質化研究的價值在於「深度理解（Verstehen）」，AI 容易將編碼變成「文字統計」，研究者需介入進行高階抽象與意義建構。</li>
+                    </ul>
+                </div>
+
+                <!-- Lincoln & Guba Criteria -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-amber-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
+                            3
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900">維持 Lincoln & Guba 的信實度標準</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5 leading-relaxed">
+                        <li><strong class="text-slate-800">可確認性 (Confirmability)：</strong>研究者應保留「審計軌跡 (Audit Trail)」，清晰紀錄哪些編碼由 AI 建議、哪些由研究者修改，維護研究透明度。</li>
+                        <li><strong class="text-slate-800">專家/受訪者檢核 (Member Checking)：</strong>AI 產出的編碼範疇需經由指導教授、研究小組同儕或受訪者重新確認，確保未偏離受訪者原意。</li>
+                    </ul>
+                </div>
+
+                <!-- AI Transparency Declaration -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-amber-200">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">
+                            4
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900">論文中的 AI 使用透明度宣告</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5 leading-relaxed">
+                        <li><strong class="text-slate-800">方法論章節說明：</strong>應於論文「研究方法 (Methodology)」章節明示使用何種 AI 工具輔助轉譯或初級編碼（例如：<em>"Whisper v3 used for transcription, followed by manual accuracy check..."</em>）。</li>
+                        <li><strong class="text-slate-800">符合期刊投稿規範：</strong>遵循 APA 7th 或目標期刊（如 Qualitative Inquiry, SSM）對於 GenAI 的引用與揭露聲明規範。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function filterStage(stage) {
+            const sections = document.querySelectorAll('.stage-section');
+            const buttons = document.querySelectorAll('.stage-btn');
+
+            // Reset button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            // Set active button
+            const activeBtn = document.getElementById(`btn-${stage}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+            }
+
+            // Show/Hide sections
+            sections.forEach(sec => {
+                if (stage === 'all') {
+                    sec.style.display = 'block';
+                } else {
+                    if (sec.id === `stage-${stage}`) {
+                        sec.style.display = 'block';
+                    } else {
+                        sec.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

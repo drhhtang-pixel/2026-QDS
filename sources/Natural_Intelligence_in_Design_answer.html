@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設計研究講義彙編 - Contemporary Design Research & Methodology</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#035485',
+                            800: '#074873',
+                            900: '#0c3b5e',
+                        },
+                        amberBrand: {
+                            50: '#fffbebfb',
+                            500: '#d97706',
+                            800: '#92400e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        .highlight-accent {
+            transition: all 0.2s ease-in-out;
+        }
+        body.highlight-mode .highlight-accent {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-lg sm:text-xl leading-tight">設計研究講義彙編</h1>
+                    <p class="text-xs text-brand-600 font-medium">Instructor: Hsien-Hui TANG | NCTU</p>
+                </div>
+            </div>
+
+            <!-- Page / Handout Selector Tabs & Highlight Switch -->
+            <div class="flex items-center space-x-3">
+                <!-- Highlight Toggle Switch -->
+                <label for="highlightToggle" class="hidden sm:inline-flex items-center cursor-pointer text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 px-3 py-1.5 rounded-lg border border-slate-200 transition select-none">
+                    <input type="checkbox" id="highlightToggle" onchange="toggleHighlightMode(this.checked)" class="sr-only peer">
+                    <div class="w-7 h-4 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-500 relative mr-2"></div>
+                    <i class="fa-solid fa-highlighter text-amber-600 mr-1.5"></i>
+                    <span>高亮關鍵字</span>
+                </label>
+
+                <!-- Page Indicator -->
+                <div class="bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-semibold">
+                    <div class="px-3 py-1.5 rounded-lg bg-white text-brand-700 shadow-sm flex items-center space-x-1">
+                        <i class="fa-solid fa-brain text-brand-600"></i>
+                        <span>講義: Natural Intelligence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-b from-brand-900 to-slate-900 text-white py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-200 border border-brand-400/30 mb-4">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Qualitative Design Studies & Methodology</span>
+            </div>
+            <h2 id="heroTitle" class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">Natural Intelligence in Design</h2>
+            <p id="heroSubtitle" class="text-slate-300 max-w-2xl mx-auto text-xs sm:text-sm mb-6">
+                Cross, N. (1999). Natural intelligence in design, Design Studies, 20, 25-39.
+            </p>
+            
+            <!-- Quick Search Bar -->
+            <div class="max-w-xl mx-auto relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input type="text" id="searchInput" onkeyup="filterContent()" placeholder="搜尋講義內容，例如：Sketches, AID, Co-evolution, Research..." class="w-full pl-11 pr-4 py-2.5 bg-white text-slate-800 rounded-xl shadow-lg focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- ==================== HANDOUT 1: NATURAL INTELLIGENCE IN DESIGN ==================== -->
+        <div id="handout-1" class="handout-page space-y-8">
+            
+            <!-- Meta Card -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-4">
+                <div class="space-y-1">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">Course Metadata</span>
+                    <h3 class="text-xl font-bold text-slate-900">Qualitative Design Studies</h3>
+                    <p class="text-sm text-slate-600"><i class="fa-regular fa-calendar mr-1.5 text-brand-500"></i><strong>Date:</strong> 2019.Feb</p>
+                    <p class="text-sm text-slate-600"><i class="fa-solid fa-user-tie mr-1.5 text-brand-500"></i><strong>Instructor:</strong> Hsien-Hui TANG</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 max-w-md w-full">
+                    <p class="text-xs font-semibold text-slate-500 mb-1">Key Reference Article:</p>
+                    <p class="font-mono text-xs text-slate-800 leading-relaxed bg-white p-2.5 rounded border border-slate-200 select-all">
+                        Cross, N. (1999). Natural intelligence in design, Design Studies, 20, 25-39.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Section 1: Authors -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2.5 bg-brand-50 rounded-xl text-brand-600">
+                            <i class="fa-solid fa-user-pen text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">1. Authors</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-angle-right text-brand-500 mt-1 mr-2"></i>
+                            <span><strong class="highlight-accent">Cross, N</strong> (The Chief Editor of <em>Design Studies</em>)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section 2: Scope of Research and Major Background -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2.5 bg-indigo-50 rounded-xl text-indigo-600">
+                            <i class="fa-solid fa-compass text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">2. Scope of Research & Major Background</h3>
+                    </div>
+                    <div class="space-y-3 text-sm text-slate-700">
+                        <div>
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Scope:</span>
+                            <p class="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                <span class="highlight-accent">Design studies</span>, <span class="highlight-accent">Design Cognition (Sketches)</span>, <span class="highlight-accent">Design Computing (AID)</span>
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Background:</span>
+                            <p class="leading-relaxed">
+                                Natural intelligence of designers. <comment-tag id="2">Every body can design but some are better than others.</comment-tag id="2" text="Doc 原檔與 HTML 皆寫為「Every body can design」，合適的英文拼法通常為單字「Everybody」。" type="suggestion">
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Research in design thinking:</span>
+                            <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-2.5 rounded-lg">
+                                interviews with designers, observations and case studies, protocol studies, reflective and theorizing / theoretical discussion, and simulation trials.
+                            </p>
+                        </div>
+                        <div class="pt-1">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700">
+                                <i class="fa-solid fa-lightbulb mr-1.5"></i> Designerly ways of thinking
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Section 3: Research Problem(s) and Objectives -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2.5 bg-rose-50 rounded-xl text-rose-600">
+                            <i class="fa-solid fa-bullseye text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">3. Research Problem(s) and Objectives</h3>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100">
+                            <span class="text-xs font-bold text-rose-700 block mb-1"><i class="fa-solid fa-flag mr-1"></i> Purpose:</span>
+                            <p class="text-slate-800 leading-relaxed">
+                                To address the natural intelligence of designers and the nature of design activity
+                            </p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="text-xs font-bold text-slate-600 block mb-1"><i class="fa-solid fa-circle-question mr-1"></i> Problem:</span>
+                            <p class="text-slate-800 font-medium">
+                                Why some people are better designers?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Methodology and Steps -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2.5 bg-emerald-50 rounded-xl text-emerald-600">
+                            <i class="fa-solid fa-list-check text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">4. Methodology and Steps</h3>
+                    </div>
+                    <div class="space-y-3 text-sm text-slate-700">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-1">Methodology:</span>
+                            <p class="font-semibold text-slate-800">Theoretical discussion</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-1">Steps:</span>
+                            <ol class="list-decimal list-inside space-y-1 text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <li>Reinforce the general findings in design studies using quotations and comments from some acknowledged expert</li>
+                                <li>Exemplify the complexity of the design process using sketches</li>
+                                <li>Make comments about AID</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6 search-target">
+                <div class="flex items-center space-x-3 pb-4 border-b border-slate-200">
+                    <div class="p-2.5 bg-amber-50 rounded-xl text-amber-600">
+                        <i class="fa-solid fa-microscope text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">5. Details</h3>
+                        <p class="text-xs text-slate-500">Comprehensive breakdown of design cognition & sketching</p>
+                    </div>
+                </div>
+
+                <!-- Introduction ~ Background -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <h4 class="font-bold text-slate-800 text-sm flex items-center">
+                        <i class="fa-solid fa-circle-info text-brand-600 mr-2"></i> Introduction ~ Background
+                    </h4>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 pl-2">
+                        <li>Introduce the idea of natural intelligence in design.</li>
+                        <li>Everyone is capable of designing.</li>
+                        <li>Some are better designers.</li>
+                        <li>What the findings of design thinking are</li>
+                    </ul>
+                </div>
+
+                <!-- Cards Grid for C1.1 and C2 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- (C1.1) What expert designers say about design -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                        <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C1.1)</span>
+                        <h4 class="font-bold text-slate-900 text-base">What expert designers say about design</h4>
+                        <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                            <li><strong class="highlight-accent">Design is rhetorical/ persuasive</strong> in the sense that designers construct an argument</li>
+                            <li><strong class="highlight-accent">Design is exploratory and emergent</strong>. Co-evolution theory in design</li>
+                            <li><comment-tag id="1"><strong class="highlight-accent">Design is reflective</strong> via media which could be STM, sketches, and …</comment-tag id="1" text="經比對 Word 文件，Doc 原檔結尾為「media which could be STM, sketches, and 」，無刪節號「…」。HTML 版本新增了刪節號以標示未完結語意。" type="suggestion"></li>
+                            <li><strong class="highlight-accent">Design is risky and ambiguous</strong></li>
+                        </ol>
+                    </div>
+
+                    <!-- (C2) The role of sketching in design -->
+                    <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3 md:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-800">(C2)</span>
+                            <span class="text-xs text-slate-400 font-mono">Cognition & Media</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-base">The role of sketching in design</h4>
+                        <ul class="list-disc list-inside text-xs text-slate-700 space-y-1.5 leading-relaxed">
+                            <li>Sketches are not only representations as communication aids but also thinking and reasoning aids.</li>
+                            <li>Sketches are part of the exploratory process.</li>
+                            <li>Stimuli to develop ideas.</li>
+                            <li>Media for exploration.</li>
+                            <li>Sketches enable designers to handle different levels of abstraction simultaneously.</li>
+                            <li>Reflect upon critical details through moving freely between levels</li>
+                            <li>Recall relevant knowledge.</li>
+                            <li>Assist structuring ill-defined problem</li>
+                            <li>Sketches promote the recognition of emergent features and properties of solutions.</li>
+                            <li><strong class="highlight-accent">Sketches are a kind of intelligence amplifier.</strong></li>
+                        </ul>
+                        <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                            <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Purcell & Gero (1998). Drawings and the design process. <em>Design Studies</em> 19: 389-430.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- (C2) Can a machine design? -->
+                <div class="border border-slate-200 rounded-xl p-5 bg-slate-900 text-white space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-500/30 text-brand-200 border border-brand-400/30">(C2) AID</span>
+                        <h4 class="font-bold text-lg text-white">Can a machine design?</h4>
+                    </div>
+                    <ul class="list-disc list-inside text-xs text-slate-300 space-y-2 leading-relaxed">
+                        <li>AI-in-design can either support or emulate design.</li>
+                        <li>The highest standards of design performance are created by the most creative human designers.</li>
+                        <li>Understanding the problem and the cognitive process of human solvers in AID further our understanding of ourselves.</li>
+                        <li>Casti said we have learned almost nothing for the chess-playing program in terms of design cognition. <comment-tag id="3">Cross thought he is being unduly pressimistic.</comment-tag id="3" text="Doc 原檔與 HTML 均將「pessimistic」誤拼為「pressimistic」。建議修正拼字。" type="suggestion"></li>
+                        <li class="text-brand-300 font-semibold">The beautiful dream about the interaction between design computing and design cognition</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Section 6: Significance and being convinced -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2.5 bg-blue-50 rounded-xl text-blue-600">
+                            <i class="fa-solid fa-award text-lg"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">6. Significance and Being Convinced</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <li>It is a good tutorial for academic writing and research.</li>
+                        <li>Provide an overview of design studies</li>
+                    </ul>
+                </div>
+
+                <!-- Section 7: Questions? -->
+                <div class="bg-gradient-to-br from-brand-800 to-slate-900 text-white rounded-2xl p-6 shadow-md border border-brand-700 flex flex-col justify-between search-target">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="p-2.5 bg-brand-500/30 rounded-xl text-brand-300">
+                                <i class="fa-solid fa-comments text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">7. Questions?</h3>
+                        </div>
+                        <div class="p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 text-center my-2">
+                            <p class="text-lg font-semibold text-brand-200">What do you learn in this class?</p>
+                        </div>
+                    </div>
+                    <comment-tag id="4"><p class="text-xs text-slate-400 text-right mt-4">Qualitative Design Studies Discussion Prompt</p></comment-tag id="4" text="Doc 檔尾端含有 Word 後台欄位註記（如 QUOTE EN.REFLIST Design Computing、Connecting to the next paragraph 等），HTML 頁面已妥善過濾非正文內容，架構更為清晰。" type="suggestion">
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>設計研究講義彙編 &copy; 2026. Instructor: Hsien-Hui TANG. NCTU Design Research & Methodology.</p>
+        </div>
+    </footer>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 z-50 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">已成功複製內容到剪貼簿！</span>
+    </div>
+
+    <script>
+        // Toggle Highlight mode
+        function toggleHighlightMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('highlight-mode');
+            } else {
+                document.body.classList.remove('highlight-mode');
+            }
+        }
+
+        // Search Filter function
+        function filterContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const targets = document.querySelectorAll('.search-target');
+
+            targets.forEach(target => {
+                const text = target.innerText.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    target.style.display = "";
+                } else {
+                    target.style.display = "none";
+                }
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
+```
+*建議已新增*

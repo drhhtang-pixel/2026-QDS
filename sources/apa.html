@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APA 格式完全指南與實用參考手冊（第七版）</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#035485',
+                            800: '#074873',
+                            900: '#0c3b5e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        .citation-entry {
+            text-indent: -2em;
+            padding-left: 2em;
+        }
+        body.orange-italics .citation-entry i:not([class*="fa"]),
+        body.orange-italics #previewReference i:not([class*="fa"]),
+        body.orange-italics font[style*="italic"],
+        body.orange-italics em {
+            color: #ea580c !important; /* Tailwind orange-600 */
+            background-color: #ffedd5; /* Tailwind orange-100 */
+            padding: 0.1em 0.25em;
+            border-radius: 0.25rem;
+            font-style: italic;
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-lg sm:text-xl leading-tight">APA 格式完全指南</h1>
+                    <p class="text-xs text-brand-600 font-medium">整合 APA 7th 最新規範與實用範例</p>
+                </div>
+            </div>
+
+            <!-- Toggle Switch & Navigation -->
+            <div class="flex items-center space-x-3">
+                <!-- Orange Italics Toggle Switch -->
+                <label for="italicToggle" class="inline-flex items-center cursor-pointer text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 px-3 py-1.5 rounded-lg border border-slate-200 transition select-none">
+                    <input type="checkbox" id="italicToggle" onchange="toggleOrangeItalics(this.checked)" class="sr-only peer">
+                    <div class="w-7 h-4 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-orange-500 relative mr-2"></div>
+                    <i class="fa-solid fa-italic text-orange-600 mr-1.5"></i>
+                    <span>斜體標記橘色</span>
+                </label>
+
+                <!-- Quick Navigation -->
+                <nav class="hidden md:flex space-x-1 text-sm font-medium text-slate-600">
+                    <a href="#why-apa" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">使用原因</a>
+                    <a href="#apa7-updates" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">第七版新特點</a>
+                    <a href="#in-text-citations" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">內文引證</a>
+                    <a href="#reference-list" class="px-3 py-2 rounded-lg hover:text-brand-600 hover:bg-slate-100 transition">參考書目</a>
+                    <a href="#generator-tool" class="px-3 py-2 rounded-lg bg-brand-50 text-brand-700 hover:bg-brand-100 transition"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i>快速生成工具</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-b from-brand-900 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto text-center">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-200 border border-brand-400/30 mb-4">
+                <i class="fa-solid fa-circle-info mr-1.5"></i> 學術寫作權威指南
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">掌握 APA 格式，提升學術專業度</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base mb-8">
+                本頁面整合美國心理學會（APA）第七版最新標準與權威中文寫作規範，提供條理分明的引證法則、實例說明與快速範例複製工具。
+            </p>
+            
+            <!-- Quick Search Bar -->
+            <div class="max-w-xl mx-auto relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input type="text" id="searchInput" onkeyup="filterContent()" placeholder="搜尋關鍵字，例如：期刊、三人以上、網頁、碩士論文..." class="w-full pl-11 pr-4 py-3 bg-white text-slate-800 rounded-xl shadow-lg focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <section id="why-apa" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 bg-brand-50 rounded-xl text-brand-600">
+                    <i class="fa-solid fa-circle-question text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">為什麼學術界廣泛使用 APA 格式？</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                APA 格式由美國心理學會（American Psychological Association）制定，起源於 1929 年。現已成為心理學、教育學、管理學、社會科學及醫學護理等領域最核心的學術規範。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-brand-200 transition">
+                    <div class="text-brand-600 font-bold text-lg mb-2 flex items-center">
+                        <i class="fa-solid fa-[#0] fa-list-check mr-2"></i> 統一寫作規範
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">提供一致的格式、字型、標題等級與參考文獻目錄，有效降低讀者與審稿者的閱讀成本。</p>
+                </div>
+                
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-brand-200 transition">
+                    <div class="text-brand-600 font-bold text-lg mb-2 flex items-center">
+                        <i class="fa-solid fa-clock-rotate-left mr-2"></i> 強調時效性 (Author-Date)
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">採用「作者-年代」引用系統，能讓讀者第一時間辨識研究資料的新穎程度與年代背景。</p>
+                </div>
+
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-brand-200 transition">
+                    <div class="text-brand-600 font-bold text-lg mb-2 flex items-center">
+                        <i class="fa-solid fa-shield-halved mr-2"></i> 維護學術誠信
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">明確界定他人觀點與自身原創研究的界線，避免抄襲風險，並向原作者表達學術尊崇。</p>
+                </div>
+
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-brand-200 transition">
+                    <div class="text-brand-600 font-bold text-lg mb-2 flex items-center">
+                        <i class="fa-solid fa-link mr-2"></i> 便於查證與數位檢索
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">嚴格規範 DOI 及網址（URL）呈現格式，讓學術同儕能迅速追溯原始數據與文獻來源。</p>
+                </div>
+
+                <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-brand-200 transition">
+                    <div class="text-brand-600 font-bold text-lg mb-2 flex items-center">
+                        <i class="fa-solid fa-heart mr-2"></i> 提倡包容性與多元語言
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed">規範性別、種族、身心障礙等議題的客觀用語，強調去偏見與包容性的學術溝通方式。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="apa7-updates" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 bg-amber-50 rounded-xl text-amber-600">
+                    <i class="fa-solid fa-sparkles text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">APA 第七版（APA 7th）主要更新亮點</h2>
+                    <p class="text-xs text-slate-500">2019 年 10 月發布之最新版本與舊版（第六版）對比</p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700">
+                            <th class="p-3.5 rounded-l-lg font-semibold">異動項目</th>
+                            <th class="p-3.5 font-semibold text-slate-500">舊版 (APA 6th)</th>
+                            <th class="p-3.5 rounded-r-lg font-semibold text-brand-700 bg-brand-50/50">第七版 (APA 7th) 最新規範</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="p-3.5 font-medium text-slate-900">3 人（含）以上作者內文引用</td>
+                            <td class="p-3.5 text-slate-500">首次需列出所有作者，第二次起才用 et al. / 等</td>
+                            <td class="p-3.5 font-semibold text-brand-700 bg-brand-50/30">首次引用即直接使用首位作者 + et al.（中文使用「等」）</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-medium text-slate-900">參考文獻作者人數上限</td>
+                            <td class="p-3.5 text-slate-500">最多列出 7 位作者</td>
+                            <td class="p-3.5 font-semibold text-brand-700 bg-brand-50/30">最多可完整列出 20 位作者，超過則前 19 位 + 省略號 ... + 最後一位</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-medium text-slate-900">書籍出版地點標註</td>
+                            <td class="p-3.5 text-slate-500">需包含城市與州別/國家（如 New York, NY）</td>
+                            <td class="p-3.5 font-semibold text-brand-700 bg-brand-50/30">完全省略出版城市與地點，僅保留出版商名稱</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-medium text-slate-900">網址與 DOI 格式</td>
+                            <td class="p-3.5 text-slate-500">標註 doi:xxxx 或格式不一；常含 "Retrieved from"</td>
+                            <td class="p-3.5 font-semibold text-brand-700 bg-brand-50/30">統一呈標準網址 <code>https://doi.org/xxx</code>，並省略 "Retrieved from"</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-medium text-slate-900">排版許可字型</td>
+                            <td class="p-3.5 text-slate-500">幾乎僅限 Times New Roman (12pt)</td>
+                            <td class="p-3.5 font-semibold text-brand-700 bg-brand-50/30">開放 Calibri (11pt)、Arial (11pt)、Georgia (11pt) 等多種清晰字型</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-medium text-slate-900">性別中立代名詞</td>
+                            <td class="p-3.5 text-slate-500">避免單數 They</td>
+                            <td class="p-3.5 font-semibold text-brand-700 bg-brand-50/30">認可使用單數 they / their 作為性別中立代名詞</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="in-text-citations" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 bg-emerald-50 rounded-xl text-emerald-600">
+                    <i class="fa-solid fa-quote-left text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">正文內文引證規範 (In-text Citations)</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-slate-50 p-4 rounded-xl text-sm text-slate-600">
+                    <strong>基本法則：</strong>西文個人作者僅標註姓氏（Last Name），中文作者標註完整姓名。中文著作之年代可採用西元（2021）或民國（民 90），依原始文獻標示照樣著錄。
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
+                    <div class="border border-slate-200 rounded-xl p-5 hover:shadow-md transition">
+                        <h3 class="font-bold text-slate-800 text-base mb-3 flex justify-between items-center">
+                            <span>1. 單一作者與兩位作者</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">基礎規則</span>
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white p-3 rounded-lg border border-slate-100">
+                                <p class="text-slate-500 text-xs mb-1">單一作者範例：</p>
+                                <p class="font-mono text-slate-800">（黃慕萱，2001） / （胡述兆，民 90）</p>
+                                <p class="font-mono text-slate-800">(Dervin, 1992)</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-100">
+                                <p class="text-slate-500 text-xs mb-1">兩位作者範例：</p>
+                                <p class="font-mono text-slate-800">（潘美月、夏麗月，1996）</p>
+                                <p class="font-mono text-slate-800">(Baker & Lancaster, 1991)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="border border-slate-200 rounded-xl p-5 hover:shadow-md transition">
+                        <h3 class="font-bold text-slate-800 text-base mb-3 flex justify-between items-center">
+                            <span>2. 三人（含）以上作者</span>
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded">APA 7th 最新簡化</span>
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white p-3 rounded-lg border border-slate-100">
+                                <p class="text-slate-500 text-xs mb-1">不論第幾次引用，一律使用「首位作者 + 等 / et al.」：</p>
+                                <p class="font-mono text-slate-800">（陳一一等，2023） 或 陳一一等（2023）</p>
+                                <p class="font-mono text-slate-800">(Taylor et al., 2022) 或 Taylor et al. (2022)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="border border-slate-200 rounded-xl p-5 hover:shadow-md transition">
+                        <h3 class="font-bold text-slate-800 text-base mb-3 flex justify-between items-center">
+                            <span>3. 團體作者 (Group Authors)</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">機構/公司</span>
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white p-3 rounded-lg border border-slate-100">
+                                <p class="text-slate-500 text-xs mb-1">有簡稱（首次完整標註，後續僅標簡稱）：</p>
+                                <p class="text-xs text-slate-500">首次：</p>
+                                <p class="font-mono text-slate-800 mb-1">（國立台灣大學［台大］，2000）<br>(American Library Association [ALA], 2001)</p>
+                                <p class="text-xs text-slate-500">第二次起：</p>
+                                <p class="font-mono text-slate-800">（台大，2000） / (ALA, 2001)</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-100">
+                                <p class="text-slate-500 text-xs mb-1">無簡稱（每次均需全稱）：</p>
+                                <p class="font-mono text-slate-800">（中國圖書館學會，民 89） / (Microsoft, 2001)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="border border-slate-200 rounded-xl p-5 hover:shadow-md transition">
+                        <h3 class="font-bold text-slate-800 text-base mb-3 flex justify-between items-center">
+                            <span>4. 特殊情況（無作者/特定章節/翻譯）</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">特殊範例</span>
+                        </h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white p-2.5 rounded-lg border border-slate-100">
+                                <span class="text-xs text-slate-500">無作者：用短題名替代（文章加引號，書籍畫斜體）</span>
+                                <p class="font-mono text-slate-800 text-xs mt-1">（「圖書資訊」，民 89） / (<i>Harrod’s Librarians' Glossary</i>, 2000)</p>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-lg border border-slate-100">
+                                <span class="text-xs text-slate-500">引用特定章節/頁數/圖表：</span>
+                                <p class="font-mono text-slate-800 text-xs mt-1">（蔡明月，民 91，圖一） / (Cheek & Buss, 1981, p. 332)</p>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-lg border border-slate-100">
+                                <span class="text-xs text-slate-500">翻譯作品：原作者為主，年代採譯本出版年</span>
+                                <p class="font-mono text-slate-800 text-xs mt-1">（蓋茲，1999） / (Naude, 1950)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reference-list" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 mb-6 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2.5 bg-indigo-50 rounded-xl text-indigo-600">
+                        <i class="fa-solid fa-list text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">參考書目格式與範例 (Reference List)</h2>
+                        <p class="text-xs text-slate-500">按文獻類型分類查閱正確撰寫格式</p>
+                    </div>
+                </div>
+                
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap gap-1.5 bg-slate-100 p-1 rounded-xl" id="tabContainer">
+                    <button onclick="switchTab('tab-books')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-white text-brand-700 shadow-sm" data-tab="tab-books">圖書 Books</button>
+                    <button onclick="switchTab('tab-journals')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition" data-tab="tab-journals">期刊 Journal</button>
+                    <button onclick="switchTab('tab-conferences')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition" data-tab="tab-conferences">會議 Conference</button>
+                    <button onclick="switchTab('tab-theses')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition" data-tab="tab-theses">學位論文 Thesis</button>
+                    <button onclick="switchTab('tab-web')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition" data-tab="tab-web">網路 Web</button>
+                    <button onclick="switchTab('tab-others')" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition" data-tab="tab-others">辭典/報告 Other</button>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT PANELS -->
+            <div id="tabContent">
+                <!-- TAB: BOOKS -->
+                <div id="tab-books" class="tab-panel space-y-6">
+                    <div class="bg-amber-50/60 border border-amber-200 rounded-lg p-3 text-xs text-amber-800 flex items-center">
+                        <i class="fa-solid fa-lightbulb text-amber-600 text-sm mr-2"></i>
+                        <span>APA 7th 重要變更：書籍格式已<strong>完全刪除出版城市/地點</strong>，僅保留出版商名稱。</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Single / Multiple Authors -->
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">單人 / 多人作者圖書</h4>
+                                <button onclick="copyText('book-ex1')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="book-ex1" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p>黃慕萱（民 85）。<i>資訊檢索</i>。台灣學生。</p>
+                                <p>胡述兆、盧荷生（民 80）。<i>圖書館與資訊教育之改進</i>。教育部圖書館事業委員會。</p>
+                                <p>Muirhead, G. (1997). <i>Planning and implementing successful system migrations</i>. Library Association Pub.</p>
+                                <p>Baker, S. L., & Lancaster, F. W. (1991). <i>The management and evaluation of library services</i>. Information Resources Press.</p>
+                            </div>
+                        </div>
+
+                        <!-- Translation / Edition / Chapter -->
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">翻譯著作 / 第二版以上 / 書中章節</h4>
+                                <button onclick="copyText('book-ex2')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="book-ex2" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p>波卓斯基 (Petroski, H.)（2001）。<i>書架：閱讀的起點 The book on the bookshelf</i>（薛絢譯）。藍鯨。（原作 1999 年出版）</p>
+                                <p>賴永祥（民 90）。<i>中國圖書分類法</i>（增訂八版）。文華圖書館管理。</p>
+                                <p>黃慕萱（民 85）。檢索指令。在<i>資訊檢索</i>（第四章，頁 77-126）。台灣學生。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: JOURNALS -->
+                <div id="tab-journals" class="tab-panel hidden space-y-6">
+                    <div class="bg-blue-50/60 border border-blue-200 rounded-lg p-3 text-xs text-blue-800 flex items-center">
+                        <i class="fa-solid fa-circle-info text-blue-600 text-sm mr-2"></i>
+                        <span>期刊名與卷數（Volume）需畫斜體，期數（Issue）放在圓括括號內不畫斜體。</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">各卷單獨編碼與連續編碼期刊</h4>
+                                <button onclick="copyText('journal-ex1')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="journal-ex1" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p>陳光華、陳雅琦（民 90 年，3 月）。學術期刊引用文獻資料庫之現況與建置。<i>大學圖書館</i>，<i>5</i>(1)，33-48。</p>
+                                <p>陳雪華（民 90，11 月）。臺灣地區數位化典藏與資源組織相關計畫之發展。<i>圖書資訊學刊</i>，<i>16</i>，49-66。</p>
+                            </div>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">英文期刊（含 DOI 格式 - APA 7th 最新標準）</h4>
+                                <button onclick="copyText('journal-ex2')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="journal-ex2" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p>Smith, J. A., & Jones, M. B. (2020). Digital learning in modern education. <i>Journal of Educational Psychology</i>, <i>112</i>(3), 450–465. https://doi.org/10.1037/edu0000456</p>
+                                <p>Takishita, F. (1997). Constructing an electronic library web page. <i>The Indexer</i>, <i>20</i>(3), 125-129.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: CONFERENCES -->
+                <div id="tab-conferences" class="tab-panel hidden space-y-6">
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">正式出版論文集 vs 未出版發表論文</h4>
+                                <button onclick="copyText('conf-ex1')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="conf-ex1" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p><strong>中文 - 正式出版論文集：</strong><br>胡歐蘭、林呈潢（民 89）。圖書館自動化系統之選擇與評估。在淡江大學覺生紀念圖書館編，<i>圖書館自動化系統的新發展及系統轉換研討會論文集</i>（頁 5-16）。編者。</p>
+                                <p><strong>中文 - 未出版研討會論文：</strong><br>李華偉（2000，12 月）。圖書館在知識管理中的角色。在中國圖書館學會、美國國際電腦研究院主辦，<i>知識管理：方法與系統研討會</i>，台北市。</p>
+                                <hr class="my-2 border-slate-200">
+                                <p><strong>英文 - 正式出版論文集 (Published Proceedings)：</strong><br>Clyde, A. (1993). Distance education and the challenges of continuing professional education. In B. Woolls (Ed.), <i>Continuing professional education and IFLA: Past, present, and a vision for the future</i> (pp. 24-33). IFLA Publications.</p>
+                                <p><strong>英文 - 研討會發表論文 (Unpublished / Presentation)：</strong><br>Kass, T. (1978, June 12–16). <i>Management, automation and staff development</i> [Paper presentation]. California Academic and Research Librarians Workshop, Chicago, IL, United States.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: THESES -->
+                <div id="tab-theses" class="tab-panel hidden space-y-6">
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">博碩士論文（未出版 / 電子版摘要）</h4>
+                                <button onclick="copyText('thesis-ex1')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="thesis-ex1" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p><strong>未出版博士論文：</strong><br>陳昭珍（民 83）。<i>古籍超文件全文資料庫模式之探討</i>［未出版之博士論文］。國立台灣大學圖書館學研究所。</p>
+                                <p><strong>電子版僅有摘要：</strong><br>黃麗虹（民 90）。<i>網際網路應用對大學圖書館組織文化之影響：以五所大學圖書館為例</i>［摘要］［未出版之碩士論文］。國立台灣大學圖書資訊學研究所。檢自全國博碩士論文摘要檢索系統。</p>
+                                <p><strong>國外論文範例：</strong><br>Palmer, P. R. (1985). <i>Graduate education of academic librarians</i> [Unpublished doctoral dissertation]. Memphis State University.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: WEB -->
+                <div id="tab-web" class="tab-panel hidden space-y-6">
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">網頁與線上資源（HTML / PDF / 一般網站）</h4>
+                                <button onclick="copyText('web-ex1')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="web-ex1" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p><strong>APA 7th 一般網頁：</strong><br>衛生福利部（2022年8月10日）。<i>心理健康促進政策指引</i>。衛生福利部。https://www.mohw.gov.tw/cp-16-70800-1.html</p>
+                                <p><strong>英文網頁（無日期加註 n.d.）：</strong><br>World Health Organization. (2023, March 15). <i>Mental health at work</i>. World Health Organization. https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work</p>
+                                <p><strong>PDF 格式電子文章：</strong><br>曾淑賢（民 91 年 6 月）。公共圖書館策略規劃之探討。<i>台北市立圖書館館訊</i>，<i>19</i>(4)，65-77。http://tml-132.tpml.edu.tw/publication/periodical/articles/1904/190406.pdf</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: OTHERS -->
+                <div id="tab-others" class="tab-panel hidden space-y-6">
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-bold text-slate-800 text-sm">百科全書、辭典條目與研究計畫報告</h4>
+                                <button onclick="copyText('other-ex1')" class="text-xs text-brand-600 hover:underline"><i class="fa-regular fa-copy mr-1"></i>複製範例</button>
+                            </div>
+                            <div id="other-ex1" class="citation-entry font-mono text-sm text-slate-800 bg-white p-3 rounded border border-slate-200 space-y-2">
+                                <p><strong>辭典條目（有署名）：</strong><br>吳美美（民 84）。半衰期。在<i>圖書館學與資訊科學大辭典</i>（上冊，頁 378）。漢美。</p>
+                                <p><strong>研究/技術報告：</strong><br>李德竹（民 83）。<i>由資訊素養研究圖書館資訊服務之意義與內涵</i>（國科會專題研究計畫成果報告，NSC83-0111-S002-006-TL）。臺灣大學圖書館系暨研究所。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="generator-tool" class="bg-gradient-to-br from-brand-900 via-slate-900 to-slate-800 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 bg-brand-500/20 rounded-xl text-brand-300 border border-brand-400/30">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold">APA 7th 快速引證生成輔助器</h2>
+                    <p class="text-xs text-slate-300">輸入基本資訊，即時預覽符合 APA 第七版的內文與參考文獻格式</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">作者姓名 (中文或英文 Last Name, First Name Initial)</label>
+                        <input type="text" id="genAuthor" placeholder="例如: 張三 或 Smith, J. A." class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-brand-400">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">出版年份</label>
+                            <input type="text" id="genYear" placeholder="例如: 2023 或 民 112" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-brand-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">作品類型</label>
+                            <select id="genType" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-brand-400">
+                                <option value="book">書籍 (Book)</option>
+                                <option value="journal">期刊文章 (Journal Article)</option>
+                                <option value="web">網頁 (Webpage)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">作品名稱 / 文章標題</label>
+                        <input type="text" id="genTitle" placeholder="例如: 學術寫作實用指南" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-brand-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">出版商 / 期刊名 / 網站名</label>
+                        <input type="text" id="genSource" placeholder="例如: 心理出版社 或 Journal of Education" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-sm text-white focus:outline-none focus:border-brand-400">
+                    </div>
+                </div>
+
+                <!-- PREVIEW BOX -->
+                <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold text-brand-300 uppercase tracking-wider mb-3"><i class="fa-solid fa-eye mr-1"></i>即時預覽 Preview</h4>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs text-slate-400 mb-1">正文內文引用 (In-Text Citation):</p>
+                                <div id="previewInText" class="p-2.5 bg-slate-900 rounded border border-slate-700 font-mono text-sm text-emerald-400">
+                                    （作者，年份）
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="text-xs text-slate-400 mb-1">參考文獻項目 (Reference Entry):</p>
+                                <div id="previewReference" class="p-2.5 bg-slate-900 rounded border border-slate-700 font-mono text-sm text-sky-300 leading-relaxed">
+                                    作者（年份）。<i>作品名稱</i>。出版商。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="copyGeneratedCitation()" class="w-full mt-4 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-lg text-sm transition flex items-center justify-center">
+                        <i class="fa-regular fa-copy mr-2"></i>複製參考文獻格式
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>APA 格式完全指南與實用參考手冊 &copy; 2026. 基於 APA 7th Edition 與權威學術引用手冊整理編製。</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification for Copy -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 z-50 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">已成功複製到剪貼簿！</span>
+    </div>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-brand-700', 'shadow-sm');
+                btn.classList.add('text-slate-600');
+            });
+
+            const activePanel = document.getElementById(tabId);
+            if (activePanel) activePanel.classList.remove('hidden');
+
+            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-white', 'text-brand-700', 'shadow-sm');
+                activeBtn.classList.remove('text-slate-600');
+            }
+        }
+
+        // Live Generator Logic
+        const genAuthor = document.getElementById('genAuthor');
+        const genYear = document.getElementById('genYear');
+        const genType = document.getElementById('genType');
+        const genTitle = document.getElementById('genTitle');
+        const genSource = document.getElementById('genSource');
+
+        const previewInText = document.getElementById('previewInText');
+        const previewReference = document.getElementById('previewReference');
+
+        function updateGenerator() {
+            const author = genAuthor.value.trim() || '作者';
+            const year = genYear.value.trim() || '年份';
+            const title = genTitle.value.trim() || '作品名稱';
+            const source = genSource.value.trim() || '出版商/期刊名';
+            const type = genType.value;
+
+            // In-text citation
+            previewInText.innerText = `（${author}，${year}）`;
+
+            // Reference entry
+            if (type === 'book') {
+                previewReference.innerHTML = `${author}（${year}）。<i>${title}</i>。${source}。`;
+            } else if (type === 'journal') {
+                previewReference.innerHTML = `${author}（${year}）。${title}。<i>${source}</i>。`;
+            } else if (type === 'web') {
+                previewReference.innerHTML = `${author}（${year}）。<i>${title}</i>。${source}。`;
+            }
+        }
+
+        [genAuthor, genYear, genType, genTitle, genSource].forEach(element => {
+            element.addEventListener('input', updateGenerator);
+            element.addEventListener('change', updateGenerator);
+        });
+
+        // Copy Text Helper
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            const textToCopy = element.innerText;
+            
+            copyToClipboard(textToCopy);
+        }
+
+        function copyGeneratedCitation() {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = previewReference.innerHTML;
+            const textToCopy = tempDiv.innerText;
+
+            copyToClipboard(textToCopy);
+        }
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast('已複製到剪貼簿！');
+            } catch (err) {
+                showToast('複製失敗，請手動複製');
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // Live Search Filter
+        function filterContent() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.example-box, .citation-entry, .border');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = "";
+                } else if (input.trim() !== '') {
+                    // search filter active
+                }
+            });
+        }
+
+        // Toggle Orange Italics
+        function toggleOrangeItalics(enabled) {
+            if (enabled) {
+                document.body.classList.add('orange-italics');
+            } else {
+                document.body.classList.remove('orange-italics');
+            }
+        }
+    </script>
+</body>
+</html>
