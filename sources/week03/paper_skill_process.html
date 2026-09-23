@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建立讀論文 SKILLS 的過程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] } } } }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .tree { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre; line-height: 1.6; }
+        code.k { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85em; background: #eef2ff; color: #4338ca; padding: .05em .35em; border-radius: .25rem; overflow-wrap: anywhere; }
+        .xref { cursor: pointer; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<header class="bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-800 text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 mb-4">
+            <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>AI 輔助閱讀論文・過程紀錄
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-black tracking-tight">建立讀論文 SKILLS 的過程</h1>
+        <p class="mt-3 text-slate-300 max-w-3xl leading-relaxed">
+            從一份範例 HTML，到建立可重複使用的 <code class="k !bg-white/10 !text-indigo-100">paper-reading-notes</code> 技能、實際套用在兩篇論文、並依「秘笈」精修規則的完整過程。
+        </p>
+    </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-10">
+
+    <!-- Overview -->
+    <section>
+        <h2 class="text-sm font-bold text-slate-500 tracking-wider mb-3">四個階段</h2>
+        <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <li><a href="#s1" class="block h-full bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition">
+                <div class="text-xs font-bold text-indigo-600 mb-1">階段一</div>
+                <div class="font-bold text-slate-900">從範例學習格式</div>
+                <div class="text-xs text-slate-500 mt-1">歸納 7 個章節，建立技能骨架</div>
+            </a></li>
+            <li><a href="#s2" class="block h-full bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition">
+                <div class="text-xs font-bold text-indigo-600 mb-1">階段二</div>
+                <div class="font-bold text-slate-900">把「秘笈」精修進技能檔</div>
+                <div class="text-xs text-slate-500 mt-1">逐欄寫作規則，新增 Objectives</div>
+            </a></li>
+            <li><a href="#s3" class="block h-full bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition">
+                <div class="text-xs font-bold text-indigo-600 mb-1">階段三</div>
+                <div class="font-bold text-slate-900">第二次實戰</div>
+                <div class="text-xs text-slate-500 mt-1">Natural Intelligence in Design (1999)</div>
+            </a></li>
+            <li><a href="#s4" class="block h-full bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition">
+                <div class="text-xs font-bold text-indigo-600 mb-1">階段四</div>
+                <div class="font-bold text-slate-900">第一次實戰</div>
+                <div class="text-xs text-slate-500 mt-1">Doing Design Thinking (2019)</div>
+            </a></li>
+        </ol>
+    </section>
+
+    <!-- Stage 1 -->
+    <section id="s1" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 scroll-mt-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center">1</div>
+            <div>
+                <div class="text-xs font-bold text-indigo-600">階段一</div>
+                <h2 class="text-2xl font-bold text-slate-900">從範例學習格式</h2>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <div class="md:col-span-1 bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-right-to-bracket mr-1.5"></i>輸入</div>
+                <p class="text-sm leading-relaxed">老師上傳一份自己讀論文的範例 HTML（<code class="k">Natural_Intelligence_in_Design_answer.html</code>）。</p>
+                <button type="button" onclick="goTab(5)" class="xref mt-3 text-xs font-semibold text-indigo-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>看分頁 5：Natural Intelligence 解答 by drhhtang</button>
+            </div>
+            <div class="md:col-span-2 bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-gears mr-1.5"></i>做的事</div>
+                <p class="text-sm mb-3">逐段檢視範例的結構，歸納出固定的 <strong>7 個章節</strong>：</p>
+                <ol class="grid sm:grid-cols-2 gap-2 text-sm">
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">1</span><span>Authors 作者</span></li>
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">2</span><span>Scope &amp; Background 研究範疇與背景</span></li>
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">3</span><span>Research Problem(s) and Objectives 研究問題與目的</span></li>
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">4</span><span>Methodology and Steps 研究方法與步驟</span></li>
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">5</span><span>Details 內容細節（依主題拆成 <code class="k">(C1)(C2)...</code> 卡片）</span></li>
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">6</span><span>Significance and Being Convinced 貢獻與說服力</span></li>
+                    <li class="flex gap-2"><span class="shrink-0 w-6 h-6 rounded-md bg-indigo-100 text-indigo-700 text-xs font-bold flex items-center justify-center">7</span><span>Questions 討論問題</span></li>
+                </ol>
+                <p class="text-sm mt-3 text-slate-600">同時記下視覺風格：Tailwind + FontAwesome、每節專屬配色、搜尋列、「高亮關鍵字」開關。</p>
+            </div>
+        </div>
+
+        <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-box-open mr-1.5"></i>輸出：建立技能資料夾</div>
+        <div class="tree text-[13px] bg-slate-900 text-slate-100 rounded-xl p-4 overflow-x-auto">paper-reading-notes/
+├── SKILL.md          — 使用時機、章節定義、工作流程
+└── assets/
+    └── template.html — 帶有 {{PLACEHOLDER}} 與註解的空白骨架</div>
+        <p class="text-sm text-slate-600 mt-3">用 <code class="k">skill-creator</code> 的打包腳本產出 <code class="k">paper-reading-notes.skill</code>，提供下載安裝。</p>
+    </section>
+
+    <!-- Stage 2 -->
+    <section id="s2" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 scroll-mt-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center">2</div>
+            <div>
+                <div class="text-xs font-bold text-indigo-600">階段二</div>
+                <h2 class="text-2xl font-bold text-slate-900">把「秘笈」精修進技能檔</h2>
+            </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-right-to-bracket mr-1.5"></i>輸入</div>
+            <p class="text-sm leading-relaxed">老師提供一份完整的「The Secrets of Critical Form for Reading Papers」規則文件，逐節定義每個欄位該怎麼寫、去哪一章找。</p>
+            <button type="button" onclick="goTab(1)" class="xref mt-3 text-xs font-semibold text-indigo-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>看分頁 1：Critical Form 閱讀論文的秘訣</button>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-1">1. 整理成「Section-by-section field guide」</h3>
+        <p class="text-sm text-slate-600 mb-3">把秘笈內容整理成 <code class="k">SKILL.md</code> 裡新的一大段，逐一收錄：</p>
+        <div class="grid sm:grid-cols-2 gap-3 mb-6 text-sm">
+            <div class="border border-slate-200 rounded-lg p-3"><div class="font-bold text-indigo-700 mb-1">Reference</div>三人／多人作者的逗號與 &amp; / and 規則、標點後空格、書籍編者姓名順序、依來源類型選格式範本</div>
+            <div class="border border-slate-200 rounded-lg p-3"><div class="font-bold text-indigo-700 mb-1">Scope</div>只挑「名詞」領域詞，不要誤放研究方法</div>
+            <div class="border border-slate-200 rounded-lg p-3"><div class="font-bold text-indigo-700 mb-1">Background</div>完整句子、通常在文獻探討前段</div>
+            <div class="border border-slate-200 rounded-lg p-3"><div class="font-bold text-indigo-700 mb-1">Problem／Aim／Objectives</div>Problem 以問號結尾；Aim 其實就是原本的 Purpose，通常只有一句；Objectives 原本沒有獨立列出，通常 2–3 個以上——真正新增的是 Objectives 這一格</div>
+            <div class="border border-slate-200 rounded-lg p-3"><div class="font-bold text-indigo-700 mb-1">Methodology vs Steps</div>Methodology 是名詞，Steps 是過程</div>
+            <div class="border border-slate-200 rounded-lg p-3"><div class="font-bold text-indigo-700 mb-1">Results／Discussion／Conclusion</div>Results 只陳述不評論；Discussion 呼應研究問題；Conclusion 轉化為新知識＋未來方向</div>
+            <div class="border border-slate-200 rounded-lg p-3 sm:col-span-2"><div class="font-bold text-indigo-700 mb-1">Significance</div>信度看邏輯是否自洽；重要性看領域現況與未來研究的關聯</div>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-3">2. 同步修改 <code class="k">template.html</code>：第 3 節從兩格改成三格</h3>
+        <div class="grid md:grid-cols-[1fr_auto_1fr] items-center gap-3 mb-6">
+            <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                <div class="text-xs font-bold text-slate-500 mb-2">修改前</div>
+                <div class="grid grid-cols-2 gap-2 text-sm font-semibold">
+                    <div class="bg-white border border-slate-200 rounded-lg p-3 text-center">Purpose</div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-3 text-center">Problem</div>
+                </div>
+            </div>
+            <div class="text-center text-indigo-500"><i class="fa-solid fa-arrow-right hidden md:inline"></i><i class="fa-solid fa-arrow-down md:hidden"></i></div>
+            <div class="border border-indigo-200 rounded-xl p-4 bg-indigo-50/50">
+                <div class="text-xs font-bold text-indigo-600 mb-2">修改後</div>
+                <div class="grid grid-cols-3 gap-2 text-sm font-semibold">
+                    <div class="bg-white border border-slate-200 rounded-lg p-3 text-center">Problem</div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-3 text-center">Aim<div class="text-[11px] font-normal text-slate-500">＝原 Purpose</div></div>
+                    <div class="bg-amber-50 border border-amber-300 rounded-lg p-3 text-center text-amber-800">Objectives<div class="text-[11px] font-bold">新增</div></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="font-bold text-slate-900 mb-1">3. 重新驗證並打包</h3>
+        <p class="text-sm text-slate-600">產出新版 <code class="k">paper-reading-notes.skill</code>。</p>
+    </section>
+
+    <!-- Stage 3 -->
+    <section id="s3" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 scroll-mt-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center">3</div>
+            <div>
+                <div class="text-xs font-bold text-indigo-600">階段三・第二次實戰</div>
+                <h2 class="text-2xl font-bold text-slate-900">Natural Intelligence in Design (1999)</h2>
+            </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-right-to-bracket mr-1.5"></i>輸入</div>
+            <p class="text-sm leading-relaxed">Nigel Cross 的 PDF（這正是階段一範例所讀的那篇論文本尊）。</p>
+            <button type="button" onclick="goTab(6)" class="xref mt-3 text-xs font-semibold text-indigo-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>看分頁 6：Natural Intelligence 解答 by AI</button>
+        </div>
+
+        <div class="text-xs font-bold text-slate-500 mb-3"><i class="fa-solid fa-gears mr-1.5"></i>做的事</div>
+        <ol class="space-y-3 text-sm">
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">1</span><span>用 <code class="k">pdfimages</code> 從 PDF 擷取內嵌的四張手繪草圖掃描圖（原本是黑底白線的 stencil mask）。</span></li>
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">2</span><span>用 <code class="k">convert -negate -trim</code> 反轉黑白、裁邊，確認分別對應 Figure 1–4：Calatrava、Leonardo da Vinci、Aalto、Stirling 的草圖。</span></li>
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">3</span><span>壓縮成 JPEG、轉成 base64，直接內嵌進單一自包含 HTML（維持「一個檔案打包所有東西」的規則）。</span></li>
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">4</span><span>依 7 節格式填入內容，第 5 節拆成：
+                <span class="flex flex-wrap gap-1.5 mt-2">
+                    <span class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-xs font-semibold">C1 研究方法</span>
+                    <span class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-xs font-semibold">C2 專家設計師語錄八大主題</span>
+                    <span class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-xs font-semibold">C3 草圖角色＋四張真實草圖</span>
+                    <span class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-xs font-semibold">C4 機器能否設計</span>
+                </span></span></li>
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">5</span><span>發佈，並提供下載檔案卡片。</span></li>
+        </ol>
+    </section>
+
+    <!-- Stage 4 -->
+    <section id="s4" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 scroll-mt-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center">4</div>
+            <div>
+                <div class="text-xs font-bold text-indigo-600">階段四・第一次實戰</div>
+                <h2 class="text-2xl font-bold text-slate-900">Doing Design Thinking (2019)</h2>
+            </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-right-to-bracket mr-1.5"></i>輸入</div>
+            <p class="text-sm leading-relaxed">Micheli et al. 的 PDF（管理學期刊的系統性文獻回顧論文）。</p>
+        </div>
+
+        <div class="text-xs font-bold text-slate-500 mb-3"><i class="fa-solid fa-gears mr-1.5"></i>做的事</div>
+        <ol class="space-y-3 text-sm mb-8">
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">1</span><span>依技能的 7 節格式，把論文內容填入複製自範本的 HTML。</span></li>
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">2</span><span>第 5 節「Details」拆成多張主題卡片，例如資料蒐集流程、10 個核心屬性、8 個工具方法、應用模型、五個文獻集群觀點。</span></li>
+            <li class="flex gap-3"><span class="shrink-0 w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">3</span><span>用 <code class="k">Artifact</code> 工具把完成的 HTML <strong>發佈</strong>成可分享連結（因為它有搜尋列、高亮切換等互動功能）。</span></li>
+        </ol>
+
+        <h3 class="font-bold text-slate-900 mb-3"><i class="fa-solid fa-comments text-indigo-600 mr-2"></i>老師回饋、依序調整的地方</h3>
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 text-left text-xs text-slate-500">
+                    <tr><th class="px-4 py-3 w-8">#</th><th class="px-4 py-3 min-w-[10rem]">老師的要求</th><th class="px-4 py-3 min-w-[16rem]">做的調整</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="px-4 py-3 font-bold text-slate-400">1</td><td class="px-4 py-3 font-semibold">C1、C2 依論文出現順序排列</td><td class="px-4 py-3 text-slate-600">把原本隨意編號的卡片，重新排成 C1→C6 對應論文敘事順序</td></tr>
+                    <tr><td class="px-4 py-3 font-bold text-slate-400">2</td><td class="px-4 py-3 font-semibold">把原文的圖表也加進對應章節</td><td class="px-4 py-3 text-slate-600">用真實數字重建 Figure 1（資料蒐集漏斗流程圖）、Table 1/2/3/4/6，並用長條圖視覺化屬性頻率</td></tr>
+                    <tr><td class="px-4 py-3 font-bold text-slate-400">3</td><td class="px-4 py-3 font-semibold">再次檢查數字是否正確</td><td class="px-4 py-3 text-slate-600">逐一核對每個數字與原文，並發現「集群分析排除了幾個屬性」這句敘述有誤（原文是排除 4 個，原本寫成 3 個），予以修正</td></tr>
+                    <tr><td class="px-4 py-3 font-bold text-slate-400">4</td><td class="px-4 py-3 font-semibold">Table 6 的「顯著」數字改成實心圓點</td><td class="px-4 py-3 text-slate-600">用 CSS <code class="k">border-radius: 50%</code> 的 <code class="k">&lt;span&gt;</code> 取代文字「1」，「0」則改成淡色短橫線 –</td></tr>
+                    <tr><td class="px-4 py-3 font-bold text-slate-400">5</td><td class="px-4 py-3 font-semibold">圓點改成橘色比較明顯</td><td class="px-4 py-3 text-slate-600">用 <code class="k">sed</code> 全域取代顏色時不小心誤改到旁邊長條圖的顏色，發現後立即改回品牌藍，只留 Table 6 的圓點是橘色</td></tr>
+                    <tr><td class="px-4 py-3 font-bold text-slate-400">6</td><td class="px-4 py-3 font-semibold">存成單頁 HTML 讓我下載</td><td class="px-4 py-3 text-slate-600">用 <code class="k">present_files</code> 額外提供下載用的檔案卡片（先前只有發佈連結，沒有下載卡片）</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Final state -->
+    <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 mb-5">
+            <div class="p-2.5 bg-indigo-50 rounded-xl text-indigo-600"><i class="fa-solid fa-folder-tree text-xl"></i></div>
+            <h2 class="text-2xl font-bold text-slate-900">目前技能檔的最終狀態</h2>
+        </div>
+        <div class="tree text-[13px] bg-slate-900 text-slate-100 rounded-xl p-4 overflow-x-auto">paper-reading-notes/
+├── SKILL.md
+│   ├── 使用時機 (description)
+│   ├── Workflow（讀取論文 → 依 7 節格式填入 → 套用秘笈規則 → 發佈 artifact）
+│   ├── The 7 sections（固定順序，含 Problem/Aim/Objectives 三格）
+│   ├── Section-by-section field guide（本次新增的秘笈精修規則）
+│   ├── Design system（配色、字型、搜尋列、高亮開關）
+│   ├── Flagging accuracy concerns（note-flag 標註機制）
+│   └── Notes（自包含檔案、雙語標籤、一論文一頁）
+└── assets/
+    └── template.html（三格版 Section 3、其餘結構不變）</div>
+    </section>
+
+    <!-- Lessons -->
+    <section>
+        <div class="flex items-center gap-3 mb-4">
+            <div class="p-2.5 bg-amber-50 rounded-xl text-amber-600"><i class="fa-solid fa-lightbulb text-xl"></i></div>
+            <h2 class="text-2xl font-bold text-slate-900">學到的幾個經驗</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 font-black flex items-center justify-center mb-3">1</div>
+                <h3 class="font-bold text-slate-900 mb-2">先核對數字，再排版</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">視覺呈現（長條圖、圓點）一定要基於原文真實數字換算，改樣式時也要小心不要動到不該動的地方（如 <code class="k">sed</code> 全域取代誤傷其他長條圖）。</p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 font-black flex items-center justify-center mb-3">2</div>
+                <h3 class="font-bold text-slate-900 mb-2">圖片可以直接從 PDF 擷取內嵌</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">用 <code class="k">pdfimages</code> + <code class="k">convert -negate</code> 處理掃描版的手繪草圖，比重新描述文字更忠於原文。</p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 font-black flex items-center justify-center mb-3">3</div>
+                <h3 class="font-bold text-slate-900 mb-2">技能檔要隨實戰經驗持續修正</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">原本的「Purpose」其實就是秘笈裡的「Aim」——同一個概念，只是名稱沒對齊；真正因為秘笈規則而新增、原本沒被獨立列出的，是「Objectives」這一格。所以精確地說，是從「兩格 Purpose(=Aim)/Problem」演化成「三格 Problem／Aim(Purpose)／Objectives」，多出來的是 Objectives，不是 Aim 取代了 Purpose。</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    QDS 2026・第三堂講義｜建立讀論文 SKILLS 的過程
+</footer>
+
+<script>
+    // 跳到同一堂的其他分頁（外框頁以 #N 切換分頁）
+    function goTab(n) {
+        try { window.top.location.hash = String(n); } catch (e) {}
+    }
+</script>
+</body>
+</html>

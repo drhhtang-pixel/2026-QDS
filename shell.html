@@ -147,6 +147,18 @@ footer{
     f.id='doc'+i;f.title=D.docs[i].t;f.setAttribute('role','tabpanel');
     f.setAttribute('aria-labelledby','tab'+i);
     f.srcdoc=D.docs[i].h.split(D.mark).join(faTag);
+    // srcdoc 內的 href="#id" 會以外框網址解析、把整個外框載入 iframe；改成在講義內捲動
+    f.addEventListener('load',function(){
+      var doc=f.contentDocument;if(!doc)return;
+      doc.addEventListener('click',function(e){
+        if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey)return;
+        var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+        e.preventDefault();
+        var id=decodeURIComponent(a.getAttribute('href').slice(1));
+        var el=id&&(doc.getElementById(id)||doc.getElementsByName(id)[0]);
+        if(el)el.scrollIntoView({block:'start'});
+      });
+    });
     stage.appendChild(f);frames[i]=f;return f;
   }
   function show(i,push){

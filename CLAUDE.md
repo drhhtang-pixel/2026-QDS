@@ -37,7 +37,9 @@
         ├── AI質化研究工具與平台全覽指南.html
         ├── Natural_Intelligence_in_Design_answer.html
         ├── natural_intelligence_design_AI.html
-        └── business_db.html   (由 Claude 撰寫的新講義，可直接編輯)
+        ├── business_db.html   (由 Claude 撰寫的新講義，可直接編輯)
+        ├── paper_skill_process.html   (分頁 8，由 Claude 依下方 .md 製作，可直接編輯)
+        └── 建立讀論文技能的過程紀錄.md  (分頁 8 的原始文字，老師提供)
 ```
 
 ## 建置
@@ -85,6 +87,7 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 | 5 | Natural Intelligence 解答 by drhhtang | Natural_Intelligence_in_Design_answer.html |
 | 6 | Natural Intelligence 解答 by AI | natural_intelligence_design_AI.html |
 | 7 | 商學院學術資料庫 | business_db.html |
+| 8 | 建立讀論文 SKILLS 的過程 | paper_skill_process.html |
 
 分頁名稱、順序與更新紀錄定義在 `build.py` 的 `week03()` 回傳清單中。
 
@@ -102,7 +105,10 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
    - business_db.html：可直接編輯。
 5. 所有講義資料以 JSON 放在 `<script id="data" type="application/json">`，`</` 會被跳脫成 `<\/`
    （所以在 weekNN/index.html 裡用 grep 搜尋 `</em>` 會找不到，要搜 `<\/em>`）。
-6. 外框頁的標題（第X堂課講義）與「記住上次分頁」的 localStorage key（`weekNN-tab`）由 build.py 依堂數帶入。
+6. **講義內的 `href="#id"` 錨點連結**：srcdoc iframe 會用外框網址解析，點了會把整個外框載入 iframe。
+   shell.html 在每個 iframe 載入後攔截這類點擊，改成在講義內 `scrollIntoView`（講義自己已處理的點擊不受影響）。
+   講義要跳到同一堂其他分頁，用 `window.top.location.hash='N'`（分頁 8 的 `goTab(N)`）。
+7. 外框頁的標題（第X堂課講義）與「記住上次分頁」的 localStorage key（`weekNN-tab`）由 build.py 依堂數帶入。
 
 ## 已完成的修改（2026/09/23）
 
@@ -118,6 +124,9 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 分頁 2：參考文獻範例首行超出外框 → 懸掛縮排改套在每筆 `<p>`（補丁）。
 - 分頁 2：「提倡包容性與多元語言」卡片加「了解更多：無偏見語言指引」按鈕，開啟頁內說明面板（內容在 `sources/week03/apa_bias_free.html`）。
 - 改為 16 堂架構：首頁為課程目錄，第三堂移到 `/week03/`，舊網址自動轉址（老師選定 `/weekNN/` 格式）。
+- 分頁 8「建立讀論文 SKILLS 的過程」：依老師提供的 .md 製作（四階段、秘笈欄位、Problem/Aim/Objectives
+  前後對照、回饋表、經驗三點；「你」改為「老師」、經驗 1 的簡體字改正體；內附跳到分頁 1／5／6 的連結）。
+- 修正所有講義內 `#錨點` 連結會把外框載入 iframe 的問題（例如 APA 上方選單）。
 - 首頁放上 2026 課程進度表（SCHEDULE），依研究方法分 4 單元，標示業師與本週。
 - 分頁 2：最下方加「課後小測驗」卡片 → 開啟小測驗面板（Q1 Takishita 1997 出版年，單選；
   Q2 哪些部分首字大寫，複選；按「對答案」顯示對錯與解說）。
