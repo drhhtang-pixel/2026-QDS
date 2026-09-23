@@ -32,6 +32,7 @@
         ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方；共用 FA CSS 也取自此檔)
         ├── apa.html
         ├── apa_bias_free.html   (APA「無偏見語言指引」說明面板，build.py 插入 apa.html；可直接編輯)
+        ├── apa_quiz.html        (APA 課後小測驗面板 2 題，build.py 插入 apa.html；可直接編輯)
         ├── Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html
         ├── AI質化研究工具與平台全覽指南.html
         ├── Natural_Intelligence_in_Design_answer.html
@@ -118,6 +119,8 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 分頁 2：「提倡包容性與多元語言」卡片加「了解更多：無偏見語言指引」按鈕，開啟頁內說明面板（內容在 `sources/week03/apa_bias_free.html`）。
 - 改為 16 堂架構：首頁為課程目錄，第三堂移到 `/week03/`，舊網址自動轉址（老師選定 `/weekNN/` 格式）。
 - 首頁放上 2026 課程進度表（SCHEDULE），依研究方法分 4 單元，標示業師與本週。
+- 分頁 2：最下方加「課後小測驗」卡片 → 開啟小測驗面板（Q1 Takishita 1997 出版年，單選；
+  Q2 哪些部分首字大寫，複選；按「對答案」顯示對錯與解說）。
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
 
 ## 更新紀錄規則（重要）

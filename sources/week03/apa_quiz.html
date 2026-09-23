@@ -1,0 +1,131 @@
+<!-- APA 小測驗面板：由 build.py 插入 apa.html 的 </body> 之前 -->
+<style>
+    #apaQuizModal .qz-opt { transition: border-color .15s, background-color .15s; }
+    #apaQuizModal .qz-opt:has(input:checked) { border-color: #0284c7; background: #f0f7ff; }
+    #apaQuizModal .qz-opt.is-right { border-color: #10b981 !important; background: #ecfdf5 !important; }
+    #apaQuizModal .qz-opt.is-wrong { border-color: #f43f5e !important; background: #fff1f2 !important; }
+    #apaQuizModal .qz-cap { color: #035485; background: #e0effe; border-radius: 0.2rem; padding: 0 0.1em; font-weight: 700; }
+</style>
+<div id="apaQuizModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="apaQuizTitle">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeApaQuiz()"></div>
+    <div class="relative mx-auto my-4 sm:my-10 w-[calc(100%-2rem)] max-w-2xl max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-5rem)] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-gradient-to-r from-brand-900 to-slate-900 text-white px-6 py-5 flex items-start justify-between gap-4 shrink-0">
+            <div>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-brand-500/20 text-brand-100 border border-brand-400/30 mb-2">
+                    <i class="fa-solid fa-pen-to-square mr-1.5"></i>課後小測驗・2 題
+                </span>
+                <h2 id="apaQuizTitle" class="text-xl sm:text-2xl font-bold leading-tight">APA 格式小測驗</h2>
+                <p class="text-xs text-slate-300 mt-1">作答後按「對答案」，會顯示解說</p>
+            </div>
+            <button onclick="closeApaQuiz()" class="shrink-0 w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 transition flex items-center justify-center" aria-label="關閉">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="overflow-y-auto px-6 py-6 space-y-6 text-sm text-slate-700 leading-relaxed">
+            <!-- Q1 -->
+            <section class="border border-slate-200 rounded-xl p-5 bg-slate-50/50" data-q="1">
+                <div class="flex items-start gap-3 mb-3">
+                    <span class="shrink-0 w-7 h-7 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center">1</span>
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">這篇期刊文章是哪一年出版的？</p>
+                        <p class="font-mono text-[13px] bg-white border border-slate-200 rounded p-3 text-slate-800">Takishita, F. (1997). Constructing an electronic library web page. <i>The Indexer</i>, <i>20</i>(3), 125–129.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" role="radiogroup" aria-label="第 1 題選項">
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-center gap-2" data-right="1"><input type="radio" name="qz1" class="accent-sky-600"> 1997</label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-center gap-2"><input type="radio" name="qz1" class="accent-sky-600"> 20</label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-center gap-2"><input type="radio" name="qz1" class="accent-sky-600"> 3</label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-center gap-2"><input type="radio" name="qz1" class="accent-sky-600"> 125–129</label>
+                </div>
+                <div class="qz-explain hidden mt-4 bg-white border border-slate-200 rounded-lg p-4">
+                    <p class="qz-result font-bold mb-2"></p>
+                    <p>答案是 <strong class="text-slate-900">1997</strong>。作者後面括號內的數字就是出版年。其他數字分別是：</p>
+                    <ul class="mt-2 space-y-1">
+                        <li><span class="font-mono text-slate-900">(1997)</span>：出版年</li>
+                        <li><span class="font-mono text-slate-900"><i>20</i></span>：卷（volume），要斜體</li>
+                        <li><span class="font-mono text-slate-900">(3)</span>：期（issue），放括號、不斜體</li>
+                        <li><span class="font-mono text-slate-900">125–129</span>：頁碼</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Q2 -->
+            <section class="border border-slate-200 rounded-xl p-5 bg-slate-50/50" data-q="2">
+                <div class="flex items-start gap-3 mb-3">
+                    <span class="shrink-0 w-7 h-7 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center">2</span>
+                    <p class="font-bold text-slate-900">英文參考文獻中，哪些部分要首字大寫（Capitalized）？<span class="font-normal text-slate-500">（可複選）</span></p>
+                </div>
+                <div class="space-y-2">
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-start gap-2" data-right="1"><input type="checkbox" class="mt-1 accent-sky-600"><span>作者的姓氏與名字縮寫</span></label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-start gap-2" data-right="1"><input type="checkbox" class="mt-1 accent-sky-600"><span>文章標題的第一個字、冒號後的第一個字、專有名詞</span></label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-start gap-2"><input type="checkbox" class="mt-1 accent-sky-600"><span>文章標題的每一個字</span></label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-start gap-2" data-right="1"><input type="checkbox" class="mt-1 accent-sky-600"><span>期刊名稱的每一個主要字（冠詞、介系詞、連接詞除外，但放在第一個字時仍大寫）</span></label>
+                    <label class="qz-opt cursor-pointer bg-white border border-slate-200 rounded-lg px-3 py-2 flex items-start gap-2"><input type="checkbox" class="mt-1 accent-sky-600"><span>書名的每一個字</span></label>
+                </div>
+                <div class="qz-explain hidden mt-4 bg-white border border-slate-200 rounded-lg p-4 space-y-3">
+                    <p class="qz-result font-bold"></p>
+                    <p>APA 第 7 版有兩種大寫方式：</p>
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <div class="border border-slate-200 rounded-lg p-3">
+                            <div class="font-bold text-slate-800 mb-1">句子式大寫（Sentence case）</div>
+                            <div class="text-xs text-slate-500 mb-2">文章標題、書名、書中章節名稱</div>
+                            <div class="text-xs">只有第一個字、冒號後第一個字、專有名詞大寫。</div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-3">
+                            <div class="font-bold text-slate-800 mb-1">標題式大寫（Title case）</div>
+                            <div class="text-xs text-slate-500 mb-2">期刊名稱</div>
+                            <div class="text-xs">每個主要字的字首都大寫。</div>
+                        </div>
+                    </div>
+                    <p>以第 1 題為例（藍底為大寫處）：</p>
+                    <p class="font-mono text-[13px] bg-slate-50 border border-slate-200 rounded p-3 text-slate-800"><span class="qz-cap">T</span>akishita, <span class="qz-cap">F</span>. (1997). <span class="qz-cap">C</span>onstructing an electronic library web page. <i><span class="qz-cap">T</span>he <span class="qz-cap">I</span>ndexer</i>, <i>20</i>(3), 125–129.</p>
+                    <p class="text-xs text-slate-500">文章標題只有 Constructing 大寫；期刊名 The Indexer 兩個字都大寫。</p>
+                </div>
+            </section>
+
+            <div class="flex flex-wrap gap-3">
+                <button type="button" onclick="checkApaQuiz()" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-lg transition"><i class="fa-solid fa-check mr-1.5"></i>對答案</button>
+                <button type="button" onclick="resetApaQuiz()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition"><i class="fa-solid fa-rotate-left mr-1.5"></i>重新作答</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openApaQuiz() {
+        document.getElementById('apaQuizModal').classList.remove('hidden');
+        document.documentElement.style.overflow = 'hidden';
+    }
+    function closeApaQuiz() {
+        document.getElementById('apaQuizModal').classList.add('hidden');
+        document.documentElement.style.overflow = '';
+    }
+    function checkApaQuiz() {
+        document.querySelectorAll('#apaQuizModal section[data-q]').forEach(function (q) {
+            var ok = true, any = false;
+            q.querySelectorAll('.qz-opt').forEach(function (o) {
+                var right = o.hasAttribute('data-right'), on = o.querySelector('input').checked;
+                if (on) any = true;
+                if (right !== on) ok = false;
+                o.classList.toggle('is-right', right);
+                o.classList.toggle('is-wrong', on && !right);
+            });
+            var r = q.querySelector('.qz-result');
+            r.textContent = !any ? '還沒作答，先看看解說吧：' : ok ? '答對了！' : '再想想，正確答案已用綠框標出：';
+            r.className = 'qz-result font-bold ' + (ok && any ? 'text-emerald-600' : 'text-rose-600');
+            q.querySelector('.qz-explain').classList.remove('hidden');
+        });
+    }
+    function resetApaQuiz() {
+        document.querySelectorAll('#apaQuizModal .qz-opt').forEach(function (o) {
+            o.classList.remove('is-right', 'is-wrong'); o.querySelector('input').checked = false;
+        });
+        document.querySelectorAll('#apaQuizModal .qz-explain').forEach(function (e) { e.classList.add('hidden'); });
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !document.getElementById('apaQuizModal').classList.contains('hidden')) {
+            e.stopPropagation();
+            closeApaQuiz();
+        }
+    }, true);
+</script>

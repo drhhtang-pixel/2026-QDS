@@ -86,8 +86,23 @@ def week03():
     a='規範性別、種族、身心障礙等議題的客觀用語，強調去偏見與包容性的學術溝通方式。</p>'
     assert h.count(a)==1; h=h.replace(a,a+'''
                     <button type="button" onclick="openBiasFree()" class="mt-3 inline-flex items-center text-xs font-semibold text-brand-600 hover:text-brand-700 hover:underline"><i class="fa-solid fa-circle-info mr-1.5"></i>了解更多：無偏見語言指引<i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i></button>''')
+    # 最下方加「課後小測驗」卡片，點選開啟小測驗面板（apa_quiz.html）
+    a='\n    </main>'
+    assert h.count(a)==1; h=h.replace(a,'''
+        <section id="apa-quiz" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 flex flex-col sm:flex-row sm:items-center gap-5">
+            <div class="flex items-center space-x-3 flex-1">
+                <div class="p-2.5 bg-brand-50 rounded-xl text-brand-600">
+                    <i class="fa-solid fa-pen-to-square text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">課後小測驗</h2>
+                    <p class="text-sm text-slate-500">2 題，檢查你是否看懂期刊參考文獻的年份與大寫規則。</p>
+                </div>
+            </div>
+            <button type="button" onclick="openApaQuiz()" class="shrink-0 inline-flex items-center justify-center px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-sm transition">開始小測驗<i class="fa-solid fa-arrow-right ml-2"></i></button>
+        </section>'''+a)
     assert h.count('</body>')==1
-    apa=h.replace('</body>',read(U/'apa_bias_free.html')+'</body>')
+    apa=h.replace('</body>',read(U/'apa_bias_free.html')+read(U/'apa_quiz.html')+'</body>')
 
     h=plain(U/'Natural_Intelligence_in_Design_answer.html')
     a='Natural intelligence in design, Design Studies, 20, 25-39.'
@@ -103,7 +118,7 @@ def week03():
      ('Critical Form 閱讀論文的秘訣',tpl,
       [('2026/09/23','加入網站'),('2026/09/23','修正 Background 四點說明')]),
      ('APA 第七版格式指南',apa,
-      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明')]),
+      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗')]),
      ('學術資料庫比較',plain(U/'Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html'),
       [('2026/09/23','加入網站')]),
      ('AI 質化研究工具',plain(U/'AI質化研究工具與平台全覽指南.html'),
