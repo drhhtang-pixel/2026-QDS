@@ -121,8 +121,9 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 首頁放上 2026 課程進度表（SCHEDULE），依研究方法分 4 單元，標示業師與本週。
 - 分頁 2：最下方加「課後小測驗」卡片 → 開啟小測驗面板（Q1 Takishita 1997 出版年，單選；
   Q2 哪些部分首字大寫，複選；按「對答案」顯示對錯與解說）。
-- 小測驗 Q1 依老師要求改問《The Indexer》**創刊年**＝1958（Society of Indexers 官網 History 頁；
-  陷阱選項 1978＝1997−20+1，說明卷數不等於年數）。Takishita 範例頁碼改 en dash（補丁）。
+- 小測驗 Q1 依老師要求：「如果一年出一卷，《The Indexer》是哪一年創刊？」答案 **1978**（1997−20+1；
+  陷阱 1977 忘了 +1）。解說附延伸：實際 1958 年創刊（Society of Indexers 官網 History 頁），早期一卷約兩年。
+  Takishita 範例頁碼改 en dash（補丁）。
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
 
 ## 更新紀錄規則（重要）
