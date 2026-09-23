@@ -36,6 +36,16 @@ files=[('APA 第七版格式指南','apa.html'),
 for label,f in files:
     h=open(U+f,encoding='utf-8').read()
     h,n=re.subn(r'<link[^>]*font-awesome[^>]*>',FAMARK,h); assert n==1,f
+    if f=='apa.html':
+        # 懸掛縮排改套在每筆 <p> 上（原本套在外框，被 p-3 蓋掉 padding，首行跑出框外）
+        a=""".citation-entry {
+            text-indent: -2em;
+            padding-left: 2em;
+        }"""
+        assert h.count(a)==1; h=h.replace(a,""".citation-entry > p {
+            text-indent: -2em;
+            padding-left: 2em;
+        }""")
     if f=='Natural_Intelligence_in_Design_answer.html':
         a='Natural intelligence in design, Design Studies, 20, 25-39.'
         assert h.count(a)==2; h=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>, 25–39.')
@@ -49,7 +59,7 @@ for label,f in files:
 # 各分頁更新紀錄（新的在後面）
 LOG=[
  [('2026/09/23','加入網站'),('2026/09/23','修正 Background 四點說明')],
- [('2026/09/23','加入網站')],
+ [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框')],
  [('2026/09/23','加入網站')],
  [('2026/09/23','加入網站')],
  [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）')],
