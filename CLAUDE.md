@@ -25,6 +25,7 @@
 ├── build.py         ← 建置腳本：讀 sources/weekNN/ + shell.html + home.html，產生下列建置產物
 ├── shell.html       ← 單堂外框頁（課程目錄連結、分頁列、上一份/下一份、頁尾更新日期與更新紀錄）
 ├── home.html        ← 課程目錄頁範本
+├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
 └── sources/
@@ -126,6 +127,7 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 改為 16 堂架構：首頁為課程目錄，第三堂移到 `/week03/`，舊網址自動轉址（老師選定 `/weekNN/` 格式）。
 - 分頁 8「建立讀論文 SKILLS 的過程」：依老師提供的 .md 製作（四階段、秘笈欄位、Problem/Aim/Objectives
   前後對照、回饋表、經驗三點；「你」改為「老師」、經驗 1 的簡體字改正體；內附跳到分頁 1／5／6 的連結）。
+- 分頁 8 加上下載卡片「如果你真的做不出來，可以下載這個 SKILL」（連結 `../paper-reading-notes.skill`，srcdoc 以外框網址解析）。
 - 修正所有講義內 `#錨點` 連結會把外框載入 iframe 的問題（例如 APA 上方選單）。
 - 首頁放上 2026 課程進度表（SCHEDULE），依研究方法分 4 單元，標示業師與本週。
 - 分頁 2：最下方加「課後小測驗」卡片 → 開啟小測驗面板（Q1 Takishita 1997 出版年，單選；
