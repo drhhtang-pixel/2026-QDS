@@ -75,6 +75,8 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html
 - 分頁 5、6：參考文獻 `Design Studies, 20` 改為斜體（APA）；分頁 6 期號 (1) 維持正體。
 - 新增分頁 7「商學院學術資料庫」（BSP 四等級表、ABI/INFORM、WRDS、TEJ、Orbis 等，附參考資料連結）。
 - 頁尾顯示「本頁最後更新」日期與「更新紀錄」面板，**各分頁日期各自獨立**。
+- 分頁 5 參考文獻標點依 APA 修正：`Natural intelligence in design. *Design Studies, 20*, 25–39.`（老師同意）。
+- 建立 GitHub repository 並啟用 Pages（見下方）。
 
 ## 更新紀錄規則（重要）
 
@@ -86,12 +88,14 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
-- 分頁 5 參考文獻：依 APA 應為 `Natural intelligence in design. Design Studies, 20, 25–39.`
-  （標題後用句點而非逗號、頁碼用 en dash）。老師只要求斜體，其餘尚未改。
 - 未來加入第四堂以後的課：可在同一 repository 新增 `lesson4.html`（複製 build 流程），
   或把 `index.html` 改成各堂課目錄頁。
 
 ## 發布到 GitHub Pages
+
+- Repository：https://github.com/drhhtang-pixel/2026-QDS（public，帳號 drhhtang-pixel）
+- 網址：https://drhhtang-pixel.github.io/2026-QDS/
+- 已設定 `http.postBuffer`（第一次推送 2.4 MB 時連線中斷，加大後正常）。
 
 ```bash
 python3 build.py
