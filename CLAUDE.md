@@ -137,7 +137,16 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - **GitHub `drhhtang-pixel/2026-QDS-archive`（Private）**：過渡用，目前存有第四堂論文 PDF 與資料夾骨架；
   Google Drive 建好並搬完後，是否刪除由老師決定（刪 repo 需老師在 GitHub 網頁操作）。
 
-### 在 Google Drive 建立存檔區（待執行：需要已連接 Google Drive 連接器的新對話）
+### Google Drive 使用範圍（老師規定，2026/09/26）
+- **在這個專案裡，Claude 只能讀取、寫入「2026 QDS 存檔區」及其子資料夾**
+  （資料夾 ID `（ID 見 CLAUDE.local.md）`，（網址見 CLAUDE.local.md） ）。
+- 搜尋一律加 `parentId = '<存檔區或其子資料夾 ID>'` 限定範圍；不瀏覽、不讀取、不修改存檔區以外的任何檔案或資料夾
+  （包括共用雲端硬碟裡既有的「2026 QDS」資料夾）。要用存檔區外的檔案，請老師先把檔案移進存檔區，或直接上傳到對話。
+- 不更改任何分享設定（不用 share_file），不刪除（不用 trash_file），除非老師明確要求。
+- 注意：這是 Claude 遵守的規則；連接器本身的授權是整個 Google 帳號。要做到技術上的硬限制，
+  需改用只被分享這個資料夾的專用 Google 帳號來連接（見老師決定）。
+
+### 在 Google Drive 建立存檔區（進行中，2026/09/26）
 老師說「照 CLAUDE.md 在 Google Drive 建立 2026 QDS 存檔區」時：
 1. 確認 Google Drive 連接器工具可用；不可用就請老師先連接並開新對話，不要改用其他地方。
 2. 在老師的「我的雲端硬碟」根目錄建立資料夾（已存在就沿用，不重複建立）：
