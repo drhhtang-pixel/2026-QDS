@@ -35,7 +35,7 @@
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
-├── private/         ← 上課存檔區＝另一個私有 repo（公開 repo 以 .gitignore 排除），見下方「存檔區」
+├── private/         ← （.gitignore 排除）過渡用的私有 repo 位置；存檔區已改用 Google Drive，見下方「存檔區」
 └── sources/
     ├── week04/      ← 第四堂講義原始檔
     │   └── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
@@ -84,7 +84,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ## Notion 資料搬遷（已決事項，尚未執行）
 
 - 範圍：只搬 2026 Course Schedule Master（17 列筆記頁、約 119 張圖、12 個 PDF），不搬 2022–2024 舊課。
-- 取得方式：老師從 Notion 匯出 zip（HTML、含子頁面與檔案）放進 `private/notion-export/`，再把可公開的部分轉成各堂「課堂筆記」分頁。
+- 取得方式：老師從 Notion 匯出 zip（HTML、含子頁面與檔案）放進 Google Drive「2026 QDS 存檔區/notion-export/」，再把可公開的部分轉成各堂「課堂筆記」分頁。
   （Notion MCP 無法存取該工作區；公開頁的非官方 API 可讀但不穩定，附件連結有時效。）
 - 版權：期刊論文全文 PDF 不上網，只放 APA 書目＋DOI；業師演講截圖（如商業研究方法 68 張）與上課錄音 m4a
   不上網（講者同意後再議）；老師自己的講義、APA 指引可上網。
@@ -127,31 +127,44 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 老師在 PDF 上的眉批（Problem/results/contributions/significance、definition of design thinking、
   participatory design 與 design thinking 的比較、cluster analysis 只用 six attributes）都已放進對應卡片。
 
-## 存檔區（private/）＝老師的完整上課資料，不給學生看
+## 存檔區＝老師的完整上課資料，不給學生看（2026/09/26 老師決定改用 Google Drive）
 
-地端「2026 QDS」資料夾＝**兩個 repo**：
-- 外層＝公開 repo `drhhtang-pixel/2026-QDS`（GitHub Pages，給學生看的講義與網站）。
-- `private/`＝私有 repo `drhhtang-pixel/2026-QDS-archive`（**Private**，老師的存檔區與備份）。
-  公開 repo 的 `.gitignore` 排除 `private/`，兩個 repo 互不干擾。
+分工：
+- **Google Drive「2026 QDS 存檔區」**：上課存檔（論文 PDF、錄音錄影、業師資料、筆記、Notion 匯出、學生資料）。
+  老師 Mac 裝 Google Drive 桌面版即為一般資料夾、自動備份；雲端 Claude 透過 **Google Drive 連接器**讀寫
+  （連接器在 https://claude.ai/customize/connectors 連接，連好後要開**新對話**才會載入）。
+- **GitHub `drhhtang-pixel/2026-QDS`（public）**：只放給學生看的網站與講義，維持現狀。
+- **GitHub `drhhtang-pixel/2026-QDS-archive`（Private）**：過渡用，目前存有第四堂論文 PDF 與資料夾骨架；
+  Google Drive 建好並搬完後，是否刪除由老師決定（刪 repo 需老師在 GitHub 網頁操作）。
 
-```
-private/
-├── README.md            ← 分類與規則說明（老師看的）
-├── weekNN/papers/       ← 論文全文 PDF（第四堂：week04/papers/2018_Design_Thinking_Review.pdf）
-├── weekNN/guest/        ← 業師投影片、演講截圖
-├── weekNN/notes/        ← 老師上課筆記、講義草稿
-├── weekNN/recordings/   ← 上課錄音錄影：不進任何 repo（太大），靠 iCloud／Google Drive／Time Machine
-├── notion-export/       ← Notion 匯出 zip 原檔
-└── students/            ← 修課名單、成績、作業（個資，永不上網）
-```
+### 在 Google Drive 建立存檔區（待執行：需要已連接 Google Drive 連接器的新對話）
+老師說「照 CLAUDE.md 在 Google Drive 建立 2026 QDS 存檔區」時：
+1. 確認 Google Drive 連接器工具可用；不可用就請老師先連接並開新對話，不要改用其他地方。
+2. 在老師的「我的雲端硬碟」根目錄建立資料夾（已存在就沿用，不重複建立）：
+   ```
+   2026 QDS 存檔區/
+   ├── README（說明文件：資料夾用途、版權／個資規則、資料流向；內容取自 2026-QDS-archive 的 README.md，
+   │          並把「備份」欄改為 Google Drive、錄音錄影也放在 Google Drive）
+   ├── week01/ … week16/          ← 每堂各有四個子資料夾：
+   │   ├── papers/                ← 論文全文 PDF
+   │   ├── guest/                 ← 業師投影片、演講截圖（講者同意前不公開）
+   │   ├── notes/                 ← 老師上課筆記、講義草稿
+   │   └── recordings/            ← 上課錄音 m4a、錄影
+   ├── notion-export/             ← Notion 匯出 zip 原檔
+   └── students/                  ← 修課名單、成績、作業（個資）
+   ```
+3. 把第四堂論文放進 `week04/papers/2018_Design_Thinking_Review.pdf`：來源是 GitHub 私有 repo
+   `drhhtang-pixel/2026-QDS-archive` 的 `week04/papers/2018_Design_Thinking_Review.pdf`（add_repo 後 clone 取得）。
+4. **不要**更改任何資料夾的分享設定（保持只有老師本人可見）；建好後回報資料夾連結，請老師在 Drive 確認。
+5. 完成後把本節「待執行」改為「已完成」，並記下資料夾連結。
 
-- **資料流向只往更公開的方向**：`private/` → 老師同意後挑選／改寫進 `sources/weekNN/` → `build.py` → 網站。
-  從 `private/` 取材做講義時，期刊全文不上網（只放 APA 書目＋DOI），業師資料與錄音需講者同意，學生資料永不上網。
-- **防呆**：公開 repo 的 `.gitignore` 全域排除 `*.pdf`、音影檔、`*.pptx`/`*.key`、`*.docx`、`*.xlsx`/`*.csv`；
+### 規則（不論存檔放哪裡都適用）
+- **資料流向只往更公開的方向**：存檔區 → 老師同意後挑選／改寫進 `sources/weekNN/` → `build.py` → 網站。
+  期刊全文不上網（只放 APA 書目＋DOI），業師資料與錄音需講者同意，學生資料永不上網。
+- **防呆**：公開 repo 的 `.gitignore` 全域排除 `*.pdf`、音影檔、`*.pptx`/`*.key`、`*.docx`、`*.xlsx`/`*.csv`，並排除 `private/`；
   `build.py` 最後檢查 `git ls-files`，若公開 repo 追蹤了這些副檔名或 `private/` 路徑就停下並列出檔名。
   （公開 repo 需要放 PDF 等檔案時，要先改這兩處並經老師同意。）
-- 雲端 Claude 要讀存檔區時：`add_repo` 加入 `drhhtang-pixel/2026-QDS-archive`，clone 到 `private/`。
-- 在 `private/` 內改完要在**該 repo** commit／push（`cd private && git add -A && git commit && git push`）。
+- 老師把存檔資料給 Claude 處理（例如 Notion 匯出轉講義）：從 Google Drive 讀取，或由老師直接上傳到對話。
 
 ## 架構重點（build.py 在做什麼）
 
