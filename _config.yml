@@ -2,3 +2,4 @@
 exclude:
   - CLAUDE.md
   - build.py
+  - check_doi.py

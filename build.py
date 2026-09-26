@@ -130,9 +130,9 @@ def week03():
     a='規範性別、種族、身心障礙等議題的客觀用語，強調去偏見與包容性的學術溝通方式。</p>'
     assert h.count(a)==1; h=h.replace(a,a+'''
                     <button type="button" onclick="openBiasFree()" class="mt-3 inline-flex items-center text-xs font-semibold text-brand-600 hover:text-brand-700 hover:underline"><i class="fa-solid fa-circle-info mr-1.5"></i>了解更多：無偏見語言指引<i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i></button>''')
-    # Takishita 範例頁碼改用 en dash（APA）
+    # Takishita 範例頁碼改用 en dash（APA），並依 Crossref 更正為 125–126
     a='<i>The Indexer</i>, <i>20</i>(3), 125-129.'
-    assert h.count(a)==1; h=h.replace(a,'<i>The Indexer</i>, <i>20</i>(3), 125–129.')
+    assert h.count(a)==1; h=h.replace(a,'<i>The Indexer</i>, <i>20</i>(3), 125–126.')
     # 最下方加「課後小測驗」卡片，點選開啟小測驗面板（apa_quiz.html）
     a='\n    </main>'
     assert h.count(a)==1; h=h.replace(a,'''
@@ -151,15 +151,18 @@ def week03():
     assert h.count('</body>')==1
     apa=h.replace('</body>',read(U/'apa_bias_free.html')+read(U/'apa_quiz.html')+'</body>')
 
+    DOI_CROSS='<a href="https://doi.org/10.1016/S0142-694X(98)00026-X" target="_blank" rel="noopener" class="underline underline-offset-2">https://doi.org/10.1016/S0142-694X(98)00026-X</a>'
     h=plain(U/'Natural_Intelligence_in_Design_answer.html')
     a='Natural intelligence in design, Design Studies, 20, 25-39.'
-    assert h.count(a)==2; ni1=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>, 25–39.')
+    assert h.count(a)==2; ni1=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>, 25–39. '+DOI_CROSS)
 
     h=plain(U/'natural_intelligence_design_AI.html')
     a='<em>Design Studies</em>, 20(1), 25–39.'; assert h.count(a)==1
     h=h.replace(a,'<em>Design Studies, 20</em>(1), 25–39.')
     a='Natural intelligence in design. Design Studies, 20(1), 25–39.'; assert h.count(a)==1
-    ni2=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>(1), 25–39.')
+    ni2=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>(1), 25–39. '+DOI_CROSS)
+    a='<em>Design Studies, 20</em>(1), 25–39. <span class="opacity-70">'; assert ni2.count(a)==1
+    ni2=ni2.replace(a,'<em>Design Studies, 20</em>(1), 25–39. '+DOI_CROSS+' <span class="opacity-70">')
     a='Simon（1981）與 Schön（1983）'; assert ni2.count(a)==1
     ni2=ni2.replace(a,'Simon (1981) 與 Schön (1983)')
 
@@ -167,15 +170,15 @@ def week03():
      ('Critical Form 閱讀論文的秘訣',tpl,
       [('2026/09/23','加入網站'),('2026/09/23','修正 Background 四點說明')]),
      ('APA 第七版格式指南',apa,
-      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗'),('2026/09/23','小測驗第 1 題改問期刊創刊年（一年一卷推算）；Takishita 範例頁碼改用 en dash'),('2026/09/23','小測驗新增第 3、4 題（判斷參考文獻類型）')]),
+      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗'),('2026/09/23','小測驗第 1 題改問期刊創刊年（一年一卷推算）；Takishita 範例頁碼改用 en dash'),('2026/09/23','小測驗新增第 3、4 題（判斷參考文獻類型）'),('2026/09/26','Takishita 範例頁碼依 Crossref 更正為 125–126')]),
      ('學術資料庫比較',plain(U/'Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html'),
       [('2026/09/23','加入網站')]),
      ('AI 質化研究工具',plain(U/'AI質化研究工具與平台全覽指南.html'),
       [('2026/09/23','加入網站')]),
      ('Natural Intelligence 解答 by drhhtang',ni1,
-      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）')]),
+      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）'),('2026/09/26','參考文獻加上 DOI 連結')]),
      ('Natural Intelligence 解答 by AI',ni2,
-      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by AI」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/26','內文引用改用半形括號')]),
+      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by AI」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/26','內文引用改用半形括號'),('2026/09/26','參考文獻加上 DOI 連結')]),
      ('商學院學術資料庫',plain(U/'business_db.html'),
       [('2026/09/23','新增講義')]),
      ('建立讀論文 SKILLS 的過程',plain(U/'paper_skill_process.html'),
@@ -188,7 +191,7 @@ def week04():
      ('設計思考的歷史與重點',plain(U/'design_thinking_history.html'),
       [('2026/09/26','新增講義（設計思考發展史、八種論述、棘手問題、DITLDESIGN 三鑽模型）'),('2026/09/26','時間軸引用改為 Rittel & Webber (1973)')]),
      ('Critical Form：Doing Design Thinking',plain(U/'Doing_Design_Thinking_critical_form.html'),
-      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號')]),
+      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','文章 DOI 改為可點的連結')]),
      ('SLR 系統文獻回顧',plain(U/'slr_cardsort_cluster.html'),
       [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號')]),
     ]
@@ -196,15 +199,55 @@ def week04():
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行
 WEEKS={3:week03,4:week04}
 
+# ─── APA 引用格式檢查（lint）────────────────────────────────
+# 老師規定（2026/09/26）：中文內文引用英文作者用 APA 英文格式＋半形括號，
+# 兩位作者用 &，三位以上用 et al.；有 DOI 的書目要做成可點連結。
+# 檢查的是補丁後的講義內容；有問題就停止建置，不產生任何檔案。
+LATIN=r"[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'’\-]*"
+APA_RULES=[
+    (r'(?<![A-Za-zÀ-ÿ])[A-Z][A-Za-zÀ-ÿ\-]*(?: et al\.)?\s*（(?:19|20)\d\d',
+     '英文作者後用了全形括號，應改為半形，如 Simon (1981)'),
+    (LATIN+r'\s*等人', '「等人」應改為 et al.'),
+    (r'[A-Z]'+LATIN+r'\s*[與、和]\s*[A-Z]'+LATIN+r'\s*[（(]\s*(?:19|20)\d\d',
+     '作者之間用了「與／、／和」，兩位作者應用 &，如 Rittel & Webber (1973)'),
+    (r'(?<![A-Za-zÀ-ÿ.])[A-Z][a-zà-ÿ][A-Za-zÀ-ÿ\-]*, [A-Z][a-zà-ÿ][A-Za-zÀ-ÿ\-]*,? (?:&|and) [A-Z][a-zà-ÿ][A-Za-zÀ-ÿ\-]*,? ?[（(]?(?:19|20)\d\d',
+     '三位以上作者應寫成 et al.，如 Tranfield et al. (2003)'),
+    (r'</(?:em|i)>\s*(?:\(\d+\))?, \d+-\d+\.', '頁碼範圍應用 en dash（–），不是連字號（-）'),
+]
+# 已確認不是引用格式錯誤的字串：(第幾堂, 分頁序號, 字串)
+APA_OK={(3,2,'https://doi.org/xxx'),          # APA 講義說明 DOI 格式的示意
+        (3,2,'edu0000456')}                    # APA 講義的虛構範例書目，DOI 不做連結
+def apa_lint(n,i,h):
+    body=re.sub(r'<(script|style)\b[\s\S]*?</\1>','',h)
+    text=html.unescape(re.sub(r'<(?!/?(?:em|i)>)[^>]+>','',body))   # 保留 <em>/<i> 供頁碼規則判斷
+    errs=[]
+    for pat,msg in APA_RULES:
+        for m in re.finditer(pat,text):
+            near=text[max(0,m.start()-40):m.end()+40]
+            if not any((n,i)==(a,b) and ok in near for a,b,ok in APA_OK):
+                errs.append('  第%d堂分頁 %d：%s\n      → %s'%(n,i,m.group(0).strip(),msg))
+    naked=re.sub(r'<a\b[\s\S]*?</a>','',body)                       # 連結以外的 DOI
+    naked=re.sub(r'<[^>]+>','',naked)
+    for m in re.finditer(r'https?://(?:dx\.)?doi\.org/\S+',naked):
+        if not any((n,i)==(a,b) and ok in m.group(0) for a,b,ok in APA_OK):
+            errs.append('  第%d堂分頁 %d：%s\n      → DOI 應做成可點的連結 <a href="…">'%(n,i,m.group(0)))
+    return errs
+
 # ─── 建置 ───────────────────────────────────────────────────
 CN='零一二三四五六七八九十'
 def cn(n): return CN[n] if n<=10 else '十'+(CN[n-10] if n>10 else '')
+
+SRCDOCS={n:WEEKS[n]() for n in WEEKS}
+lint=[e for n,ds in SRCDOCS.items() for i,(t,h,lg) in enumerate(ds,1) for e in apa_lint(n,i,h)]
+if lint:
+    raise SystemExit('APA 引用格式檢查未通過（%d 處），請修正後再建置：\n'%len(lint)+'\n'.join(lint))
+print('APA 引用格式檢查通過')
 
 shell=read(ROOT/'shell.html')
 built={}
 for n in range(1,TOTAL+1):
     if n in WEEKS:
-        docs=[(t,tailwind(h,'第%d堂「%s」'%(n,t)),lg) for t,h,lg in WEEKS[n]()]
+        docs=[(t,tailwind(h,'第%d堂「%s」'%(n,t)),lg) for t,h,lg in SRCDOCS[n]]
         for t,h,lg in docs: assert lg,t
         title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1]); key='week%02d'%n
         payload=json.dumps({'title':title,'key':key,'fa':FA,'mark':FAMARK,

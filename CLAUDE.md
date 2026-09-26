@@ -11,6 +11,7 @@
   （例如合併到 main、上線、再做其他修改）。老師偏好 **Artifact 卡片**（按 Open 就能看）：
   把 `weekNN/index.html` 去掉 `<!DOCTYPE>`/`<html>`/`<head>` 外殼後用 Artifact 工具發布。
   第四堂預覽 artifact：https://claude.ai/artifact/G2AEarTPktir4aeMDPED5D （之後更新請傳 `url` 發布到同一個網址）。
+  第三堂預覽 artifact：https://claude.ai/artifact/RGT8xyprcgDfPYmopeRYp9 （同上）。
   Artifact 版的「課程目錄」連結與 SKILL 下載無作用，只供預覽；正式網站仍是 GitHub Pages。
 - 讀者：研究所學生，會用電腦與手機瀏覽。
 - 發布方式：GitHub Pages（此資料夾即 repository 根目錄）。
