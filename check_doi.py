@@ -10,7 +10,7 @@ import re,json,html,sys,time,difflib,subprocess,urllib.parse
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
-UA='2026-QDS-doi-check/1.0 (mailto:drhhtang@mail.ntust.edu.tw)'   # Crossref 建議附聯絡信箱
+UA='2026-QDS-doi-check/1.0'
 # 講義裡刻意保留、不檢查的 DOI（與 build.py 的 APA_OK 對應）
 SKIP={'10.1037/edu0000456'}   # APA 講義的虛構範例書目
 

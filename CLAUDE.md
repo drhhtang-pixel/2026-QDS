@@ -78,7 +78,8 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   Crossref 登記的標題與書目相符；有錯時結束代碼 1。`--suggest` 另外替沒有 DOI 的書目列出 Crossref 候選（多半是書評、
   後來的版本等錯誤配對，**不可直接採用**）。刻意不檢查的 DOI 寫在 `SKIP`。
   - 判斷候選 DOI、替缺 DOI 的書目找正確 DOI：用 `.claude/agents/doi-checker.md`（doi-checker agent，只回報、不改檔）。
-    `.claude/` 被 .gitignore 排除，這個 agent 只在老師這台 Mac 上有。
+    `.claude/agents/` 有推上 GitHub（.gitignore 只排除 `.claude/` 裡的其他檔案），雲端 session 也能用。
+  - 不要把老師的 email 或帳號寫進任何會 commit 的檔案，也不要放進送給外部服務的請求（如 Crossref 的 User-Agent）。
   - 本機的 python.org 版 Python 沒有 SSL 憑證，所以腳本用系統 `curl` 連網（不要改用 urllib）。
 
 - **Tailwind 預先編譯**（2026/09/26 起）：講義原始檔照舊寫 `<script src="https://cdn.tailwindcss.com">` 和
