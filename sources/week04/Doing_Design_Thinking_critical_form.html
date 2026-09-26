@@ -225,37 +225,86 @@
             </div>
 
             <!-- C1 Data collection -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3 md:col-span-2">
-                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C1)</span>
-                    <h4 class="font-bold text-slate-900 text-base">Phase 1: Data Collection（Figure 1 資料蒐集流程）</h4>
-                    <div class="space-y-2 text-xs">
-                        <div class="rounded-lg bg-brand-50 border border-brand-100 p-3">
-                            <div class="flex justify-between items-center"><span class="font-semibold text-slate-800">Search 4 databases: "Design*" AND "Think*" in title/abstract, peer-reviewed, 1985–2017</span><span class="font-mono font-bold text-brand-700 text-sm">32,232</span></div>
+            <div class="border border-slate-200 rounded-xl p-5 sm:p-6 bg-white hover:border-brand-300 transition space-y-4">
+                <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C1)</span>
+                <h4 class="font-bold text-slate-900 text-base">Phase 1: Data Collection — Figure 1. The Data Gathering Process</h4>
+                <p class="text-xs text-slate-500">資料蒐集分四步：左邊是<strong class="text-slate-700">做了什麼</strong>，右邊是<strong class="text-slate-700">做完後剩下多少</strong>；中間紅字是被排除的篇數。</p>
+
+                <!-- Step 1 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">1</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Initial search of academic databases</p>
+                            <p>4 databases: ABI ProQuest, Business Source Premier, Science Direct, Emerald</p>
+                            <p>Search string <span class="font-mono bg-white border border-slate-200 rounded px-1">"Design*" AND "Think*"</span> in title or abstract; peer-reviewed journals; 1985–2017</p>
                         </div>
-                        <div class="text-center text-slate-400"><i class="fa-solid fa-arrow-down"></i> screen titles &amp; abstracts, remove duplicates, drop journals outside JCR 2013 / ABS guide (7 design journals kept)</div>
-                        <div class="rounded-lg bg-brand-50 border border-brand-100 p-3 mx-6 sm:mx-12">
-                            <div class="flex justify-between items-center"><span class="font-semibold text-slate-800">Documents retained (EndNote)</span><span class="font-mono font-bold text-brand-700 text-sm">525</span></div>
-                        </div>
-                        <div class="text-center text-slate-400"><i class="fa-solid fa-arrow-down"></i> exclude technical design practices, other fields, generic usage of the phrase</div>
-                        <div class="rounded-lg bg-brand-600 text-white p-3 mx-12 sm:mx-24">
-                            <div class="flex justify-between items-center"><span class="font-semibold">Articles retained</span><span class="font-mono font-bold text-sm">104</span></div>
-                        </div>
-                        <div class="text-center text-slate-500">+ 9 highly influential books + 3 applied models（cross-referencing; consulting 7 scholars &amp; 10 practitioners）</div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-brand-50 border border-brand-200 p-3 flex sm:flex-col items-center justify-between sm:justify-center">
+                        <span class="text-xs text-brand-700 font-semibold">retrieved 檢索到</span>
+                        <span class="font-mono font-bold text-brand-800 text-2xl">32,232</span>
                     </div>
                 </div>
-                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
-                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C1.1)</span>
-                    <h4 class="font-bold text-slate-900 text-base">Four guidelines for the 525 → 104 cull</h4>
-                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
-                        <li>Exclude articles where "design thinking" means technical design practices.</li>
-                        <li>Discard applications to other fields (e.g., architecture, chemistry).</li>
-                        <li>Include key "designerly thinking" works, but <strong class="highlight-accent">focus on design thinking in management discourse</strong>.</li>
-                        <li>Exclude cases that do not say what was done or what "design thinking" refers to.</li>
-                    </ol>
-                    <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
-                        <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Tranfield, Denyer, &amp; Smart (2003)
+                <div class="pl-11 text-xs text-rose-600 font-semibold"><i class="fa-solid fa-arrow-down mr-1"></i>排除 31,707 篇</div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">2</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Initial screening of titles and abstracts</p>
+                            <ul class="list-disc list-inside space-y-0.5">
+                                <li>Drop irrelevant uses (e.g., technical designs, research design, business-process design, strategic/lean thinking)</li>
+                                <li>Remove overlaps among databases</li>
+                                <li>Drop journals outside the 2013 JCR or the ABS Academic Journal Quality Guide (7 design journals kept as exceptions)</li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-brand-50 border border-brand-200 p-3 flex sm:flex-col items-center justify-between sm:justify-center">
+                        <span class="text-xs text-brand-700 font-semibold">retained 保留</span>
+                        <span class="font-mono font-bold text-brand-800 text-2xl">525</span>
+                    </div>
+                </div>
+                <div class="pl-11 text-xs text-rose-600 font-semibold"><i class="fa-solid fa-arrow-down mr-1"></i>排除 421 篇</div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">3</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Two authors read the abstracts in detail and apply four guidelines</p>
+                            <ol class="list-decimal list-inside space-y-0.5">
+                                <li>Exclude articles where "design thinking" means technical design practices.</li>
+                                <li>Exclude applications to other fields (e.g., architecture, chemistry).</li>
+                                <li>Keep key "designerly thinking" works, but <strong class="highlight-accent">focus on design thinking in management discourse</strong>.</li>
+                                <li>Exclude cases that do not say what was done or what "design thinking" refers to.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-brand-600 text-white p-3 flex sm:flex-col items-center justify-between sm:justify-center">
+                        <span class="text-xs font-semibold">articles retained 最終文章</span>
+                        <span class="font-mono font-bold text-2xl">104</span>
+                    </div>
+                </div>
+                <div class="pl-11 text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-plus mr-1"></i>再補充其他來源</div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-sm">4</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Add other relevant sources</p>
+                            <p>Found through cross-referencing, consulting 7 scholars and 10 practitioners, and the authors' own experience.</p>
+                        </div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-emerald-50 border border-emerald-200 p-3 flex sm:flex-col items-center justify-between sm:justify-center text-emerald-800">
+                        <span class="text-xs font-semibold">added 加入</span>
+                        <span class="font-bold text-sm text-right sm:text-center"><span class="font-mono text-xl">9</span> books ＋ <span class="font-mono text-xl">3</span> applied models</span>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                    <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Tranfield, Denyer, &amp; Smart (2003) — systematic review = data collection, analysis, synthesis
                 </div>
             </div>
 
