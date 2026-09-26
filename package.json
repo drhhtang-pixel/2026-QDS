@@ -1,0 +1,8 @@
+{
+  "name": "2026-qds",
+  "private": true,
+  "description": "建置用工具：build.py 用 Tailwind CLI 把各講義的 Tailwind 預先編譯成 CSS",
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

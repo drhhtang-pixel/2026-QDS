@@ -1,4 +1,4 @@
-import re,json,gzip,base64,html,datetime
+import re,json,gzip,base64,html,datetime,hashlib,subprocess,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 SRC=ROOT/'sources'
@@ -54,6 +54,50 @@ def plain(path):
     h=read(path)
     h,n=re.subn(r'<link[^>]*font-awesome[^>]*>',FAMARK,h); assert n==1,path
     return h
+
+# ─── Tailwind 預先編譯 ───────────────────────────────────────
+# 講義原本用 cdn.tailwindcss.com 在瀏覽器端即時產生 CSS（瀏覽器會警告不該用在正式網站）。
+# 建置時改用 Tailwind CLI（版本見 package.json，npm install 安裝），依每份講義的內容與 tailwind.config
+# 產生 CSS 內嵌進去。結果快取在 tw_cache/（要 commit）：講義沒改就直接用快取，不必有 Node.js。
+TWCDN='<script src="https://cdn.tailwindcss.com"></script>'
+TWBIN=ROOT/'node_modules'/'.bin'/'tailwindcss'
+TWCACHE=ROOT/'tw_cache'
+TWVER=json.loads(read(ROOT/'package.json'))['devDependencies']['tailwindcss']
+tw_used=set()
+
+def tailwind(h,name):
+    """把 Tailwind CDN 與 tailwind.config 腳本換成預先編譯好的 <style>。"""
+    if TWCDN not in h: return h
+    assert h.count(TWCDN)==1,name
+    cfg='{}'
+    m=re.search(r'<script>\s*tailwind\.config\s*=\s*',h)
+    if m:
+        end=h.index('</script>',m.end())
+        cfg=h[m.end():end].strip().rstrip(';').strip()
+        depth=0                      # 確認整段腳本只有這個設定物件，移除時不會誤刪其他程式
+        for i,ch in enumerate(cfg):
+            depth+=(ch=='{')-(ch=='}')
+            if depth==0: break
+        assert cfg[0]=='{' and i==len(cfg)-1,'tailwind.config 腳本含其他程式：'+name
+        h=h[:m.start()]+h[end+len('</script>'):]
+    f=TWCACHE/(hashlib.sha256((TWVER+cfg+h).encode()).hexdigest()[:16]+'.css')
+    tw_used.add(f.name)
+    if not f.exists():
+        if not TWBIN.exists():
+            raise SystemExit('「%s」需要重新編譯 Tailwind：請先在專案資料夾執行 npm install（需要 Node.js）'%name)
+        TWCACHE.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory() as d:
+            d=Path(d)
+            (d/'page.html').write_text(h,encoding='utf-8')
+            (d/'in.css').write_text('@tailwind base;\n@tailwind components;\n@tailwind utilities;\n')
+            (d/'tailwind.config.js').write_text('module.exports={...(%s),content:[%s]};'%(cfg,json.dumps(str(d/'page.html'))),encoding='utf-8')
+            subprocess.run([str(TWBIN),'-c',str(d/'tailwind.config.js'),'-i',str(d/'in.css'),'-o',str(f),'--minify'],
+                           check=True,capture_output=True)
+        print('  Tailwind 編譯：%s → tw_cache/%s'%(name,f.name))
+    # 跟 CDN 一樣放在 <head> 最後（CDN 是執行時把 <style> 加到 head 尾端），講義自己的樣式順序才不會變
+    h=h.replace(TWCDN,'')
+    assert h.count('</head>')==1,name
+    return h.replace('</head>','<style>'+read(f)+'</style>\n</head>')
 
 # 共用 Font Awesome CSS（取自第三堂 Critical Form 打包檔）
 _,FA=unbundle(SRC/'week03'/'The_Secrets_of_Critical_Form_for_Reading_Papers.html')
@@ -154,7 +198,7 @@ shell=read(ROOT/'shell.html')
 built={}
 for n in range(1,TOTAL+1):
     if n in WEEKS:
-        docs=WEEKS[n]()
+        docs=[(t,tailwind(h,'第%d堂「%s」'%(n,t)),lg) for t,h,lg in WEEKS[n]()]
         for t,h,lg in docs: assert lg,t
         title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1]); key='week%02d'%n
         payload=json.dumps({'title':title,'key':key,'fa':FA,'mark':FAMARK,
@@ -204,3 +248,5 @@ home=home.replace('/*RANGE*/','%s – %s・每週三'%(SCHEDULE[0][0],SCHEDULE[-
 home=home.replace('/*UPDATED*/',max(u for _,_,u in built.values()))
 (ROOT/'index.html').write_text(home,encoding='utf-8')
 print('index.html  課程目錄')
+for f in TWCACHE.glob('*.css'):          # 清掉已不再使用的舊快取
+    if f.name not in tw_used: f.unlink()

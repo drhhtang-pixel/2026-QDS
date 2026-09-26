@@ -4,3 +4,4 @@ __pycache__/
 
 # 不公開的備份（期刊全文 PDF 等），只留在本機、不推上 GitHub
 private/
+node_modules/

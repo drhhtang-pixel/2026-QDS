@@ -23,6 +23,8 @@
 2026 QDS/
 ├── CLAUDE.md        ← 本文件
 ├── build.py         ← 建置腳本：讀 sources/weekNN/ + shell.html + home.html，產生下列建置產物
+├── package.json     ← 只用來安裝 Tailwind CLI（tailwindcss 3.4.17，與原 CDN 同版）；node_modules/ 不 commit
+├── tw_cache/        ← 各講義預先編譯好的 Tailwind CSS 快取（要 commit；build.py 會自動清掉不再使用的）
 ├── shell.html       ← 單堂外框頁（課程目錄連結、分頁列、上一份/下一份、頁尾更新日期與更新紀錄）
 ├── home.html        ← 課程目錄頁範本
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
@@ -49,10 +51,21 @@
 ## 建置
 
 ```bash
-python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各 weekNN/index.html
+npm install           # 第一次（或換電腦）要裝一次 Tailwind CLI，需要 Node.js
+python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只用標準函式庫）
 ```
 
 **每次修改後都要重新執行 build.py**，再檢查產物。
+
+- **Tailwind 預先編譯**（2026/09/26 起）：講義原始檔照舊寫 `<script src="https://cdn.tailwindcss.com">` 和
+  `tailwind.config = {...}`，build.py 的 `tailwind()` 會用 Tailwind CLI 依該份講義的內容與設定編譯 CSS，
+  把兩段腳本換成 `<style>`（放在 `</head>` 前，與 CDN 注入位置相同，樣式順序不變）。建置產物不再載入 Tailwind CDN，
+  瀏覽器也不會再出現「cdn.tailwindcss.com should not be used in production」警告。
+- 快取鍵＝Tailwind 版本＋設定＋講義 HTML 的雜湊：講義沒改就直接用 `tw_cache/`，不需要 Node.js；
+  改了講義但沒裝 CLI，build.py 會停下來提示先 `npm install`。
+- 限制：CLI 只看得到檔案裡寫出來的 class 名稱。講義 JS 不要用字串拼接產生 class（如 `'bg-'+color+'-100'`），
+  要寫完整名稱（目前所有講義都符合）。
+- 2026/09/26 驗證：9 個分頁改用編譯版後，與 CDN 版整頁截圖逐像素相同；高亮開關、APA 小測驗／無偏見語言面板也相同。
 
 ## 課程進度表（SCHEDULE）
 
@@ -163,6 +176,7 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
   解說附「看講義範例」按鈕（關閉面板、切到該分類 tab、捲到 #reference-list）。
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
 - 2026/09/26：新增第四堂，分頁 1「Critical Form：Doing Design Thinking」；文章 PDF 不上網（`private/`）。
+- 2026/09/26：Tailwind 改為建置時預先編譯（package.json + tw_cache/），全站不再載入 Tailwind CDN。
 
 ## 更新紀錄規則（重要）
 
@@ -196,8 +210,8 @@ Pages 設定：Settings → Pages → Deploy from a branch → `main` / `(root)`
 
 ## 技術限制與慣例
 
-- 每個 weekNN/index.html 必須是**單一自足檔案**，外部資源只用：`cdn.tailwindcss.com`、`cdnjs.cloudflare.com`（腳本）、
-  Google Fonts。不要引入其他 CDN 或遠端圖片（claude.ai artifact 版本的 CSP 會擋）。
+- 每個 weekNN/index.html 必須是**單一自足檔案**，外部資源只用：`cdnjs.cloudflare.com`（腳本）、Google Fonts
+  （Tailwind 已改為建置時編譯內嵌，產物不再用 `cdn.tailwindcss.com`；講義原始檔仍可照舊寫 CDN 標籤）。不要引入其他 CDN 或遠端圖片（claude.ai artifact 版本的 CSP 會擋）。
 - 新講義版型沿用既有風格：Tailwind、Noto Sans TC、slate/indigo 色系、白底卡片、深色漸層頁首。
 - 內容用繁體中文；書目依 APA 第 7 版（期刊名與卷號斜體）。
 - 測試：`.claude/launch.json` 有 `site` 設定（`python3 -m http.server 8765`），可用內建瀏覽器開
