@@ -5,3 +5,22 @@ __pycache__/
 # 不公開的備份（期刊全文 PDF 等），只留在本機、不推上 GitHub
 private/
 node_modules/
+
+# 防呆：上課存檔類檔案一律不進公開 repo（論文全文、錄音錄影、投影片、文件、學生資料表）
+# build.py 也會檢查 git 追蹤清單，萬一被 git add -f 也會擋下
+*.pdf
+*.m4a
+*.mp3
+*.wav
+*.aac
+*.mp4
+*.mov
+*.m4v
+*.pptx
+*.ppt
+*.key
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.csv

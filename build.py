@@ -250,3 +250,15 @@ home=home.replace('/*UPDATED*/',max(u for _,_,u in built.values()))
 print('index.html  課程目錄')
 for f in TWCACHE.glob('*.css'):          # 清掉已不再使用的舊快取
     if f.name not in tw_used: f.unlink()
+
+# ─── 防呆：存檔區資料不可進公開 repo ─────────────────────────
+# 論文全文、錄音錄影、投影片、學生資料等放 private/（另一個私有 repo），不可被公開 repo 追蹤。
+# .gitignore 已排除，這裡再檢查一次，擋下 git add -f 之類的誤操作。
+NOPUBLIC=('.pdf','.m4a','.mp3','.wav','.aac','.mp4','.mov','.m4v','.pptx','.ppt','.key','.docx','.doc','.xlsx','.xls','.csv')
+try:
+    tracked=subprocess.run(['git','ls-files','-z'],cwd=ROOT,capture_output=True,check=True).stdout.decode('utf-8').split('\0')
+except (OSError,subprocess.CalledProcessError):
+    tracked=[]                           # 不是 git repo（或沒裝 git）就略過
+bad=[f for f in tracked if f and (f.startswith('private/') or f.lower().endswith(NOPUBLIC))]
+if bad:
+    raise SystemExit('以下檔案不可放進公開 repo，請移到 private/ 並執行 git rm --cached：\n  '+'\n  '.join(bad))

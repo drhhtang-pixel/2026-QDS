@@ -35,7 +35,7 @@
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
-├── private/         ← 不公開備份（.gitignore 排除，不會推上 GitHub），見下方「不公開備份」
+├── private/         ← 上課存檔區＝另一個私有 repo（公開 repo 以 .gitignore 排除），見下方「存檔區」
 └── sources/
     ├── week04/      ← 第四堂講義原始檔
     │   └── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
@@ -84,7 +84,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ## Notion 資料搬遷（已決事項，尚未執行）
 
 - 範圍：只搬 2026 Course Schedule Master（17 列筆記頁、約 119 張圖、12 個 PDF），不搬 2022–2024 舊課。
-- 取得方式：老師從 Notion 匯出 zip（HTML、含子頁面與檔案）放進專案資料夾，再轉成各堂「課堂筆記」分頁。
+- 取得方式：老師從 Notion 匯出 zip（HTML、含子頁面與檔案）放進 `private/notion-export/`，再把可公開的部分轉成各堂「課堂筆記」分頁。
   （Notion MCP 無法存取該工作區；公開頁的非官方 API 可讀但不穩定，附件連結有時效。）
 - 版權：期刊論文全文 PDF 不上網，只放 APA 書目＋DOI；業師演講截圖（如商業研究方法 68 張）與上課錄音 m4a
   不上網（講者同意後再議）；老師自己的講義、APA 指引可上網。
@@ -127,12 +127,31 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 老師在 PDF 上的眉批（Problem/results/contributions/significance、definition of design thinking、
   participatory design 與 design thinking 的比較、cluster analysis 只用 six attributes）都已放進對應卡片。
 
-## 不公開備份（private/）
+## 存檔區（private/）＝老師的完整上課資料，不給學生看
 
-- repository 是 public，任何推上 GitHub 的檔案學生都能下載，所以**期刊全文 PDF 一律不 commit**。
-- `private/` 已列入 `.gitignore`：放在這裡的檔案只留在本機。第四堂文章 PDF 的位置：
-  `private/week04/2018_Design_Thinking_Review.pdf`（老師本機需自行放入；雲端工作環境重開後不會保留）。
-- 若需要雲端備份，建議另開 **private** repository 或放雲端硬碟（需老師決定）。
+地端「2026 QDS」資料夾＝**兩個 repo**：
+- 外層＝公開 repo `drhhtang-pixel/2026-QDS`（GitHub Pages，給學生看的講義與網站）。
+- `private/`＝私有 repo `drhhtang-pixel/2026-QDS-archive`（**Private**，老師的存檔區與備份）。
+  公開 repo 的 `.gitignore` 排除 `private/`，兩個 repo 互不干擾。
+
+```
+private/
+├── README.md            ← 分類與規則說明（老師看的）
+├── weekNN/papers/       ← 論文全文 PDF（第四堂：week04/papers/2018_Design_Thinking_Review.pdf）
+├── weekNN/guest/        ← 業師投影片、演講截圖
+├── weekNN/notes/        ← 老師上課筆記、講義草稿
+├── weekNN/recordings/   ← 上課錄音錄影：不進任何 repo（太大），靠 iCloud／Google Drive／Time Machine
+├── notion-export/       ← Notion 匯出 zip 原檔
+└── students/            ← 修課名單、成績、作業（個資，永不上網）
+```
+
+- **資料流向只往更公開的方向**：`private/` → 老師同意後挑選／改寫進 `sources/weekNN/` → `build.py` → 網站。
+  從 `private/` 取材做講義時，期刊全文不上網（只放 APA 書目＋DOI），業師資料與錄音需講者同意，學生資料永不上網。
+- **防呆**：公開 repo 的 `.gitignore` 全域排除 `*.pdf`、音影檔、`*.pptx`/`*.key`、`*.docx`、`*.xlsx`/`*.csv`；
+  `build.py` 最後檢查 `git ls-files`，若公開 repo 追蹤了這些副檔名或 `private/` 路徑就停下並列出檔名。
+  （公開 repo 需要放 PDF 等檔案時，要先改這兩處並經老師同意。）
+- 雲端 Claude 要讀存檔區時：`add_repo` 加入 `drhhtang-pixel/2026-QDS-archive`，clone 到 `private/`。
+- 在 `private/` 內改完要在**該 repo** commit／push（`cd private && git add -A && git commit && git push`）。
 
 ## 架構重點（build.py 在做什麼）
 
