@@ -1,0 +1,4 @@
+# GitHub Pages（Jekyll）設定：以下檔案留在 repo，但不發布成網頁
+exclude:
+  - CLAUDE.md
+  - build.py
