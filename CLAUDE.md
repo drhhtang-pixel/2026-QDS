@@ -146,26 +146,13 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 注意：這是 Claude 遵守的規則；連接器本身的授權是整個 Google 帳號。要做到技術上的硬限制，
   需改用只被分享這個資料夾的專用 Google 帳號來連接（見老師決定）。
 
-### 在 Google Drive 建立存檔區（進行中，2026/09/26）
-老師說「照 CLAUDE.md 在 Google Drive 建立 2026 QDS 存檔區」時：
-1. 確認 Google Drive 連接器工具可用；不可用就請老師先連接並開新對話，不要改用其他地方。
-2. 在老師的「我的雲端硬碟」根目錄建立資料夾（已存在就沿用，不重複建立）：
-   ```
-   2026 QDS 存檔區/
-   ├── README（說明文件：資料夾用途、版權／個資規則、資料流向；內容取自 2026-QDS-archive 的 README.md，
-   │          並把「備份」欄改為 Google Drive、錄音錄影也放在 Google Drive）
-   ├── week01/ … week16/          ← 每堂各有四個子資料夾：
-   │   ├── papers/                ← 論文全文 PDF
-   │   ├── guest/                 ← 業師投影片、演講截圖（講者同意前不公開）
-   │   ├── notes/                 ← 老師上課筆記、講義草稿
-   │   └── recordings/            ← 上課錄音 m4a、錄影
-   ├── notion-export/             ← Notion 匯出 zip 原檔
-   └── students/                  ← 修課名單、成績、作業（個資）
-   ```
-3. 把第四堂論文放進 `week04/papers/2018_Design_Thinking_Review.pdf`：來源是 GitHub 私有 repo
-   `drhhtang-pixel/2026-QDS-archive` 的 `week04/papers/2018_Design_Thinking_Review.pdf`（add_repo 後 clone 取得）。
-4. **不要**更改任何資料夾的分享設定（保持只有老師本人可見）；建好後回報資料夾連結，請老師在 Drive 確認。
-5. 完成後把本節「待執行」改為「已完成」，並記下資料夾連結。
+### 在 Google Drive 建立存檔區（已完成，2026/09/26）
+- 位置：老師公司帳號 （帳號見 CLAUDE.local.md） 的「我的雲端硬碟」根目錄（老師選擇另建，不放進共用雲端硬碟既有的「2026 QDS」）。
+- 內容：week01～week16（各有 papers／guest／notes／recordings）、notion-export、students、Google 文件「README｜存檔區使用說明」。
+- 權限：只有老師本人（owner），未分享給任何人。
+- **待老師自行上傳**：第四堂論文 PDF → `week04/papers/`
+  （（網址見 CLAUDE.local.md） ）。連接器單次上傳容量不足以傳 600 KB 的 PDF。
+- 之後新增資料夾或檔案：先 `search_files` 確認不重複；權限保持只有老師本人。
 
 ### 規則（不論存檔放哪裡都適用）
 - **資料流向只往更公開的方向**：存檔區 → 老師同意後挑選／改寫進 `sources/weekNN/` → `build.py` → 網站。
