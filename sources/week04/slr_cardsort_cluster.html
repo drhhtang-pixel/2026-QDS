@@ -253,7 +253,8 @@
                     <div class="space-y-4 text-sm text-slate-600">
                         <div>
                             <b class="text-slate-900">階層式集群（hierarchical）</b>
-                            <p>每個物件先自成一群，每次合併最相似的兩群，直到全部合成一群（凝聚法 agglomerative）。結果畫成<b>樹狀圖</b>，在不同高度「切一刀」即得不同群數。卡片分類最常用。</p>
+                            <p>每個物件先自成一群，每次合併最相似的兩群，直到全部合成一群（凝聚法 agglomerative）。結果畫成<b>樹狀圖</b>（dendrogram，字源為希臘文 <i>dendron</i>「樹」＋ <i>-gram</i>「圖」），在不同高度「切一刀」即得不同群數。卡片分類最常用。</p>
+                            <p class="text-xs mt-1"><i class="fa-solid fa-link mr-1"></i>說明：<a class="ext" href="https://en.wikipedia.org/wiki/Dendrogram" target="_blank" rel="noopener">Wikipedia：Dendrogram</a></p>
                         </div>
                         <div>
                             <b class="text-slate-900">非階層式集群（如 k-means）</b>
@@ -309,7 +310,7 @@
                 </div>
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
                     <h3 class="font-bold text-slate-900 mb-1">樹狀圖 Dendrogram</h3>
-                    <p class="text-xs text-slate-500 mb-3">橫軸＝合併時的距離（1 − 相似度）。拖曳滑桿「切一刀」，看會分成幾群。</p>
+                    <p class="text-xs text-slate-500 mb-3">橫軸＝合併時的距離（1 − 相似度）。拖曳滑桿「切一刀」，看會分成幾群。<br><i class="fa-solid fa-link mr-1"></i>說明：<a class="ext" href="https://en.wikipedia.org/wiki/Dendrogram" target="_blank" rel="noopener">Wikipedia：Dendrogram</a>；Python 畫法：<a class="ext" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html" target="_blank" rel="noopener">SciPy dendrogram 文件</a></p>
                     <svg id="dendro" class="w-full" viewBox="0 0 460 300" role="img" aria-label="卡片分類的階層式集群樹狀圖"></svg>
                     <div class="flex items-center gap-3 mt-3 text-sm">
                         <label for="cut" class="shrink-0 text-slate-600">切割距離</label>
