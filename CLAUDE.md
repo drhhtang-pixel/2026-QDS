@@ -244,6 +244,9 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 2026/09/26：新增第四堂，分頁 1「Critical Form：Doing Design Thinking」；文章 PDF 不上網（`private/`）。
 - 2026/09/26：Tailwind 改為建置時預先編譯（package.json + tw_cache/），全站不再載入 Tailwind CDN。
 - 2026/09/26：第四堂新增分頁 2「SLR 系統文獻回顧」（Tranfield et al., 2003、PRISMA、卡片分類、集群分析）。
+- 2026/09/26：第四堂新增分頁 1「設計思考的歷史與重點」，原分頁 1、2 順移為 2、3（見下方工作紀錄）。
+- 2026/09/26：全站內文引用統一用 et al.＋半形括號；build.py 加 APA 引用格式檢查；新增 check_doi.py 與 doi-checker agent；
+  第三堂分頁 5、6 補 Cross (1999) DOI，分頁 2 Takishita 頁碼更正為 125–126。
 
 ## 更新紀錄規則（重要）
 
@@ -280,10 +283,34 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 教訓：這個 session 開始時 main 已被另一個 session 加入第四堂分頁 1，推送前要先 `git fetch` 並合併 main，
   再把自己的分頁排到正確位置。
 
+## 工作紀錄：設計思考講義、引用格式統一、DOI 檢查（2026/09/26，本機 main）
+
+- **第四堂分頁 1「設計思考的歷史與重點」**（`sources/week04/design_thinking_history.html`，Claude 撰寫，可直接編輯）。
+  老師的要求依序：研究設計思考的歷史與重點做成 HTML → wicked problem 譯為「**棘手問題**」並加詳解與「結構不良問題」
+  （Simon, 1973）對照 → 加 **DITLDESIGN 三鑽**（Problem Distillation 問題梳理／Design Iteration 設計迭代／
+  Field Verification 場域驗證＋Diffusion 擴散，實例 EyeBus 等；中文名與說明老師已確認正確）→
+  Johansson-Sköldberg et al. (2013) 完整書目放在「八種論述」表下 → 標題改「設計思考的批判與反省」→
+  「先用」改「可以用」→ 課堂討論 4 題改為老師的版本（第 3 題問五步驟與三鑽的差異）→ 放第四堂第 1 個分頁。
+  - 內容依據：時間軸 1962–2013 共 25 則；Double Diamond 2004、d.school 2005、Johansson-Sköldberg et al. 八種論述
+    有上網查證，其餘依一般文獻知識撰寫。參考文獻 29 筆，13 筆 DOI 逐一驗證。
+- **引用格式全站統一**（老師決定）：et al.＋半形括號（取代先前另一個 session 訂的全形括號、列出全部作者的規則）。
+  修改了第四堂分頁 2、3，第三堂分頁 6（補丁）；第三堂 APA 講義的中文作者範例（陳一一等（2023））是教學內容，不改。
+- **APA 引用格式檢查（lint）**寫在 build.py（`APA_RULES`／`APA_OK`），第一次執行抓到第四堂分頁 2 的 DOI 未做成連結。
+  上線前用 9 種錯誤寫法、11 種正確寫法測過：全部抓到、沒有誤判。
+- **DOI 檢查**：`check_doi.py`（腳本）＋ `.claude/agents/doi-checker.md`（判斷候選 DOI）。實測 `--suggest` 的候選
+  大多是書評或後來的版本（如 Lawson 1980 → 2006 年第 4 版、Alexander 1964 → 1968 年書評），agent 已正確排除。
+  已確定沒有 DOI 的 23 筆（第四堂分頁 1 的多數老書、HBR、Core77、Fast Company 等）不必再找。
+- 教訓：
+  - **同一個資料夾可能同時有別的 session 在跑**（這次另一個 session 改寫了 git 歷史並強制推送）。推送前先
+    `git fetch`、看 `git status -sb`；必要時用 list_sessions 查看其他 session，等它完成再推。
+  - `pkill -f "python3 -"` 會連帶殺掉預覽伺服器（`python3 -m http.server`），不要用這麼寬的比對。
+  - `git mv -k` 對未追蹤的檔案會靜默略過，搬新檔用一般 `mv`。
+  - 內建瀏覽器有時截圖全白（面板隱藏時），改用 javascript_tool 讀 DOM 確認內容。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
 - 向 GitHub Support 申請移除舊 commit 快取（見「清除 git 歷史中的 Drive ID 與帳號」）。
-- 是否也把 shell.html、home.html、package*.json、check_doi.py 加進 `_config.yml` 的 exclude。
+- 是否也把 shell.html、home.html、package*.json 加進 `_config.yml` 的 exclude（check_doi.py 已加入）。
 - 若有只給修課生的內容，評估搬到 Cloudflare Pages + Access。
 
 ## 發布到 GitHub Pages
