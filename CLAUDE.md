@@ -200,6 +200,32 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 課程目錄的「最後更新」自動取該堂所有分頁中最新的日期。
 日期格式：`2026/09/23`。說明用繁體中文、簡短。
 
+## 工作紀錄：第四堂分頁 2「SLR 系統文獻回顧」（2026/09/26，session 分支 `claude/zealous-tesla-96isa2`）
+
+- 老師的要求：整理 systematic literature review（Tranfield, Denyer, & Smart, 2003）、card sorting、cluster analysis
+  的相關訊息與做法成 HTML → 放第四堂**第 2 個分頁**，講義名稱「**SLR 系統文獻回顧**」。
+- 來源檔 `sources/week04/slr_cardsort_cluster.html`（Claude 撰寫，可直接編輯）；段落：三者關係 → 方法 1 SLR →
+  方法 2 卡片分類 → 方法 3 集群分析 → 互動範例 → 參考文獻（APA 7，7＋1 筆）。
+- **對照原文後的更正（老師要求核對，改寫時不要改回去）**：
+  - Phase 0–9 出自原文 **Figure 2**「Stages of a systematic review」（p. 214，改編自 NHS CRD 2001），不是 Figure 1
+    （Figure 1 是證據等級）。各 Phase 說明已依原文改寫；原文沒有的內容（snowballing、「是否已有近期回顧」、
+    protocol 列品質準則）已刪除。Phase 7 用原文的 realist synthesis／meta-synthesis（meta-ethnography 三技巧）；
+    Phase 9 用原文的「evidence-informed」。
+  - 三特質依原文「replicable, scientific and transparent process」（p. 209），不是 inclusive。
+  - Tullis & Wood (2004) 建議 **20–30 人**（以 168 人為基準，15 人 r≈0.90、30 人 r≈0.95）；「15 人」是
+    Nielsen (2004, NN/g) 的建議。Tullis & Wood 連結用 ResearchGate 頁（研討會報告，無 DOI）。
+  - 原文 PDF 可在 Illinois 課程網站取得（不 commit）：
+    https://josephmahoney.web.illinois.edu/BADM504_Fall%202019/6_Tranfield,%20Denyer%20and%20Smart%20(2003).pdf
+- 老師後續要求：PRISMA 列出全名與各字母意義（Preferred Reporting Items for Systematic reviews and Meta-Analyses）；
+  dendrogram 拼法正確，加說明連結（英文 Wikipedia＋SciPy 文件；中文維基「樹狀圖」會轉到「樹狀結構」，不適用）。
+- 互動範例：8 張卡、6 位參與者的**示範資料**，JS 即時算共現矩陣＋平均連結樹狀圖；0.33–0.75 之間為 4 群。
+  色票用 dataviz 參考色（#2a78d6、#eb6834、#1baf7a、#eda100），群旁有文字標籤。
+- 內含 `../week03/#1`、`../week03/#3` 連結（`target="_top"`，已測可跳轉）。
+- 單份講義預覽 artifact：https://claude.ai/artifact/SpuTgLTJAMs2Ug1VPZbZUC（FA 內嵌，只供檢查內容）；
+  整堂預覽用上方第四堂 artifact。
+- 教訓：這個 session 開始時 main 已被另一個 session 加入第四堂分頁 1，推送前要先 `git fetch` 並合併 main，
+  再把自己的分頁排到正確位置。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
 - （目前無）
@@ -207,7 +233,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ## 發布到 GitHub Pages
 
 - Repository：https://github.com/drhhtang-pixel/2026-QDS（public，帳號 drhhtang-pixel）
-- 網址：https://drhhtang-pixel.github.io/2026-QDS/（目錄）、…/week03/（第三堂）
+- 網址：https://drhhtang-pixel.github.io/2026-QDS/（目錄）、…/week03/（第三堂）、…/week04/（第四堂）
 - 已設定 `http.postBuffer`（第一次推送 2.4 MB 時連線中斷，加大後正常）。
 
 ```bash
