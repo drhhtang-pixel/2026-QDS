@@ -27,7 +27,9 @@
 
 ```
 2026 QDS/
-├── CLAUDE.md        ← 本文件
+├── CLAUDE.md        ← 本文件（公開 repo 可見，不寫 Drive ID、帳號等識別資訊）
+├── CLAUDE.local.md  ← 不公開（.gitignore），Drive 資料夾 ID、帳號；Claude Code 自動讀取；換電腦要自己複製
+├── _config.yml      ← GitHub Pages（Jekyll）設定：exclude CLAUDE.md、build.py，不發布成網頁
 ├── build.py         ← 建置腳本：讀 sources/weekNN/ + shell.html + home.html，產生下列建置產物
 ├── package.json     ← 只用來安裝 Tailwind CLI（tailwindcss 3.4.17，與原 CDN 同版）；node_modules/ 不 commit
 ├── tw_cache/        ← 各講義預先編譯好的 Tailwind CSS 快取（要 commit；build.py 會自動清掉不再使用的）
@@ -280,7 +282,9 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
-- （目前無）
+- 向 GitHub Support 申請移除舊 commit 快取（見「清除 git 歷史中的 Drive ID 與帳號」）。
+- 是否也把 shell.html、home.html、package*.json、check_doi.py 加進 `_config.yml` 的 exclude。
+- 若有只給修課生的內容，評估搬到 Cloudflare Pages + Access。
 
 ## 發布到 GitHub Pages
 
@@ -298,6 +302,36 @@ git push
 Pages 設定：Settings → Pages → Deploy from a branch → `main` / `(root)`。約 1 分鐘後生效。
 若 repository 尚未建立，先確認老師要用的 repository 名稱與帳號，再 `git init` / 設定 remote。
 推送或建立 repository 前請先向老師確認。
+
+### 平台評估（2026/09/26 老師詢問後決定：繼續用 GitHub Pages）
+- 適合原因：純靜態、單一自足 HTML、內容本來就公開、免費 HTTPS、push 才上線且有版本紀錄、容量足夠。
+- 限制：無法設密碼／限定登入；repo 為 public（原始檔、build.py、CLAUDE.md 都看得到）；無法收學生作答資料。
+- **若將來有「只給修課生看」的內容**（如講者同意後的業師簡報）→ 改用 **Cloudflare Pages + Cloudflare Access**
+  （以學生 email 一次性驗證碼登入，免費 50 人內；靜態產物可直接搬）。Netlify/Vercel 密碼保護要付費，不建議；
+  學校 LMS 只當入口放連結；Notion 無法放自訂 HTML/JS。
+
+### Pages 會把 repo 裡所有檔案發布成網頁（2026/09/26 發現）
+- 預設 Jekyll 會把 `CLAUDE.md` 轉成 `…/2026-QDS/CLAUDE.html`、其他檔案原樣公開。已加 `_config.yml` 的 `exclude`
+  （CLAUDE.md、build.py），推送後確認三個網址 404，講義內容與 repo 逐位元相同。
+- 仍會發布的非講義檔：`shell.html`、`home.html`、`package.json`、`package-lock.json`、`check_doi.py`
+  （要排除就加進 `_config.yml` 的 `exclude`，先確認學生不需要）。
+- 注意：Jekyll 3 的 `exclude` 會取代預設清單；新增不想公開的檔案時記得加進去。
+
+### 清除 git 歷史中的 Drive ID 與帳號（2026/09/26，老師同意改寫歷史＋強制推送）
+- 原因：CLAUDE.md 曾寫入存檔區資料夾 ID、week04/papers 資料夾網址、老師公司帳號 email（自 commit `db7700c` 起，共 6 個 commit）。
+- 做法：資訊移到 `CLAUDE.local.md`（已 .gitignore）→ `git filter-branch --tree-filter` 以 perl 把 CLAUDE.md 中的
+  ID／網址／email 換成「見 CLAUDE.local.md」→ 本機清 refs/original、reflog、`gc --prune=now` → `git push --force-with-lease`。
+  本機沒有 git-filter-repo，用 filter-branch 即可（repo 小，數秒完成）。
+- 結果：main `4007cae→23064fd`、`claude/dazzling-mayer-eq6w55` `ff0ef6b→5ec002a`、
+  `claude/sweet-newton-0eiil5` `039ba59→695740b`、`claude/zealous-tesla-96isa2` `9ade4c3→1ca694a`；
+  tag `2026.09.23` 早於存檔區，不含資料，未變動。只有 CLAUDE.md 內容改變，其他檔案與 commit 數相同。
+- **強制推送不會觸發 Pages 重建**（線上 CLAUDE.html 仍是舊版），要手動：`gh api -X POST repos/drhhtang-pixel/2026-QDS/pages/builds`。
+- 教訓：**Drive ID、網址、帳號 email 等識別資訊一律只寫在 CLAUDE.local.md**；推送前用
+  `git grep -e <ID> -e ditldesignfirm` 確認沒有外洩。
+- 後續（需老師處理，尚未完成）：
+  1. GitHub 仍可用完整 SHA 看到舊 commit（如 `db7700c…`），要徹底移除需向 GitHub Support 申請「Remove sensitive data」。
+  2. 還在使用舊 `claude/…` 分支的雲端 session 要結束或重新 clone，否則推送會把舊紀錄帶回來。
+  3. 改寫前的本機備份在該 session 的 scratchpad `backup-before-rewrite.git`（含舊資料，/private/tmp 下，確認無誤後可刪）。
 
 ## 技術限制與慣例
 
