@@ -4,7 +4,7 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 3 堂**（7 份講義）。
+目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（1 份講義）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - 讀者：研究所學生，會用電腦與手機瀏覽。
@@ -28,6 +28,7 @@
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
+├── week04/index.html ← 建置產物：第四堂
 └── sources/
     └── week03/      ← 第三堂各份講義原始檔
         ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方；共用 FA CSS 也取自此檔)
@@ -41,6 +42,8 @@
         ├── business_db.html   (由 Claude 撰寫的新講義，可直接編輯)
         ├── paper_skill_process.html   (分頁 8，由 Claude 依下方 .md 製作，可直接編輯)
         └── 建立讀論文技能的過程紀錄.md  (分頁 8 的原始文字，老師提供)
+    └── week04/
+        └── slr_cardsort_cluster.html  (SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
 ```
 
 ## 建置
@@ -91,6 +94,18 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 | 8 | 建立讀論文 SKILLS 的過程 | paper_skill_process.html |
 
 分頁名稱、順序與更新紀錄定義在 `build.py` 的 `week03()` 回傳清單中。
+
+## 第四堂分頁
+
+| # | 分頁名稱 | 來源檔 |
+|---|---|---|
+| 1 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
+
+- 老師原本指定這份為第四堂**第 2 個分頁**；第 1 份講義尚未提供，暫時是唯一分頁。
+  第 1 份加入後，在 `week04()` 清單最前面插入即可（網址 `#1` 會改指向新講義）。
+- 內容：Tranfield, Denyer, & Smart (2003) 三階段 Phase 0–9（已對照原文 Figure 2, p. 214）、PRISMA 全名、
+  卡片分類（Tullis & Wood 2004 建議 20–30 人；Nielsen 2004 認為 15 人）、集群分析、互動樹狀圖範例（示範資料）。
+- 內含跳到第三堂分頁 1、3 的連結（`../week03/#N`，`target="_top"`）。
 
 ## 架構重點（build.py 在做什麼）
 
