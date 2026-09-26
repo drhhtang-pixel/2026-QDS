@@ -283,6 +283,9 @@ Pages 設定：Settings → Pages → Deploy from a branch → `main` / `(root)`
   （Tailwind 已改為建置時編譯內嵌，產物不再用 `cdn.tailwindcss.com`；講義原始檔仍可照舊寫 CDN 標籤）。不要引入其他 CDN 或遠端圖片（claude.ai artifact 版本的 CSP 會擋）。
 - 新講義版型沿用既有風格：Tailwind、Noto Sans TC、slate/indigo 色系、白底卡片、深色漸層頁首。
 - 內容用繁體中文；書目依 APA 第 7 版（期刊名與卷號斜體）。
+- **中文內文引用英文作者（老師規定，2026/09/26）**：人名之間用英文逗號「, 」，最後兩位用「&」連接，& 前**不加**逗號；
+  不用「、」「與」「和」。例：`Tranfield, Denyer & Smart（2003）`、`Tullis & Wood（2004）`、`(Luchs, Swan & Creusen, 2016)`。
+  （文末完整書目條目仍依 APA 7：`Mura, M., & Beverland, M. B.`，含縮寫名時 & 前保留逗號。）
 - 測試：`.claude/launch.json` 有 `site` 設定（`python3 -m http.server 8765`），可用內建瀏覽器開
   `http://localhost:8765/` 檢查目錄頁與 `/week03/`，逐一點 `#tab0`～`#tab6` 確認 iframe 載入、無 JS 錯誤。
   （本機沒有安裝 Playwright；file:// 會被擋，請用本機伺服器。瀏覽器可能快取舊檔，網址加 `?v=N` 強制重新載入。）
