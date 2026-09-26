@@ -65,6 +65,19 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 **每次修改後都要重新執行 build.py**，再檢查產物。
 
+- **APA 引用格式檢查（lint，2026/09/26 起）**：build.py 建置前會掃描每一份講義（補丁後的內容，略過 script/style），
+  發現以下問題就**停止建置**並列出堂次、分頁與原文，不產生任何檔案：
+  英文作者後用全形括號 `Simon（1981）`、「等人」、作者間用「與／、／和」、三位以上作者沒用 et al.、
+  書目頁碼用連字號 `25-39`、DOI 沒有做成連結。
+  - 規則在 `APA_RULES`；確認不是錯誤的例外寫在 `APA_OK`（堂次, 分頁, 字串），目前只有 APA 講義的 DOI 格式示意與虛構範例。
+  - 只檢查固定格式，不判斷書目內容對錯、不查 DOI 是否存在（見下方 DOI 檢查）。
+- **DOI 檢查（需要網路，推送前執行）**：`python3 check_doi.py` 讀建置產物，逐筆確認 DOI 連結存在（doi.org）且
+  Crossref 登記的標題與書目相符；有錯時結束代碼 1。`--suggest` 另外替沒有 DOI 的書目列出 Crossref 候選（多半是書評、
+  後來的版本等錯誤配對，**不可直接採用**）。刻意不檢查的 DOI 寫在 `SKIP`。
+  - 判斷候選 DOI、替缺 DOI 的書目找正確 DOI：用 `.claude/agents/doi-checker.md`（doi-checker agent，只回報、不改檔）。
+    `.claude/` 被 .gitignore 排除，這個 agent 只在老師這台 Mac 上有。
+  - 本機的 python.org 版 Python 沒有 SSL 憑證，所以腳本用系統 `curl` 連網（不要改用 urllib）。
+
 - **Tailwind 預先編譯**（2026/09/26 起）：講義原始檔照舊寫 `<script src="https://cdn.tailwindcss.com">` 和
   `tailwind.config = {...}`，build.py 的 `tailwind()` 會用 Tailwind CLI 依該份講義的內容與設定編譯 CSS，
   把兩段腳本換成 `<style>`（放在 `</head>` 前，與 CDN 注入位置相同，樣式順序不變）。建置產物不再載入 Tailwind CDN，
@@ -154,7 +167,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 ### Google Drive 使用範圍（老師規定，2026/09/26）
 - **在這個專案裡，Claude 只能讀取、寫入「2026 QDS 存檔區」及其子資料夾**
-  （資料夾 ID `（ID 見 CLAUDE.local.md）`，（網址見 CLAUDE.local.md） ）。
+  （資料夾 ID 與所屬帳號寫在本機的 `CLAUDE.local.md`，不進公開 repo；本機沒有該檔時請向老師索取）。
 - 搜尋一律加 `parentId = '<存檔區或其子資料夾 ID>'` 限定範圍；不瀏覽、不讀取、不修改存檔區以外的任何檔案或資料夾
   （包括共用雲端硬碟裡既有的「2026 QDS」資料夾）。要用存檔區外的檔案，請老師先把檔案移進存檔區，或直接上傳到對話。
 - 不更改任何分享設定（不用 share_file），不刪除（不用 trash_file），除非老師明確要求。
@@ -162,14 +175,14 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   需改用只被分享這個資料夾的專用 Google 帳號來連接（見老師決定）。
 
 ### 在 Google Drive 建立存檔區（已完成，2026/09/26）
-- 位置：老師公司帳號 （帳號見 CLAUDE.local.md） 的「我的雲端硬碟」根目錄（老師選擇另建，不放進共用雲端硬碟既有的「2026 QDS」）。
+- 位置：老師公司帳號的「我的雲端硬碟」根目錄（老師選擇另建，不放進共用雲端硬碟既有的「2026 QDS」）。
 - 內容：week01～week16（各有 papers／guest／notes／recordings）、notion-export、students、Google 文件「README｜存檔區使用說明」。
 - 權限：只有老師本人（owner），未分享給任何人。
-- 第四堂論文 PDF 已由老師上傳到 `week04/papers/2018 Design Thinking Review.pdf`
-  （（網址見 CLAUDE.local.md） ）；同資料夾另有老師放入的
-  Auernhammer (2021) Stanford design thinking、2024 AI 與美妝消費兩篇 PDF。
+- 第四堂論文 PDF 已由老師上傳到 `week04/papers/2018 Design Thinking Review.pdf`；
+  同資料夾另有老師放入的 Auernhammer (2021) Stanford design thinking、2024 AI 與美妝消費兩篇 PDF。
 - 大檔案（PDF 等）請老師自己上傳：連接器單次上傳容量不足以傳數百 KB 以上的檔案。
 - 之後新增資料夾或檔案：先 `search_files` 確認不重複；權限保持只有老師本人。
+- **Drive 資料夾 ID、網址、帳號 email 一律只寫在 `CLAUDE.local.md`（已 .gitignore），不要寫進 CLAUDE.md 或任何會 commit 的檔案。**
 
 ### 規則（不論存檔放哪裡都適用）
 - **資料流向只往更公開的方向**：存檔區 → 老師同意後挑選／改寫進 `sources/weekNN/` → `build.py` → 網站。

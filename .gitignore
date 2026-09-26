@@ -24,3 +24,6 @@ node_modules/
 *.xlsx
 *.xls
 *.csv
+
+# 不公開的 Claude 設定（Drive 資料夾 ID、帳號等識別資訊）
+CLAUDE.local.md
