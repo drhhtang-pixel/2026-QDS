@@ -4,7 +4,7 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（2 份講義）。
+目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（3 份講義）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - **老師要求（2026/09/26）：每次修改完，一定要先把改好的頁面給老師看，等老師確認後才繼續下一步**
@@ -39,8 +39,9 @@
 ├── private/         ← （.gitignore 排除）保留為不公開的本機暫存位置；正式存檔區在 Google Drive，見下方「存檔區」
 └── sources/
     ├── week04/      ← 第四堂講義原始檔
-    │   ├── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
-    │   └── slr_cardsort_cluster.html  (分頁 2 SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
+    │   ├── design_thinking_history.html  (分頁 1「設計思考的歷史與重點」，由 Claude 撰寫，可直接編輯)
+    │   ├── Doing_Design_Thinking_critical_form.html  (分頁 2，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
+    │   └── slr_cardsort_cluster.html  (分頁 3 SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
     └── week03/      ← 第三堂各份講義原始檔
         ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方；共用 FA CSS 也取自此檔)
         ├── apa.html
@@ -119,8 +120,15 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 | # | 分頁名稱 | 來源檔 |
 |---|---|---|
-| 1 | Critical Form：Doing Design Thinking | Doing_Design_Thinking_critical_form.html |
-| 2 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
+| 1 | 設計思考的歷史與重點 | design_thinking_history.html |
+| 2 | Critical Form：Doing Design Thinking | Doing_Design_Thinking_critical_form.html |
+| 3 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
+
+- 分頁 1「設計思考的歷史與重點」（2026/09/26 老師指定放第四堂第 1 個分頁，原分頁 1、2 順移為 2、3）：
+  designerly thinking vs. design thinking、時間軸 1962–2013、八種論述（Johansson-Sköldberg et al., 2013，表下附完整書目）、
+  六個核心概念、棘手問題詳解（wicked problems 譯為「棘手問題」，附十特徵與「結構不良問題」Simon, 1973 對照）、
+  流程模型（Double Diamond、d.school、IDEO、**DITLDESIGN 三鑽**：問題梳理／設計迭代／場域驗證＋擴散，老師已確認）、
+  批判與反省、課堂討論 4 題（老師改寫的版本）、參考文獻 29 筆（13 筆 DOI 已逐一驗證）。
 
 - 本堂文章：Micheli, P., Wilner, S. J. S., Bhatti, S. H., Mura, M., & Beverland, M. B. (2019). Doing design thinking:
   Conceptual review, synthesis, and research agenda. *Journal of Product Innovation Management, 36*(2), 124–148.
@@ -283,9 +291,11 @@ Pages 設定：Settings → Pages → Deploy from a branch → `main` / `(root)`
   （Tailwind 已改為建置時編譯內嵌，產物不再用 `cdn.tailwindcss.com`；講義原始檔仍可照舊寫 CDN 標籤）。不要引入其他 CDN 或遠端圖片（claude.ai artifact 版本的 CSP 會擋）。
 - 新講義版型沿用既有風格：Tailwind、Noto Sans TC、slate/indigo 色系、白底卡片、深色漸層頁首。
 - 內容用繁體中文；書目依 APA 第 7 版（期刊名與卷號斜體）。
-- **中文內文引用英文作者（老師規定，2026/09/26）**：人名之間用英文逗號「, 」，最後兩位用「&」連接，& 前**不加**逗號；
-  不用「、」「與」「和」。例：`Tranfield, Denyer & Smart（2003）`、`Tullis & Wood（2004）`、`(Luchs, Swan & Creusen, 2016)`。
-  （文末完整書目條目仍依 APA 7：`Mura, M., & Beverland, M. B.`，含縮寫名時 & 前保留逗號。）
+- **中文內文引用英文作者（老師規定，2026/09/26，全站統一）**：用 APA 英文格式與**半形括號**（括號前空一格）。
+  兩位作者用「&」：`Rittel & Webber (1973)`、`(Tullis & Wood, 2004)`；三位以上一律 `et al.`：
+  `Johansson-Sköldberg et al. (2013)`、`(Tranfield et al., 2003)`。不用「等人」「、」「與」「和」連接人名，也不用全形括號（）。
+  （文末完整書目條目仍依 APA 7 列出全部作者：`Mura, M., & Beverland, M. B.`。第三堂分頁 6 是原始上傳檔，以 build.py 補丁修正。）
+- **參考文獻 DOI（老師規定）**：有 DOI 的書目都加上可點的 `https://doi.org/...` 連結，並逐一確認存在（doi.org handle API／Crossref）；沒有 DOI 的維持純文字。
 - 測試：`.claude/launch.json` 有 `site` 設定（`python3 -m http.server 8765`），可用內建瀏覽器開
   `http://localhost:8765/` 檢查目錄頁與 `/week03/`，逐一點 `#tab0`～`#tab6` 確認 iframe 載入、無 JS 錯誤。
   （本機沒有安裝 Playwright；file:// 會被擋，請用本機伺服器。瀏覽器可能快取舊檔，網址加 `?v=N` 強制重新載入。）

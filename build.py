@@ -160,6 +160,8 @@ def week03():
     h=h.replace(a,'<em>Design Studies, 20</em>(1), 25–39.')
     a='Natural intelligence in design. Design Studies, 20(1), 25–39.'; assert h.count(a)==1
     ni2=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>(1), 25–39.')
+    a='Simon（1981）與 Schön（1983）'; assert ni2.count(a)==1
+    ni2=ni2.replace(a,'Simon (1981) 與 Schön (1983)')
 
     return [
      ('Critical Form 閱讀論文的秘訣',tpl,
@@ -173,7 +175,7 @@ def week03():
      ('Natural Intelligence 解答 by drhhtang',ni1,
       [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）')]),
      ('Natural Intelligence 解答 by AI',ni2,
-      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by AI」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）')]),
+      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by AI」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/26','內文引用改用半形括號')]),
      ('商學院學術資料庫',plain(U/'business_db.html'),
       [('2026/09/23','新增講義')]),
      ('建立讀論文 SKILLS 的過程',plain(U/'paper_skill_process.html'),
@@ -183,10 +185,12 @@ def week03():
 def week04():
     U=SRC/'week04'
     return [
+     ('設計思考的歷史與重點',plain(U/'design_thinking_history.html'),
+      [('2026/09/26','新增講義（設計思考發展史、八種論述、棘手問題、DITLDESIGN 三鑽模型）'),('2026/09/26','時間軸引用改為 Rittel & Webber (1973)')]),
      ('Critical Form：Doing Design Thinking',plain(U/'Doing_Design_Thinking_critical_form.html'),
-      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接')]),
+      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號')]),
      ('SLR 系統文獻回顧',plain(U/'slr_cardsort_cluster.html'),
-      [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接')]),
+      [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號')]),
     ]
 
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行

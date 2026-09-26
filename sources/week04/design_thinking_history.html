@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設計思考的歷史與重點</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Noto Sans TC', "PingFang TC", "Microsoft JhengHei", sans-serif; }
+        .era-btn.active { background:#4f46e5; color:#fff; border-color:#4f46e5; }
+        .tl-item.hide { display:none; }
+        .ref p { padding-left:2em; text-indent:-2em; }
+        a.doi { color:#4338ca; text-decoration:underline; text-underline-offset:3px; word-break:break-all; }
+        a.doi:hover { color:#312e81; }
+        details > summary { cursor:pointer; list-style:none; }
+        details > summary::-webkit-details-marker { display:none; }
+        details[open] .chev { transform:rotate(90deg); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen pb-12">
+
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 shadow-md">
+        <div class="max-w-6xl mx-auto text-center">
+            <span class="inline-block px-3 py-1 bg-indigo-500/30 text-indigo-300 rounded-full text-sm font-medium mb-3 border border-indigo-400/30">
+                設計研究基礎
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">設計思考的歷史與重點</h1>
+            <p class="text-slate-300 max-w-3xl mx-auto text-base sm:text-lg">
+                從 1960 年代的「設計方法運動」到今日的創新管理工具——同一個詞，兩條不同的發展脈絡
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 space-y-12">
+
+        <!-- 導讀 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <i class="fa-solid fa-compass text-indigo-600"></i>先釐清：你說的「設計思考」是哪一種？
+            </h2>
+            <p class="leading-relaxed text-slate-700 mb-6">
+                「Design Thinking」在學術界與企業界的意思並不相同。Johansson-Sköldberg et al. (2013）建議區分兩個詞：
+                研究設計師「怎麼想」的學術傳統，稱為 <strong>designerly thinking</strong>；
+                把設計師的做法整理成非設計師也能用的流程與工具，才是一般所稱的 <strong>design thinking</strong>。
+                讀文獻時先判斷作者站在哪一邊，才不會把兩種論述混在一起引用。
+            </p>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="rounded-xl border border-indigo-200 bg-indigo-50/60 p-5">
+                    <div class="flex items-center gap-2 mb-2 text-indigo-800 font-bold">
+                        <i class="fa-solid fa-microscope"></i>Designerly thinking（設計研究）
+                    </div>
+                    <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                        <li>起點：1960 年代設計方法運動、設計認知研究</li>
+                        <li>問題：專業設計師實際上如何思考、推理、做決策？</li>
+                        <li>方法：<strong>口語分析</strong>、觀察、實驗、個案、理論建構</li>
+                        <li>代表：Simon、Schön、Lawson、Cross、Dorst、Goldschmidt</li>
+                        <li>發表：<em>Design Studies</em>、<em>Design Issues</em>、DTRS 研討會</li>
+                    </ul>
+                </div>
+                <div class="rounded-xl border border-amber-200 bg-amber-50/60 p-5">
+                    <div class="flex items-center gap-2 mb-2 text-amber-800 font-bold">
+                        <i class="fa-solid fa-briefcase"></i>Design thinking（管理論述）
+                    </div>
+                    <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                        <li>起點：2000 年代 IDEO、Stanford d.school、商學院</li>
+                        <li>問題：組織如何用設計師的方法做創新？</li>
+                        <li>方法：流程模型、工作坊、工具箱（同理地圖、原型、測試）</li>
+                        <li>代表：Kelley、Brown、Martin、Boland &amp; Collopy</li>
+                        <li>發表：<em>Harvard Business Review</em>、商管書籍、顧問報告</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 時間軸 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+                <i class="fa-solid fa-timeline text-indigo-600"></i>發展時間軸
+            </h2>
+            <p class="text-slate-600 mb-5 text-sm">點選年代篩選；色點代表所屬脈絡：
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500 inline-block"></span>設計研究</span>、
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>管理／實務</span>
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6" id="eras">
+                <button class="era-btn active px-3 py-1.5 rounded-full border border-slate-300 text-sm" data-era="all">全部</button>
+                <button class="era-btn px-3 py-1.5 rounded-full border border-slate-300 text-sm" data-era="1">1960s 設計方法運動</button>
+                <button class="era-btn px-3 py-1.5 rounded-full border border-slate-300 text-sm" data-era="2">1970–80s 反思與第二代</button>
+                <button class="era-btn px-3 py-1.5 rounded-full border border-slate-300 text-sm" data-era="3">1990s 設計認知研究</button>
+                <button class="era-btn px-3 py-1.5 rounded-full border border-slate-300 text-sm" data-era="4">2000s 走向商業</button>
+                <button class="era-btn px-3 py-1.5 rounded-full border border-slate-300 text-sm" data-era="5">2010s 反省與批判</button>
+            </div>
+            <ol class="relative border-l-2 border-slate-200 ml-3 space-y-6" id="timeline"></ol>
+        </section>
+
+        <!-- 五種 + 三種論述 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+                <i class="fa-solid fa-layer-group text-indigo-600"></i>文獻中的八種論述
+            </h2>
+            <p class="text-slate-600 mb-5 text-sm leading-relaxed">
+                Johansson-Sköldberg et al. (2013）整理出設計研究中的 5 種 designerly thinking 論述，以及管理領域的 3 種 design thinking 論述。
+                每一種的知識論根源不同，是寫文獻回顧時很好用的分類架構。
+            </p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border-collapse min-w-[640px]">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700">
+                            <th class="text-left p-3 border-b border-slate-200 w-10">#</th>
+                            <th class="text-left p-3 border-b border-slate-200">把設計看成……</th>
+                            <th class="text-left p-3 border-b border-slate-200">代表學者</th>
+                            <th class="text-left p-3 border-b border-slate-200">關鍵概念</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="bg-indigo-50/40"><td colspan="4" class="p-2 px-3 text-xs font-bold text-indigo-700 tracking-wide">DESIGNERLY THINKING（設計研究）</td></tr>
+                        <tr><td class="p-3">1</td><td class="p-3">創造人造物</td><td class="p-3">Simon (1969)</td><td class="p-3">人造物科學、有限理性、滿意解（satisficing）</td></tr>
+                        <tr><td class="p-3">2</td><td class="p-3">反思性實踐</td><td class="p-3">Schön (1983)</td><td class="p-3">行動中反思、與情境的反思性對話</td></tr>
+                        <tr><td class="p-3">3</td><td class="p-3">解決問題的活動</td><td class="p-3">Buchanan (1992)</td><td class="p-3">棘手問題、設計作為通才式的人文學科</td></tr>
+                        <tr><td class="p-3">4</td><td class="p-3">一種推理與理解的方式</td><td class="p-3">Lawson (1980)、Cross (1982, 2006)</td><td class="p-3">designerly ways of knowing、解決方案導向</td></tr>
+                        <tr><td class="p-3">5</td><td class="p-3">創造意義</td><td class="p-3">Krippendorff (2006)</td><td class="p-3">語意學轉向、以人為中心的意義設計</td></tr>
+                        <tr class="bg-amber-50/50"><td colspan="4" class="p-2 px-3 text-xs font-bold text-amber-700 tracking-wide">DESIGN THINKING（管理論述）</td></tr>
+                        <tr><td class="p-3">6</td><td class="p-3">設計公司的工作方式</td><td class="p-3">Kelley (2001)、Brown (2008, 2009)</td><td class="p-3">IDEO 方法、以人為本、快速原型</td></tr>
+                        <tr><td class="p-3">7</td><td class="p-3">處理組織中不確定問題的方法</td><td class="p-3">Boland &amp; Collopy (2004)</td><td class="p-3">design attitude vs. decision attitude</td></tr>
+                        <tr><td class="p-3">8</td><td class="p-3">管理者必備的能力</td><td class="p-3">Martin (2009)</td><td class="p-3">知識漏斗、溯因推理、探索與利用的平衡</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ref mt-4 rounded-lg bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700 leading-relaxed">
+                <div class="text-xs font-bold text-slate-500 mb-1"><i class="fa-solid fa-bookmark mr-1"></i>資料來源</div>
+                <p>Johansson-Sköldberg, U., Woodilla, J., &amp; Çetinkaya, M. (2013). Design thinking: Past, present and possible futures. <em>Creativity and Innovation Management, 22</em>(2), 121–146. <a class="doi" href="https://doi.org/10.1111/caim.12023" target="_blank" rel="noopener">https://doi.org/10.1111/caim.12023</a></p>
+            </div>
+        </section>
+
+        <!-- 核心概念 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-900 mb-5 flex items-center gap-3">
+                <i class="fa-solid fa-lightbulb text-indigo-600"></i>六個核心概念
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="text-indigo-600 text-xl mb-2"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    <h3 class="font-bold text-slate-900 mb-1">棘手問題 Wicked problems</h3>
+                    <p class="text-xs text-slate-500 mb-2">Rittel &amp; Webber (1973)；Buchanan (1992)</p>
+                    <p class="text-sm text-slate-700 leading-relaxed">設計問題沒有明確定義、沒有停止規則、答案只有好壞而無對錯；每次嘗試都會改變問題本身。這是設計不能套用線性流程的根本原因。</p>
+                    <a href="#wicked" class="inline-flex items-center gap-1 mt-3 text-sm font-medium text-indigo-700 hover:text-indigo-900">
+                        詳細說明：棘手問題 vs. 結構不良問題<i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="text-indigo-600 text-xl mb-2"><i class="fa-solid fa-rotate"></i></div>
+                    <h3 class="font-bold text-slate-900 mb-1">行動中反思 Reflection-in-action</h3>
+                    <p class="text-xs text-slate-500 mb-2">Schön (1983)</p>
+                    <p class="text-sm text-slate-700 leading-relaxed">設計師「命名—框定—移動—評估」，與情境進行反思性對話。挑戰了 Simon 式「技術理性」把設計當成最佳化問題的看法。</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="text-indigo-600 text-xl mb-2"><i class="fa-solid fa-arrows-left-right"></i></div>
+                    <h3 class="font-bold text-slate-900 mb-1">問題與解答共同演化</h3>
+                    <p class="text-xs text-slate-500 mb-2">Maher &amp; Poon (1996)；Dorst &amp; Cross (2001)</p>
+                    <p class="text-sm text-slate-700 leading-relaxed">問題空間與解答空間同時發展、互相定義。設計師不是先完整定義問題再求解，而是在兩者間來回跳躍直到「搭橋」成功。</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="text-indigo-600 text-xl mb-2"><i class="fa-solid fa-crosshairs"></i></div>
+                    <h3 class="font-bold text-slate-900 mb-1">解決方案導向 Solution-focused</h3>
+                    <p class="text-xs text-slate-500 mb-2">Lawson (1980)；Cross (1982)</p>
+                    <p class="text-sm text-slate-700 leading-relaxed">Lawson 的實驗發現：建築系學生透過提出方案來了解問題，科學系學生則先分析規則。設計有其獨特的「知的方式」。</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="text-indigo-600 text-xl mb-2"><i class="fa-solid fa-border-all"></i></div>
+                    <h3 class="font-bold text-slate-900 mb-1">溯因推理與框架創造</h3>
+                    <p class="text-xs text-slate-500 mb-2">Dorst (2011)；Martin (2009)</p>
+                    <p class="text-sm text-slate-700 leading-relaxed">當「要什麼」（價值）已知、而「是什麼」與「如何」都未知時，設計師要同時提出新框架（frame）與方案——Dorst 認為這才是設計思考的核心。</p>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="text-indigo-600 text-xl mb-2"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h3 class="font-bold text-slate-900 mb-1">草圖與視覺思考</h3>
+                    <p class="text-xs text-slate-500 mb-2">McKim (1973)；Goldschmidt (1991)</p>
+                    <p class="text-sm text-slate-700 leading-relaxed">草圖不只是記錄想法，而是「看見—看成」（seeing that / seeing as）的辯證過程，讓設計師從自己的圖中發現新可能。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 棘手問題詳解 -->
+        <section id="wicked" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 scroll-mt-4">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+                <i class="fa-solid fa-puzzle-piece text-indigo-600"></i>棘手問題（wicked problems）詳解
+            </h2>
+            <p class="text-slate-700 leading-relaxed mb-5">
+                Rittel &amp; Webber (1973)在討論都市與社會規劃時提出這個詞，用來對比數學、下棋這類
+                <strong>溫和問題（tame problems）</strong>。「wicked」不是道德上的邪惡，而是指問題難纏、會抵抗被解決，
+                所以中文也譯作<strong>抗解問題</strong>、<strong>詭譎問題</strong>、<strong>惡劣問題</strong>；本講義採用較通俗的「棘手問題」。
+                Buchanan (1992)把它帶進設計領域，主張大多數設計問題都是棘手問題。
+            </p>
+
+            <h3 class="font-bold text-slate-900 mb-3">Rittel &amp; Webber (1973) 的十個特徵</h3>
+            <ol class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-slate-700 list-decimal pl-5 mb-8 leading-relaxed">
+                <li>沒有明確的問題定義——定義問題就等於在想解法</li>
+                <li>沒有停止規則——永遠可以做得更好，只能在資源用完時停下</li>
+                <li>解答沒有對錯，只有好壞（或「夠好」）</li>
+                <li>解答無法立即、也無法最終檢驗其效果</li>
+                <li>每個解答都是「一次性操作」，會留下無法抹去的後果，沒有試錯機會</li>
+                <li>沒有可以列舉的解答集合，也沒有公認的可用手段清單</li>
+                <li>每個問題本質上都是獨特的</li>
+                <li>每個問題都可以看成另一個問題的症狀</li>
+                <li>如何解釋問題中的落差，決定了解決方向</li>
+                <li>規劃者沒有犯錯的權利——必須為後果負責</li>
+            </ol>
+
+            <h3 class="font-bold text-slate-900 mb-2">和「結構不良問題」有什麼不同？</h3>
+            <p class="text-sm text-slate-700 leading-relaxed mb-4">
+                Simon (1973)從認知與人工智慧的角度提出<strong>結構不良問題（ill-structured problems）</strong>，
+                也譯作<strong>劣構問題</strong>；相近的說法還有 Reitman 的<strong>定義不良問題（ill-defined problems）</strong>。
+                兩個概念常被混用，但出發點不同：
+            </p>
+            <div class="overflow-x-auto mb-5">
+                <table class="w-full text-sm border-collapse min-w-[640px]">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700">
+                            <th class="text-left p-3 border-b border-slate-200 w-28"></th>
+                            <th class="text-left p-3 border-b border-slate-200">結構良好問題<br><span class="font-normal text-xs">well-structured</span></th>
+                            <th class="text-left p-3 border-b border-slate-200">結構不良問題<br><span class="font-normal text-xs">ill-structured（Simon, 1973）</span></th>
+                            <th class="text-left p-3 border-b border-slate-200">棘手問題<br><span class="font-normal text-xs">wicked（Rittel &amp; Webber, 1973）</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-700">
+                        <tr><td class="p-3 font-semibold">例子</td><td class="p-3">解方程式、下棋</td><td class="p-3">設計一棟房子、寫一篇論文</td><td class="p-3">都市交通、長照、流浪動物管理</td></tr>
+                        <tr><td class="p-3 font-semibold">觀點</td><td class="p-3">認知／資訊處理</td><td class="p-3">認知／資訊處理：問題空間沒有完整給定</td><td class="p-3">社會／政治：多方利害關係人、價值衝突</td></tr>
+                        <tr><td class="p-3 font-semibold">目標與評估</td><td class="p-3">明確，有客觀的正確答案</td><td class="p-3">不完整，需由解題者自行補充</td><td class="p-3">眾說紛紜，好壞取決於誰在判斷</td></tr>
+                        <tr><td class="p-3 font-semibold">能否拆解</td><td class="p-3">可以直接求解</td><td class="p-3">可以：Simon 認為能分解成一連串結構良好的子問題逐步處理</td><td class="p-3">很難：處理一部分就會改變整體，問題本身隨之變動</td></tr>
+                        <tr><td class="p-3 font-semibold">失敗的代價</td><td class="p-3">可重來</td><td class="p-3">多半可以重來、修改</td><td class="p-3">介入會留下真實的社會後果</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rounded-xl bg-indigo-50 border border-indigo-100 p-4 text-sm text-slate-700 leading-relaxed">
+                <i class="fa-solid fa-circle-info text-indigo-600 mr-1"></i>
+                <strong>簡單記法：</strong>所有棘手問題都是結構不良的，但結構不良問題不一定棘手。
+                寫論文時要依你的研究脈絡選詞——研究設計師個人如何解題（設計認知、口語分析）多用「結構不良」；
+                研究社會設計、服務設計、公共議題則多用「棘手問題」。
+                下方 DITLDESIGN 三鑽的第一鑽「問題梳理」，就是在把棘手問題整理成可以著手的問題。
+            </div>
+        </section>
+
+        <!-- 流程模型 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+                <i class="fa-solid fa-diagram-project text-indigo-600"></i>常見流程模型
+            </h2>
+            <p class="text-slate-600 mb-6 text-sm">管理論述普及的關鍵，是把設計過程畫成簡單的流程圖。注意：這些模型都是<strong>示意</strong>，實際設計過程是反覆、跳躍的。</p>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-bold text-slate-900 mb-3">英國設計協會 Double Diamond (2004)</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-sm">
+                        <div class="rounded-lg bg-indigo-100 text-indigo-900 p-3"><div class="font-bold">Discover</div><div class="text-xs">發散：探索問題</div></div>
+                        <div class="rounded-lg bg-indigo-200 text-indigo-900 p-3"><div class="font-bold">Define</div><div class="text-xs">收斂：定義問題</div></div>
+                        <div class="rounded-lg bg-violet-100 text-violet-900 p-3"><div class="font-bold">Develop</div><div class="text-xs">發散：發展方案</div></div>
+                        <div class="rounded-lg bg-violet-200 text-violet-900 p-3"><div class="font-bold">Deliver</div><div class="text-xs">收斂：交付方案</div></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">兩個鑽石：先做對的事（problem），再把事做對（solution）。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 mb-3">Stanford d.school 五步驟</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-sm">
+                        <div class="rounded-lg bg-amber-100 text-amber-900 p-3"><div class="font-bold">Empathize</div><div class="text-xs">同理</div></div>
+                        <div class="rounded-lg bg-amber-100 text-amber-900 p-3"><div class="font-bold">Define</div><div class="text-xs">定義</div></div>
+                        <div class="rounded-lg bg-amber-100 text-amber-900 p-3"><div class="font-bold">Ideate</div><div class="text-xs">發想</div></div>
+                        <div class="rounded-lg bg-amber-100 text-amber-900 p-3"><div class="font-bold">Prototype</div><div class="text-xs">原型</div></div>
+                        <div class="rounded-lg bg-amber-100 text-amber-900 p-3 col-span-2 sm:col-span-1"><div class="font-bold">Test</div><div class="text-xs">測試</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 mb-3">IDEO／Brown (2009)三個空間</h3>
+                    <div class="grid sm:grid-cols-3 gap-2 text-center text-sm">
+                        <div class="rounded-lg bg-emerald-100 text-emerald-900 p-3"><div class="font-bold">Inspiration 啟發</div><div class="text-xs">找到值得解決的問題或機會</div></div>
+                        <div class="rounded-lg bg-emerald-100 text-emerald-900 p-3"><div class="font-bold">Ideation 構思</div><div class="text-xs">產生、發展、測試想法</div></div>
+                        <div class="rounded-lg bg-emerald-100 text-emerald-900 p-3"><div class="font-bold">Implementation 實行</div><div class="text-xs">把想法帶到市場與生活</div></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">並以「可行性 feasibility × 存續性 viability × 需求性 desirability」三圈交集說明創新。</p>
+                </div>
+                <div class="rounded-xl border-2 border-indigo-200 bg-indigo-50/40 p-4 sm:p-5">
+                    <h3 class="font-bold text-slate-900 mb-1 flex flex-wrap items-center gap-2">
+                        DITLDESIGN 三鑽模型 Triple Diamond
+                        <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-indigo-600 text-white">本課程</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-3">台科大設計思考與創新研究室（Design Information &amp; Thinking Lab，唐玄輝）</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_1fr_auto] gap-2 text-center text-sm items-stretch">
+                        <div class="rounded-lg bg-indigo-100 text-indigo-900 p-3"><div class="text-[11px] font-bold text-indigo-500">DIAMOND 1</div><div class="font-bold">Problem Distillation</div><div class="text-xs">問題梳理</div></div>
+                        <div class="rounded-lg bg-violet-100 text-violet-900 p-3"><div class="text-[11px] font-bold text-violet-500">DIAMOND 2</div><div class="font-bold">Design Iteration</div><div class="text-xs">設計迭代</div></div>
+                        <div class="rounded-lg bg-emerald-100 text-emerald-900 p-3"><div class="text-[11px] font-bold text-emerald-600">DIAMOND 3</div><div class="font-bold">Field Verification</div><div class="text-xs">場域驗證</div></div>
+                        <div class="rounded-lg border border-dashed border-slate-300 bg-white text-slate-700 p-3 flex flex-col justify-center"><div class="font-bold"><i class="fa-solid fa-arrow-right-long mr-1"></i>Diffusion</div><div class="text-xs">擴散</div></div>
+                    </div>
+                    <ul class="text-sm text-slate-700 mt-4 space-y-1.5 list-disc pl-5 leading-relaxed">
+                        <li><strong>問題梳理</strong>：從利害關係人與實地研究中，把複雜、牽涉多方的社會問題萃取成可以著手的核心問題。</li>
+                        <li><strong>設計迭代</strong>：提出方案、製作原型，依回饋反覆修正。</li>
+                        <li><strong>場域驗證</strong>：把方案放到真實場域中測試，驗證實際成效——這是相對於 Double Diamond 最主要的延伸。</li>
+                        <li><strong>擴散</strong>：驗證有效後，推廣到更大的系統（如政府政策或全國服務）。</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-3">實例：EyeBus 視障者公車服務（2023 年臺北市 15 條路線採用）、流浪犬管理 SOP、寵物登記系統 UX 優化、動物收容所認養服務。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 批判 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-5 flex items-center gap-3">
+                <i class="fa-solid fa-scale-balanced text-indigo-600"></i>設計思考的批判與反省
+            </h2>
+            <div class="space-y-3">
+                <details class="rounded-xl border border-slate-200 p-4">
+                    <summary class="font-semibold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-chevron-right chev text-xs text-slate-400 transition-transform"></i>過度簡化：流程取代了專業判斷</summary>
+                    <p class="text-sm text-slate-700 mt-3 leading-relaxed">Kimbell (2011)指出管理論述把設計思考描述成普遍、去脈絡的認知風格，忽略設計實踐是嵌在材料、工具、組織與文化中的情境化活動。五步驟模型容易被誤用成「照做就會有創新」的清單。</p>
+                </details>
+                <details class="rounded-xl border border-slate-200 p-4">
+                    <summary class="font-semibold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-chevron-right chev text-xs text-slate-400 transition-transform"></i>「有用的迷思」</summary>
+                    <p class="text-sm text-slate-700 mt-3 leading-relaxed">Norman (2010)認為設計思考並非設計師獨有，好的科學家、工程師、管理者也這樣思考；但這個標籤能幫助設計被組織重視，所以是「有用的迷思」。</p>
+                </details>
+                <details class="rounded-xl border border-slate-200 p-4">
+                    <summary class="font-semibold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-chevron-right chev text-xs text-slate-400 transition-transform"></i>「失敗的實驗」</summary>
+                    <p class="text-sm text-slate-700 mt-3 leading-relaxed">曾大力推廣設計思考的 Nussbaum (2011)轉而宣告它是失敗的實驗：企業把它當成線性、可套用的流程，只產出漸進式改良，並主張以「創造力商數」（Creative Intelligence）取代。</p>
+                </details>
+                <details class="rounded-xl border border-slate-200 p-4">
+                    <summary class="font-semibold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-chevron-right chev text-xs text-slate-400 transition-transform"></i>理論與證據的落差</summary>
+                    <p class="text-sm text-slate-700 mt-3 leading-relaxed">管理論述多來自顧問案例與成功故事，較少嚴謹的實證研究；而設計研究累積了大量實證（如口語分析），兩邊卻很少對話。Johansson-Sköldberg et al. (2013）呼籲管理論述回頭汲取 designerly thinking 的研究成果。</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- 與本課的關係 -->
+        <section class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-indigo-50 to-slate-50 border border-indigo-100">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <i class="fa-solid fa-link text-indigo-600"></i>和 QDS 課程的關係
+            </h2>
+            <ul class="space-y-3 text-slate-700 leading-relaxed">
+                <li class="flex gap-3"><i class="fa-solid fa-comments text-indigo-500 mt-1"></i><span><strong>口語分析</strong>：設計思考的實證知識大多來自放聲思考（think-aloud）研究。1994 年 Delft 的 DTRS 2 讓多組研究者分析同一份設計師口語資料，成果收錄於 Cross et al. (1996)的 <em>Analysing Design Activity</em>——本學期最後一個單元會實際練習。</span></li>
+                <li class="flex gap-3"><i class="fa-solid fa-microphone text-indigo-500 mt-1"></i><span><strong>訪談與個案研究</strong>：Lawson、Cross 研究傑出設計師的方式，是深度訪談與個案——這正是質化研究如何建構「設計師怎麼想」理論的例子。</span></li>
+                <li class="flex gap-3"><i class="fa-solid fa-book-open text-indigo-500 mt-1"></i><span><strong>文獻回顧</strong>：寫論文的第二章時，可以用上方「八種論述」判斷每篇文獻的立場，再決定你的研究要對話的是哪一條脈絡。</span></li>
+            </ul>
+        </section>
+
+        <!-- 討論題 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <i class="fa-solid fa-circle-question text-indigo-600"></i>課堂討論
+            </h2>
+            <ol class="list-decimal pl-6 space-y-2 text-slate-700">
+                <li>Simon 與 Schön 對「設計是什麼」的看法有何根本差異？你自己的設計經驗比較接近哪一種？</li>
+                <li>如果你的研究題目用到「設計思考」這個詞，它屬於八種論述中的哪一種？為什麼？</li>
+                <li>設計思考五步驟模型在什麼情況下有用？什麼情況下會誤導？和 DITLDESIGN 三鑽模型的差異是？</li>
+                <li>如果要用質化方法研究「設計師如何思考設計解法的框架」，你會選擇訪談、個案研究，還是口語分析？</li>
+            </ol>
+        </section>
+
+        <!-- 參考文獻 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <i class="fa-solid fa-bookmark text-indigo-600"></i>參考文獻
+            </h2>
+            <div class="ref text-sm text-slate-700 space-y-2 leading-relaxed">
+                <p>Alexander, C. (1964). <em>Notes on the synthesis of form</em>. Harvard University Press.</p>
+                <p>Archer, L. B. (1965). <em>Systematic method for designers</em>. Council of Industrial Design.</p>
+                <p>Boland, R. J., &amp; Collopy, F. (Eds.). (2004). <em>Managing as designing</em>. Stanford University Press. <a class="doi" href="https://doi.org/10.1515/9780804767439" target="_blank" rel="noopener">https://doi.org/10.1515/9780804767439</a></p>
+                <p>Brown, T. (2008). Design thinking. <em>Harvard Business Review, 86</em>(6), 84–92.</p>
+                <p>Brown, T. (2009). <em>Change by design: How design thinking transforms organizations and inspires innovation</em>. HarperBusiness.</p>
+                <p>Buchanan, R. (1992). Wicked problems in design thinking. <em>Design Issues, 8</em>(2), 5–21. <a class="doi" href="https://doi.org/10.2307/1511637" target="_blank" rel="noopener">https://doi.org/10.2307/1511637</a></p>
+                <p>Cross, N. (1982). Designerly ways of knowing. <em>Design Studies, 3</em>(4), 221–227. <a class="doi" href="https://doi.org/10.1016/0142-694X(82)90040-0" target="_blank" rel="noopener">https://doi.org/10.1016/0142-694X(82)90040-0</a></p>
+                <p>Cross, N. (2006). <em>Designerly ways of knowing</em>. Springer. <a class="doi" href="https://doi.org/10.1007/1-84628-301-9" target="_blank" rel="noopener">https://doi.org/10.1007/1-84628-301-9</a></p>
+                <p>Cross, N., Christiaans, H., &amp; Dorst, K. (Eds.). (1996). <em>Analysing design activity</em>. Wiley.</p>
+                <p>Dorst, K. (2011). The core of ‘design thinking’ and its application. <em>Design Studies, 32</em>(6), 521–532. <a class="doi" href="https://doi.org/10.1016/j.destud.2011.07.006" target="_blank" rel="noopener">https://doi.org/10.1016/j.destud.2011.07.006</a></p>
+                <p>Dorst, K., &amp; Cross, N. (2001). Creativity in the design process: Co-evolution of problem–solution. <em>Design Studies, 22</em>(5), 425–437. <a class="doi" href="https://doi.org/10.1016/S0142-694X(01)00009-6" target="_blank" rel="noopener">https://doi.org/10.1016/S0142-694X(01)00009-6</a></p>
+                <p>Goldschmidt, G. (1991). The dialectics of sketching. <em>Creativity Research Journal, 4</em>(2), 123–143. <a class="doi" href="https://doi.org/10.1080/10400419109534381" target="_blank" rel="noopener">https://doi.org/10.1080/10400419109534381</a></p>
+                <p>Johansson-Sköldberg, U., Woodilla, J., &amp; Çetinkaya, M. (2013). Design thinking: Past, present and possible futures. <em>Creativity and Innovation Management, 22</em>(2), 121–146. <a class="doi" href="https://doi.org/10.1111/caim.12023" target="_blank" rel="noopener">https://doi.org/10.1111/caim.12023</a></p>
+                <p>Jones, J. C. (1970). <em>Design methods: Seeds of human futures</em>. Wiley.</p>
+                <p>Kelley, T. (2001). <em>The art of innovation: Lessons in creativity from IDEO, America’s leading design firm</em>. Currency/Doubleday.</p>
+                <p>Kimbell, L. (2011). Rethinking design thinking: Part I. <em>Design and Culture, 3</em>(3), 285–306. <a class="doi" href="https://doi.org/10.2752/175470811X13071166525216" target="_blank" rel="noopener">https://doi.org/10.2752/175470811X13071166525216</a></p>
+                <p>Krippendorff, K. (2006). <em>The semantic turn: A new foundation for design</em>. CRC Press. <a class="doi" href="https://doi.org/10.4324/9780203299951" target="_blank" rel="noopener">https://doi.org/10.4324/9780203299951</a></p>
+                <p>Lawson, B. (1980). <em>How designers think</em>. Architectural Press.</p>
+                <p>Maher, M. L., &amp; Poon, J. (1996). Modeling design exploration as co-evolution. <em>Microcomputers in Civil Engineering, 11</em>(3), 195–209. <a class="doi" href="https://doi.org/10.1111/j.1467-8667.1996.tb00323.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1467-8667.1996.tb00323.x</a></p>
+                <p>Martin, R. (2009). <em>The design of business: Why design thinking is the next competitive advantage</em>. Harvard Business Press.</p>
+                <p>McKim, R. H. (1973). <em>Experiences in visual thinking</em>. Brooks/Cole.</p>
+                <p>Norman, D. (2010, June 25). <em>Design thinking: A useful myth</em>. Core77.</p>
+                <p>Nussbaum, B. (2011, April 5). <em>Design thinking is a failed experiment. So what’s next?</em> Fast Company.</p>
+                <p>Reitman, W. R. (1964). Heuristic decision procedures, open constraints, and the structure of ill-defined problems. In M. W. Shelly &amp; G. L. Bryan (Eds.), <em>Human judgments and optimality</em> (pp. 282–315). Wiley.</p>
+                <p>Rittel, H. W. J., &amp; Webber, M. M. (1973). Dilemmas in a general theory of planning. <em>Policy Sciences, 4</em>(2), 155–169. <a class="doi" href="https://doi.org/10.1007/BF01405730" target="_blank" rel="noopener">https://doi.org/10.1007/BF01405730</a></p>
+                <p>Rowe, P. G. (1987). <em>Design thinking</em>. MIT Press.</p>
+                <p>Schön, D. A. (1983). <em>The reflective practitioner: How professionals think in action</em>. Basic Books.</p>
+                <p>Simon, H. A. (1969). <em>The sciences of the artificial</em>. MIT Press.</p>
+                <p>Simon, H. A. (1973). The structure of ill structured problems. <em>Artificial Intelligence, 4</em>(3–4), 181–201. <a class="doi" href="https://doi.org/10.1016/0004-3702(73)90011-8" target="_blank" rel="noopener">https://doi.org/10.1016/0004-3702(73)90011-8</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    const TL = [
+        {y:'1962', era:1, k:'r', t:'倫敦「設計方法研討會」', d:'Conference on Design Methods 被視為設計方法運動的起點，希望把設計過程系統化、科學化。'},
+        {y:'1964', era:1, k:'r', t:'Alexander《Notes on the Synthesis of Form》', d:'以數學方式拆解設計問題的需求關係；Alexander 後來反而批評方法運動。'},
+        {y:'1965', era:1, k:'r', t:'Archer《Systematic Method for Designers》', d:'提出系統化的設計步驟，代表「第一代」理性設計方法。'},
+        {y:'1966', era:1, k:'r', t:'設計研究學會（DRS）成立', d:'Design Research Society 成立，設計研究開始有學術社群。'},
+        {y:'1969', era:1, k:'r', t:'Simon《The Sciences of the Artificial》', d:'「設計」是把現況改變成偏好狀態的行動，所有專業都在做設計；提出人造物科學。'},
+        {y:'1970', era:2, k:'r', t:'Jones《Design Methods》', d:'整理大量設計方法，強調發散—轉換—收斂的過程。'},
+        {y:'1972–73', era:2, k:'r', t:'Rittel：第二代設計方法與棘手問題', d:'Rittel 提出「第二代」方法（參與、論證）；Rittel &amp; Webber (1973) 發表棘手問題十大特徵。'},
+        {y:'1973', era:2, k:'r', t:'McKim《Experiences in Visual Thinking》', d:'Stanford 設計課程的視覺思考教材，後來影響 d.school 的教學傳統。'},
+        {y:'1979', era:2, k:'r', t:'期刊《Design Studies》創刊', d:'設計研究最重要的期刊之一，大量設計思考與口語分析研究在此發表。'},
+        {y:'1980', era:2, k:'r', t:'Lawson《How Designers Think》', d:'以實驗比較建築與科學學生，指出設計師採「解決方案導向」策略。'},
+        {y:'1982', era:2, k:'r', t:'Cross〈Designerly Ways of Knowing〉', d:'主張設計是與科學、人文並列的第三種知識文化。'},
+        {y:'1983', era:2, k:'r', t:'Schön《The Reflective Practitioner》', d:'以「行動中反思」描述專業者如何在實踐中思考，挑戰技術理性。'},
+        {y:'1987', era:2, k:'r', t:'Rowe《Design Thinking》', d:'第一本以「Design Thinking」為書名的著作，研究建築與都市設計師的思考程序。'},
+        {y:'1991', era:3, k:'r', t:'第一屆設計思考研究研討會（DTRS）', d:'於 Delft 舉行，此後成為設計認知研究的核心研討會；同年 Goldschmidt 發表草圖辯證研究。'},
+        {y:'1991', era:3, k:'m', t:'IDEO 成立', d:'David Kelley Design 等公司合併為 IDEO，日後成為設計思考商業化的代表。'},
+        {y:'1992', era:3, k:'r', t:'Buchanan〈Wicked Problems in Design Thinking〉', d:'把棘手問題引入設計，主張設計是面對不確定性的通才學科。'},
+        {y:'1994–96', era:3, k:'r', t:'DTRS 2 與《Analysing Design Activity》', d:'多組研究者分析同一組設計口語資料，口語分析成為設計認知研究的主要方法。'},
+        {y:'1996–2001', era:3, k:'r', t:'問題—解答共同演化模型', d:'Maher & Poon (1996)提出模型，Dorst & Cross (2001)以實驗驗證設計創造力的共同演化。'},
+        {y:'2004', era:4, k:'m', t:'英國設計協會 Double Diamond', d:'Design Council 發表 Discover–Define–Develop–Deliver 四階段模型；同年 Boland & Collopy 出版《Managing as Designing》。'},
+        {y:'2005', era:4, k:'m', t:'Stanford d.school 成立', d:'由 David Kelley 等人創立、Hasso Plattner 捐款，推廣跨領域設計思考教育與五步驟模型。'},
+        {y:'2008', era:4, k:'m', t:'Brown〈Design Thinking〉（HBR）', d:'IDEO 執行長在《哈佛商業評論》發表，設計思考正式進入主流管理話語。'},
+        {y:'2009', era:4, k:'m', t:'Brown《Change by Design》、Martin《The Design of Business》', d:'兩本暢銷書把設計思考定位為企業的創新能力與競爭優勢。'},
+        {y:'2010–11', era:5, k:'m', t:'Norman「有用的迷思」、Nussbaum「失敗的實驗」', d:'業界重要推手開始公開反省設計思考被過度簡化與包裝。'},
+        {y:'2011', era:5, k:'r', t:'Dorst〈The Core of Design Thinking〉、Kimbell〈Rethinking Design Thinking〉', d:'學界回應：以框架創造定義核心，並批判去脈絡化的管理論述。'},
+        {y:'2013', era:5, k:'r', t:'Johansson-Sköldberg et al.〈Past, Present and Possible Futures〉', d:'區分 designerly thinking 與 design thinking，整理八種論述。'},
+    ];
+    const ol = document.getElementById('timeline');
+    ol.innerHTML = TL.map(e => `
+        <li class="tl-item ml-6" data-era="${e.era}">
+            <span class="absolute -left-[9px] mt-1.5 w-4 h-4 rounded-full border-2 border-white ${e.k==='r'?'bg-indigo-500':'bg-amber-500'}"></span>
+            <div class="text-xs font-bold ${e.k==='r'?'text-indigo-600':'text-amber-600'}">${e.y}</div>
+            <div class="font-semibold text-slate-900">${e.t}</div>
+            <p class="text-sm text-slate-600 leading-relaxed">${e.d}</p>
+        </li>`).join('');
+    document.querySelectorAll('.era-btn').forEach(b => b.addEventListener('click', () => {
+        document.querySelectorAll('.era-btn').forEach(x => x.classList.toggle('active', x === b));
+        const era = b.dataset.era;
+        document.querySelectorAll('.tl-item').forEach(li => li.classList.toggle('hide', era !== 'all' && li.dataset.era !== era));
+    }));
+    </script>
+</body>
+</html>
