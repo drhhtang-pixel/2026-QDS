@@ -4,9 +4,14 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（1 份講義）。
+目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（2 份講義）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
+- **老師要求（2026/09/26）：每次修改完，一定要先把改好的頁面給老師看，等老師確認後才繼續下一步**
+  （例如合併到 main、上線、再做其他修改）。老師偏好 **Artifact 卡片**（按 Open 就能看）：
+  把 `weekNN/index.html` 去掉 `<!DOCTYPE>`/`<html>`/`<head>` 外殼後用 Artifact 工具發布。
+  第四堂預覽 artifact：https://claude.ai/artifact/G2AEarTPktir4aeMDPED5D （之後更新請傳 `url` 發布到同一個網址）。
+  Artifact 版的「課程目錄」連結與 SKILL 下載無作用，只供預覽；正式網站仍是 GitHub Pages。
 - 讀者：研究所學生，會用電腦與手機瀏覽。
 - 發布方式：GitHub Pages（此資料夾即 repository 根目錄）。
 - 網址結構（老師選定 `/weekNN/`）：
@@ -23,13 +28,19 @@
 2026 QDS/
 ├── CLAUDE.md        ← 本文件
 ├── build.py         ← 建置腳本：讀 sources/weekNN/ + shell.html + home.html，產生下列建置產物
+├── package.json     ← 只用來安裝 Tailwind CLI（tailwindcss 3.4.17，與原 CDN 同版）；node_modules/ 不 commit
+├── tw_cache/        ← 各講義預先編譯好的 Tailwind CSS 快取（要 commit；build.py 會自動清掉不再使用的）
 ├── shell.html       ← 單堂外框頁（課程目錄連結、分頁列、上一份/下一份、頁尾更新日期與更新紀錄）
 ├── home.html        ← 課程目錄頁範本
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
 ├── week04/index.html ← 建置產物：第四堂
+├── private/         ← 不公開備份（.gitignore 排除，不會推上 GitHub），見下方「不公開備份」
 └── sources/
+    ├── week04/      ← 第四堂講義原始檔
+    │   ├── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
+    │   └── slr_cardsort_cluster.html  (分頁 2 SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
     └── week03/      ← 第三堂各份講義原始檔
         ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方；共用 FA CSS 也取自此檔)
         ├── apa.html
@@ -42,17 +53,26 @@
         ├── business_db.html   (由 Claude 撰寫的新講義，可直接編輯)
         ├── paper_skill_process.html   (分頁 8，由 Claude 依下方 .md 製作，可直接編輯)
         └── 建立讀論文技能的過程紀錄.md  (分頁 8 的原始文字，老師提供)
-    └── week04/
-        └── slr_cardsort_cluster.html  (SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
 ```
 
 ## 建置
 
 ```bash
-python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各 weekNN/index.html
+npm install           # 第一次（或換電腦）要裝一次 Tailwind CLI，需要 Node.js
+python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只用標準函式庫）
 ```
 
 **每次修改後都要重新執行 build.py**，再檢查產物。
+
+- **Tailwind 預先編譯**（2026/09/26 起）：講義原始檔照舊寫 `<script src="https://cdn.tailwindcss.com">` 和
+  `tailwind.config = {...}`，build.py 的 `tailwind()` 會用 Tailwind CLI 依該份講義的內容與設定編譯 CSS，
+  把兩段腳本換成 `<style>`（放在 `</head>` 前，與 CDN 注入位置相同，樣式順序不變）。建置產物不再載入 Tailwind CDN，
+  瀏覽器也不會再出現「cdn.tailwindcss.com should not be used in production」警告。
+- 快取鍵＝Tailwind 版本＋設定＋講義 HTML 的雜湊：講義沒改就直接用 `tw_cache/`，不需要 Node.js；
+  改了講義但沒裝 CLI，build.py 會停下來提示先 `npm install`。
+- 限制：CLI 只看得到檔案裡寫出來的 class 名稱。講義 JS 不要用字串拼接產生 class（如 `'bg-'+color+'-100'`），
+  要寫完整名稱（目前所有講義都符合）。
+- 2026/09/26 驗證：9 個分頁改用編譯版後，與 CDN 版整頁截圖逐像素相同；高亮開關、APA 小測驗／無偏見語言面板也相同。
 
 ## 課程進度表（SCHEDULE）
 
@@ -99,13 +119,27 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 
 | # | 分頁名稱 | 來源檔 |
 |---|---|---|
-| 1 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
+| 1 | Critical Form：Doing Design Thinking | Doing_Design_Thinking_critical_form.html |
+| 2 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
 
-- 老師原本指定這份為第四堂**第 2 個分頁**；第 1 份講義尚未提供，暫時是唯一分頁。
-  第 1 份加入後，在 `week04()` 清單最前面插入即可（網址 `#1` 會改指向新講義）。
-- 內容：Tranfield, Denyer, & Smart (2003) 三階段 Phase 0–9（已對照原文 Figure 2, p. 214）、PRISMA 全名、
-  卡片分類（Tullis & Wood 2004 建議 20–30 人；Nielsen 2004 認為 15 人）、集群分析、互動樹狀圖範例（示範資料）。
-- 內含跳到第三堂分頁 1、3 的連結（`../week03/#N`，`target="_top"`）。
+- 本堂文章：Micheli, P., Wilner, S. J. S., Bhatti, S. H., Mura, M., & Beverland, M. B. (2019). Doing design thinking:
+  Conceptual review, synthesis, and research agenda. *Journal of Product Innovation Management, 36*(2), 124–148.
+  https://doi.org/10.1111/jpim.12466
+- Critical Form 依老師的 paper-reading-notes 技能（repo 內 `paper-reading-notes.skill` 的版本：Problem／Aim／Objectives 三格）
+  製作，內容英文、標籤中英並列；第 5 節 C1→C9 依論文順序，Table 1～6、Figure 1 依原文數字重建。
+- 老師在 PDF 上的眉批（Problem/results/contributions/significance、definition of design thinking、
+  participatory design 與 design thinking 的比較、cluster analysis 只用 six attributes）都已放進對應卡片。
+- 分頁 2「SLR 系統文獻回顧」（老師指定為第 2 個分頁）：
+  - 內容：Tranfield, Denyer, & Smart (2003) 三階段 Phase 0–9（已對照原文 Figure 2, p. 214）、PRISMA 全名、
+    卡片分類（Tullis & Wood 2004 建議 20–30 人；Nielsen 2004 認為 15 人）、集群分析、互動樹狀圖範例（示範資料）。
+  - 內含跳到第三堂分頁 1、3 的連結（`../week03/#N`，`target="_top"`）。
+
+## 不公開備份（private/）
+
+- repository 是 public，任何推上 GitHub 的檔案學生都能下載，所以**期刊全文 PDF 一律不 commit**。
+- `private/` 已列入 `.gitignore`：放在這裡的檔案只留在本機。第四堂文章 PDF 的位置：
+  `private/week04/2018_Design_Thinking_Review.pdf`（老師本機需自行放入；雲端工作環境重開後不會保留）。
+- 若需要雲端備份，建議另開 **private** repository 或放雲端硬碟（需老師決定）。
 
 ## 架構重點（build.py 在做什麼）
 
@@ -153,6 +187,9 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 小測驗新增 Q3（Baker & Lancaster 1991 → 圖書）、Q4（Kass 1978 → 會議），選項用講義參考書目的分類名稱，
   解說附「看講義範例」按鈕（關閉面板、切到該分類 tab、捲到 #reference-list）。
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
+- 2026/09/26：新增第四堂，分頁 1「Critical Form：Doing Design Thinking」；文章 PDF 不上網（`private/`）。
+- 2026/09/26：Tailwind 改為建置時預先編譯（package.json + tw_cache/），全站不再載入 Tailwind CDN。
+- 2026/09/26：第四堂新增分頁 2「SLR 系統文獻回顧」（Tranfield et al., 2003、PRISMA、卡片分類、集群分析）。
 
 ## 更新紀錄規則（重要）
 
@@ -186,8 +223,8 @@ Pages 設定：Settings → Pages → Deploy from a branch → `main` / `(root)`
 
 ## 技術限制與慣例
 
-- 每個 weekNN/index.html 必須是**單一自足檔案**，外部資源只用：`cdn.tailwindcss.com`、`cdnjs.cloudflare.com`（腳本）、
-  Google Fonts。不要引入其他 CDN 或遠端圖片（claude.ai artifact 版本的 CSP 會擋）。
+- 每個 weekNN/index.html 必須是**單一自足檔案**，外部資源只用：`cdnjs.cloudflare.com`（腳本）、Google Fonts
+  （Tailwind 已改為建置時編譯內嵌，產物不再用 `cdn.tailwindcss.com`；講義原始檔仍可照舊寫 CDN 標籤）。不要引入其他 CDN 或遠端圖片（claude.ai artifact 版本的 CSP 會擋）。
 - 新講義版型沿用既有風格：Tailwind、Noto Sans TC、slate/indigo 色系、白底卡片、深色漸層頁首。
 - 內容用繁體中文；書目依 APA 第 7 版（期刊名與卷號斜體）。
 - 測試：`.claude/launch.json` 有 `site` 設定（`python3 -m http.server 8765`），可用內建瀏覽器開

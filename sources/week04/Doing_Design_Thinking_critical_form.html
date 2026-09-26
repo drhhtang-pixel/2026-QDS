@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Doing Design Thinking - 論文讀書筆記</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff', 100: '#e0effe', 500: '#0284c7',
+                            600: '#0369a1', 700: '#035485', 800: '#074873', 900: '#0c3b5e',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; }
+        .highlight-accent { transition: all 0.2s ease-in-out; }
+        body.highlight-mode .highlight-accent {
+            background-color: #fef3c7; color: #92400e;
+            padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-weight: 600;
+        }
+        .note-flag {
+            border-bottom: 1px dashed #d97706; cursor: help; position: relative;
+        }
+        .note-flag:hover .note-tooltip { display: block; }
+        .note-tooltip {
+            display: none; position: absolute; bottom: 125%; left: 0; z-index: 20;
+            background: #1e293b; color: #f8fafc; font-size: 0.7rem; line-height: 1.3; font-weight: 400;
+            padding: 0.5rem 0.75rem; border-radius: 0.5rem; width: 240px; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+        }
+        /* Table 6 / Table 5 圓點 */
+        .dot { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: #f97316; }
+        .nodot { color: #cbd5e1; }
+        .bar { background: #0369a1; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-lg sm:text-xl leading-tight">論文讀書筆記</h1>
+                    <p class="text-xs text-brand-600 font-medium">Critical Form｜QDS 2026 第四堂</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <label for="highlightToggle" class="hidden sm:inline-flex items-center cursor-pointer text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 px-3 py-1.5 rounded-lg border border-slate-200 transition select-none">
+                    <input type="checkbox" id="highlightToggle" onchange="toggleHighlightMode(this.checked)" class="sr-only peer">
+                    <div class="w-7 h-4 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-500 relative mr-2"></div>
+                    <i class="fa-solid fa-highlighter text-amber-600 mr-1.5"></i>
+                    <span>高亮關鍵字</span>
+                </label>
+                <div class="bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-semibold">
+                    <div class="px-3 py-1.5 rounded-lg bg-white text-brand-700 shadow-sm flex items-center space-x-1">
+                        <i class="fa-solid fa-brain text-brand-600"></i>
+                        <span>Doing Design Thinking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-b from-brand-900 to-slate-900 text-white py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-200 border border-brand-400/30 mb-4">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Design Thinking・Innovation Management・Systematic Literature Review</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">Doing Design Thinking: Conceptual Review, Synthesis, and Research Agenda</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto text-xs sm:text-sm mb-6">Micheli, P., Wilner, S. J. S., Bhatti, S. H., Mura, M., &amp; Beverland, M. B. (2019). Doing design thinking: Conceptual review, synthesis, and research agenda. <em>Journal of Product Innovation Management, 36</em>(2), 124–148. https://doi.org/10.1111/jpim.12466</p>
+            <div class="max-w-xl mx-auto relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input type="text" id="searchInput" onkeyup="filterContent()" placeholder="搜尋筆記內容…" class="w-full pl-11 pr-4 py-2.5 bg-white text-slate-800 rounded-xl shadow-lg focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-8">
+
+        <!-- Meta Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-4">
+            <div class="space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">Reading Notes</span>
+                <h3 class="text-xl font-bold text-slate-900">Doing Design Thinking: Conceptual Review, Synthesis, and Research Agenda</h3>
+                <p class="text-sm text-slate-600"><i class="fa-regular fa-calendar mr-1.5 text-brand-500"></i><strong>日期:</strong> 2026/09/30（第四堂 Paper Discussion）</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 max-w-md w-full">
+                <p class="text-xs font-semibold text-slate-500 mb-1">引用格式 (Citation, APA 7):</p>
+                <p class="font-mono text-xs text-slate-800 leading-relaxed bg-white p-2.5 rounded border border-slate-200 select-all">Micheli, P., Wilner, S. J. S., Bhatti, S. H., Mura, M., &amp; Beverland, M. B. (2019). Doing design thinking: Conceptual review, synthesis, and research agenda. <em>Journal of Product Innovation Management, 36</em>(2), 124–148. https://doi.org/10.1111/jpim.12466</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 1. Authors -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2.5 bg-brand-50 rounded-xl text-brand-600"><i class="fa-solid fa-user-pen text-lg"></i></div>
+                    <h3 class="text-lg font-bold text-slate-900">1. Authors 作者</h3>
+                </div>
+                <ul class="space-y-2 text-sm text-slate-700">
+                    <li class="flex items-start"><i class="fa-solid fa-circle-user text-brand-500 mt-1 mr-2"></i><span><strong class="highlight-accent">Micheli, P.</strong> — Professor of business performance and innovation, Warwick Business School (corresponding author); design &amp; innovation management, performance management.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-user text-brand-500 mt-1 mr-2"></i><span><strong>Wilner, S. J. S.</strong> — Chair in brand communication, Lazaridis School of Business, Wilfrid Laurier University; product/service innovation, branding, consumer culture.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-user text-brand-500 mt-1 mr-2"></i><span><strong>Bhatti, S. H.</strong> — Ph.D. in engineering management; formerly at Siemens; innovation management, design thinking, project management.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-user text-brand-500 mt-1 mr-2"></i><span><strong>Mura, M.</strong> — Associate professor, Department of Management, University of Bologna; performance measurement, sustainability, business analytics.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-user text-brand-500 mt-1 mr-2"></i><span><strong>Beverland, M. B.</strong> — Professor of Marketing, University of Sussex Business School; design-driven innovation, branding.</span></li>
+                    <li class="text-xs text-slate-500 pt-1 border-t border-slate-100">All five authors are <strong>management / marketing</strong> scholars — worth remembering when the paper classifies "design" vs. "management" perspectives.</li>
+                </ul>
+            </div>
+
+            <!-- 2. Scope & Background -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2.5 bg-indigo-50 rounded-xl text-indigo-600"><i class="fa-solid fa-compass text-lg"></i></div>
+                    <h3 class="text-lg font-bold text-slate-900">2. Scope & Background 研究範疇與背景</h3>
+                </div>
+                <div class="space-y-3 text-sm text-slate-700">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Scope:</span>
+                        <p class="bg-slate-50 p-2.5 rounded-lg border border-slate-100"><span class="highlight-accent">Design thinking</span>, <span class="highlight-accent">Innovation management</span>, Design management, New product development (NPD)</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Background:</span>
+                        <ul class="list-disc list-inside leading-relaxed space-y-1.5">
+                            <li>Over the past decade, design thinking has moved from innovation buzzword to widely diffused practice (Brown, 2008; Liedtka, 2015; Martin, 2009), and it has been implemented in firms such as SAP, P&amp;G, Intuit, Bank of America, Samsung and Kaiser Permanente.</li>
+                            <li>A generally accepted definition is still lacking, and even the term itself is controversial among its practitioners and advocates (Liedtka, 2015).</li>
+                            <li>Design scholars have long written on "designerly ways of thinking" (Buchanan, 1992; Dorst, 2006, 2011; Lawson &amp; Dorst, 2009), whereas management has only recently framed design thinking as an approach to innovation and creative problem solving.</li>
+                            <li>An "umbrella construct" that loosely covers diverse phenomena (Hirsch &amp; Levin, 1999) is useful at first, but without clarity it risks <strong class="highlight-accent">construct collapse</strong>, as happened to organizational effectiveness and work climate.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 3. Research Problem, Aim & Objectives -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2.5 bg-rose-50 rounded-xl text-rose-600"><i class="fa-solid fa-bullseye text-lg"></i></div>
+                    <h3 class="text-lg font-bold text-slate-900">3. Research Problem, Aim & Objectives 研究問題、目的與目標</h3>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="text-xs font-bold text-slate-600 block mb-1"><i class="fa-solid fa-circle-question mr-1"></i> Problem:</span>
+                        <p class="text-slate-800 font-medium">What is design thinking — what are its essential attributes, tools and methods — given that promoters and critics disagree about what it is, where it applies, and what it achieves？</p>
+                    </div>
+                    <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100">
+                        <span class="text-xs font-bold text-rose-700 block mb-1"><i class="fa-solid fa-flag mr-1"></i> Aim / Purpose:</span>
+                        <p class="text-slate-800 leading-relaxed">To shed light on current knowledge and conceptualizations of design thinking, so that it does not collapse as a construct and scholars and managers can benefit from its apparent advantages.</p>
+                    </div>
+                    <div class="p-3 bg-rose-50/30 rounded-xl border border-rose-100">
+                        <span class="text-xs font-bold text-rose-600 block mb-1"><i class="fa-solid fa-list-ol mr-1"></i> Objectives:</span>
+                        <ul class="list-disc list-inside text-slate-800 space-y-1">
+                            <li>Identify the principal attributes of design thinking and the tools and methods that support them.</li>
+                            <li>Reveal the (sometimes contradictory) perspectives of scholars writing on design thinking, and recommend topics for further study.</li>
+                            <li>Surface the enduring questions that may hinder practical implementation, and suggest theoretical frames to address them.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Methodology and Steps -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2.5 bg-emerald-50 rounded-xl text-emerald-600"><i class="fa-solid fa-list-check text-lg"></i></div>
+                    <h3 class="text-lg font-bold text-slate-900">4. Methodology & Steps 研究方法與步驟</h3>
+                </div>
+                <div class="space-y-3 text-sm text-slate-700">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-1">Methodology:</span>
+                        <p class="font-semibold text-slate-800"><span class="highlight-accent">Multiphase study</span>: systematic literature review (Tranfield, Denyer, &amp; Smart, 2003) + card sorting + cluster analysis</p>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-1">Steps:</span>
+                        <ol class="list-decimal list-inside space-y-1 text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <li><strong>Phase 1 – Systematic review:</strong> searched four databases (ABI ProQuest, Business Source Premier, Science Direct, Emerald), screened articles, and added influential books and applied models.</li>
+                            <li>Two researchers coded the 104 articles, first independently and then jointly, and grouped the codes into attributes.</li>
+                            <li><strong>Phase 2 – Card sorting:</strong> seven senior designers described, critiqued and sorted cards of the attributes and tools (member check).</li>
+                            <li><strong>Phase 3 – Cluster analysis:</strong> grouped the articles by six attributes (hierarchical clustering, then K-means) and validated the clusters with ANOVA.</li>
+                            <li>Interpreted each cluster as a perspective in the literature and derived research questions, theoretical implications and managerial implications.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Details -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6 search-target">
+            <div class="flex items-center space-x-3 pb-4 border-b border-slate-200">
+                <div class="p-2.5 bg-amber-50 rounded-xl text-amber-600"><i class="fa-solid fa-microscope text-xl"></i></div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">5. Details 內容細節</h3>
+                    <p class="text-xs text-slate-500">依論文敘事順序整理（C1→C9），圖表依原文數字重建</p>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                <h4 class="font-bold text-slate-800 text-sm flex items-center"><i class="fa-solid fa-circle-info text-brand-600 mr-2"></i> Introduction</h4>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 pl-2">
+                    <li>Two opening quotes set the tension: "we all need to think like designers" (Brown, 2009) vs. "just what design thinking is supposed to be is not well understood" (Kimbell, 2011).</li>
+                    <li>Authors disagree on the level of analysis: an organizational attribute, or the traits of individual "design thinkers"; a set of tools (Seidel &amp; Fixson, 2013) or a culture (Kimbell, 2011).</li>
+                    <li>Divergent definitions hinder the comparability of empirical findings and thus inhibit progress.</li>
+                    <li>The goal is <strong>not</strong> to dismiss design thinking as a management fad, but to clarify it and set a research agenda.</li>
+                </ul>
+            </div>
+
+            <!-- C1 Data collection -->
+            <div class="border border-slate-200 rounded-xl p-5 sm:p-6 bg-white hover:border-brand-300 transition space-y-4">
+                <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C1)</span>
+                <h4 class="font-bold text-slate-900 text-base">Phase 1: Data Collection — Figure 1. The Data Gathering Process</h4>
+                <p class="text-xs text-slate-500">資料蒐集分四步：左邊是<strong class="text-slate-700">做了什麼</strong>，右邊是<strong class="text-slate-700">做完後剩下多少</strong>；中間紅字是被排除的篇數。</p>
+
+                <!-- Step 1 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">1</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Initial search of academic databases</p>
+                            <p>4 databases: ABI ProQuest, Business Source Premier, Science Direct, Emerald</p>
+                            <p>Search string <span class="font-mono bg-white border border-slate-200 rounded px-1">"Design*" AND "Think*"</span> in title or abstract; peer-reviewed journals; 1985–2017</p>
+                        </div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-brand-50 border border-brand-200 p-3 flex sm:flex-col items-center justify-between sm:justify-center">
+                        <span class="text-xs text-brand-700 font-semibold">retrieved 檢索到</span>
+                        <span class="font-mono font-bold text-brand-800 text-2xl">32,232</span>
+                    </div>
+                </div>
+                <div class="pl-11 text-xs text-rose-600 font-semibold"><i class="fa-solid fa-arrow-down mr-1"></i>排除 31,707 篇</div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">2</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Initial screening of titles and abstracts</p>
+                            <ul class="list-disc list-inside space-y-0.5">
+                                <li>Drop irrelevant uses (e.g., technical designs, research design, business-process design, strategic/lean thinking)</li>
+                                <li>Remove overlaps among databases</li>
+                                <li>Drop journals outside the 2013 JCR or the ABS Academic Journal Quality Guide (7 design journals kept as exceptions)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-brand-50 border border-brand-200 p-3 flex sm:flex-col items-center justify-between sm:justify-center">
+                        <span class="text-xs text-brand-700 font-semibold">retained 保留</span>
+                        <span class="font-mono font-bold text-brand-800 text-2xl">525</span>
+                    </div>
+                </div>
+                <div class="pl-11 text-xs text-rose-600 font-semibold"><i class="fa-solid fa-arrow-down mr-1"></i>排除 421 篇</div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">3</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Two authors read the abstracts in detail and apply four guidelines</p>
+                            <ol class="list-decimal list-inside space-y-0.5">
+                                <li>Exclude articles where "design thinking" means technical design practices.</li>
+                                <li>Exclude applications to other fields (e.g., architecture, chemistry).</li>
+                                <li>Keep key "designerly thinking" works, but <strong class="highlight-accent">focus on design thinking in management discourse</strong>.</li>
+                                <li>Exclude cases that do not say what was done or what "design thinking" refers to.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-brand-600 text-white p-3 flex sm:flex-col items-center justify-between sm:justify-center">
+                        <span class="text-xs font-semibold">articles retained 最終文章</span>
+                        <span class="font-mono font-bold text-2xl">104</span>
+                    </div>
+                </div>
+                <div class="pl-11 text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-plus mr-1"></i>再補充其他來源</div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex gap-3 flex-1">
+                        <div class="w-8 h-8 shrink-0 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-sm">4</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
+                            <p class="font-bold text-slate-900 text-sm">Add other relevant sources</p>
+                            <p>Found through cross-referencing, consulting 7 scholars and 10 practitioners, and the authors' own experience.</p>
+                        </div>
+                    </div>
+                    <div class="sm:w-44 shrink-0 rounded-lg bg-emerald-50 border border-emerald-200 p-3 flex sm:flex-col items-center justify-between sm:justify-center text-emerald-800">
+                        <span class="text-xs font-semibold">added 加入</span>
+                        <span class="font-bold text-sm text-right sm:text-center"><span class="font-mono text-xl">9</span> books ＋ <span class="font-mono text-xl">3</span> applied models</span>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                    <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Tranfield, Denyer, &amp; Smart (2003) — systematic review = data collection, analysis, synthesis
+                </div>
+            </div>
+
+            <!-- C2 Data analysis -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C2)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Descriptive analysis</h4>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Most articles appeared in the past decade: an initial peak in 2009, then a peak in 2015 (HBR special issue) (Figure 2).</li>
+                        <li>Most come from design journals (<em>Design Management Review</em>, <em>Design Studies</em>, <em>Design Issues</em>); among management journals, JPIM, HBR, <em>Journal of Business Strategy</em>, <em>Strategy &amp; Leadership</em> (Figure 3).</li>
+                        <li><strong class="highlight-accent">Most articles discuss examples or single cases, often without a formal research method</strong>; very few quantitative studies; descriptive/normative more than explanatory.</li>
+                        <li>Mostly individual or organizational level; few at team level.</li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C2.1)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Table 1. Most-cited sources</h4>
+                    <table class="w-full text-xs">
+                        <thead><tr class="text-slate-500 border-b border-slate-200"><th class="text-left py-1">Author</th><th class="text-left">Year</th><th class="text-left">Type</th><th class="text-right">Cited by</th></tr></thead>
+                        <tbody class="text-slate-700">
+                            <tr class="border-b border-slate-100"><td class="py-1">Brown</td><td>2008</td><td>Article</td><td class="text-right font-mono">48%</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-1">Martin</td><td>2009</td><td>Book</td><td class="text-right font-mono">46%</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-1">Brown</td><td>2009</td><td>Book</td><td class="text-right font-mono">39%</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-1">Simon</td><td>1969</td><td>Book</td><td class="text-right font-mono">39%</td></tr>
+                            <tr><td class="py-1">Buchanan</td><td>1992</td><td>Article</td><td class="text-right font-mono">34%</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-slate-500 leading-relaxed">Brown: inspiration–ideation–implementation; Martin: abductive reasoning, blending analysis &amp; intuition; Simon: design as changing existing into preferred situations; Buchanan: wicked problems.</p>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C2.2)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Coding of constructs</h4>
+                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Initial review: <strong>91 codes</strong> (54 concepts + 37 tools and methods).</li>
+                        <li>Second-order coding with two identical sets of 91 cards: one researcher found 18 attributes, the other 16; <strong>9</strong> were shared.</li>
+                        <li>Inter-rater reliability <strong>58.5%</strong>, described as high for an initial coding phase (Miles &amp; Huberman, 1994).</li>
+                        <li><strong class="highlight-accent">Discussion of discrepancies → 10 attributes + one category "design tools and methods"</strong> (37 tools).</li>
+                    </ol>
+                    <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                        <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Rosenthal &amp; Rosnow (1991)
+                    </div>
+                </div>
+            </div>
+
+            <!-- C3 Card sorting, C4 definitions -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C3)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Phase 2: Card sorting exercise</h4>
+                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Convenience sample of <strong>7</strong> design directors / senior designers, 15–25 years of experience (2 medical devices, 2 FMCG, 2 industrial products, 1 automotive).</li>
+                        <li>Sorted 10 attribute cards + 37 tool cards; could relabel, merge or add (blank cards); about 45 minutes each.</li>
+                        <li>No attribute discarded, none added; the last two designers added no new insight.</li>
+                        <li>"Problem solving" and "creativity and innovation" were seen as <em>outcomes</em>; user-centeredness and collaboration permeate the whole process.</li>
+                        <li><strong class="highlight-accent">The 37 tools and methods were merged into 8.</strong></li>
+                    </ol>
+                    <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                        <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Harloff (2005); Goulding (2002)
+                    </div>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3 md:col-span-2">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C4)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Definitions of design thinking &amp; applied models (Table 2)</h4>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li><strong>Brown (2008)</strong>: uses the designer's <em>sensibility</em> and <em>methods</em> to match people's needs with what is technologically feasible and commercially viable — both a process and an individual characteristic, explicitly linked to business.</li>
+                        <li><strong>Lockwood (2010b)</strong>: a human-centered innovation process emphasizing observation, collaboration, fast learning, visualization, rapid prototyping, and concurrent business analysis.</li>
+                        <li><strong>Martin (2009)</strong>: stresses the <em>thinking</em> — "the productive mix of analytical thinking and intuitive thinking."</li>
+                    </ul>
+                    <table class="w-full text-xs mt-2">
+                        <thead><tr class="text-slate-500 border-b border-slate-200"><th class="text-left py-1 w-1/4">Proponent</th><th class="text-left">Main stages</th></tr></thead>
+                        <tbody class="text-slate-700">
+                            <tr class="border-b border-slate-100"><td class="py-1 font-semibold">IDEO</td><td>Inspiration → Ideation → Implementation</td></tr>
+                            <tr class="border-b border-slate-100"><td class="py-1 font-semibold">Stanford d.school</td><td>Empathy → Define → Ideate → Prototype and test</td></tr>
+                            <tr><td class="py-1 font-semibold">IBM</td><td>Understand → Explore → Prototype → Evaluate</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-slate-700"><strong class="highlight-accent">All models start by exploring/understanding the problem, move to ideation, and end with prototyping, testing and iteration.</strong></p>
+                </div>
+            </div>
+
+            <!-- C5 Ten attributes -->
+            <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-4">
+                <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C5)</span>
+                <h4 class="font-bold text-slate-900 text-base">The 10 principal attributes（Table 3：在 104 篇中出現的篇數）</h4>
+                <div class="space-y-1.5 text-xs">
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Creativity and innovation</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:100%"></div></div><span class="w-8 text-right font-mono">104</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">User centeredness and involvement</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:79.8%"></div></div><span class="w-8 text-right font-mono">83</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Problem solving</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:70.2%"></div></div><span class="w-8 text-right font-mono">73</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Iteration and experimentation</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:61.5%"></div></div><span class="w-8 text-right font-mono">64</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Interdisciplinary collaboration</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:55.8%"></div></div><span class="w-8 text-right font-mono">58</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Ability to visualize</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:39.4%"></div></div><span class="w-8 text-right font-mono">41</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Gestalt view</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:33.7%"></div></div><span class="w-8 text-right font-mono">35</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Abductive reasoning</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:28.8%"></div></div><span class="w-8 text-right font-mono">30</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700">Tolerance of ambiguity and failure</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:28.8%"></div></div><span class="w-8 text-right font-mono">30</span></div>
+                    <div class="flex items-center gap-2"><span class="w-44 sm:w-56 shrink-0 text-slate-700"><span class="note-flag">Blending analysis and intuition<span class="note-tooltip">Table 3 labels this attribute "Blending rationality and intuition"; the text calls it "Blending analysis and intuition". Same attribute.</span></span></span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:24%"></div></div><span class="w-8 text-right font-mono">25</span></div>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">These are not new constructs; <strong class="highlight-accent">the design thinking literature gives each a contextually unique meaning and combines them</strong> to explain outcomes that no single attribute could. (Plus "design tools and methods": 37 types.)</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">① Creativity and innovation</p>
+                        <p>Creativity = producing novel and useful ideas; innovation = implementing them (Amabile, 1988). Mentioned in every article — both an attribute and an outcome.</p>
+                    </div>
+                    <div class="rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">② User-centeredness and involvement</p>
+                        <p>Empathy is the prime means of being user-centered.</p>
+                        <p><strong>Participatory design vs. design thinking:</strong> participatory / co-creative design gives end users direct roles in early design phases (Sanders &amp; Stappers, 2008); <strong class="highlight-accent">in design thinking, user needs are considered in many ways without necessarily involving users directly</strong> (Beverland et al., 2015).</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">③ Problem solving</p>
+                        <p>Especially <em>wicked</em> problems (Buchanan, 1992; Rittel in Churchman, 1967): ill-formulated, many clients with conflicting values; they can be addressed but not solved "rightly". An alternative to linear problem solving.</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">④ Iteration and experimentation</p>
+                        <p>Trial-and-error learning; cycles of problem definition and solution. Prototypes are for learning and finding new directions, not for validation (Brown, 2008).</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">⑤ Interdisciplinary collaboration</p>
+                        <p>Cross-functional teams make sure the technical, business and human dimensions of a problem are all represented (Glen et al., 2014).</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">⑥ Ability to visualize</p>
+                        <p>Moving from abstract thinking to visualized ideas and thinking on top of them (Boni et al., 2009). Not necessarily physical — storytelling also visualizes.</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">⑦ Gestalt view</p>
+                        <p>A holistic, integrative view: the whole is more than the sum of parts; the problem is seen in its system and context, which allows reframing (Drews, 2009).</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">⑧ Abductive reasoning</p>
+                        <p>The imagination of what <em>might be</em> rather than analysis of what <em>is</em> (Martin, 2010); a best guess that creates new insight (Kolko, 2010); allows reframing (Dorst, 2011).</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">⑨ Tolerance of ambiguity and failure</p>
+                        <p>Ambiguity is inherent in wicked problems; early, inexpensive failures are valuable for learning (Luchs, Swan, &amp; Creusen, 2016).</p>
+                    </div>
+                    <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 space-y-1">
+                        <p class="font-bold text-slate-900">⑩ Blending analysis and intuition</p>
+                        <p>Not rejecting analysis but dynamically balancing it with intuition (Martin, 2009); also exploration/exploitation, reliability/validity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C6 Tools -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3 md:col-span-2">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C6)</span>
+                    <h4 class="font-bold text-slate-900 text-base">8 essential tools and methods（Table 4）</h4>
+                    <p class="text-xs text-slate-500">依設計師卡片分類的順序；數字為出現篇數</p>
+                    <div class="space-y-1.5 text-xs">
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Ethnographic methods</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:90.2%"></div></div><span class="w-6 text-right font-mono">37</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Personas</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:22%"></div></div><span class="w-6 text-right font-mono">9</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Journey map</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:26.8%"></div></div><span class="w-6 text-right font-mono">11</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Brainstorming</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:78%"></div></div><span class="w-6 text-right font-mono">32</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Mind map</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:9.8%"></div></div><span class="w-6 text-right font-mono">4</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Visualization</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:97.6%"></div></div><span class="w-6 text-right font-mono">40</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Prototyping</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:100%"></div></div><span class="w-6 text-right font-mono">41</span></div>
+                        <div class="flex items-center gap-2"><span class="w-32 shrink-0 text-slate-700">Experiments</span><div class="flex-1 bg-slate-100 rounded h-4"><div class="bar h-4 rounded" style="width:80.5%"></div></div><span class="w-6 text-right font-mono">33</span></div>
+                    </div>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-1.5 leading-relaxed">
+                        <li><strong class="highlight-accent">Not the quantity of tools but the linkage between them matters</strong> (Seidel &amp; Fixson, 2013).</li>
+                        <li>Designers described prototypes as <em>boundary-spanning objects</em> (Carlile, 2002) across functions and firms.</li>
+                        <li>Prototypes as "local experiments" in the global experiment of reframing the problem (Schön, 1983).</li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3 md:col-span-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C6.1)</span>
+                    <h4 class="font-bold text-slate-900 text-base">How tools enable the attributes（整理自 Table 5）</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-center">
+                            <thead>
+                                <tr class="text-slate-500 border-b border-slate-200 align-bottom">
+                                    <th class="text-left py-1 pr-2">Tool</th>
+                                    <th class="px-1">User</th><th class="px-1">Collab.</th><th class="px-1">Visual.</th><th class="px-1">Gestalt</th><th class="px-1">Abduct.</th><th class="px-1">Blend</th><th class="px-1">Iterat.</th><th class="px-1">Toler.</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-700">
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Ethnographic methods</td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td></tr>
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Personas</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td class="nodot">–</td><td class="nodot">–</td></tr>
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Journey maps</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td><td class="nodot">–</td></tr>
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Brainstorming</td><td class="nodot">–</td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td></tr>
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Mind maps</td><td class="nodot">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td></tr>
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Visualization</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td></tr>
+                                <tr class="border-b border-slate-100"><td class="text-left py-1.5 pr-2">Prototypes</td><td class="nodot">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                                <tr><td class="text-left py-1.5 pr-2">Field experiments</td><td class="nodot">–</td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td><td class="nodot">–</td><td class="nodot">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Table 5 in the paper is written as sentences (e.g., "Personas … serve as a boundary-spanning object during interdisciplinary collaboration"); this matrix marks each attribute a sentence names. Abbreviations: User = user-centeredness, Collab. = interdisciplinary collaboration, Visual. = ability to visualize, Abduct. = abductive reasoning, Blend = blending analysis and intuition, Iterat. = iteration and experimentation, Toler. = tolerance of ambiguity and failure ("encourage early failure").</p>
+                </div>
+            </div>
+
+            <!-- C7 Cluster analysis method -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C7)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Phase 3: Cluster analysis — selecting variables</h4>
+                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Challenge: 10 attributes + divergent views make it hard to say precisely what design thinking is.</li>
+                        <li>"Creativity and innovation" appears in all articles → cannot discriminate.</li>
+                        <li>User-centeredness, problem solving, iteration appear in over 60% → also excluded.</li>
+                        <li><strong class="highlight-accent">Only six attributes retained</strong> (abductive reasoning, ability to visualize, blending, gestalt, interdisciplinary collaboration, tolerance of ambiguity and failure) — 4 of the 10 excluded.</li>
+                        <li>Post hoc: clustering with all 10 put most articles into one large cluster (footnote 4).</li>
+                    </ol>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C7.1)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Identifying &amp; validating clusters</h4>
+                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Two-stage procedure: hierarchical clustering (dendrogram) to choose the number of clusters, then K-means (Hartigan &amp; Wong, 1979).</li>
+                        <li>Repeated with different algorithms; combined with the researchers' judgment.</li>
+                        <li><strong class="highlight-accent">A five-cluster model gave the best fit</strong> → five perspectives in the literature.</li>
+                        <li>Cluster analysis is exploratory, so some overlap among clusters is expected.</li>
+                    </ol>
+                    <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                        <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Ketchen &amp; Shook (1996); Hair et al. (1992)
+                    </div>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C7.2)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Validation with ANOVA</h4>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Compared the five clusters on the three excluded common attributes.</li>
+                        <li>User-centeredness <span class="font-mono">F = .10</span>; problem solving <span class="font-mono">F = .90</span>; iteration <span class="font-mono">F = 1.50</span>; all <span class="font-mono">p &gt; .05</span>. Post hoc S-N-K: no significant differences.</li>
+                        <li><strong class="highlight-accent">The five perspectives share the common attributes but differ on the others.</strong></li>
+                        <li class="text-slate-500">Note: the text says the null hypothesis that "<span class="note-flag">all four groups<span class="note-tooltip">The analysis has five clusters; "four groups" in the original text appears to be a typo for five.</span></span>" had the same level cannot be rejected.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- C8 Five perspectives -->
+            <div class="bg-slate-900 text-white rounded-xl p-5 sm:p-6 space-y-5">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-400 text-slate-900 inline-block">(C8)</span>
+                    <h4 class="font-bold text-lg">Five perspectives from the cluster analysis（Table 6）</h4>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-center">
+                        <thead>
+                            <tr class="text-slate-400 border-b border-slate-700"><th class="text-left py-1.5">Attribute</th><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th></tr>
+                        </thead>
+                        <tbody class="text-slate-200">
+                            <tr class="border-b border-slate-800"><td class="text-left py-1.5">Abductive reasoning</td><td class="text-slate-600">–</td><td><span class="dot"></span></td><td class="text-slate-600">–</td><td class="text-slate-600">–</td><td><span class="dot"></span></td></tr>
+                            <tr class="border-b border-slate-800"><td class="text-left py-1.5">Ability to visualize</td><td class="text-slate-600">–</td><td><span class="dot"></span></td><td class="text-slate-600">–</td><td><span class="dot"></span></td><td class="text-slate-600">–</td></tr>
+                            <tr class="border-b border-slate-800"><td class="text-left py-1.5">Blending rationality and intuition</td><td class="text-slate-600">–</td><td class="text-slate-600">–</td><td class="text-slate-600">–</td><td class="text-slate-600">–</td><td><span class="dot"></span></td></tr>
+                            <tr class="border-b border-slate-800"><td class="text-left py-1.5">Gestalt view</td><td class="text-slate-600">–</td><td class="text-slate-600">–</td><td class="text-slate-600">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                            <tr class="border-b border-slate-800"><td class="text-left py-1.5">Interdisciplinary collaboration</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="text-slate-600">–</td><td class="text-slate-600">–</td></tr>
+                            <tr class="border-b border-slate-800"><td class="text-left py-1.5">Tolerance of ambiguity and failure</td><td class="text-slate-600">–</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td class="text-slate-600">–</td><td class="text-slate-600">–</td></tr>
+                            <tr class="font-semibold"><td class="text-left py-1.5">Number of articles</td><td class="font-mono">38</td><td class="font-mono">18</td><td class="font-mono">20</td><td class="font-mono">14</td><td class="font-mono">14</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2">
+                        <p class="font-bold text-amber-300">C1 · Interdisciplinary collaboration (38)</p>
+                        <p class="text-slate-300">"Design thinking is definitely a team sport" (Kelley). Advocates adoption irrespective of industry or problem; all employees should become "design thinkers" (Brown, 2009). Yet claims of benefit remain speculative; some warn of "overblown claims" (McCullagh, 2013).</p>
+                        <p class="text-slate-400">Brown's (2008) definition actually embeds three skillsets: designer, engineer, business manager.</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2">
+                        <p class="font-bold text-amber-300">C2 · Reclaiming design thinking as designers' domain (18)</p>
+                        <p class="text-slate-300">Mostly non-management authors, critical of management discourse (Kimbell, 2011: the concept presumes all design disciplines share practices). All agree the <strong class="highlight-accent">ability to visualize</strong> is central.</p>
+                        <p class="text-slate-400">Key tension: a way of approaching problems, or a professional skillset? Can non-designers "do" design thinking?</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2">
+                        <p class="font-bold text-amber-300">C3 · Resilience in problem-solving (20)</p>
+                        <p class="text-slate-300">Emphasis on organizational culture: "we'll have to be willing to tolerate more failure" (Nooyi, PepsiCo). An alternative to narrowly analytical approaches, yet managers still tend to seek closed-form solutions.</p>
+                        <p class="text-slate-400">Design culture (Deserti &amp; Rizzo, 2014) vs. diversity of ambiguity tolerance in teams (Beckman &amp; Barry, 2007).</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2">
+                        <p class="font-bold text-amber-300">C4 · Seeing and reflecting upon the whole (14)</p>
+                        <p class="text-slate-300">Focus on individual designers and the "thinking" part; how to educate designers. Draws on Schön's (1983) <em>The Reflective Practitioner</em>: action and reflection; gestalt view enables reframing.</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2">
+                        <p class="font-bold text-amber-300">C5 · Learning to think like a designer (14)</p>
+                        <p class="text-slate-300">Roger Martin's abductive reasoning and blended logics; non-designers can and should learn it, so teach it in business schools (Dunne &amp; Martin, 2006). Counterpoint: talent and craft cannot be picked up in "a workshop or two" (McCullagh, 2010).</p>
+                    </div>
+                    <div class="bg-amber-400/10 border border-amber-300/30 rounded-lg p-4 space-y-2">
+                        <p class="font-bold text-amber-300"><i class="fa-solid fa-lightbulb mr-1"></i>Research questions (examples)</p>
+                        <ul class="list-disc list-inside text-slate-300 space-y-1">
+                            <li>C1: What constitutes a "design thinker"? What is its effect on performance?</li>
+                            <li>C2: Approach to problems, or skillset requiring training?</li>
+                            <li>C3: Does it require a failure-tolerant culture, or create one?</li>
+                            <li>C4: How can design thinking skills be assessed?</li>
+                            <li>C5: What are the barriers to adoption? Results of teaching it in MBAs?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C9 Contributions & implications -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C9)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Contributions</h4>
+                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li><strong class="highlight-accent">10 attributes + 8 tools and methods</strong> rigorously derived from multidisciplinary literature → clarity for a construct "plagued by polysemy".</li>
+                        <li>Identification of five scholarly perspectives → detailed recommendations for further study.</li>
+                        <li>Enduring questions that impede practical implementation, with suggested theoretical frames.</li>
+                    </ol>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C9.1)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Theoretical implications</h4>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li>Design thinking has the <em>reverse</em> problem of most academic concepts: <strong class="highlight-accent">it lacks rigor, not relevance</strong>.</li>
+                        <li><strong>Microfoundations</strong>: design thinking as Schön's reflective "conversation" with a situation.</li>
+                        <li><strong>Communities of practice</strong> (Wenger, 1998): designers bristle at "anyone" doing design thinking; managers, with a logic of replication, see it as separable activities.</li>
+                        <li>Critiques: Nussbaum (2011) — a "failed experiment" turned into a linear, gated method; Verganti (2017) — "design moved closer to management."</li>
+                    </ul>
+                </div>
+                <div class="border border-slate-200 rounded-xl p-5 bg-white hover:border-brand-300 transition space-y-3">
+                    <span class="text-xs font-bold px-2.5 py-1 rounded bg-brand-100 text-brand-800 inline-block">(C9.2)</span>
+                    <h4 class="font-bold text-slate-900 text-base">Managerial implications</h4>
+                    <ul class="list-disc list-inside text-xs text-slate-700 space-y-2 leading-relaxed">
+                        <li><strong>When?</strong> Only the "fuzzy front end" of NPD (Luchs, 2016; Lockwood, 2009b), or the whole process (Deserti &amp; Rizzo, 2014)? Radical or incremental innovation?</li>
+                        <li><strong>How?</strong> Senior-management commitment and a design-thinking coordinator, or organic cross-team structures?</li>
+                        <li><strong>vs. Agile &amp; Lean Startup:</strong> they share iteration and user focus, but <strong class="highlight-accent">design thinking mixes activities, skills, orientations and logics</strong> (e.g., abductive reframing before searching for solutions).</li>
+                    </ul>
+                    <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                        <i class="fa-solid fa-bookmark text-amber-500 mr-1"></i> Others: Ries (2011); Cooper &amp; Sommer (2016)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6">
+            <!-- 6. Significance -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2.5 bg-blue-50 rounded-xl text-blue-600"><i class="fa-solid fa-award text-lg"></i></div>
+                    <h3 class="text-lg font-bold text-slate-900">6. Significance 貢獻與說服力</h3>
+                </div>
+                <ul class="list-disc list-inside text-sm text-slate-700 space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <li><strong>Reliability — logic holds:</strong> the problem (a fuzzy construct at risk of collapse) is answered by a method that first derives the attributes (review), then checks them with practitioners (card sorting), then maps disagreement (cluster analysis). Each phase feeds the next, and the results map onto the three objectives.</li>
+                    <li><strong>Limits to keep in mind:</strong> the card sorting used a convenience sample of 7 product designers (no service/interaction designers, no managers); inter-rater agreement was 58.5% before discussion; clusters rest on the presence/absence of only six attributes; the sample is limited to management discourse and ranked journals.</li>
+                    <li><strong>Importance:</strong> published in JPIM, it offers a shared vocabulary (10 attributes, 8 tools) that later empirical studies can operationalize, and a concrete research agenda — its central claim is that design thinking research now needs empirical evidence.</li>
+                    <li><strong>For this course:</strong> a model of a systematic literature review — databases (ABI/INFORM, Business Source Premier; see week 3, tab 7), a search string, inclusion/exclusion rules, a data-gathering figure, and coding with inter-rater reliability.</li>
+                </ul>
+            </div>
+
+        </div>
+
+            <!-- 7. Questions -->
+        <div class="bg-gradient-to-br from-brand-800 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-md border border-brand-700 space-y-6 search-target">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-brand-500/30 rounded-xl text-brand-300"><i class="fa-solid fa-comments text-lg"></i></div>
+                <h3 class="text-lg font-bold text-white">7. Questions? 討論問題</h3>
+            </div>
+            <div class="p-5 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 text-center">
+                <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-400 text-slate-900 inline-block mb-3">核心問題</span>
+                <p class="text-lg font-semibold text-brand-200">If design thinking is a way of approaching problems that anyone can learn (Clusters 1 &amp; 5), but designers argue it cannot be separated from design doing and visualization (Clusters 2 &amp; 4), which view does your own research take — and how would that choice change whom you study and which method you use?</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-amber-300 flex items-center"><i class="fa-solid fa-flask mr-2"></i>A. 研究方法：把這篇當作系統性文獻回顧的範例</h4>
+                    <ol class="space-y-3">
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">1</span>
+                                <div>
+                                    <p class="font-semibold text-white">Inter-rater reliability 58.5% 夠嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Two coders agreed on only 58.5% before discussion. What does "reaching agreement through discussion" add to — or hide from — the validity of the 10 attributes?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C2.2 Coding of constructs</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">2</span>
+                                <div>
+                                    <p class="font-semibold text-white">7 位產品設計師能「驗證」這些屬性嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">The card sorting used 7 product designers (no service or interaction designers, no managers). Who should have been in the room, and would the 10 attributes survive?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C3 Card sorting</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">3</span>
+                                <div>
+                                    <p class="font-semibold text-white">「出現頻率」等於「重要性」嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Table 3 ranks attributes by how many articles mention them. Is frequency in the literature evidence of what design thinking <em>is</em>, or of what authors like to write about?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C5 Table 3</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">4</span>
+                                <div>
+                                    <p class="font-semibold text-white">拿掉最常見的 4 個屬性才分得出群，這樣合理嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Removing the four most common attributes made the clusters appear. Are the five "perspectives" real differences in the literature, or an artifact of the method?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C7 Only six attributes</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-amber-300 flex items-center"><i class="fa-solid fa-lightbulb mr-2"></i>B. Design thinking 的概念</h4>
+                    <ol class="space-y-3">
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">5</span>
+                                <div>
+                                    <p class="font-semibold text-white">User-centered 一定要讓使用者參與嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Design thinking considers user needs "without necessarily entailing direct user involvement," unlike participatory design. Is empathy on behalf of users enough?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C5 ② Participatory design vs. design thinking</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">6</span>
+                                <div>
+                                    <p class="font-semibold text-white">Design thinking 和 designerly ways of knowing 是同一件事嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">This review deliberately focuses on management discourse, and all five authors are management scholars. What is lost when design thinking is studied mainly from a management perspective?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>第三堂 Cross (1999) Natural Intelligence in Design</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">7</span>
+                                <div>
+                                    <p class="font-semibold text-white">Visualization 是 design thinking 的核心嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Cluster 2 argues the ability to visualize is central, yet Verganti (2017) says managers have treated aesthetics as irrelevant. Can you do design thinking without sketching or making?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C8 Cluster 2; C9.1</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-amber-300 flex items-center"><i class="fa-solid fa-briefcase mr-2"></i>C. 實務與未來研究</h4>
+                    <ol class="space-y-3">
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">8</span>
+                                <div>
+                                    <p class="font-semibold text-white">為何 Nussbaum 說 design thinking 是「失敗的實驗」？你同意嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Why did Nussbaum (2011) call design thinking a "failed experiment"? When it is turned into a linear, gated, by-the-book process, is it still design thinking?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C9.1 Theoretical implications</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">9</span>
+                                <div>
+                                    <p class="font-semibold text-white">探索一下 Design thinking 和 Agile、Lean Startup 差在哪裡？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">All three iterate with users. The paper argues design thinking differs because it mixes activities, skills, orientations and logics — especially abductive reframing before searching for solutions. Explore the differences, ideally with a real project.</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C9.2 Managerial implications</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">10</span>
+                                <div>
+                                    <p class="font-semibold text-white">如果要實證研究 design thinking，你會怎麼做？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">The paper concludes that empirical evidence is lacking. Pick one of its research questions and design a qualitative study: whom, what data, and which method (interview, case study, protocol analysis)?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C8 Research questions；本學期後續單元：訪談、個案研究、口語分析</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400">Qualitative Design Studies Discussion Prompt</p>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>論文讀書筆記 &copy; 2026. Qualitative Design Studies. Instructor: Hsien-Hui TANG.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleHighlightMode(enabled) {
+            document.body.classList.toggle('highlight-mode', enabled);
+        }
+        function filterContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            document.querySelectorAll('.search-target').forEach(target => {
+                const text = target.innerText.toLowerCase();
+                target.style.display = (query === '' || text.includes(query)) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
