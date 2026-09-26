@@ -185,6 +185,8 @@ def week04():
     return [
      ('Critical Form：Doing Design Thinking',plain(U/'Doing_Design_Thinking_critical_form.html'),
       [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）')]),
+     ('SLR 系統文獻回顧',plain(U/'slr_cardsort_cluster.html'),
+      [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）')]),
     ]
 
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行

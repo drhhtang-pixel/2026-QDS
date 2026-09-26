@@ -4,7 +4,7 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（1 份講義）。
+目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（2 份講義）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - **老師要求（2026/09/26）：每次修改完，一定要先把改好的頁面給老師看，等老師確認後才繼續下一步**
@@ -35,10 +35,12 @@
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
+├── week04/index.html ← 建置產物：第四堂
 ├── private/         ← （.gitignore 排除）過渡用的私有 repo 位置；存檔區已改用 Google Drive，見下方「存檔區」
 └── sources/
     ├── week04/      ← 第四堂講義原始檔
-    │   └── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
+    │   ├── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
+    │   └── slr_cardsort_cluster.html  (分頁 2 SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
     └── week03/      ← 第三堂各份講義原始檔
         ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方；共用 FA CSS 也取自此檔)
         ├── apa.html
@@ -118,6 +120,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 | # | 分頁名稱 | 來源檔 |
 |---|---|---|
 | 1 | Critical Form：Doing Design Thinking | Doing_Design_Thinking_critical_form.html |
+| 2 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
 
 - 本堂文章：Micheli, P., Wilner, S. J. S., Bhatti, S. H., Mura, M., & Beverland, M. B. (2019). Doing design thinking:
   Conceptual review, synthesis, and research agenda. *Journal of Product Innovation Management, 36*(2), 124–148.
@@ -126,6 +129,10 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   製作，內容英文、標籤中英並列；第 5 節 C1→C9 依論文順序，Table 1～6、Figure 1 依原文數字重建。
 - 老師在 PDF 上的眉批（Problem/results/contributions/significance、definition of design thinking、
   participatory design 與 design thinking 的比較、cluster analysis 只用 six attributes）都已放進對應卡片。
+- 分頁 2「SLR 系統文獻回顧」（老師指定為第 2 個分頁）：
+  - 內容：Tranfield, Denyer, & Smart (2003) 三階段 Phase 0–9（已對照原文 Figure 2, p. 214）、PRISMA 全名、
+    卡片分類（Tullis & Wood 2004 建議 20–30 人；Nielsen 2004 認為 15 人）、集群分析、互動樹狀圖範例（示範資料）。
+  - 內含跳到第三堂分頁 1、3 的連結（`../week03/#N`，`target="_top"`）。
 
 ## 存檔區＝老師的完整上課資料，不給學生看（2026/09/26 老師決定改用 Google Drive）
 
@@ -210,6 +217,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
 - 2026/09/26：新增第四堂，分頁 1「Critical Form：Doing Design Thinking」；文章 PDF 不上網（`private/`）。
 - 2026/09/26：Tailwind 改為建置時預先編譯（package.json + tw_cache/），全站不再載入 Tailwind CDN。
+- 2026/09/26：第四堂新增分頁 2「SLR 系統文獻回顧」（Tranfield et al., 2003、PRISMA、卡片分類、集群分析）。
 
 ## 更新紀錄規則（重要）
 
@@ -220,6 +228,32 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 課程目錄的「最後更新」自動取該堂所有分頁中最新的日期。
 日期格式：`2026/09/23`。說明用繁體中文、簡短。
 
+## 工作紀錄：第四堂分頁 2「SLR 系統文獻回顧」（2026/09/26，session 分支 `claude/zealous-tesla-96isa2`）
+
+- 老師的要求：整理 systematic literature review（Tranfield, Denyer, & Smart, 2003）、card sorting、cluster analysis
+  的相關訊息與做法成 HTML → 放第四堂**第 2 個分頁**，講義名稱「**SLR 系統文獻回顧**」。
+- 來源檔 `sources/week04/slr_cardsort_cluster.html`（Claude 撰寫，可直接編輯）；段落：三者關係 → 方法 1 SLR →
+  方法 2 卡片分類 → 方法 3 集群分析 → 互動範例 → 參考文獻（APA 7，7＋1 筆）。
+- **對照原文後的更正（老師要求核對，改寫時不要改回去）**：
+  - Phase 0–9 出自原文 **Figure 2**「Stages of a systematic review」（p. 214，改編自 NHS CRD 2001），不是 Figure 1
+    （Figure 1 是證據等級）。各 Phase 說明已依原文改寫；原文沒有的內容（snowballing、「是否已有近期回顧」、
+    protocol 列品質準則）已刪除。Phase 7 用原文的 realist synthesis／meta-synthesis（meta-ethnography 三技巧）；
+    Phase 9 用原文的「evidence-informed」。
+  - 三特質依原文「replicable, scientific and transparent process」（p. 209），不是 inclusive。
+  - Tullis & Wood (2004) 建議 **20–30 人**（以 168 人為基準，15 人 r≈0.90、30 人 r≈0.95）；「15 人」是
+    Nielsen (2004, NN/g) 的建議。Tullis & Wood 連結用 ResearchGate 頁（研討會報告，無 DOI）。
+  - 原文 PDF 可在 Illinois 課程網站取得（不 commit）：
+    https://josephmahoney.web.illinois.edu/BADM504_Fall%202019/6_Tranfield,%20Denyer%20and%20Smart%20(2003).pdf
+- 老師後續要求：PRISMA 列出全名與各字母意義（Preferred Reporting Items for Systematic reviews and Meta-Analyses）；
+  dendrogram 拼法正確，加說明連結（英文 Wikipedia＋SciPy 文件；中文維基「樹狀圖」會轉到「樹狀結構」，不適用）。
+- 互動範例：8 張卡、6 位參與者的**示範資料**，JS 即時算共現矩陣＋平均連結樹狀圖；0.33–0.75 之間為 4 群。
+  色票用 dataviz 參考色（#2a78d6、#eb6834、#1baf7a、#eda100），群旁有文字標籤。
+- 內含 `../week03/#1`、`../week03/#3` 連結（`target="_top"`，已測可跳轉）。
+- 單份講義預覽 artifact：https://claude.ai/artifact/SpuTgLTJAMs2Ug1VPZbZUC（FA 內嵌，只供檢查內容）；
+  整堂預覽用上方第四堂 artifact。
+- 教訓：這個 session 開始時 main 已被另一個 session 加入第四堂分頁 1，推送前要先 `git fetch` 並合併 main，
+  再把自己的分頁排到正確位置。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
 - （目前無）
@@ -227,7 +261,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ## 發布到 GitHub Pages
 
 - Repository：https://github.com/drhhtang-pixel/2026-QDS（public，帳號 drhhtang-pixel）
-- 網址：https://drhhtang-pixel.github.io/2026-QDS/（目錄）、…/week03/（第三堂）
+- 網址：https://drhhtang-pixel.github.io/2026-QDS/（目錄）、…/week03/（第三堂）、…/week04/（第四堂）
 - 已設定 `http.postBuffer`（第一次推送 2.4 MB 時連線中斷，加大後正常）。
 
 ```bash
