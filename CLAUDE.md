@@ -36,7 +36,7 @@
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
 ├── week04/index.html ← 建置產物：第四堂
-├── private/         ← （.gitignore 排除）過渡用的私有 repo 位置；存檔區已改用 Google Drive，見下方「存檔區」
+├── private/         ← （.gitignore 排除）保留為不公開的本機暫存位置；正式存檔區在 Google Drive，見下方「存檔區」
 └── sources/
     ├── week04/      ← 第四堂講義原始檔
     │   ├── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
@@ -141,8 +141,8 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   老師 Mac 裝 Google Drive 桌面版即為一般資料夾、自動備份；雲端 Claude 透過 **Google Drive 連接器**讀寫
   （連接器在 https://claude.ai/customize/connectors 連接，連好後要開**新對話**才會載入）。
 - **GitHub `drhhtang-pixel/2026-QDS`（public）**：只放給學生看的網站與講義，維持現狀。
-- **GitHub `drhhtang-pixel/2026-QDS-archive`（Private）**：過渡用，目前存有第四堂論文 PDF 與資料夾骨架；
-  Google Drive 建好並搬完後，是否刪除由老師決定（刪 repo 需老師在 GitHub 網頁操作）。
+- 過渡用的 GitHub 私有 repo `2026-QDS-archive` 已於 2026/09/26 由老師刪除（PDF 已移到 Google Drive）。
+  **不要再建立任何存放上課資料的 GitHub repo**；存檔一律放 Google Drive。
 
 ### Google Drive 使用範圍（老師規定，2026/09/26）
 - **在這個專案裡，Claude 只能讀取、寫入「2026 QDS 存檔區」及其子資料夾**
@@ -157,8 +157,10 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 位置：老師公司帳號 （帳號見 CLAUDE.local.md） 的「我的雲端硬碟」根目錄（老師選擇另建，不放進共用雲端硬碟既有的「2026 QDS」）。
 - 內容：week01～week16（各有 papers／guest／notes／recordings）、notion-export、students、Google 文件「README｜存檔區使用說明」。
 - 權限：只有老師本人（owner），未分享給任何人。
-- **待老師自行上傳**：第四堂論文 PDF → `week04/papers/`
-  （（網址見 CLAUDE.local.md） ）。連接器單次上傳容量不足以傳 600 KB 的 PDF。
+- 第四堂論文 PDF 已由老師上傳到 `week04/papers/2018 Design Thinking Review.pdf`
+  （（網址見 CLAUDE.local.md） ）；同資料夾另有老師放入的
+  Auernhammer (2021) Stanford design thinking、2024 AI 與美妝消費兩篇 PDF。
+- 大檔案（PDF 等）請老師自己上傳：連接器單次上傳容量不足以傳數百 KB 以上的檔案。
 - 之後新增資料夾或檔案：先 `search_files` 確認不重複；權限保持只有老師本人。
 
 ### 規則（不論存檔放哪裡都適用）
