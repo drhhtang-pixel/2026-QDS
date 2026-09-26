@@ -631,7 +631,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 gap-6">
             <!-- 6. Significance -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition search-target">
                 <div class="flex items-center space-x-3 mb-4">
@@ -646,19 +646,136 @@
                 </ul>
             </div>
 
+        </div>
+
             <!-- 7. Questions -->
-            <div class="bg-gradient-to-br from-brand-800 to-slate-900 text-white rounded-2xl p-6 shadow-md border border-brand-700 flex flex-col justify-between search-target">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="p-2.5 bg-brand-500/30 rounded-xl text-brand-300"><i class="fa-solid fa-comments text-lg"></i></div>
-                        <h3 class="text-lg font-bold text-white">7. Questions? 討論問題</h3>
-                    </div>
-                    <div class="p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 text-center my-2">
-                        <p class="text-lg font-semibold text-brand-200">If design thinking is a way of approaching problems that anyone can learn (Clusters 1 &amp; 5), but designers argue it cannot be separated from design doing and visualization (Clusters 2 &amp; 4), which view does your own research take — and how would that choice change whom you study and which method you use?</p>
-                    </div>
-                </div>
-                <p class="text-xs text-slate-400 mt-3">Qualitative Design Studies Discussion Prompt</p>
+        <div class="bg-gradient-to-br from-brand-800 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-md border border-brand-700 space-y-6 search-target">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-brand-500/30 rounded-xl text-brand-300"><i class="fa-solid fa-comments text-lg"></i></div>
+                <h3 class="text-lg font-bold text-white">7. Questions? 討論問題</h3>
             </div>
+            <div class="p-5 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 text-center">
+                <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-400 text-slate-900 inline-block mb-3">核心問題</span>
+                <p class="text-lg font-semibold text-brand-200">If design thinking is a way of approaching problems that anyone can learn (Clusters 1 &amp; 5), but designers argue it cannot be separated from design doing and visualization (Clusters 2 &amp; 4), which view does your own research take — and how would that choice change whom you study and which method you use?</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-amber-300 flex items-center"><i class="fa-solid fa-flask mr-2"></i>A. 研究方法：把這篇當作系統性文獻回顧的範例</h4>
+                    <ol class="space-y-3">
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">1</span>
+                                <div>
+                                    <p class="font-semibold text-white">Inter-rater reliability 58.5% 夠嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Two coders agreed on only 58.5% before discussion. What does "reaching agreement through discussion" add to — or hide from — the validity of the 10 attributes?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C2.2 Coding of constructs</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">2</span>
+                                <div>
+                                    <p class="font-semibold text-white">7 位產品設計師能「驗證」這些屬性嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">The card sorting used 7 product designers (no service or interaction designers, no managers). Who should have been in the room, and would the 10 attributes survive?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C3 Card sorting</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">3</span>
+                                <div>
+                                    <p class="font-semibold text-white">「出現頻率」等於「重要性」嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Table 3 ranks attributes by how many articles mention them. Is frequency in the literature evidence of what design thinking <em>is</em>, or of what authors like to write about?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C5 Table 3</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">4</span>
+                                <div>
+                                    <p class="font-semibold text-white">拿掉最常見的 4 個屬性才分得出群，這樣合理嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Removing the four most common attributes made the clusters appear. Are the five "perspectives" real differences in the literature, or an artifact of the method?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C7 Only six attributes</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-amber-300 flex items-center"><i class="fa-solid fa-lightbulb mr-2"></i>B. Design thinking 的概念</h4>
+                    <ol class="space-y-3">
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">5</span>
+                                <div>
+                                    <p class="font-semibold text-white">User-centered 一定要讓使用者參與嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Design thinking considers user needs "without necessarily entailing direct user involvement," unlike participatory design. Is empathy on behalf of users enough?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C5 ② Participatory design vs. design thinking</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">6</span>
+                                <div>
+                                    <p class="font-semibold text-white">Design thinking 和 designerly ways of knowing 是同一件事嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">This review deliberately focuses on management discourse, and all five authors are management scholars. What is lost when design thinking is studied mainly from a management perspective?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>第三堂 Cross (1999) Natural Intelligence in Design</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">7</span>
+                                <div>
+                                    <p class="font-semibold text-white">Visualization 是 design thinking 的核心嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Cluster 2 argues the ability to visualize is central, yet Verganti (2017) says managers have treated aesthetics as irrelevant. Can you do design thinking without sketching or making?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C8 Cluster 2; C9.1</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-amber-300 flex items-center"><i class="fa-solid fa-briefcase mr-2"></i>C. 實務與未來研究</h4>
+                    <ol class="space-y-3">
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">8</span>
+                                <div>
+                                    <p class="font-semibold text-white">為何 Nussbaum 說 design thinking 是「失敗的實驗」？你同意嗎？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">Why did Nussbaum (2011) call design thinking a "failed experiment"? When it is turned into a linear, gated, by-the-book process, is it still design thinking?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C9.1 Theoretical implications</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">9</span>
+                                <div>
+                                    <p class="font-semibold text-white">探索一下 Design thinking 和 Agile、Lean Startup 差在哪裡？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">All three iterate with users. The paper argues design thinking differs because it mixes activities, skills, orientations and logics — especially abductive reframing before searching for solutions. Explore the differences, ideally with a real project.</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C9.2 Managerial implications</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="bg-white/5 border border-white/10 rounded-xl p-4">
+                            <div class="flex gap-3">
+                                <span class="shrink-0 w-7 h-7 rounded-full bg-brand-500/30 text-brand-200 text-xs font-bold flex items-center justify-center">10</span>
+                                <div>
+                                    <p class="font-semibold text-white">如果要實證研究 design thinking，你會怎麼做？</p>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">The paper concludes that empirical evidence is lacking. Pick one of its research questions and design a qualitative study: whom, what data, and which method (interview, case study, protocol analysis)?</p>
+                                    <p class="text-xs text-slate-400 mt-1.5"><i class="fa-solid fa-link mr-1"></i>C8 Research questions；本學期後續單元：訪談、個案研究、口語分析</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400">Qualitative Design Studies Discussion Prompt</p>
         </div>
 
     </main>

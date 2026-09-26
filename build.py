@@ -140,7 +140,7 @@ def week04():
     U=SRC/'week04'
     return [
      ('Critical Form：Doing Design Thinking',plain(U/'Doing_Design_Thinking_critical_form.html'),
-      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數')]),
+      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）')]),
     ]
 
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行
