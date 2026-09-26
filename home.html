@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>QDS 2026 課程講義</title>
 <script>
-// 舊網址相容：/2026-QDS/#2 → /2026-QDS/week03/#2
-if(/^#\d+$/.test(location.hash))location.replace('week03/'+location.hash);
+// 舊網址相容：/2026-QDS/#N → /2026-QDS/week03/#M（2026/09/26 第三堂分頁調整順序，舊編號對應新編號）
+if(/^#\d+$/.test(location.hash)){var m={1:1,2:6,3:4,4:7,5:2,6:3,7:5,8:8}[location.hash.slice(1)];location.replace('week03/#'+(m||location.hash.slice(1)));}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>QDS 2026 課程講義</title>
 <script>
-// 舊網址相容：/2026-QDS/#2 → /2026-QDS/week03/#2
-if(/^#\d+$/.test(location.hash))location.replace('week03/'+location.hash);
+// 舊網址相容：/2026-QDS/#N → /2026-QDS/week03/#M（2026/09/26 第三堂分頁調整順序，舊編號對應新編號）
+if(/^#\d+$/.test(location.hash)){var m={1:1,2:6,3:4,4:7,5:2,6:3,7:5,8:8}[location.hash.slice(1)];location.replace('week03/#'+(m||location.hash.slice(1)));}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,7 +137,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;paddi
       <div class="head"><span class="no">03</span><div class="when"><b>第 3 堂</b><small>2026/09/23（三）</small></div><span class="now">本週</span></div>
       <h3>文獻與理論推導 I</h3>
       <div class="tags"><span class="type">Lecture</span><span class="who">台科大唐玄輝教授</span></div>
-      <ol><li>Critical Form 閱讀論文的秘訣</li><li>APA 第七版格式指南</li><li>學術資料庫比較</li><li>AI 質化研究工具</li><li>Natural Intelligence 解答 by drhhtang</li><li>Natural Intelligence 解答 by AI</li><li>商學院學術資料庫</li><li>建立讀論文 SKILLS 的過程</li></ol>
+      <ol><li>Critical Form 閱讀論文的秘訣</li><li>Natural Intelligence 解答 by drhhtang</li><li>Natural Intelligence 解答 by AI</li><li>學術資料庫比較</li><li>商學院學術資料庫</li><li>APA 第七版格式指南</li><li>AI 質化研究工具</li><li>建立讀論文 SKILLS 的過程</li></ol>
       <div class="meta"><span>8 份講義・更新 2026/09/26</span><em>進入 →</em></div>
     </a></li>
     <li><a class="card" href="week04/" data-date="2026-09-30">

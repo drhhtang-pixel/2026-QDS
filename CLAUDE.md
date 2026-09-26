@@ -123,15 +123,18 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 | # | 分頁名稱 | 來源檔 |
 |---|---|---|
 | 1 | Critical Form 閱讀論文的秘訣 | The_Secrets_of_Critical_Form_for_Reading_Papers.html |
-| 2 | APA 第七版格式指南 | apa.html |
-| 3 | 學術資料庫比較 | Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html |
-| 4 | AI 質化研究工具 | AI質化研究工具與平台全覽指南.html |
-| 5 | Natural Intelligence 解答 by drhhtang | Natural_Intelligence_in_Design_answer.html |
-| 6 | Natural Intelligence 解答 by AI | natural_intelligence_design_AI.html |
-| 7 | 商學院學術資料庫 | business_db.html |
+| 2 | Natural Intelligence 解答 by drhhtang | Natural_Intelligence_in_Design_answer.html |
+| 3 | Natural Intelligence 解答 by AI | natural_intelligence_design_AI.html |
+| 4 | 學術資料庫比較 | Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html |
+| 5 | 商學院學術資料庫 | business_db.html |
+| 6 | APA 第七版格式指南 | apa.html |
+| 7 | AI 質化研究工具 | AI質化研究工具與平台全覽指南.html |
 | 8 | 建立讀論文 SKILLS 的過程 | paper_skill_process.html |
 
 分頁名稱、順序與更新紀錄定義在 `build.py` 的 `week03()` 回傳清單中。
+- 2026/09/26 老師調整順序（原順序 1 Critical Form、2 APA、3 資料庫比較、4 AI 工具、5 NI drhhtang、6 NI AI、7 商學院、8 SKILLS）。
+  連帶修改：分頁 8 的 `goTab()` 按鈕、第四堂 SLR 的 `../week03/#4` 連結、`APA_OK` 的分頁編號（APA 講義現為 6）、
+  home.html 舊網址 `/2026-QDS/#N` 依舊編號轉到新編號。**再調整順序時，這幾處都要一起改。**
 
 ## 第四堂分頁
 
