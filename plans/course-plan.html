@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QDS 網站執行規劃</title>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#475569;--line:#e2e8f0;--accent:#4f46e5;--accent-soft:#eef2ff;--warn:#b45309;--warn-soft:#fffbeb;--ok:#15803d;--bad:#b91c1c;
+--lit:#15803d;--int:#92400e;--case:#475569;--verbal:#1d4ed8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1120;--card:#111827;--ink:#e2e8f0;--muted:#94a3b8;--line:#1f2937;--accent:#818cf8;--accent-soft:#1e1b4b;--warn:#fbbf24;--warn-soft:#291d05;--ok:#4ade80;--bad:#f87171}}
+:root[data-theme="dark"]{--bg:#0b1120;--card:#111827;--ink:#e2e8f0;--muted:#94a3b8;--line:#1f2937;--accent:#818cf8;--accent-soft:#1e1b4b;--warn:#fbbf24;--warn-soft:#291d05;--ok:#4ade80;--bad:#f87171}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.7}
+header{background:linear-gradient(135deg,#1e293b,#312e81);color:#fff;padding:32px 16px}
+header .wrap{max-width:920px;margin:0 auto}
+header h1{margin:0 0 6px;font-size:1.6rem}
+header p{margin:0;color:#c7d2fe;font-size:.95rem}
+main{max-width:920px;margin:0 auto;padding:20px 16px 48px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+nav.toc a{font-size:.85rem;text-decoration:none;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:18px}
+h2{margin:0 0 12px;font-size:1.25rem}
+h3{margin:18px 0 8px;font-size:1.05rem}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent);margin-right:6px;vertical-align:middle}
+.note{background:var(--warn-soft);border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;margin:12px 0}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;white-space:nowrap}
+code{background:var(--accent-soft);padding:1px 5px;border-radius:4px;font-size:.88em}
+ul.tasks{list-style:none;padding:0;margin:0}
+ul.tasks li{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+ul.tasks li:last-child{border-bottom:0}
+ul.tasks input{margin-top:6px;accent-color:var(--accent);flex:none;width:16px;height:16px}
+ul.tasks li.done span{color:var(--muted);text-decoration:line-through}
+.good{color:var(--ok);font-weight:700}.bad{color:var(--bad);font-weight:700}
+pre{background:var(--accent-soft);padding:12px;border-radius:8px;overflow-x:auto;white-space:pre-wrap;font-size:.85rem}
+footer{color:var(--muted);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>2026 QDS 課程網站：全學期執行規劃</h1>
+<p>建立日期 2026/09/26　目標：風格一致、流程更有效率、善用 Agent、中國大陸學生也看得到</p>
+</div></header>
+<main>
+<nav class="toc">
+<a href="#status">現況</a><a href="#p0">第 0 階段</a><a href="#china">A 中國可連</a><a href="#style">B 風格</a><a href="#eff">C 效率</a><a href="#agents">D Agent</a><a href="#weekly">每週節奏</a><a href="#decide">待老師決定</a><a href="#prompts">開工指令</a>
+</nav>
+
+<section id="status">
+<h2>現況與主要問題</h2>
+<div class="table-wrap"><table>
+<tr><th>面向</th><th>現況</th><th>問題</th></tr>
+<tr><td>風格</td><td>每份講義各自用 Tailwind CDN 寫，大多來自 claude.ai artifact</td><td>沒有共用範本，每份重新設計，容易慢慢走樣</td></tr>
+<tr><td>效率</td><td>新增一堂要改 <code>build.py</code>、手動 build、提交 2.4 MB 建置產物</td><td>改一個字，repo 就多存一份 2.4 MB</td></tr>
+<tr><td>Agent</td><td>都在同一個對話裡依序做</td><td>沒有可重複使用的 SOP、分工角色或自動檢查</td></tr>
+<tr><td>中國學生</td><td>GitHub Pages、Google Fonts、<code>cdn.tailwindcss.com</code></td><td>在中國大陸大多被擋或極不穩定</td></tr>
+</table></div>
+<div class="note"><b>中國大陸的問題比表面嚴重：</b>
+<ul>
+<li><code>fonts.googleapis.com</code> 被封鎖，而且它是會擋住畫面的樣式表，瀏覽器要等到逾時，畫面先空白很久。</li>
+<li><code>cdn.tailwindcss.com</code> 很不穩定，載入失敗時整份講義完全沒有版型。</li>
+<li><code>github.io</code> 時通時斷，而且很慢；第三堂一頁就 2.4 MB。</li>
+</ul></div>
+</section>
+
+<section id="p0">
+<h2><span class="tag">9/26–9/29</span>第 0 階段：先把第 4 堂做出來</h2>
+<ul class="tasks">
+<li><input type="checkbox" id="t-p0-1"><span>老師提供第 4 堂講義檔、分頁名稱與上課順序</span></li>
+<li><input type="checkbox" id="t-p0-2"><span>沿用現有流程做 <code>week04</code>（<code>sources/week04/</code>、<code>week04()</code>、<code>WEEKS</code>），不被架構改造耽誤上課</span></li>
+<li><input type="checkbox" id="t-p0-3"><span>9/30 上課前合併到 main 並確認上線</span></li>
+</ul>
+</section>
+
+<section id="china">
+<h2><span class="tag">9/30–10/6</span>A. 讓中國學生看得到</h2>
+<h3>第一層：網頁「零外部請求」（台灣學生也會變快）</h3>
+<ul class="tasks">
+<li><input type="checkbox" id="t-a1"><span><b>Tailwind 建置時編譯</b>：用官方單一執行檔（不需 Node），只留實際用到的 CSS（約 10–20 KB）內嵌，拿掉 CDN 腳本</span></li>
+<li><input type="checkbox" id="t-a2"><span><b>拿掉 Google Fonts</b>：改用系統字型 <code>"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif</code></span></li>
+<li><input type="checkbox" id="t-a3"><span>Font Awesome 已內嵌，維持不變</span></li>
+<li><input type="checkbox" id="t-a4"><span><b>圖片</b>轉 WebP 並壓縮（第 1、6 份講義各約 1 MB，主要是圖片）</span></li>
+<li><input type="checkbox" id="t-a5"><span><b>自動檢查</b>：<code>build.py</code> 發現任何外部網址就中止建置</span></li>
+</ul>
+<h3>第二層：中國連得到的鏡像站</h3>
+<div class="table-wrap"><table>
+<tr><th>選項</th><th>大陸速度</th><th>成本／門檻</th><th>建議</th></tr>
+<tr><td>台科大學校網頁空間（電算中心）</td><td>通常可連</td><td>免費，要向學校申請</td><td class="good">首選</td></tr>
+<tr><td>阿里雲 OSS／騰訊雲 COS 香港區靜態網站</td><td>快</td><td>每月幾十台幣，香港區不需 ICP 備案</td><td class="good">替代方案</td></tr>
+<tr><td>Cloudflare Pages / Vercel / Netlify</td><td>常被限速或封鎖</td><td>免費</td><td class="bad">不建議</td></tr>
+<tr><td>Gitee Pages</td><td>已停止服務</td><td>—</td><td class="bad">不可用</td></tr>
+<tr><td>大陸境內主機</td><td>最快</td><td>需 ICP 備案，台灣個人實務上很難</td><td class="bad">不建議</td></tr>
+</table></div>
+<ul class="tasks">
+<li><input type="checkbox" id="t-a6"><span>老師選定鏡像站並取得帳號</span></li>
+<li><input type="checkbox" id="t-a7"><span>GitHub Actions 部署時同步上傳到鏡像站</span></li>
+<li><input type="checkbox" id="t-a8"><span><b>第三層離線備援</b>：每堂加「下載本堂講義」按鈕（單一 HTML 檔，可用微信或 email 傳遞）</span></li>
+<li><input type="checkbox" id="t-a9"><span><b>驗證</b>：用 17ce／boce 等中國測速服務測鏡像站，並請一位在中國的學生實測（不可省略，Claude 無法模擬大陸網路）</span></li>
+</ul>
+</section>
+
+<section id="style">
+<h2>B. 風格一致：建立設計系統</h2>
+<ul class="tasks">
+<li><input type="checkbox" id="t-b1"><span><code>design/tokens.css</code>：色系（slate/indigo、4 個單元色標）、字型、圓角、間距</span></li>
+<li><input type="checkbox" id="t-b2"><span><code>design/components.html</code>：深色漸層頁首、白底卡片、比較表、提示框、APA 參考文獻列表、跳分頁連結、小測驗面板</span></li>
+<li><input type="checkbox" id="t-b3"><span><code>sources/_template/lecture.html</code>：新講義的起始範本</span></li>
+<li><input type="checkbox" id="t-b4"><span>風格指南頁發布在 <code>/2026-QDS/style/</code>，老師能直接看到每個元件的樣子</span></li>
+<li><input type="checkbox" id="t-b5"><span><b>小測驗通用化</b>：把 <code>apa_quiz.html</code> 的測驗引擎抽出來，之後每堂的課後小測驗只要寫題目 JSON</span></li>
+<li><input type="checkbox" id="t-b6"><span>舊講義（第三堂第 1～6 份）維持補丁方式；新講義一律從範本開始</span></li>
+</ul>
+</section>
+
+<section id="eff">
+<h2>C. 效率：新增一堂只需「放檔案＋填設定」</h2>
+<ul class="tasks">
+<li><input type="checkbox" id="t-c1"><span>每堂設定移到 <code>sources/weekNN/week.json</code>（分頁名稱、順序、來源檔、更新紀錄），新增一堂不用改 <code>build.py</code></span></li>
+<li><input type="checkbox" id="t-c2"><span><b>GitHub Actions</b>：推送後自動 build、檢查、部署 Pages 與鏡像站；建置產物不再提交進 repo（Pages 來源改為 GitHub Actions）</span></li>
+<li><input type="checkbox" id="t-c3"><span><b>每堂一個分支＋PR 預覽</b>：Claude 在分支上做，老師看預覽，確認後合併才上線</span></li>
+<li><input type="checkbox" id="t-c4"><span><b>Notion</b>：先試用 Notion 連接器讀「2026 Course Schedule Master」；讀得到就自動同步 SCHEDULE 與搬課堂筆記，讀不到就照原計畫用 zip 匯出</span></li>
+<li><input type="checkbox" id="t-c5"><span>建立 <code>inbox/weekNN/</code> 收件夾慣例，附 <code>00-說明.md</code>（分頁名稱、順序、重點）</span></li>
+</ul>
+</section>
+
+<section id="agents">
+<h2>D. 善用 Agent：建立分工角色（放在 <code>.claude/</code>）</h2>
+<div class="table-wrap"><table>
+<tr><th>角色</th><th>工作</th></tr>
+<tr><td>Skill <code>new-week</code></td><td>新增一堂的標準流程（SOP），把 CLAUDE.md「新增一堂課」寫成可執行步驟</td></tr>
+<tr><td><code>handout-builder</code></td><td>把一份原始資料（PPT／PDF／.md／Notion 頁）依範本轉成講義；每份講義一個 agent，平行處理</td></tr>
+<tr><td><code>style-reviewer</code></td><td>對照設計系統，列出不一致之處</td></tr>
+<tr><td><code>apa-checker</code></td><td>檢查書目是否符合 APA 7（期刊名與卷號斜體、en dash），並上網核對 DOI</td></tr>
+<tr><td><code>zh-tw-proofreader</code></td><td>正體字、台灣用語（視頻→影片、質量→品質），確認「老師」稱謂</td></tr>
+<tr><td><code>qa-tester</code></td><td>用 Playwright 點過每個分頁，抓 JS 錯誤、截手機版畫面，並封鎖所有外部網域模擬中國網路</td></tr>
+<tr><td><code>quiz-maker</code></td><td>依講義草擬課後小測驗，交給老師審核</td></tr>
+</table></div>
+<ul class="tasks">
+<li><input type="checkbox" id="t-d1"><span>建立上表的 skill 與 agent 定義檔</span></li>
+<li><input type="checkbox" id="t-d2"><span><b>Routine（排程）</b>：每週一早上比對 Notion 進度表與 SCHEDULE、測試鏡像站是否可連、提醒下週三那堂還缺哪些講義</span></li>
+</ul>
+</section>
+
+<section id="weekly">
+<h2><span class="tag">10/7 起</span>第 2 階段：每週固定節奏</h2>
+<div class="table-wrap"><table>
+<tr><th>時間</th><th>誰</th><th>做什麼</th></tr>
+<tr><td>上課前週四、五</td><td>老師</td><td>資料丟進 <code>inbox/weekNN/</code>，附 <code>00-說明.md</code></td></tr>
+<tr><td>週六</td><td>Agents</td><td>builder 平行轉換 → 三個 reviewer 平行檢查 → QA → 在分支開 PR，回報摘要</td></tr>
+<tr><td>週日</td><td>老師</td><td>看預覽，提出修改</td></tr>
+<tr><td>週一</td><td>老師</td><td>合併，網站與鏡像站自動上線</td></tr>
+<tr><td>週二</td><td>Routine</td><td>確認中國可連，檢查無誤</td></tr>
+</table></div>
+<ul class="tasks">
+<li><input type="checkbox" id="t-w1"><span>補做第 1、2 堂</span></li>
+<li><input type="checkbox" id="t-w2"><span>搬遷 Notion 17 頁課堂筆記（依 CLAUDE.md 的版權原則）</span></li>
+</ul>
+</section>
+
+<section id="decide">
+<h2>需要老師決定的事</h2>
+<ul class="tasks">
+<li><input type="checkbox" id="t-q1"><span>鏡像站：先問台科大電算中心，還是直接用阿里雲／騰訊雲香港區？</span></li>
+<li><input type="checkbox" id="t-q2"><span>字型：改用系統字型（蘋方／微軟正黑）可以嗎？外觀差異很小</span></li>
+<li><input type="checkbox" id="t-q3"><span>部署：改成 GitHub Actions 自動部署、不再提交建置產物，可以嗎？</span></li>
+<li><input type="checkbox" id="t-q4"><span>有沒有在中國的學生可以幫忙實測？</span></li>
+</ul>
+<div class="note"><b>建議順序：</b>先完成第 4 堂 → 9/30 後先做 <b>A 第一層</b>（零外部請求，不需任何外部帳號）→ 再依老師決定接上鏡像站 → B、C、D 依序建立。</div>
+</section>
+
+<section id="prompts">
+<h2>開工指令（貼到新的 Claude Code 工作階段）</h2>
+<h3>第 4 堂</h3>
+<pre>準備第四堂（2026/09/30 文獻搜尋 Design Prototype）講義。
+沿用現有流程（CLAUDE.md「新增一堂課」），先不要做 plans/course-plan.html 裡的架構改造。
+講義檔：（上傳或放到 sources/week04/）
+分頁名稱與順序：1. … 2. … 3. …</pre>
+<h3>第 1 階段 A 第一層</h3>
+<pre>依 plans/course-plan.html 的「A. 讓中國學生看得到 → 第一層」執行：
+Tailwind 建置時編譯、拿掉 Google Fonts、圖片壓縮、build.py 外部網址檢查。
+用 Playwright 封鎖所有外部網域驗證每個分頁版型正常，完成後更新 CLAUDE.md 與本規劃的勾選項。</pre>
+</section>
+
+<footer>勾選狀態只存在你這台瀏覽器；正式進度請同步更新到本檔或 CLAUDE.md。</footer>
+</main>
+<script>
+document.querySelectorAll('ul.tasks input').forEach(function(cb){
+  var k='qds-plan-'+cb.id;
+  try{cb.checked=localStorage.getItem(k)==='1'}catch(e){}
+  var sync=function(){cb.parentNode.classList.toggle('done',cb.checked)};
+  sync();
+  cb.addEventListener('change',function(){sync();try{localStorage.setItem(k,cb.checked?'1':'0')}catch(e){}});
+});
+</script>
+</body>
+</html>

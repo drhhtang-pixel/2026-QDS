@@ -150,7 +150,8 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
-- （目前無）
+- 全學期執行規劃見 `plans/course-plan.html`（2026/09/26）：中國大陸可連（零外部請求＋鏡像站）、設計系統、
+  week.json＋GitHub Actions、Agent 分工。其中「需要老師決定的事」確認後再執行。
 
 ## 發布到 GitHub Pages
 
