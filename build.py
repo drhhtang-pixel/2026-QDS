@@ -136,8 +136,15 @@ def week03():
       [('2026/09/23','新增講義（依「建立讀論文技能的過程紀錄.md」製作）'),('2026/09/23','加上下載 paper-reading-notes SKILL 的按鈕')]),
     ]
 
+def week04():
+    U=SRC/'week04'
+    return [
+     ('Critical Form：Doing Design Thinking',plain(U/'Doing_Design_Thinking_critical_form.html'),
+      [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）')]),
+    ]
+
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行
-WEEKS={3:week03}
+WEEKS={3:week03,4:week04}
 
 # ─── 建置 ───────────────────────────────────────────────────
 CN='零一二三四五六七八九十'

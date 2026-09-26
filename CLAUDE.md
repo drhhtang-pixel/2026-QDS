@@ -4,7 +4,7 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 3 堂**（7 份講義）。
+目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（1 份講義）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - 讀者：研究所學生，會用電腦與手機瀏覽。
@@ -28,7 +28,10 @@
 ├── paper-reading-notes.skill ← 老師的讀論文技能包（zip：SKILL.md + assets/template.html），分頁 8 提供下載，老師同意公開
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
+├── private/         ← 不公開備份（.gitignore 排除，不會推上 GitHub），見下方「不公開備份」
 └── sources/
+    ├── week04/      ← 第四堂講義原始檔
+    │   └── Doing_Design_Thinking_critical_form.html  (分頁 1，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
     └── week03/      ← 第三堂各份講義原始檔
         ├── The_Secrets_of_Critical_Form_for_Reading_Papers.html   (打包格式，見下方；共用 FA CSS 也取自此檔)
         ├── apa.html
@@ -92,6 +95,27 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 
 分頁名稱、順序與更新紀錄定義在 `build.py` 的 `week03()` 回傳清單中。
 
+## 第四堂分頁
+
+| # | 分頁名稱 | 來源檔 |
+|---|---|---|
+| 1 | Critical Form：Doing Design Thinking | Doing_Design_Thinking_critical_form.html |
+
+- 本堂文章：Micheli, P., Wilner, S. J. S., Bhatti, S. H., Mura, M., & Beverland, M. B. (2019). Doing design thinking:
+  Conceptual review, synthesis, and research agenda. *Journal of Product Innovation Management, 36*(2), 124–148.
+  https://doi.org/10.1111/jpim.12466
+- Critical Form 依老師的 paper-reading-notes 技能（repo 內 `paper-reading-notes.skill` 的版本：Problem／Aim／Objectives 三格）
+  製作，內容英文、標籤中英並列；第 5 節 C1→C9 依論文順序，Table 1～6、Figure 1 依原文數字重建。
+- 老師在 PDF 上的眉批（Problem/results/contributions/significance、definition of design thinking、
+  participatory design 與 design thinking 的比較、cluster analysis 只用 six attributes）都已放進對應卡片。
+
+## 不公開備份（private/）
+
+- repository 是 public，任何推上 GitHub 的檔案學生都能下載，所以**期刊全文 PDF 一律不 commit**。
+- `private/` 已列入 `.gitignore`：放在這裡的檔案只留在本機。第四堂文章 PDF 的位置：
+  `private/week04/2018_Design_Thinking_Review.pdf`（老師本機需自行放入；雲端工作環境重開後不會保留）。
+- 若需要雲端備份，建議另開 **private** repository 或放雲端硬碟（需老師決定）。
+
 ## 架構重點（build.py 在做什麼）
 
 1. **第 1 份講義是「打包格式」**（`__bundler/manifest` + `__bundler/template`，資源以 gzip+base64 存放，
@@ -138,6 +162,7 @@ python3 build.py      # 只用 Python 標準函式庫，產生 index.html 與各
 - 小測驗新增 Q3（Baker & Lancaster 1991 → 圖書）、Q4（Kass 1978 → 會議），選項用講義參考書目的分類名稱，
   解說附「看講義範例」按鈕（關閉面板、切到該分類 tab、捲到 #reference-list）。
 - Git tag `2026.09.23` 標記改版前（單堂版）的網站。
+- 2026/09/26：新增第四堂，分頁 1「Critical Form：Doing Design Thinking」；文章 PDF 不上網（`private/`）。
 
 ## 更新紀錄規則（重要）
 
