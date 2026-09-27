@@ -321,7 +321,10 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - `.github/workflows/release.yml`：每週三 07:05／07:25／07:50 解密、建置、有新內容才推送，並開一則 issue 通知老師（GitHub email）。
   可在 Actions 頁手動執行（workflow_dispatch）。雲端建置沒有 Node.js，所以 **tw_cache/ 要包含所有講義（含未公開）的快取**，本機正常 build 一次即可。
 - 老師授權：講義到時間**自動公開、不必事先同意，事後告知**。其他推送（build.py、內容修正等）照舊先給老師看。
-- 預覽：`python3 build.py --preview` 把全部內容建置到 `private/preview/`（不影響正式產物）；本機伺服器開 `/private/preview/`。
+- 預覽／**老師模式**：`python3 build.py --preview` 把全部內容建置到 `private/preview/`（不影響正式產物）：卡片連到
+  `weekNN/index.html`、標出學生目前狀態與公開時間，頁首有「老師模式」提示。老師模式 artifact（只有老師看得到）：
+  https://claude.ai/artifact/FJmk7vLnNMxHZq52mBnYhd —— 主頁用 `private/preview/index.html` 去掉 doctype/html/head/body 外殼，
+  `files` 帶 `weekNN/index.html`。**每次修改講義後都要重新 --preview 並更新這個 artifact。**
   `QDS_NOW=2026-10-07T07:00 python3 build.py` 可模擬某個時間點（測完要再跑一次一般 build 還原）。
 - 機器人會推 commit 到 main：**本機推送前一定先 `git pull --rebase`**。
 - 某堂公開後：可從 `.gitignore` 移除該堂、把原始檔一般 commit；並更新 Notion 該列「網頁講義」「整理狀態＝已上線」。

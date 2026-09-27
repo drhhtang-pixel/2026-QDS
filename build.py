@@ -11,6 +11,7 @@ TOTAL=16          # 本學期總堂數
 TZ=datetime.timezone(datetime.timedelta(hours=8))
 PREVIEW='--preview' in sys.argv
 NOW=datetime.datetime.fromisoformat(os.environ['QDS_NOW']).replace(tzinfo=TZ) if os.environ.get('QDS_NOW') else datetime.datetime.now(TZ)
+REALNOW=NOW                              # 老師模式用來標示學生目前看到的狀態
 if PREVIEW: NOW=datetime.datetime(2100,1,1,tzinfo=TZ)
 OUT=ROOT/'private'/'preview' if PREVIEW else ROOT
 PREP_DAYS=7; OPEN_HOUR=7
@@ -304,6 +305,9 @@ for n in range(1,TOTAL+1):
             print('%s  尚未公開（課前準備 %s、講義 %s 07:00）'%(key,prep_at.strftime('%m/%d'),open_at.strftime('%m/%d')))
             continue
         title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1])
+        if PREVIEW:
+            docs=[(t,re.sub(r'\.\./(week\d\d)/#',r'../\1/index.html#',h),lg) for t,h,lg in docs]
+            title='〔老師模式〕'+title
         payload=json.dumps({'title':title,'key':key,'fa':FA,'mark':FAMARK,
             'docs':[{'t':t,'h':h,'log':lg} for t,h,lg in docs]},ensure_ascii=False).replace('</','<\\/')
         out.parent.mkdir(parents=True,exist_ok=True)
@@ -326,15 +330,22 @@ def card(n):
         items=''.join('<li>%s</li>'%html.escape(t) for t,_,_ in docs)
         meta=('%d 份講義・更新 %s'%(len(docs),upd) if full
               else '講義 %s 07:00 開放'%opens(n)[1].strftime('%m/%d'))
-        return '''    <li><a class="card" href="%s/" data-date="%s">
+        if PREVIEW: meta=student_status(n)
+        return '''    <li><a class="card" href="%s" data-date="%s">
       %s
       <ol>%s</ol>
       <div class="meta"><span>%s</span><em>進入 →</em></div>
-    </a></li>'''%(key,d.isoformat(),head,items,meta)
+    </a></li>'''%(key+('/index.html' if PREVIEW else '/'),d.isoformat(),head,items,meta)
     return '''    <li><div class="card off" data-date="%s">
       %s
       <div class="meta"><span>講義尚未開放</span></div>
     </div></li>'''%(d.isoformat(),head)
+def student_status(n):
+    """老師模式卡片：依真實時間，學生目前看到什麼、什麼時候公開"""
+    if n in ALWAYS_OPEN: return '學生：已公開'
+    p,o=opens(n); f='%m/%d %H:%M'
+    now='講義已公開' if REALNOW>=o else ('只看得到課前準備' if REALNOW>=p and HASPREP.get(n) else '還看不到')
+    return '學生：%s｜課前準備 %s・講義 %s'%(now,p.strftime(f),o.strftime(f))
 CN_UNIT='一二三四五六'
 units=[]
 for m,cls in UNITS.items():
@@ -348,6 +359,10 @@ for m,cls in UNITS.items():
   </section>'''%(cls,CN_UNIT[len(units)],m,ns[0],ns[-1],'\n'.join(card(n) for n in ns)))
 assert sum(1 for m in (r[2] for r in SCHEDULE) if m in UNITS)==TOTAL
 home=read(ROOT/'home.html').replace('/*UNITS*/','\n'.join(units))
+if PREVIEW:
+    home=home.replace('<main class="wrap">','<main class="wrap">\n  <div style="margin:1rem 0;padding:.8rem 1rem;border-radius:8px;background:#fff7e6;border:1px solid #f0c36d;color:#7a4b00;font-size:.9rem">'
+        '<b>老師模式</b>：顯示全部內容（含尚未公開），只有老師看得到。每張卡片下方是學生目前看到的狀態與公開時間（%s 建置）。</div>'%REALNOW.strftime('%Y/%m/%d %H:%M'),1)
+    home=home.replace('<title>','<title>〔老師模式〕',1)
 home=home.replace('/*SUMMARY*/','講義已開放 %d / %d 堂'%(sum(1 for b in built.values() if b[3]),TOTAL))
 home=home.replace('/*RANGE*/','%s – %s・每週三'%(SCHEDULE[0][0],SCHEDULE[-1][0]))
 home=home.replace('/*UPDATED*/',max(b[2] for b in built.values()))
