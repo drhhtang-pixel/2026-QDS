@@ -3,3 +3,5 @@ exclude:
   - CLAUDE.md
   - build.py
   - check_doi.py
+  - seal.py
+  - sealed

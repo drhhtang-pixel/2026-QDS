@@ -311,6 +311,21 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   - `git mv -k` 對未追蹤的檔案會靜默略過，搬新檔用一般 `mv`。
   - 內建瀏覽器有時截圖全白（面板隱藏時），改用 javascript_tool 讀 DOM 確認內容。
 
+## 定時公開（老師規定 2026/09/27）
+
+- **課前準備**（每堂 `sources/weekNN/prep.html`，第 N 堂上課前要完成的閱讀與作業）在上課前 7 天 07:00 公開；
+  **其餘講義**在上課當天（週三）07:00（台北時間）公開。時間由 build.py 的 `opens()` 計算；`ALWAYS_OPEN` 是規則訂定前已上線的堂次。
+- **公開 repo 裡只要有明文原始檔就等於公開**：未公開的 `sources/weekNN/` 列在 `.gitignore`，用 `python3 seal.py`
+  加密成 `sealed/sources.tar.gz.enc` 後推送（密鑰在本機 `private/seal.key`，GitHub 上是 repository secret `QDS_SEAL_KEY`）。
+  **修改任何未公開講義後都要重新執行 `seal.py` 並推送 sealed/**，否則雲端公開的是舊版。
+- `.github/workflows/release.yml`：每週三 07:05／07:25／07:50 解密、建置、有新內容才推送，並開一則 issue 通知老師（GitHub email）。
+  可在 Actions 頁手動執行（workflow_dispatch）。雲端建置沒有 Node.js，所以 **tw_cache/ 要包含所有講義（含未公開）的快取**，本機正常 build 一次即可。
+- 老師授權：講義到時間**自動公開、不必事先同意，事後告知**。其他推送（build.py、內容修正等）照舊先給老師看。
+- 預覽：`python3 build.py --preview` 把全部內容建置到 `private/preview/`（不影響正式產物）；本機伺服器開 `/private/preview/`。
+  `QDS_NOW=2026-10-07T07:00 python3 build.py` 可模擬某個時間點（測完要再跑一次一般 build 還原）。
+- 機器人會推 commit 到 main：**本機推送前一定先 `git pull --rebase`**。
+- 某堂公開後：可從 `.gitignore` 移除該堂、把原始檔一般 commit；並更新 Notion 該列「網頁講義」「整理狀態＝已上線」。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
 - 向 GitHub Support 申請移除舊 commit 快取（見「清除 git 歷史中的 Drive ID 與帳號」）。

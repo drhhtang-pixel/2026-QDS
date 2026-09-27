@@ -1,8 +1,19 @@
-import re,json,gzip,base64,html,datetime,hashlib,subprocess,tempfile
+import re,json,gzip,base64,html,datetime,hashlib,subprocess,tempfile,os,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 SRC=ROOT/'sources'
 TOTAL=16          # 本學期總堂數
+
+# ─── 定時公開（老師規定 2026/09/27）──────────────────────────
+# 課前準備（sources/weekNN/prep.html）在上課前 7 天 07:00 公開；其餘講義在上課當天 07:00（台北時間）公開。
+# 還沒到時間的內容不產生頁面。GitHub Actions（.github/workflows/release.yml）每週三早上自動建置並推送。
+# python3 build.py --preview：全部內容建置到 private/preview/（不影響正式網站，供老師預覽）
+TZ=datetime.timezone(datetime.timedelta(hours=8))
+PREVIEW='--preview' in sys.argv
+NOW=datetime.datetime.fromisoformat(os.environ['QDS_NOW']).replace(tzinfo=TZ) if os.environ.get('QDS_NOW') else datetime.datetime.now(TZ)
+if PREVIEW: NOW=datetime.datetime(2100,1,1,tzinfo=TZ)
+OUT=ROOT/'private'/'preview' if PREVIEW else ROOT
+PREP_DAYS=7; OPEN_HOUR=7
 
 # 2026 課程進度表（來源：Notion「2026 Course Schedule Master」，2026/09/23 老師提供截圖）
 # Notion 改了就同步改這裡。順序＝堂次。(日期, 主題, 研究方法, 教師, Type)
@@ -53,7 +64,11 @@ def plain(path):
     """一般講義：把 cdnjs 的 Font Awesome <link> 換成標記，由外框頁注入共用 FA CSS。"""
     h=read(path)
     h,n=re.subn(r'<link[^>]*font-awesome[^>]*>',FAMARK,h); assert n==1,path
-    return h
+    # 講義旁 img/ 資料夾的照片（已用 sips 壓縮）內嵌成 data URI，產物仍是單一自足檔案
+    def img(m):
+        f=path.parent/'img'/m.group(1); assert f.exists(),f
+        return 'src="data:image/jpeg;base64,'+base64.b64encode(f.read_bytes()).decode()+'"'
+    return re.sub(r'src="img/([^"]+\.jpg)"',img,h)
 
 # ─── Tailwind 預先編譯 ───────────────────────────────────────
 # 講義原本用 cdn.tailwindcss.com 在瀏覽器端即時產生 CSS（瀏覽器會警告不該用在正式網站）。
@@ -196,8 +211,17 @@ def week04():
       [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','第三堂分頁調整順序，「學術資料庫比較」連結改為分頁 4')]),
     ]
 
+def tabs_json(n):
+    """未公開（加密）的堂次：分頁名稱、檔案、更新紀錄寫在 sources/weekNN/tabs.json，跟講義一起加密，
+    build.py 本身不透露內容。格式：{"tabs":[{"title","file","log":[[日期,說明],…]}],"prep_log":[[日期,說明]]}"""
+    cfg=json.loads(read(SRC/('week%02d'%n)/'tabs.json'))
+    return [(t['title'],plain(SRC/('week%02d'%n)/t['file']),[tuple(x) for x in t['log']]) for t in cfg['tabs']]
+
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行
 WEEKS={3:week03,4:week04}
+for _f in sorted(SRC.glob('week*/tabs.json')):
+    _n=int(_f.parent.name[4:]); WEEKS[_n]=(lambda n: lambda: tabs_json(n))(_n)
+WEEKS=dict(sorted(WEEKS.items()))
 
 # ─── APA 引用格式檢查（lint）────────────────────────────────
 # 老師規定（2026/09/26）：中文內文引用英文作者用 APA 英文格式＋半形括號，
@@ -237,7 +261,25 @@ def apa_lint(n,i,h):
 CN='零一二三四五六七八九十'
 def cn(n): return CN[n] if n<=10 else '十'+(CN[n-10] if n>10 else '')
 
-SRCDOCS={n:WEEKS[n]() for n in WEEKS}
+ALWAYS_OPEN={3,4}   # 定時公開規則訂定前就已上線的堂次，一律公開
+def opens(n):
+    """(課前準備公開時間, 講義公開時間)"""
+    if n in ALWAYS_OPEN:
+        t=datetime.datetime(2000,1,1,tzinfo=TZ); return t,t
+    d=datetime.datetime.strptime(SCHEDULE[n-1][0],'%Y/%m/%d').replace(hour=OPEN_HOUR,tzinfo=TZ)
+    return d-datetime.timedelta(days=PREP_DAYS),d
+SRCDOCS={}; HASPREP={}
+for n in WEEKS:
+    wdir=SRC/('week%02d'%n)
+    if not wdir.exists():                # 加密的未公開講義沒有解開（例如本機沒有密鑰）
+        if NOW>=opens(n)[0]: raise SystemExit('第%d堂已到公開時間，但找不到 %s（加密檔沒有解開？）'%(n,wdir))
+        print('第%d堂：原始檔不在本機，略過（尚未公開）'%n); continue
+    ds=WEEKS[n](); prep=wdir/'prep.html'
+    HASPREP[n]=prep.exists()
+    if HASPREP[n]:
+        pl=json.loads(read(wdir/'tabs.json'))['prep_log']
+        ds=[('課前準備',plain(prep),[tuple(x) for x in pl])]+ds
+    SRCDOCS[n]=ds
 lint=[e for n,ds in SRCDOCS.items() for i,(t,h,lg) in enumerate(ds,1) for e in apa_lint(n,i,h)]
 if lint:
     raise SystemExit('APA 引用格式檢查未通過（%d 處），請修正後再建置：\n'%len(lint)+'\n'.join(lint))
@@ -246,18 +288,28 @@ print('APA 引用格式檢查通過')
 shell=read(ROOT/'shell.html')
 built={}
 for n in range(1,TOTAL+1):
-    if n in WEEKS:
+    if n in SRCDOCS:
+        # 全部先編譯 Tailwind（快取要完整，雲端建置時才不需要 Node.js），再依時間決定公開哪些分頁
         docs=[(t,tailwind(h,'第%d堂「%s」'%(n,t)),lg) for t,h,lg in SRCDOCS[n]]
         for t,h,lg in docs: assert lg,t
-        title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1]); key='week%02d'%n
+        prep_at,open_at=opens(n); key='week%02d'%n
+        if NOW>=open_at: pass
+        elif HASPREP[n] and NOW>=prep_at: docs=docs[:1]
+        else: docs=[]
+        out=OUT/key/'index.html'
+        if not docs:
+            if out.exists(): out.unlink()   # 尚未公開：不留任何產物
+            print('%s  尚未公開（課前準備 %s、講義 %s 07:00）'%(key,prep_at.strftime('%m/%d'),open_at.strftime('%m/%d')))
+            continue
+        title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1])
         payload=json.dumps({'title':title,'key':key,'fa':FA,'mark':FAMARK,
             'docs':[{'t':t,'h':h,'log':lg} for t,h,lg in docs]},ensure_ascii=False).replace('</','<\\/')
-        out=ROOT/key/'index.html'; out.parent.mkdir(exist_ok=True)
+        out.parent.mkdir(parents=True,exist_ok=True)
         page=shell.replace('/*TITLE*/',title).replace('/*PAYLOAD*/',payload)
         out.write_text(page,encoding='utf-8')
         upd=max(d for _,_,lg in docs for d,_ in lg)
-        built[n]=(key,docs,upd)
-        print('%s/index.html  %d 份講義  %.2f MB'%(key,len(docs),len(page)/1e6))
+        built[n]=(key,docs,upd,NOW>=open_at)
+        print('%s/index.html  %d 份講義%s  %.2f MB'%(key,len(docs),'' if NOW>=open_at else '（只有課前準備）',len(page)/1e6))
 WD='一二三四五六日'
 def card(n):
     date,topic,method,who,typ=SCHEDULE[n-1]
@@ -268,13 +320,15 @@ def card(n):
       <h3>%s</h3>
       <div class="tags"><span class="type">%s</span>%s</div>'''%(n,n,date,WD[d.weekday()],html.escape(topic),html.escape(typ),whohtml)
     if n in built:
-        key,docs,upd=built[n]
+        key,docs,upd,full=built[n]
         items=''.join('<li>%s</li>'%html.escape(t) for t,_,_ in docs)
+        meta=('%d 份講義・更新 %s'%(len(docs),upd) if full
+              else '講義 %s 07:00 開放'%opens(n)[1].strftime('%m/%d'))
         return '''    <li><a class="card" href="%s/" data-date="%s">
       %s
       <ol>%s</ol>
-      <div class="meta"><span>%d 份講義・更新 %s</span><em>進入 →</em></div>
-    </a></li>'''%(key,d.isoformat(),head,items,len(docs),upd)
+      <div class="meta"><span>%s</span><em>進入 →</em></div>
+    </a></li>'''%(key,d.isoformat(),head,items,meta)
     return '''    <li><div class="card off" data-date="%s">
       %s
       <div class="meta"><span>講義尚未開放</span></div>
@@ -292,13 +346,15 @@ for m,cls in UNITS.items():
   </section>'''%(cls,CN_UNIT[len(units)],m,ns[0],ns[-1],'\n'.join(card(n) for n in ns)))
 assert sum(1 for m in (r[2] for r in SCHEDULE) if m in UNITS)==TOTAL
 home=read(ROOT/'home.html').replace('/*UNITS*/','\n'.join(units))
-home=home.replace('/*SUMMARY*/','講義已開放 %d / %d 堂'%(len(built),TOTAL))
+home=home.replace('/*SUMMARY*/','講義已開放 %d / %d 堂'%(sum(1 for b in built.values() if b[3]),TOTAL))
 home=home.replace('/*RANGE*/','%s – %s・每週三'%(SCHEDULE[0][0],SCHEDULE[-1][0]))
-home=home.replace('/*UPDATED*/',max(u for _,_,u in built.values()))
-(ROOT/'index.html').write_text(home,encoding='utf-8')
-print('index.html  課程目錄')
-for f in TWCACHE.glob('*.css'):          # 清掉已不再使用的舊快取
-    if f.name not in tw_used: f.unlink()
+home=home.replace('/*UPDATED*/',max(b[2] for b in built.values()))
+OUT.mkdir(parents=True,exist_ok=True)
+(OUT/'index.html').write_text(home,encoding='utf-8')
+print('%s  課程目錄%s'%('index.html' if not PREVIEW else 'private/preview/index.html','（預覽：全部內容）' if PREVIEW else ''))
+if len(SRCDOCS)==len(WEEKS):             # 清掉已不再使用的舊快取（有未解開的加密講義時不清，以免刪掉它們的快取）
+    for f in TWCACHE.glob('*.css'):
+        if f.name not in tw_used: f.unlink()
 
 # ─── 防呆：存檔區資料不可進公開 repo ─────────────────────────
 # 論文全文、錄音錄影、投影片、學生資料等放 private/（另一個私有 repo），不可被公開 repo 追蹤。

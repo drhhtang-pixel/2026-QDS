@@ -1,0 +1,49 @@
+# 定時公開講義（老師規定 2026/09/27）
+# 課前準備：上課前 7 天 07:00；講義：上課當天（週三）07:00（台北時間）。
+# 未公開講義以 sealed/sources.tar.gz.enc 加密存放，這裡用 secrets.QDS_SEAL_KEY 解開後依時間建置。
+# GitHub 排程常延遲，所以週三早上跑三次（07:05、07:25、07:50）；沒有新內容就不推送。
+name: 定時公開講義
+on:
+  schedule:
+    - cron: '5 23 * * 2'
+    - cron: '25 23 * * 2'
+    - cron: '50 23 * * 2'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+  pages: write
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 解開未公開講義
+        env:
+          QDS_SEAL_KEY: ${{ secrets.QDS_SEAL_KEY }}
+        run: |
+          if [ -f sealed/sources.tar.gz.enc ]; then
+            openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -md sha256 -pass env:QDS_SEAL_KEY \
+              -in sealed/sources.tar.gz.enc | tar xz
+          fi
+      - name: 建置
+        run: python3 build.py
+      - name: 推送並通知
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html week*/index.html
+          if git diff --cached --quiet; then echo "沒有新公開的內容"; exit 0; fi
+          weeks=$(git diff --cached --name-only | grep -oE '^week[0-9]+' | sort -u | tr '\n' ' ')
+          git commit -m "定時公開：${weeks}"
+          git push
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null || true
+          body="@${GITHUB_REPOSITORY_OWNER} 已依排程公開：${weeks}"$'\n\n'
+          for w in $weeks; do body="${body}- https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/${w}/"$'\n'; done
+          body="${body}"$'\n'"（約 1 分鐘後生效）"
+          gh issue create --title "講義已公開：${weeks}" --body "$body"

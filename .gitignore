@@ -29,3 +29,11 @@ node_modules/
 
 # 不公開的 Claude 設定（Drive 資料夾 ID、帳號等識別資訊）
 CLAUDE.local.md
+
+# 尚未公開的講義原始檔（老師規定 2026/09/27：時間到才公開）。改用 seal.py 加密成 sealed/ 推送。
+# 講義公開後可從這裡移除該堂，改為一般 commit。
+sources/week05/
+sources/week06/
+sources/week07/
+sources/week08/
+# 預覽建置（python3 build.py --preview）的產物在 private/preview/，已由 private/ 排除
