@@ -122,6 +122,12 @@ _,FA=unbundle(SRC/'week03'/'The_Secrets_of_Critical_Form_for_Reading_Papers.html
 # 每堂回傳 [(分頁名稱, HTML, 更新紀錄)]，順序即上課講述順序。
 # 更新紀錄：修改某分頁時在該分頁的清單末尾附加 ('YYYY/MM/DD','說明')。
 
+def week02():
+    return [
+     ('課後作業',plain(SRC/'week02'/'homework.html'),
+      [('2026/09/27','新增分頁：閱讀 Micheli et al. (2019)，為第 4 堂準備')]),
+    ]
+
 def week03():
     U=SRC/'week03'
     tpl,_=unbundle(U/'The_Secrets_of_Critical_Form_for_Reading_Papers.html')
@@ -210,8 +216,8 @@ def week04():
       [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','文章 DOI 改為可點的連結')]),
      ('SLR 系統文獻回顧',plain(U/'slr_cardsort_cluster.html'),
       [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','第三堂分頁調整順序，「學術資料庫比較」連結改為分頁 4')]),
-     ('回家閱讀',plain(U/'home_reading.html'),
-      [('2026/09/27','新增分頁：為第 6 堂預作準備的閱讀（Csikszentmihalyi, 1996《創造力》）與分組章節報告'),('2026/09/27','作業改為訪談經驗反思與《創造力》分組章節報告')]),
+     ('課後作業',plain(U/'home_reading.html'),
+      [('2026/09/27','新增分頁：為第 6 堂預作準備的閱讀（Csikszentmihalyi, 1996《創造力》）與分組章節報告'),('2026/09/27','作業改為訪談經驗反思與《創造力》分組章節報告'),('2026/09/27','分頁名稱「回家閱讀」改為「課後作業」')]),
     ]
 
 def tabs_json(n):
@@ -221,7 +227,7 @@ def tabs_json(n):
     return [(t['title'],plain(SRC/('week%02d'%n)/t['file']),[tuple(x) for x in t['log']]) for t in cfg['tabs']]
 
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行
-WEEKS={3:week03,4:week04}
+WEEKS={2:week02,3:week03,4:week04}
 for _f in sorted(SRC.glob('week*/tabs.json')):
     _n=int(_f.parent.name[4:]); WEEKS[_n]=(lambda n: lambda: tabs_json(n))(_n)
 WEEKS=dict(sorted(WEEKS.items()))
@@ -264,7 +270,7 @@ def apa_lint(n,i,h):
 CN='零一二三四五六七八九十'
 def cn(n): return CN[n] if n<=10 else '十'+(CN[n-10] if n>10 else '')
 
-ALWAYS_OPEN={3,4}   # 定時公開規則訂定前就已上線的堂次，一律公開
+ALWAYS_OPEN={2,3,4}   # 定時公開規則訂定前就已上線的堂次，一律公開
 def opens(n):
     """(課前準備公開時間, 講義公開時間)"""
     if n in ALWAYS_OPEN:

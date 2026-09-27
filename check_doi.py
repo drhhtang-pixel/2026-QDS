@@ -42,7 +42,8 @@ DOI=re.compile(r'https?://(?:dx\.)?doi\.org/([^\s"<>]+?)(?=[\s"<>]|\.?$|\.<)')
 
 def refs():
     """(堂次, 分頁, 分頁名稱, 書目 HTML)"""
-    for f in sorted(ROOT.glob('week[0-9][0-9]/index.html')):
+    base=ROOT/'private'/'preview' if '--preview' in sys.argv else ROOT   # --preview：檢查含未公開講義的預覽建置（先 build.py --preview）
+    for f in sorted(base.glob('week[0-9][0-9]/index.html')):
         n=int(f.parent.name[4:])
         s=f.read_text(encoding='utf-8')
         d=json.loads(re.search(r'<script id="data" type="application/json">(.*?)</script>',s,re.S).group(1).replace('<\\/','</'))
