@@ -211,7 +211,7 @@ def week04():
      ('SLR 系統文獻回顧',plain(U/'slr_cardsort_cluster.html'),
       [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','第三堂分頁調整順序，「學術資料庫比較」連結改為分頁 4')]),
      ('回家閱讀',plain(U/'home_reading.html'),
-      [('2026/09/27','新增分頁：為第 6 堂預作準備的閱讀（Csikszentmihalyi, 1996《創造力》）與分組章節報告')]),
+      [('2026/09/27','新增分頁：為第 6 堂預作準備的閱讀（Csikszentmihalyi, 1996《創造力》）與分組章節報告'),('2026/09/27','作業改為訪談經驗反思與《創造力》分組章節報告')]),
     ]
 
 def tabs_json(n):
@@ -302,7 +302,7 @@ for n in range(1,TOTAL+1):
         out=OUT/key/'index.html'
         if not docs:
             if out.exists(): out.unlink()   # 尚未公開：不留任何產物
-            print('%s  尚未公開（課前準備 %s、講義 %s 07:00）'%(key,prep_at.strftime('%m/%d'),open_at.strftime('%m/%d')))
+            print('%s  尚未公開（%s講義 %s 07:00）'%(key,'課前準備 %s、'%prep_at.strftime('%m/%d') if HASPREP[n] else '',open_at.strftime('%m/%d')))
             continue
         title='第%s堂｜%s'%(cn(n),SCHEDULE[n-1][1])
         if PREVIEW:
@@ -345,6 +345,7 @@ def student_status(n):
     if n in ALWAYS_OPEN: return '學生：已公開'
     p,o=opens(n); f='%m/%d %H:%M'
     now='講義已公開' if REALNOW>=o else ('只看得到課前準備' if REALNOW>=p and HASPREP.get(n) else '還看不到')
+    if not HASPREP.get(n): return '學生：%s｜講義 %s（無課前準備）'%(now,o.strftime(f))
     return '學生：%s｜課前準備 %s・講義 %s'%(now,p.strftime(f),o.strftime(f))
 CN_UNIT='一二三四五六'
 units=[]
