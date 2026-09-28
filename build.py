@@ -65,9 +65,12 @@ def plain(path):
     """一般講義：把 cdnjs 的 Font Awesome <link> 換成標記，由外框頁注入共用 FA CSS。"""
     h=read(path)
     h,n=re.subn(r'<link[^>]*font-awesome[^>]*>',FAMARK,h); assert n==1,path
-    # 講義旁 img/ 資料夾的照片（已用 sips 壓縮）內嵌成 data URI，產物仍是單一自足檔案
+    return inline_imgs(h,path.parent)
+
+def inline_imgs(h,d):
+    """講義旁 img/ 資料夾的照片（已用 sips 壓縮）內嵌成 data URI，產物仍是單一自足檔案"""
     def img(m):
-        f=path.parent/'img'/m.group(1); assert f.exists(),f
+        f=d/'img'/m.group(1); assert f.exists(),f
         return 'src="data:image/jpeg;base64,'+base64.b64encode(f.read_bytes()).decode()+'"'
     return re.sub(r'src="img/([^"]+\.jpg)"',img,h)
 
@@ -122,8 +125,21 @@ _,FA=unbundle(SRC/'week03'/'The_Secrets_of_Critical_Form_for_Reading_Papers.html
 # 每堂回傳 [(分頁名稱, HTML, 更新紀錄)]，順序即上課講述順序。
 # 更新紀錄：修改某分頁時在該分頁的清單末尾附加 ('YYYY/MM/DD','說明')。
 
+def week01():
+    U=SRC/'week01'
+    return [
+     ('課程介紹',plain(U/'intro.html'),
+      [('2026/09/28','新增講義（整理自 2023～2026 Notion 上課筆記：課程目的、四個單元、為什麼要做研究）')]),
+     ('課後作業',plain(U/'homework.html'),
+      [('2026/09/28','新增分頁：在 AI 幫助下讀 Cross (1999)、蒐集 2026 年 AI 應用案例')]),
+    ]
+
 def week02():
     return [
+     ('研究架構',plain(SRC/'week02'/'research_structure.html'),
+      [('2026/09/28','新增講義（研究流程、AIMRDR、為什麼要用這個結構、英文與閱讀練習）'),('2026/09/28','加入研究流程的上課板書')]),
+     ('MEMO：如何寫好論文',plain(SRC/'week02'/'memo.html'),
+      [('2026/09/28','新增講義（論文各部分的寫作提醒、Critical Form 表單）')]),
      ('課後作業',plain(SRC/'week02'/'homework.html'),
       [('2026/09/27','新增分頁：閱讀 Micheli et al. (2019)，為第 4 堂準備')]),
     ]
@@ -170,6 +186,9 @@ def week03():
             </div>
             <button type="button" onclick="openApaQuiz()" class="shrink-0 inline-flex items-center justify-center px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-sm transition">開始小測驗<i class="fa-solid fa-arrow-right ml-2"></i></button>
         </section>'''+a)
+    # 上課補充：APA 口訣與 APA 7 圖表標題說明（2026/09/28，Notion 筆記；sources/week03/supplement_apa.html）
+    a='        <section id="generator-tool"'
+    assert h.count(a)==1; h=h.replace(a,read(U/'supplement_apa.html')+a)
     assert h.count('</body>')==1
     apa=h.replace('</body>',read(U/'apa_bias_free.html')+read(U/'apa_quiz.html')+'</body>')
 
@@ -177,6 +196,9 @@ def week03():
     h=plain(U/'Natural_Intelligence_in_Design_answer.html')
     a='Natural intelligence in design, Design Studies, 20, 25-39.'
     assert h.count(a)==2; ni1=h.replace(a,'Natural intelligence in design. <em>Design Studies, 20</em>, 25–39. '+DOI_CROSS)
+    # 上課補充：閱讀順序、摘要拆解、DIK、三種推理、假設思維（2026/09/28；sources/week03/supplement_ni.html）
+    a='\n        </div>\n\n    </main>'
+    assert ni1.count(a)==1; ni1=inline_imgs(ni1.replace(a,'\n'+read(U/'supplement_ni.html')+a),U)
 
     h=plain(U/'natural_intelligence_design_AI.html')
     a='<em>Design Studies</em>, 20(1), 25–39.'; assert h.count(a)==1
@@ -188,34 +210,41 @@ def week03():
     a='Simon（1981）與 Schön（1983）'; assert ni2.count(a)==1
     ni2=ni2.replace(a,'Simon (1981) 與 Schön (1983)')
 
+    # 上課補充：搜尋技巧（2026/09/28；sources/week03/supplement_search.html）
+    db4=plain(U/'Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html')
+    a='\n    </main>'
+    assert db4.count(a)==1; db4=db4.replace(a,'\n'+read(U/'supplement_search.html')+a)
+
     return [
      ('Critical Form 閱讀論文的秘訣',tpl,
       [('2026/09/23','加入網站'),('2026/09/23','修正 Background 四點說明')]),
      ('Natural Intelligence 解答 by drhhtang',ni1,
-      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）'),('2026/09/26','參考文獻加上 DOI 連結')]),
+      [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by drhhtang」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/23','參考文獻標點依 APA 修正（標題後句點、頁碼 en dash）'),('2026/09/26','參考文獻加上 DOI 連結'),('2026/09/28','加入上課補充：閱讀順序、摘要逐句拆解、原始資料→資訊→知識、三種推理、假設思維'),('2026/09/28','加入上課圖片：創新的 1 2 3 4、三種推理')]),
      ('Natural Intelligence 解答 by AI',ni2,
       [('2026/09/23','加入網站'),('2026/09/23','分頁名稱改為「Natural Intelligence 解答 by AI」'),('2026/09/23','參考文獻期刊名與卷號改為斜體（APA）'),('2026/09/26','內文引用改用半形括號'),('2026/09/26','參考文獻加上 DOI 連結')]),
-     ('學術資料庫比較',plain(U/'Google_Scholar_vs_Scopus_vs_WoS_vs_SDOL.html'),
-      [('2026/09/23','加入網站')]),
+     ('學術資料庫比較',db4,
+      [('2026/09/23','加入網站'),('2026/09/28','加入上課補充：搜尋前先拆概念、往下追引用、老師的提醒')]),
      ('商學院學術資料庫',plain(U/'business_db.html'),
       [('2026/09/23','新增講義')]),
      ('APA 第七版格式指南',apa,
-      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗'),('2026/09/23','小測驗第 1 題改問期刊創刊年（一年一卷推算）；Takishita 範例頁碼改用 en dash'),('2026/09/23','小測驗新增第 3、4 題（判斷參考文獻類型）'),('2026/09/26','Takishita 範例頁碼依 Crossref 更正為 125–126')]),
+      [('2026/09/23','加入網站'),('2026/09/23','修正參考文獻範例首行超出外框'),('2026/09/23','「提倡包容性與多元語言」加上無偏見語言指引說明'),('2026/09/23','最下方加上課後小測驗'),('2026/09/23','小測驗第 1 題改問期刊創刊年（一年一卷推算）；Takishita 範例頁碼改用 en dash'),('2026/09/23','小測驗新增第 3、4 題（判斷參考文獻類型）'),('2026/09/26','Takishita 範例頁碼依 Crossref 更正為 125–126'),('2026/09/28','加入上課補充：APA 口訣與 APA 7 圖表標題規定')]),
      ('AI 質化研究工具',plain(U/'AI質化研究工具與平台全覽指南.html'),
       [('2026/09/23','加入網站')]),
      ('建立讀論文 SKILLS 的過程',plain(U/'paper_skill_process.html'),
       [('2026/09/23','新增講義（依「建立讀論文技能的過程紀錄.md」製作）'),('2026/09/23','加上下載 paper-reading-notes SKILL 的按鈕'),('2026/09/26','分頁順序調整，跳轉按鈕改指向新的分頁編號')]),
+     ('課後作業',plain(U/'homework.html'),
+      [('2026/09/28','新增分頁：用三個資料庫查「設計的定義」')]),
     ]
 
 def week04():
     U=SRC/'week04'
     return [
      ('設計思考的歷史與重點',plain(U/'design_thinking_history.html'),
-      [('2026/09/26','新增講義（設計思考發展史、八種論述、棘手問題、DITLDESIGN 三鑽模型）'),('2026/09/26','時間軸引用改為 Rittel & Webber (1973)')]),
+      [('2026/09/26','新增講義（設計思考發展史、八種論述、棘手問題、DITLDESIGN 三鑽模型）'),('2026/09/26','時間軸引用改為 Rittel & Webber (1973)'),('2026/09/28','加入上課補充：創新 vs. 創意'),('2026/09/28','加入上課圖片：設計角色在未來五年的變化、Analysis → Synthesis → Evaluation')]),
      ('Critical Form：Doing Design Thinking',plain(U/'Doing_Design_Thinking_critical_form.html'),
       [('2026/09/26','新增講義（Micheli et al., 2019 的 Critical Form）'),('2026/09/26','C1 資料蒐集流程圖改為四步驟，標出每步做法與篇數'),('2026/09/26','討論問題擴充為核心問題＋10 題（研究方法、概念、實務三類）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','文章 DOI 改為可點的連結')]),
      ('SLR 系統文獻回顧',plain(U/'slr_cardsort_cluster.html'),
-      [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','第三堂分頁調整順序，「學術資料庫比較」連結改為分頁 4')]),
+      [('2026/09/26','新增講義（系統性文獻回顧 Tranfield et al., 2003、卡片分類、集群分析）'),('2026/09/26','內文引用的英文作者改用「, 」與「&」連接'),('2026/09/26','內文引用統一用 et al. 與半形括號'),('2026/09/26','第三堂分頁調整順序，「學術資料庫比較」連結改為分頁 4'),('2026/09/28','加入上課補充：60–100 篇經驗值、Scopus 篩選練習')]),
      ('課後作業',plain(U/'home_reading.html'),
       [('2026/09/27','新增分頁：為第 6 堂預作準備的閱讀（Csikszentmihalyi, 1996《創造力》）與分組章節報告'),('2026/09/27','作業改為訪談經驗反思與《創造力》分組章節報告'),('2026/09/27','分頁名稱「回家閱讀」改為「課後作業」')]),
     ]
@@ -227,7 +256,7 @@ def tabs_json(n):
     return [(t['title'],plain(SRC/('week%02d'%n)/t['file']),[tuple(x) for x in t['log']]) for t in cfg['tabs']]
 
 # 已上線的堂數 → 建置函式；新增一堂就在這裡加一行
-WEEKS={2:week02,3:week03,4:week04}
+WEEKS={1:week01,2:week02,3:week03,4:week04}
 for _f in sorted(SRC.glob('week*/tabs.json')):
     _n=int(_f.parent.name[4:]); WEEKS[_n]=(lambda n: lambda: tabs_json(n))(_n)
 WEEKS=dict(sorted(WEEKS.items()))
@@ -270,7 +299,7 @@ def apa_lint(n,i,h):
 CN='零一二三四五六七八九十'
 def cn(n): return CN[n] if n<=10 else '十'+(CN[n-10] if n>10 else '')
 
-ALWAYS_OPEN={2,3,4}   # 定時公開規則訂定前就已上線的堂次，一律公開
+ALWAYS_OPEN={1,2,3,4}   # 定時公開規則訂定前就已上線的堂次，一律公開
 def opens(n):
     """(課前準備公開時間, 講義公開時間)"""
     if n in ALWAYS_OPEN:
@@ -370,6 +399,23 @@ if PREVIEW:
     home=home.replace('<main class="wrap">','<main class="wrap">\n  <div style="margin:1rem 0;padding:.8rem 1rem;border-radius:8px;background:#fff7e6;border:1px solid #f0c36d;color:#7a4b00;font-size:.9rem">'
         '<b>老師模式</b>：顯示全部內容（含尚未公開），只有老師看得到。每張卡片下方是學生目前看到的狀態與公開時間（%s 建置）。</div>'%REALNOW.strftime('%Y/%m/%d %H:%M'),1)
     home=home.replace('<title>','<title>〔老師模式〕',1)
+    # 教學資料（只有老師模式）：private/teacher/*/manifest.json 的錄影連結與 PDF（PDF 複製到 private/preview/materials/）
+    import shutil
+    mats={}
+    for mf in sorted((ROOT/'private'/'teacher').glob('*/manifest.json')):
+        m=json.loads(read(mf))
+        for k,p in enumerate(m.get('pdfs',[]),1):
+            src=mf.parent/p['file']; dst=OUT/'materials'/('w%02d_%d.pdf'%(p['week'],k))   # 英數檔名（artifact 路徑）
+            dst.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(src,dst)
+            mats.setdefault(p['week'],[]).append('<a href="materials/%s" target="_blank">📄 %s</a>（%s）'%(dst.name,html.escape(p['title']),html.escape(p['note'])))
+        for v in m.get('videos',[]):
+            mats.setdefault(v['week'],[]).append('<a href="%s" target="_blank" rel="noopener">🎬 錄影</a>（%s）'%(html.escape(v['url']),html.escape(v['note'])))
+        for a_ in m.get('audio',[]):
+            mats.setdefault(a_['week'],[]).append('🎙 %s（在 Notion 舊頁，未下載）'%html.escape(a_['name']))
+    if mats:
+        rows=''.join('<li style="margin:.35rem 0"><b>第 %d 堂</b>：%s</li>'%(w,'、'.join(v)) for w,v in sorted(mats.items()))
+        home=home.replace('</main>','<section style="margin:2rem 0;padding:1rem 1.2rem;border-radius:8px;background:#f3f0ff;border:1px solid #c9bdf5;color:#2d2350">'
+            '<h2 style="margin:0 0 .5rem;font-size:1.1rem">教學資料（只有老師看得到）</h2><ul style="margin:0;padding-left:1.2rem;font-size:.9rem">%s</ul></section>\n</main>'%rows,1)
 home=home.replace('/*SUMMARY*/','講義已開放 %d / %d 堂'%(sum(1 for b in built.values() if b[3]),TOTAL))
 home=home.replace('/*RANGE*/','%s – %s・每週三'%(SCHEDULE[0][0],SCHEDULE[-1][0]))
 home=home.replace('/*UPDATED*/',max(b[2] for b in built.values()))
