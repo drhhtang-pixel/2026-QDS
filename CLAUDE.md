@@ -4,7 +4,7 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 3 堂**（8 份講義）、**第 4 堂**（3 份講義）。
+目前已上線：**第 1～4 堂**（單元一文獻理論探討）。**第 5～8 堂**（單元二訪談）已完成，加密存放，依排程在上課當天 07:00 自動公開（見「定時公開」）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - **老師要求（2026/09/26）：每次修改完，一定要先把改好的頁面給老師看，等老師確認後才繼續下一步**
@@ -29,7 +29,10 @@
 2026 QDS/
 ├── CLAUDE.md        ← 本文件（公開 repo 可見，不寫 Drive ID、帳號等識別資訊）
 ├── CLAUDE.local.md  ← 不公開（.gitignore），Drive 資料夾 ID、帳號；Claude Code 自動讀取；換電腦要自己複製
-├── _config.yml      ← GitHub Pages（Jekyll）設定：exclude CLAUDE.md、build.py，不發布成網頁
+├── _config.yml      ← GitHub Pages（Jekyll）設定：exclude CLAUDE.md、build.py、check_doi.py、seal.py、sealed，不發布成網頁
+├── seal.py          ← 把未公開講義（.gitignore 排除的 sources/weekNN/）加密成 sealed/sources.tar.gz.enc
+├── sealed/          ← 加密的未公開講義（要 commit；GitHub Actions 解密後依時間建置）
+├── .github/workflows/release.yml ← 每週三 07:05／07:25／07:50 自動建置、公開、開 issue 通知老師
 ├── build.py         ← 建置腳本：讀 sources/weekNN/ + shell.html + home.html，產生下列建置產物
 ├── package.json     ← 只用來安裝 Tailwind CLI（tailwindcss 3.4.17，與原 CDN 同版）；node_modules/ 不 commit
 ├── tw_cache/        ← 各講義預先編譯好的 Tailwind CSS 快取（要 commit；build.py 會自動清掉不再使用的）
@@ -39,9 +42,14 @@
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
 ├── week04/index.html ← 建置產物：第四堂
-├── private/         ← （.gitignore 排除）保留為不公開的本機暫存位置；正式存檔區在 Google Drive，見下方「存檔區」
+├── private/         ← （.gitignore 排除，只在老師 Mac、沒有備份）seal.key（加密密鑰）、preview/（老師模式建置）、
+│                       teacher/unit1/（從 Notion 下載的照片、PDF、錄影連結 manifest.json，只給老師模式用）、removed/（移除的舊分頁）
+│                       正式存檔區在 Google Drive，見下方「存檔區」；備份 private/ 到 Drive 是待辦事項
 └── sources/
-    ├── week04/      ← 第四堂講義原始檔
+    ├── week01/      ← 第一堂：intro.html（課程介紹）、homework.html（課後作業）；Claude 撰寫，可直接編輯
+    ├── week02/      ← 第二堂：research_structure.html、memo.html、homework.html、img/；Claude 撰寫
+    ├── week05～08/  ← 未公開（.gitignore）：各堂講義＋tabs.json（分頁名稱、檔案、更新紀錄）＋img/；改完要跑 seal.py
+    ├── week04/      ← 第四堂講義原始檔（另有 home_reading.html＝分頁 4「課後作業」、img/）
     │   ├── design_thinking_history.html  (分頁 1「設計思考的歷史與重點」，由 Claude 撰寫，可直接編輯)
     │   ├── Doing_Design_Thinking_critical_form.html  (分頁 2，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
     │   └── slr_cardsort_cluster.html  (分頁 3 SLR 系統文獻回顧，由 Claude 撰寫，可直接編輯)
@@ -56,6 +64,9 @@
         ├── natural_intelligence_design_AI.html
         ├── business_db.html   (由 Claude 撰寫的新講義，可直接編輯)
         ├── paper_skill_process.html   (分頁 8，由 Claude 依下方 .md 製作，可直接編輯)
+        ├── supplement_ni.html／supplement_search.html／supplement_apa.html  (2026/09/28「上課補充」片段，build.py 插入分頁 2、4、6)
+        ├── homework.html   (分頁 9「課後作業」)
+        ├── img/            (上課補充用的照片)
         └── 建立讀論文技能的過程紀錄.md  (分頁 8 的原始文字，老師提供)
 ```
 
@@ -328,6 +339,44 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   `QDS_NOW=2026-10-07T07:00 python3 build.py` 可模擬某個時間點（測完要再跑一次一般 build 還原）。
 - 機器人會推 commit 到 main：**本機推送前一定先 `git pull --rebase`**。
 - 某堂公開後：可從 `.gitignore` 移除該堂、把原始檔一般 commit；並更新 Notion 該列「網頁講義」「整理狀態＝已上線」。
+
+## 工作紀錄：2026/09/27–28 session（Notion 整理＋單元一、二講義＋定時公開）
+
+詳細的網址、Notion 頁面與含業師／客戶細節的決定寫在 `CLAUDE.local.md`。
+
+### 做了什麼
+1. **Notion 盤點與標示**（連接器可直接讀寫 `[課程]`）：比對 2022～2026 各年度頁面，在頁首加標示 callout：
+   【母版】【重複資料】【原始頁】【內容放錯】【封存說明】【頁首】。只新增、不刪除不搬移。
+   2026 資料庫改名「2026 Course Schedule Master」，新增屬性「網頁講義」（URL）、「整理狀態」（未整理／已盤點／講義完成／已上線），
+   加「整理進度」看板檢視；範本「Lesson」改為四段結構（頁首 → 本年度筆記 → 講義底稿 → 相關舊資料，只放連結）；
+   舊年度首頁加【封存說明】；`[課程]` 底下建立「QDS 2026 整理總覽」頁（連結、規則、講義底稿流程、標示說明、單元進度）。
+2. **單元二訪談（第 5～8 堂）講義**：第 5 堂訪談方法與個案練習、第 6 堂《創造力》、第 7 堂業師課前導讀、
+   第 8 堂 Eckert & Stacey (2000) Critical Form＋讀論文的提醒；各堂最後一個分頁「課後作業」。
+3. **單元一文獻（第 1～4 堂）講義**：第 1 堂新增（課程介紹、課後作業）、第 2 堂新增研究架構與 MEMO、
+   第 3 堂分頁 2／4／6 加「上課補充」＋分頁 9 課後作業、第 4 堂加上課補充與照片。
+4. **定時公開**（見「定時公開」一節）、**老師模式**（`build.py --preview`，只有老師看得到的 artifact）、
+   `check_doi.py --preview`（檢查含未公開講義的預覽建置）。
+5. 盤點表、待決表、挑照片頁都用有資料庫的 artifact 讓老師勾選；勾選結果另存成靜態 HTML 放 Drive 存檔區 notion-export/。
+
+### 老師決定的規則（之後都照做）
+- **講義上課當天（週三）07:00 自動公開，不必事先同意，事後告知**；還沒公開的原始檔不可出現在公開 repo。
+- **每一堂最後一個分頁是「課後作業」＝下一堂要討論的內容；論文閱讀提前兩週**（第 N 堂要討論的論文放第 N−2 堂的課後作業）。
+  不再用「課前準備」分頁。自由作業要標示「自由作業」。
+- **老師模式**：顯示全部內容與學生公開狀態；錄影連結、老師投影片、期刊全文 PDF 只放老師模式（來自 `private/teacher/`，不進 repo 也不進 sealed）。
+  每次修改講義後都要重新 `--preview` 並更新老師模式 artifact。
+- **客戶名稱**：單元一講義一律用一般化例子，不出現客戶名稱（老師：學生版匿名、老師講義用全名）。第 5 堂維持老師先前同意的真名（是否改匿名：先不做）。
+- **APA**：年代照原文獻著錄（民國年不改）；圖與表的編號與標題依 APA 7 都放在上方（講義已加說明）；Scopus 說法照網站（期刊、會議、叢書）。
+- 講義內容以「上課補充」標籤標出由 Notion 筆記整理加入的部分；原始上傳檔（第三堂分頁 1～6）不直接改，用 build.py 插入片段。
+- 資料流向維持只往更公開的方向；Notion 以外的工作區（如 DITLDESIGN 會議記錄）**先不讀**。
+- **Notion「QDS 2026 整理總覽」頁是老師記進度的地方**（網址在 CLAUDE.local.md）：每次完成或新增待辦（上線、整理單元、老師要做的事），
+  都要同步更新該頁的「老師的待辦／請 Claude 做的待辦／自動公開時程／單元進度／歷程」，老師靠它記得做到哪裡。
+
+### 待辦
+- 把 `private/`（seal.key、teacher/、照片、PDF）備份到 Google Drive 存檔區（老師：留到後面做）。
+- 老師自己刪除：2026 資料庫 4 筆「【空白列｜請老師刪除】」、「2024 Course Schedule Bachalor (1)」整個資料庫。
+- 下一個單元：個案研究（第 9～12 堂）或口語分析（第 13～16 堂），流程同上。
+- 第 7 堂上課後依今年演講更新；第 5 堂老師可能還要修改（改完要 seal.py 並推送）。
+- 每堂自動公開後，把 Notion 該列改為「已上線」並填網頁講義網址（雲端流程不會自動更新 Notion）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
