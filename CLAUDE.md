@@ -3,7 +3,7 @@
 ## 專案概述
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
-全學期共 **16 堂**，每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
+全學期共 **17 堂**（2026/09/29 老師新增第 17 堂 2027/01/13 總結），每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
 目前已上線：**第 1～4 堂**（單元一文獻理論探討）。**第 5～8 堂**（單元二訪談）已完成，加密存放，依排程在上課當天 07:00 自動公開（見「定時公開」）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
@@ -105,7 +105,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 ## 課程進度表（SCHEDULE）
 
-- 定義在 `build.py` 的 `SCHEDULE`（16 筆，順序＝堂次）：`(日期, 主題, 研究方法, 教師, Type)`。
+- 定義在 `build.py` 的 `SCHEDULE`（17 筆，順序＝堂次）：`(日期, 主題, 研究方法, 教師, Type)`。
 - 來源：Notion「2026 Course Schedule Master」（公開頁 https://candy-napkin-731.notion.site/bb64ee39878941a3aa19d20cc294cb7d ，
   2026/09/23 老師提供整理後截圖）。**Notion 改了就同步改 SCHEDULE**。
 - 研究方法 → 單元與色標由 `UNITS` 決定（文獻理論探討=綠、訪談=棕、個案研究=灰、口語分析=藍）；
@@ -374,7 +374,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ### 待辦
 - 把 `private/`（seal.key、teacher/、照片、PDF）備份到 Google Drive 存檔區（老師：留到後面做）。
 - 老師自己刪除：2026 資料庫 4 筆「【空白列｜請老師刪除】」、「2024 Course Schedule Bachalor (1)」整個資料庫。
-- 下一個單元：個案研究（第 9～12 堂）或口語分析（第 13～16 堂），流程同上。
+- 單元三個案研究（第 9～12 堂）已完成（2026/09/28）；單元四口語分析（第 13～17 堂）進行中。
 - 第 7 堂上課後依今年演講更新；第 5 堂老師可能還要修改（改完要 seal.py 並推送）。
 - 每堂自動公開後，把 Notion 該列改為「已上線」並填網頁講義網址（雲端流程不會自動更新 Notion）。
 

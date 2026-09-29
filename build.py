@@ -2,7 +2,7 @@ import re,json,gzip,base64,html,datetime,hashlib,subprocess,tempfile,os,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 SRC=ROOT/'sources'
-TOTAL=16          # 本學期總堂數
+TOTAL=17          # 本學期總堂數（2026/09/29 老師新增第 17 堂總結）
 
 # ─── 定時公開（老師規定 2026/09/27）──────────────────────────
 # 課前準備（sources/weekNN/prep.html）在上課前 7 天 07:00 公開；其餘講義在上課當天 07:00（台北時間）公開。
@@ -32,9 +32,10 @@ SCHEDULE=[
  ('2026/11/18','商業研究方法','個案研究','唐碩陳羿霖執行策略師','Lecture'),
  ('2026/11/25','個案研究論文討論','個案研究','台科大唐玄輝教授','Paper Discussion'),
  ('2026/12/09','用戶體驗研究方法','口語分析','悠識數位林蕙如總監','Lecture'),
- ('2026/12/16','口語分析','口語分析','台科大唐玄輝教授','Lecture'),
- ('2026/12/23','口語分析','口語分析','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/12/16','口語分析','口語分析','台科大唐玄輝教授','Paper Discussion'),
+ ('2026/12/23','口語分析','口語分析','台科大唐玄輝教授','Lecture'),
  ('2027/01/06','口語分析','口語分析','台科大唐玄輝教授','Paper Discussion'),
+ ('2027/01/13','總結','口語分析','台科大唐玄輝教授','Lecture'),
 ]
 assert len(SCHEDULE)==TOTAL
 HOST='台科大唐玄輝教授'
