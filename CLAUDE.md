@@ -4,7 +4,7 @@
 
 這是 Qualitative Design Studies（QDS 2026，授課：唐玄輝 Hsien-Hui TANG，drhhtang）的課程講義網站。
 全學期共 **17 堂**（2026/09/29 老師新增第 17 堂 2027/01/13 總結），每堂一個頁面，該堂講義以分頁（tab）方式呈現，給修課學生瀏覽。
-目前已上線：**第 1～4 堂**（單元一文獻理論探討）。**第 5～8 堂**（單元二訪談）已完成，加密存放，依排程在上課當天 07:00 自動公開（見「定時公開」）。
+目前已上線：**第 1～4 堂**（單元一文獻理論探討）。**第 5～17 堂**（單元二訪談、三個案研究、四口語分析）講義全部完成（2026/09/29），加密存放，依排程在上課當天 07:00 自動公開（見「定時公開」）。
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - **老師要求（2026/09/26）：每次修改完，一定要先把改好的頁面給老師看，等老師確認後才繼續下一步**
@@ -48,7 +48,7 @@
 └── sources/
     ├── week01/      ← 第一堂：intro.html（課程介紹）、homework.html（課後作業）；Claude 撰寫，可直接編輯
     ├── week02/      ← 第二堂：research_structure.html、memo.html、homework.html、img/；Claude 撰寫
-    ├── week05～08/  ← 未公開（.gitignore）：各堂講義＋tabs.json（分頁名稱、檔案、更新紀錄）＋img/；改完要跑 seal.py
+    ├── week05～17/  ← 未公開（.gitignore）：各堂講義＋tabs.json（分頁名稱、檔案、更新紀錄）＋img/；改完要跑 seal.py
     ├── week04/      ← 第四堂講義原始檔（另有 home_reading.html＝分頁 4「課後作業」、img/）
     │   ├── design_thinking_history.html  (分頁 1「設計思考的歷史與重點」，由 Claude 撰寫，可直接編輯)
     │   ├── Doing_Design_Thinking_critical_form.html  (分頁 2，由 Claude 依 paper-reading-notes 技能製作，可直接編輯)
@@ -112,7 +112,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   同一研究方法的堂次必須連續（有 assert）。教師不是 `HOST`（台科大唐玄輝教授）者自動標「業師」。
 - 單堂頁標題也取自 SCHEDULE：「第三堂｜文獻與理論推導 I」。
 
-## Notion 資料搬遷（已決事項，尚未執行）
+## Notion 資料搬遷（已被取代：2026/09/27 起 Notion 連接器可直接讀寫，不再匯出 zip；以下僅供參考）
 
 - 範圍：只搬 2026 Course Schedule Master（17 列筆記頁、約 119 張圖、12 個 PDF），不搬 2022–2024 舊課。
 - 取得方式：老師從 Notion 匯出 zip（HTML、含子頁面與檔案）放進 Google Drive「2026 QDS 存檔區/notion-export/」，再把可公開的部分轉成各堂「課堂筆記」分頁。
@@ -377,6 +377,44 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 單元三個案研究（第 9～12 堂）已完成（2026/09/28）；單元四口語分析（第 13～17 堂）進行中。
 - 第 7 堂上課後依今年演講更新；第 5 堂老師可能還要修改（改完要 seal.py 並推送）。
 - 每堂自動公開後，把 Notion 該列改為「已上線」並填網頁講義網址（雲端流程不會自動更新 Notion）。
+
+## 工作紀錄：2026/09/28–30 session（單元三個案研究、單元四口語分析、Notion 全面整理）
+
+詳細網址、Drive 資料夾、業師與客戶的決定寫在 `CLAUDE.local.md`。
+
+### 講義（全部已加密推送，依排程公開）
+| 堂 | 日期 | 分頁 |
+|---|---|---|
+| 9 | 11/04 | 個案研究：從事實推到知識（2022／2023 講課筆記）；個案練習：公共設計案與趨勢（含 5 張趨勢投影片）。無課後作業 |
+| 10 | 11/11 | 論文討論：蓮花腳踏車（討論導讀，**Lotus 全文 PDF 仍缺**，到位後補成 Critical Form）；Critical Form：境隨心轉（附延伸閱讀 Cardon et al., 2011）；課後作業（Park-Lee、Steen） |
+| 11 | 11/18 | 業師課前導讀：商業研究方法（只寫一般化方法、只寫講者姓名）；課後作業（自由作業：假設法） |
+| 12 | 11/25 | 改名「個案研究論文討論」。Critical Form：Park-Lee (2020)、Steen et al. (2011)；課後作業（Suwa & Tversky，第 14 堂討論） |
+| 13 | 12/09 | 業師課前導讀：用戶體驗研究（含 4 張講者簡報照片，附延伸閱讀 Postma et al., 2012）；課後作業 |
+| 14 | 12/16 | Critical Form：Suwa & Tversky (1997)（老師 QDS 2018 筆記表＋原文＋老師眉批 25 則）；口語分析入門；課後作業（Valkenburg & Dorst） |
+| 15 | 12/23 | 口語分析的做法（老師投影片：段句、編碼基模、編碼範例、新手專家比較，老師同意公開）；課堂練習：放聲思考（改寫自老師 1998 實驗指示語）；課後作業（期末預告） |
+| 16 | 1/06 | Critical Form：Valkenburg & Dorst (1998)（老師 CGU 2003 筆記表＋原文）；課後作業（四單元回顧） |
+| 17 | 1/13 | **新增（老師 2026/09/29 決定）**：總結（四種方法、Data→Knowledge、Simon／Schön／FBS、創造力與文化）；期末作業：設計三個實驗 |
+
+- `build.py`：`TOTAL=17`；第 14 堂 Type＝Paper Discussion、第 15 堂＝Lecture；第 17 堂「總結」。
+- 老師決定的排程：第 14 堂討論 Suwa、第 15 堂方法與練習、第 16 堂討論 Valkenburg；論文至少提前兩週指定。
+- Critical Form 可交給 agent 平行寫（模型檔 `sources/week08/Eckert_Stacey_critical_form.html`），給同樣的 lint 規則；
+  論文全文沒有時只用老師的筆記表，不補原文細節。掃描檔 PDF 用 pymupdf 轉頁面圖再讀（本機無 pdftoppm；scratchpad venv 裝 pypdf、pymupdf）。
+- 照片流程：Notion 下載（簽名網址 5 分鐘，或用 REST API 取 1 小時連結）→ `sips` 縮 1400px → manifest.json →
+  `private/logs/gen_photos_unit3.py`／`gen_photos_unit4.py` 產生挑選頁 artifact（db collection `photos`）→ 老師勾選 → 放 `sources/weekNN/img/`。
+
+### Notion 整理（log 在 private/logs/notion_unit3_log.md、notion_unit4_log*.md、notion_cleanup_20260928_log.md）
+- 17 堂都有【頁首】（第 17 堂列 2026/09/29 新建）；第 9～17 堂整理狀態＝講義完成。
+- 母版／原始頁／重複資料標示補到單元三、四；2024 大學部誤標的【母版】已更正，副本改指向 2026 母版。
+- 第 10、12、13 堂互放錯的筆記加【內容放錯】互連；作業欄統一為「該堂討論的論文」（舊值移到頁內「舊作業」）。
+- 舊年度 2022–2024 四頁搬進「QDS 封存（2022–2024）」（老師同意搬移）；主頁索引加「現行連結」欄；舊資料庫 15 個範本加【封存範本】。
+- 不可公開標示：Student list ×4、第一次作業【學生資料】、9/16 9/23 課堂逐字稿 ×4【含學生發言】（連到第 2、3 堂）、業師頁 ×3【個資】。
+- 總覽頁最上方放學生網站與老師模式連結；公開時程到第 17 堂。
+- API 設不了資料庫檢視篩選，已列入老師待辦（手動設定）。
+
+### 還沒做／待老師
+- Lotus bicycle PDF（Candy & Edmonds, 1996）→ 第 10 堂分頁 1 補 Critical Form。
+- 業師講座後依今年演講更新：第 7 堂（10/21）、第 11 堂（11/18）、第 13 堂（12/09，簡報照片公開前確認講者同意）。
+- 每堂公開後更新 Notion「已上線」與網頁講義網址。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
