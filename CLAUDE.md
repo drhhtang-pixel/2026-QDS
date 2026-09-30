@@ -386,7 +386,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 | 堂 | 日期 | 分頁 |
 |---|---|---|
 | 9 | 11/04 | 個案研究：從事實推到知識（2022／2023 講課筆記）；個案練習：公共設計案與趨勢（含 5 張趨勢投影片）。無課後作業 |
-| 10 | 11/11 | 論文討論：蓮花腳踏車（討論導讀，**Lotus 全文 PDF 仍缺**，到位後補成 Critical Form）；Critical Form：境隨心轉（附延伸閱讀 Cardon et al., 2011）；課後作業（Park-Lee、Steen） |
+| 10 | 11/11 | Critical Form：Lotus Bicycle（2026/09/30 補上，依掃描檔與老師眉批；DOI 為 10.1016/0142-694X(95)00026-N）；論文討論：蓮花腳踏車（討論導讀）；Critical Form：境隨心轉（附延伸閱讀 Cardon et al., 2011）；課後作業（Park-Lee、Steen） |
 | 11 | 11/18 | 業師課前導讀：商業研究方法（只寫一般化方法、只寫講者姓名）；課後作業（自由作業：假設法） |
 | 12 | 11/25 | 改名「個案研究論文討論」。Critical Form：Park-Lee (2020)、Steen et al. (2011)；課後作業（Suwa & Tversky，第 14 堂討論） |
 | 13 | 12/09 | 業師課前導讀：用戶體驗研究（含 4 張講者簡報照片，附延伸閱讀 Postma et al., 2012）；課後作業 |
@@ -412,7 +412,6 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - API 設不了資料庫檢視篩選，已列入老師待辦（手動設定）。
 
 ### 還沒做／待老師
-- Lotus bicycle PDF（Candy & Edmonds, 1996）→ 第 10 堂分頁 1 補 Critical Form。
 - 業師講座後依今年演講更新：第 7 堂（10/21）、第 11 堂（11/18）、第 13 堂（12/09，簡報照片公開前確認講者同意）。
 - 每堂公開後更新 Notion「已上線」與網頁講義網址。
 
