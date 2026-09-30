@@ -138,7 +138,7 @@ def week01():
 def week02():
     return [
      ('研究架構',plain(SRC/'week02'/'research_structure.html'),
-      [('2026/09/28','新增講義（研究流程、AIMRDR、為什麼要用這個結構、英文與閱讀練習）'),('2026/09/28','加入研究流程的上課板書')]),
+      [('2026/09/28','新增講義（研究流程、AIMRDR、為什麼要用這個結構、英文與閱讀練習）'),('2026/09/28','加入研究流程的上課板書'),('2026/10/01','AIMRDR 加上 A Abstract 摘要；Literature、Conclusion 改為括號內的補充項')]),
      ('MEMO：如何寫好論文',plain(SRC/'week02'/'memo.html'),
       [('2026/09/28','新增講義（論文各部分的寫作提醒、Critical Form 表單）')]),
      ('課後作業',plain(SRC/'week02'/'homework.html'),
