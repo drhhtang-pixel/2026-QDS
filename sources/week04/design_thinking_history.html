@@ -454,6 +454,7 @@
                 <p>Kelley, T. (2001). <em>The art of innovation: Lessons in creativity from IDEO, America’s leading design firm</em>. Currency/Doubleday.</p>
                 <p>Kimbell, L. (2011). Rethinking design thinking: Part I. <em>Design and Culture, 3</em>(3), 285–306. <a class="doi" href="https://doi.org/10.2752/175470811X13071166525216" target="_blank" rel="noopener">https://doi.org/10.2752/175470811X13071166525216</a></p>
                 <p>Krippendorff, K. (2006). <em>The semantic turn: A new foundation for design</em>. CRC Press. <a class="doi" href="https://doi.org/10.4324/9780203299951" target="_blank" rel="noopener">https://doi.org/10.4324/9780203299951</a></p>
+                <p>Lawson, B. (1979). Cognitive strategies in architectural design. <em>Ergonomics, 22</em>(1), 59–68. <a class="doi" href="https://doi.org/10.1080/00140137908924589" target="_blank" rel="noopener">https://doi.org/10.1080/00140137908924589</a></p>
                 <p>Lawson, B. (1980). <em>How designers think</em>. Architectural Press.</p>
                 <p>Maher, M. L., &amp; Poon, J. (1996). Modeling design exploration as co-evolution. <em>Microcomputers in Civil Engineering, 11</em>(3), 195–209. <a class="doi" href="https://doi.org/10.1111/j.1467-8667.1996.tb00323.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1467-8667.1996.tb00323.x</a></p>
                 <p>Maher, M. L., &amp; Tang, H.-H. (2003). Co-evolution as a computational and cognitive model of design. <em>Research in Engineering Design, 14</em>(1), 47–64. <a class="doi" href="https://doi.org/10.1007/s00163-002-0016-y" target="_blank" rel="noopener">https://doi.org/10.1007/s00163-002-0016-y</a></p>
@@ -484,7 +485,7 @@
         {y:'1972–73', era:2, k:'r', t:'Rittel：第二代設計方法與棘手問題', d:'Rittel 提出「第二代」方法（參與、論證）；Rittel &amp; Webber (1973) 發表棘手問題十大特徵。'},
         {y:'1973', era:2, k:'r', t:'McKim《Experiences in Visual Thinking》', d:'Stanford 設計課程的視覺思考教材，後來影響 d.school 的教學傳統。'},
         {y:'1979', era:2, k:'r', t:'期刊《Design Studies》創刊', d:'設計研究最重要的期刊之一，大量設計思考與口語分析研究在此發表。'},
-        {y:'1980', era:2, k:'r', t:'Lawson《How Designers Think》', d:'以實驗比較建築與科學學生，指出設計師採「解決方案導向」策略。', r:'Lawson, B. (1980). <em>How designers think</em>. Architectural Press.'},
+        {y:'1980', era:2, k:'r', t:'Lawson《How Designers Think》', d:'以實驗比較建築與科學學生，指出設計師採「解決方案導向」策略。', more:['openLawson','了解更多：「Bryan Lawson 做了什麼？」'], r:'Lawson, B. (1980). <em>How designers think</em>. Architectural Press.'},
         {y:'1982', era:2, k:'r', t:'Cross〈Designerly Ways of Knowing〉', d:'主張設計是與科學、人文並列的第三種知識文化。', r:'Cross, N. (1982). Designerly ways of knowing. <em>Design Studies, 3</em>(4), 221–227. <a class="doi" href="https://doi.org/10.1016/0142-694X(82)90040-0" target="_blank" rel="noopener">https://doi.org/10.1016/0142-694X(82)90040-0</a>'},
         {y:'1983', era:2, k:'r', t:'Schön《The Reflective Practitioner》', d:'以「行動中反思」描述專業者如何在實踐中思考，挑戰技術理性。', r:'Schön, D. A. (1983). <em>The reflective practitioner: How professionals think in action</em>. Basic Books.'},
         {y:'1987', era:2, k:'r', t:'Rowe《Design Thinking》', d:'第一本以「Design Thinking」為書名的著作，研究建築與都市設計師的思考程序。', r:'Rowe, P. G. (1987). <em>Design thinking</em>. MIT Press.'},
@@ -509,6 +510,7 @@
             <div class="font-semibold text-slate-900">${e.t}</div>
             <p class="text-sm text-slate-600 leading-relaxed">${e.d}</p>
             ${[].concat(e.r || []).map(r => `<p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-book mr-1"></i>${r}</p>`).join('')}
+            ${e.more ? `<button type="button" onclick="${e.more[0]}()" class="mt-2 inline-flex items-center text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"><i class="fa-solid fa-circle-info mr-1.5"></i>${e.more[1]}<i class="fa-solid fa-arrow-right ml-1.5 text-[10px]"></i></button>` : ''}
         </li>`).join('');
     document.querySelectorAll('.era-btn').forEach(b => b.addEventListener('click', () => {
         document.querySelectorAll('.era-btn').forEach(x => x.classList.toggle('active', x === b));
@@ -555,6 +557,76 @@
     function closeMyth() { document.getElementById('mythModal').classList.add('hidden'); document.documentElement.style.overflow = ''; }
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && !document.getElementById('mythModal').classList.contains('hidden')) { e.stopPropagation(); closeMyth(); }
+    }, true);
+    </script>
+    <!-- Lawson 研究方法補充資料面板 -->
+    <div id="lawsonModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="lawsonTitle">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeLawson()"></div>
+        <div class="relative mx-auto my-4 sm:my-10 w-[calc(100%-2rem)] max-w-3xl max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-5rem)] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white px-6 py-5 flex items-start justify-between gap-4 shrink-0">
+                <div>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 mb-2"><i class="fa-solid fa-circle-info mr-1.5"></i>補充資料</span>
+                    <h2 id="lawsonTitle" class="text-xl sm:text-2xl font-bold leading-tight">Bryan Lawson 的研究方法</h2>
+                    <p class="text-xs text-slate-300 mt-1">How Designers Think</p>
+                </div>
+                <button type="button" onclick="closeLawson()" class="shrink-0 w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 transition flex items-center justify-center" aria-label="關閉"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="overflow-y-auto px-6 py-6 space-y-5 text-sm text-slate-700 leading-relaxed">
+                <p>英國建築師暨心理學者 Bryan Lawson 在其經典著作《How Designers Think》（中文常譯為《設計師如何思考》）中，探討設計思維的核心並非依賴單一的哲學推演，而是建立在多種跨學科實證與觀察方法的整合上。Lawson 兼具建築學與心理學的背景，他主要採用了以下四大類研究方法：</p>
+                <div class="rounded-xl border border-slate-200 p-4">
+                    <p class="font-bold text-slate-900 mb-2"><span class="inline-flex w-6 h-6 rounded-full bg-indigo-600 text-white text-xs items-center justify-center mr-2">1</span><i class="fa-solid fa-flask text-indigo-500 mr-1.5"></i>實驗室實證研究<span class="block sm:inline text-xs font-normal text-slate-500 sm:ml-2">Empirical &amp; Experimental Studies</span></p>
+                    <p>這是 Lawson 最著名且奠定其設計理論基礎的方法。他設計了高度控制的認知實驗，用來比較不同背景者的思考模式。</p>
+                    <div class="mt-3 rounded-lg bg-slate-50 border border-slate-200 p-3 space-y-2">
+                        <p class="font-semibold text-slate-900">經典實驗：彩色積木實驗（1979 年發表；Lawson, 1979）</p>
+                        <p><strong>實驗設計：</strong>他邀請了「建築系高年級學生」（代表設計師）與「科學領域研究生」（代表科學家），要求他們用不同顏色的積木組合結構。實驗設有隱藏的排列規則（如某些顏色不能相鄰），且目標是讓外圍出現特定的顏色組合。</p>
+                        <p><strong>科學家：</strong>採用問題導向（Problem-focused / Analysis）策略。他們試圖排列各種組合來測試並找出背後的隱藏規則，掌握規則後才去推導最佳解。</p>
+                        <p><strong>設計師：</strong>採用解答導向（Solution-focused / Synthesis）策略。他們直接嘗試組合出符合目標顏色的方案，如果不符合規則就微調換下一個方案，在「產生解答」的過程中逐步理解問題。</p>
+                        <p><strong>結論：</strong>設計思維的核心特徵是分析與合成同時進行（Analysis-by-synthesis），設計師往往透過「提出解答」來「理解問題」。</p>
+                    </div>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-4">
+                    <p class="font-bold text-slate-900 mb-2"><span class="inline-flex w-6 h-6 rounded-full bg-indigo-600 text-white text-xs items-center justify-center mr-2">2</span><i class="fa-solid fa-brain text-indigo-500 mr-1.5"></i>心理學觀點的整合<span class="block sm:inline text-xs font-normal text-slate-500 sm:ml-2">Psychological Perspectives on Design Thinking</span></p>
+                    <p>Lawson 受過心理學訓練，但他並不是用人格量表去測量設計師，而是在書中整合認知心理學對「思考」的研究，用來解釋設計師的思考方式：</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1"><li><strong>發散與收斂思考（Divergent &amp; Convergent Thinking）：</strong>借用心理學對兩種思考類型的研究，說明設計同時需要兩者：發想階段要發散，決策階段要收斂，設計師要能在兩者之間切換。</li><li><strong>創造性思考的歷程：</strong>討論心理學中創造過程的階段說法（例如醞釀、頓悟），並提醒真實的設計過程是反覆來回，而不是依序走完的線性步驟。</li><li><strong>設計中的表徵（Representation）：</strong>分析設計師如何用草圖、圖紙與心中的意象來思考，以及這些表徵如何影響設計決策。</li></ul>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-4">
+                    <p class="font-bold text-slate-900 mb-2"><span class="inline-flex w-6 h-6 rounded-full bg-indigo-600 text-white text-xs items-center justify-center mr-2">3</span><i class="fa-solid fa-comments text-indigo-500 mr-1.5"></i>質性觀察與深度訪談<span class="block sm:inline text-xs font-normal text-slate-500 sm:ml-2">Ethnographic Observation &amp; Interviews</span></p>
+                    <p>為了理解真實世界中設計師的運作方式，Lawson 深入田野進行長期調查：</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1"><li><strong>專業設計師訪談：</strong>訪談大量知名建築師、工業設計師及其客戶與合作夥伴，揭示他們如何應對「棘手問題」（Wicked Problems）。</li><li><strong>設計過程的實務觀察：</strong>記錄真實設計專案的運作，分析設計師如何在「法規、預算、美學、功能」等多重限制（Constraints）中進行動態博弈。</li></ul>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-4">
+                    <p class="font-bold text-slate-900 mb-2"><span class="inline-flex w-6 h-6 rounded-full bg-indigo-600 text-white text-xs items-center justify-center mr-2">4</span><i class="fa-solid fa-chalkboard-user text-indigo-500 mr-1.5"></i>設計教育田野觀察與反思<span class="block sm:inline text-xs font-normal text-slate-500 sm:ml-2">Pedagogical Observation &amp; Action Research</span></p>
+                    <p>身為長期任教於建築與設計系所的教授，Lawson 將課堂與工作室（Studio）視為重要的研究場域：</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1"><li><strong>新手與專家的對比（Novice vs. Expert Comparison）：</strong>觀察設計系學生（新手）與資深設計師（專家）在面對設計任務時的行為差異。</li><li><strong>設計指導（Design Tutoring）過程分析：</strong>研究導師與學生在評圖（Critique）對話中，如何傳遞無法言說的隱性知識（Tacit Knowledge）。</li></ul>
+                </div>
+                <div>
+                    <p class="font-bold text-slate-900 mb-2"><i class="fa-solid fa-table mr-2 text-indigo-600"></i>總結 Bryan Lawson 的研究方法特質</p>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-50 text-slate-500"><tr><th class="p-2 font-medium">研究面向</th><th class="p-2 font-medium">核心方法</th><th class="p-2 font-medium">關鍵發現</th></tr></thead>
+                            <tbody><tr class="border-t border-slate-200"><td class="p-2 font-medium text-slate-900 whitespace-nowrap">認知機制</td><td class="p-2">認知心理實驗（彩色積木實驗）</td><td class="p-2">設計是「解答導向」且「分析與合成同步」的歷程。</td></tr><tr class="border-t border-slate-200"><td class="p-2 font-medium text-slate-900 whitespace-nowrap">思考特質</td><td class="p-2">心理學理論的整合</td><td class="p-2">設計需要平衡發散思考（創造力）與收斂思考（功能落實）。</td></tr><tr class="border-t border-slate-200"><td class="p-2 font-medium text-slate-900 whitespace-nowrap">實務情境</td><td class="p-2">質性訪談與田野觀察</td><td class="p-2">設計問題多為缺乏明確邊界的棘手問題，需透過「限制條件」進行重構。</td></tr><tr class="border-t border-slate-200"><td class="p-2 font-medium text-slate-900 whitespace-nowrap">能力演進</td><td class="p-2">設計教育觀察（新手 vs. 專家）</td><td class="p-2">設計思考是一套可被訓練與學習的認知技能。</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+                <p>Bryan Lawson 透過結合嚴謹的科學實驗與人文質性的田野觀察，成功打破了當時將設計視為「純粹藝術靈感」或「純粹線性工程」的迷思，為現代設計思考（Design Thinking）奠定了堅實的認知科學基礎。</p>
+                <div class="rounded-xl border border-indigo-200 bg-indigo-50/60 p-4">
+                    <p class="font-bold text-indigo-800 mb-1"><i class="fa-brands fa-youtube mr-2"></i>延伸影片</p>
+                    <p>Design Thinking in 90 Seconds 這部影片精簡介紹了設計思考的核心概念，其中引用了 Bryan Lawson 的經典實驗研究，能幫助你更快理解設計師「以解答為導向」的思考模式。</p>
+                    <a href="https://www.youtube.com/watch?v=qG68GTOn_jM" target="_blank" rel="noopener" class="mt-2 inline-flex items-center font-semibold text-indigo-700 underline underline-offset-2">在 YouTube 觀看影片<i class="fa-solid fa-arrow-up-right-from-square ml-1.5 text-xs"></i></a>
+                </div>
+                <div class="border-t border-slate-200 pt-4">
+                    <p class="font-bold text-slate-900 mb-2"><i class="fa-solid fa-book mr-2 text-indigo-600"></i>參考文獻</p>
+                    <p class="pl-8 -indent-8">Lawson, B. (1979). Cognitive strategies in architectural design. <em>Ergonomics, 22</em>(1), 59–68. <a href="https://doi.org/10.1080/00140137908924589" target="_blank" rel="noopener" class="underline underline-offset-2 break-all">https://doi.org/10.1080/00140137908924589</a></p>
+                    <p class="pl-8 -indent-8 mt-2">Lawson, B. (1980). <em>How designers think</em>. Architectural Press.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function openLawson() { document.getElementById('lawsonModal').classList.remove('hidden'); document.documentElement.style.overflow = 'hidden'; }
+    function closeLawson() { document.getElementById('lawsonModal').classList.add('hidden'); document.documentElement.style.overflow = ''; }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !document.getElementById('lawsonModal').classList.contains('hidden')) { e.stopPropagation(); closeLawson(); }
     }, true);
     </script>
 </body>
