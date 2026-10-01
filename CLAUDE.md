@@ -154,6 +154,8 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 | 1 | 設計思考的歷史與重點 | design_thinking_history.html |
 | 2 | Critical Form：Doing Design Thinking | Doing_Design_Thinking_critical_form.html |
 | 3 | SLR 系統文獻回顧 | slr_cardsort_cluster.html |
+| 4 | 課後作業 | home_reading.html（含《創造力》分組章節報告說明） |
+| 5 | 課堂抽籤 | gacha.html（iframe 嵌入 https://simple-gacha.vercel.app/ ，2026/09/30 老師指定放第 5 個） |
 
 - 分頁 1「設計思考的歷史與重點」（2026/09/26 老師指定放第四堂第 1 個分頁，原分頁 1、2 順移為 2、3）：
   designerly thinking vs. design thinking、時間軸 1962–2013、八種論述（Johansson-Sköldberg et al., 2013，表下附完整書目）、
@@ -414,6 +416,42 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ### 還沒做／待老師
 - 業師講座後依今年演講更新：第 7 堂（10/21）、第 11 堂（11/18）、第 13 堂（12/09，簡報照片公開前確認講者同意）。
 - 每堂公開後更新 Notion「已上線」與網頁講義網址。
+
+## 工作紀錄：2026/09/30–10/01 session（第 2、3、4、6、10 堂修改）
+
+### 做了什麼（全部已推送上線；第 6、10 堂為加密檔，依排程公開）
+- 第 3 堂分頁 9 課後作業：改為「思考如何用三個資料庫查『設計的定義』」。
+- 第 4 堂分頁 1「設計思考的歷史與重點」：
+  - 時間軸各則加書目（TL 陣列的 `r` 欄位，可為字串或陣列；渲染成小字＋書本圖示）：Simon、Jones、Lawson、Cross、Schön、Rowe、
+    Brown 2008／2009、Martin 2009（兩本附中文版：《設計思考改造世界（十周年增訂新版）》吳莉君、陳依亭譯，聯經 2021；
+    《設計思考就是這麼回事！》林麗冠、李仰淳譯，天下文化 2011）、Dorst 2011、Kimbell 2011、Johansson-Sköldberg et al. 2013、
+    共同演化三篇（Maher & Poon 1996、Dorst & Cross 2001、Maher & Tang 2003；標題年份改 1996–2003）。
+  - 時間軸按鈕：TL 的 `more:['openXxx','按鈕文字']` 欄位會在該則下方產生「了解更多」按鈕。
+  - 跳出面板（形式同第 3 堂 APA 無偏見語言面板）：「有用的迷思」（Norman 2010＋2013 修正看法）掛在批判與反省的 details 內；
+    「Bryan Lawson 做了什麼？」掛在時間軸 1980（四類研究方法、彩色積木實驗 1979 年發表、延伸影片連結）。
+    老師給的 Lawson 原稿有一段「人格量表測量」與事實不符，已依老師同意改寫為「心理學觀點的整合」。影片片名照老師寫法，不改。
+    時間軸 1980 說明加「配合上訪談釐清設計本質」（老師文字）。
+  - 「有用的迷思」內文改為老師版本（結尾提問「你認同這樣的說法嗎？」）。
+  - Double Diamond、DITLDESIGN 三鑽模型加 SVG 線稿（自繪，保留原色塊）；三鑽補 EyeBus 論文 Wang et al. (2022) IJDesign
+    （DOI 10.57698/v16i1.04 非 Crossref 登記，check_doi 只能確認存在）。
+- 第 4 堂分頁 4：《創造力》分組章節報告說明（全班讀第一章；第 2～7、12、13 章八組各一章；6 分鐘、6～12 頁、Critical Form）。
+- 第 4 堂分頁 5：課堂抽籤（外部 iframe，是「只用 cdnjs／Google Fonts」規則的例外，老師指定；artifact 預覽會擋，正式站正常）。
+- 第 6 堂（加密）：指定章節補第 7 章「早年歲月」（Claude 依一般理解撰寫，未對照原文）、章名與書一致、標出組別、分組連到第 4 堂分頁 4。
+- 第 10 堂（加密）：新增分頁 1「Critical Form：Lotus Bicycle」（agent 依掃描檔 20 頁＋老師眉批撰寫；正確 DOI 為
+  10.1016/0142-694X(95)00026-N）。原討論導讀改為分頁 2。p. 71 標題旁一則中文眉批看不清楚，老師說先不管。
+- 第 2 堂 AIMRDR：加 A Abstract；Literature、Conclusion 改為括號內的補充項（虛線框、縮排）。
+- 寫了一篇 FB 貼文（設計思考的歷史與重點）給老師自行發布，未存檔。
+
+### 待辦
+- 學生填寫分組名單：之後做。老師建 Google 表單（日期、課程、組別、組員姓名）放存檔區 students/ → 在第 4 堂分頁 5 加「填寫分組名單」按鈕；
+  回覆複製姓名、組別貼進抽籤工具。學生資料不進 repo。
+- 第 5 堂可能還要改（10/07 公開）；第 7、11、13 堂業師講座後更新；第 13 堂簡報照片公開前確認講者同意。
+
+### 教訓
+- 內建瀏覽器的預覽伺服器（port 8765）隔一段時間會停，navigate 失敗時重新 `preview_start site`。
+- 關閉的 `<details>` 裡元素的 innerText 是空字串，用 JS 找按鈕要用 textContent。
+- 本機有 hook 會擋含刪除指令字樣的 Bash 指令；不再需要的記憶改寫成「已完成」而不是刪掉；長的 Python 先寫成檔案再執行。
+- 第 7 章等未對照原文的內容要明講「依一般理解撰寫」，請老師審。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 
