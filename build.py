@@ -420,6 +420,25 @@ if PREVIEW:
         rows=''.join('<li style="margin:.35rem 0"><b>第 %d 堂</b>：%s</li>'%(w,'、'.join(v)) for w,v in sorted(mats.items()))
         home=home.replace('</main>','<section style="margin:2rem 0;padding:1rem 1.2rem;border-radius:8px;background:#f3f0ff;border:1px solid #c9bdf5;color:#2d2350">'
             '<h2 style="margin:0 0 .5rem;font-size:1.1rem">教學資料（只有老師看得到）</h2><ul style="margin:0;padding-left:1.2rem;font-size:.9rem">%s</ul></section>\n</main>'%rows,1)
+# 新網站上線公告橫幅（2026/10/02 老師要求；只放舊網站，老師模式與新平台不放）
+NEWSITE='https://ditldesign-users-control.pages.dev/'
+if not PREVIEW and '--platform' not in sys.argv:
+    home=home.replace('<main class="wrap">','<main class="wrap">\n  <a class="newsite" href="%s" target="_blank" rel="noopener">'
+        '<span class="ico" aria-hidden="true">📢</span><span><b>課程講義新網站上線，請註冊</b>'
+        '第 5 堂以後的講義將改在新網站提供，修課同學請註冊並申請「上課的同學」。</span><em>前往新網站 →</em></a>'
+        '<p class="newsite-sub"><a href="%sregister.html" target="_blank" rel="noopener">看註冊說明（含 QR code）</a></p>'%(NEWSITE,NEWSITE),1)
+    home=home.replace('</style>','''.newsite{display:flex;align-items:center;gap:.8rem;margin:0 0 .4rem;padding:.9rem 1.1rem;border-radius:12px;
+  background:var(--now-soft);border:1px solid var(--now);color:var(--ink);text-decoration:none}
+.newsite:hover{box-shadow:0 6px 20px rgba(20,40,70,.12)}
+.newsite:focus-visible{outline:2px solid var(--now);outline-offset:2px}
+.newsite .ico{font-size:1.5rem;flex:none}
+.newsite span{font-size:.9rem;line-height:1.55;color:var(--muted)}
+.newsite b{display:block;color:var(--ink);font-size:1rem}
+.newsite em{margin-left:auto;font-style:normal;font-weight:700;color:var(--now);white-space:nowrap}
+.newsite-sub{margin:0 0 1.5rem;font-size:.82rem;text-align:right}
+.newsite-sub a{color:var(--accent)}
+@media (max-width:560px){.newsite{flex-wrap:wrap}.newsite em{margin-left:0}}
+</style>''',1)
 home=home.replace('/*SUMMARY*/','講義已開放 %d / %d 堂'%(sum(1 for b in built.values() if b[3]),TOTAL))
 home=home.replace('/*RANGE*/','%s – %s・每週三'%(SCHEDULE[0][0],SCHEDULE[-1][0]))
 home=home.replace('/*UPDATED*/',max(b[2] for b in built.values()))

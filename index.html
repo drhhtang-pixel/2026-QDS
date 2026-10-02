@@ -106,6 +106,17 @@ a.card .no{background:var(--u);color:var(--bar)}
 .card.off .meta{margin-top:.7rem}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;padding:1rem 0 1.5rem}
 @media (max-width:560px){.grid{grid-template-columns:1fr}}
+.newsite{display:flex;align-items:center;gap:.8rem;margin:0 0 .4rem;padding:.9rem 1.1rem;border-radius:12px;
+  background:var(--now-soft);border:1px solid var(--now);color:var(--ink);text-decoration:none}
+.newsite:hover{box-shadow:0 6px 20px rgba(20,40,70,.12)}
+.newsite:focus-visible{outline:2px solid var(--now);outline-offset:2px}
+.newsite .ico{font-size:1.5rem;flex:none}
+.newsite span{font-size:.9rem;line-height:1.55;color:var(--muted)}
+.newsite b{display:block;color:var(--ink);font-size:1rem}
+.newsite em{margin-left:auto;font-style:normal;font-weight:700;color:var(--now);white-space:nowrap}
+.newsite-sub{margin:0 0 1.5rem;font-size:.82rem;text-align:right}
+.newsite-sub a{color:var(--accent)}
+@media (max-width:560px){.newsite{flex-wrap:wrap}.newsite em{margin-left:0}}
 </style>
 </head>
 <body>
@@ -117,6 +128,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem;paddi
   </div>
 </header>
 <main class="wrap">
+  <a class="newsite" href="https://ditldesign-users-control.pages.dev/" target="_blank" rel="noopener"><span class="ico" aria-hidden="true">📢</span><span><b>課程講義新網站上線，請註冊</b>第 5 堂以後的講義將改在新網站提供，修課同學請註冊並申請「上課的同學」。</span><em>前往新網站 →</em></a><p class="newsite-sub"><a href="https://ditldesign-users-control.pages.dev/register.html" target="_blank" rel="noopener">看註冊說明（含 QR code）</a></p>
   <div class="sec"><h2>課程進度</h2><span>講義已開放 4 / 17 堂</span></div>
   <section class="unit u-lit">
     <div class="unit-h"><span class="dot"></span><h2>單元一　文獻理論探討</h2><span>第 1–4 堂</span></div>
