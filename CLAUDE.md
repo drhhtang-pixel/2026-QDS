@@ -45,7 +45,7 @@
 ├── week04/index.html ← 建置產物：第四堂
 ├── private/         ← （.gitignore 排除，只在老師 Mac、沒有備份）seal.key（加密密鑰）、preview/（老師模式建置）、
 │                       teacher/unit1/（從 Notion 下載的照片、PDF、錄影連結 manifest.json，只給老師模式用）、removed/（移除的舊分頁）
-│                       正式存檔區在 Google Drive，見下方「存檔區」；備份 private/ 到 Drive 是待辦事項
+│                       正式存檔區在 Google Drive，見下方「存檔區」；private/ 已備份到存檔區 private-backup/（2026/10/05，改了要再 rsync，指令在 CLAUDE.local.md）
 └── sources/
     ├── week01/      ← 第一堂：intro.html（課程介紹）、homework.html（課後作業）；Claude 撰寫，可直接編輯
     ├── week02/      ← 第二堂：research_structure.html、memo.html、homework.html、img/；Claude 撰寫
@@ -375,7 +375,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   都要同步更新該頁的「老師的待辦／請 Claude 做的待辦／自動公開時程／單元進度／歷程」，老師靠它記得做到哪裡。
 
 ### 待辦
-- 把 `private/`（seal.key、teacher/、照片、PDF）備份到 Google Drive 存檔區（老師：留到後面做）。
+- ~~把 `private/` 備份到 Google Drive 存檔區~~：2026/10/05 完成（存檔區 private-backup/）。
 - 老師自己刪除：2026 資料庫 4 筆「【空白列｜請老師刪除】」、「2024 Course Schedule Bachalor (1)」整個資料庫。
 - 單元三個案研究（第 9～12 堂）已完成（2026/09/28）；單元四口語分析（第 13～17 堂）進行中。
 - 第 7 堂上課後依今年演講更新；第 5 堂老師可能還要修改（改完要 seal.py 並推送）。
