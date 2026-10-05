@@ -43,7 +43,7 @@
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
 ├── week04/index.html ← 建置產物：第四堂
-├── private/         ← （.gitignore 排除，只在老師 Mac、沒有備份）seal.key（加密密鑰）、preview/（老師模式建置）、
+├── private/         ← （.gitignore 排除，只在老師 Mac；2026/10/05 起備份到 Drive 存檔區 private-backup/）seal.key（加密密鑰）、preview/（老師模式建置）、
 │                       teacher/unit1/（從 Notion 下載的照片、PDF、錄影連結 manifest.json，只給老師模式用）、removed/（移除的舊分頁）
 │                       正式存檔區在 Google Drive，見下方「存檔區」；private/ 已備份到存檔區 private-backup/（2026/10/05，改了要再 rsync，指令在 CLAUDE.local.md）
 └── sources/
@@ -371,7 +371,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   不再用「課前準備」分頁。自由作業要標示「自由作業」。
 - **老師模式**：顯示全部內容與學生公開狀態；錄影連結、老師投影片、期刊全文 PDF 只放老師模式（來自 `private/teacher/`，不進 repo 也不進 sealed）。
   每次修改講義後都要重新 `--preview` 並更新老師模式 artifact。
-- **客戶名稱**：單元一講義一律用一般化例子，不出現客戶名稱（老師：學生版匿名、老師講義用全名）。第 5 堂維持老師先前同意的真名（是否改匿名：先不做）。
+- **客戶名稱**：單元一講義一律用一般化例子，不出現客戶名稱（老師：學生版匿名、老師講義用全名）。第 5 堂兩個個案 2026/10/05 起改寫 H Company、L Company（取代先前的真名）。
 - **APA**：年代照原文獻著錄（民國年不改）；圖與表的編號與標題依 APA 7 都放在上方（講義已加說明）；Scopus 說法照網站（期刊、會議、叢書）。
 - 講義內容以「上課補充」標籤標出由 Notion 筆記整理加入的部分；原始上傳檔（第三堂分頁 1～6）不直接改，用 build.py 插入片段。
 - 資料流向維持只往更公開的方向；Notion 以外的工作區（如 DITLDESIGN 會議記錄）**先不讀**。
@@ -382,7 +382,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - ~~把 `private/` 備份到 Google Drive 存檔區~~：2026/10/05 完成（存檔區 private-backup/）。
 - 老師自己刪除：2026 資料庫 4 筆「【空白列｜請老師刪除】」、「2024 Course Schedule Bachalor (1)」整個資料庫。
 - 單元三個案研究（第 9～12 堂）已完成（2026/09/28）；單元四口語分析（第 13～17 堂）進行中。
-- 第 7 堂上課後依今年演講更新；第 5 堂老師可能還要修改（改完要 seal.py 並推送）。
+- 第 7 堂上課後依今年演講更新；第 5 堂 2026/10/05 老師確認不再修改。
 - 每堂自動公開後，把 Notion 該列改為「已上線」並填網頁講義網址（雲端流程不會自動更新 Notion）。
 
 ## 工作紀錄：2026/09/28–30 session（單元三個案研究、單元四口語分析、Notion 全面整理）
@@ -450,7 +450,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 ### 待辦
 - 學生填寫分組名單：之後做。老師建 Google 表單（日期、課程、組別、組員姓名）放存檔區 students/ → 在第 4 堂分頁 5 加「填寫分組名單」按鈕；
   回覆複製姓名、組別貼進抽籤工具。學生資料不進 repo。
-- 第 5 堂可能還要改（10/07 公開）；第 7、11、13 堂業師講座後更新；第 13 堂簡報照片公開前確認講者同意。
+- ~~第 5 堂可能還要改~~（2026/10/05 確認不改）；第 7、11、13 堂業師講座後更新；第 13 堂簡報照片公開前確認講者同意。
 
 ### 教訓
 - 內建瀏覽器的預覽伺服器（port 8765）隔一段時間會停，navigate 失敗時重新 `preview_start site`。
@@ -503,6 +503,31 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   後台一律用網頁內確認框（admin.html 的 `ask()`），並在失敗時顯示錯誤訊息。
 - 資料庫改動（新增欄位、規則）一定要**先請老師執行 SQL、確認生效，再上線網頁**，否則網頁會找不到欄位而出錯。
 - 學生姓名、學號、E-mail 等個資不寫進 CLAUDE.md（公開 repo）。
+
+## 工作紀錄：2026/10/03–05 session（整理總覽、存檔區整理、第 5 堂老師模式補充、客戶匿名）
+
+詳細網址、Drive 資料夾 ID、客戶真名對照寫在 `CLAUDE.local.md`。
+
+### 做了什麼
+- **第 5 堂**：老師看過預覽，內容不改，照排程 10/07 公開。個案客戶改寫 **H Company**（永續服務個案）、**L Company**（房屋銷售練習），
+  學生版重新加密推送、新網站 `./deploy.sh --content` 同步；第 6 堂一筆舊更新紀錄一併改。投影片與照片裡的真名、旗下品牌名（Dyson、Restyle 2050、Refresh）老師說先不處理。
+- **第 5 堂老師模式補充**（學生看不到）：老師提供 2023 上課簡報（Keynote，存檔區 week05/）。Keynote 用 `osascript` 輸出 PDF
+  （要 `skipped slides:true` 才會含隱藏頁，頁碼才對得上 .pptx），pymupdf 轉圖。內容放 `private/teacher/week05/`：
+  - 分頁 1「訪談的基礎與方法」（新增，排第一）：整理 Purdue Writing Lab 與 Valenzuela & Shrivastava (2002) 兩份英文教材，附 7 筆參考文獻（Dick、McNamara、Patton、Kvale & Brinkmann 依一般知識，未逐筆查證）。
+  - 分頁 3 六階段後加「個案細看：從訪綱到三個分析框架」（訪綱四步、受訪者篩選與走查、summary 與共同／相異／特別點、體驗維度、人物誌象限、AAPR）。
+  - 分頁 4 加作業範例「體驗情境板」。
+  - 老師要求：**不標簡報頁數**、不用「補充」字樣與說明框。
+- **build.py**：`teacher_extras()` 老師模式補充機制（見「定時公開」一節）。
+- **給講者的單頁**：第 5 堂「個案與練習」轉成單一 HTML（`private/share/`，去掉跨分頁連結與本週作業），寄給照片中的專案設計師。
+- **Google Drive 存檔區**：week01～16 的 guest／notes／papers／recordings 子資料夾取消（4 個檔案移到各週第一層，64 個空資料夾移除），
+  補建 week17；README 由老師貼上新版說明（這個 session 沒有 Google Docs 連接器，Drive 連接器改不了文件內容）。
+- **private/ 備份**到存檔區 `private-backup/`（Drive 桌面版本機路徑 rsync，只增不刪）；Notion 總覽加「資料存放地圖」圖（PNG，headless Chrome 截圖後上傳）。
+
+### 教訓
+- Notion 頁面的圖片區塊不能用 update_content 比對替換：先插入新圖，再用 REST API `delete-a-block` 刪舊圖。
+- Drive 連接器只能改檔名與位置；要改 Google 文件內容需要 Google Docs 連接器（開新對話才會載入），否則寫好段落請老師貼。
+- 只能在「2026 QDS 存檔區」裡操作：找本機路徑時不要列出「共用雲端硬碟」等其他資料夾。
+- 老師模式的 Tailwind 快取不可寫進公開的 `tw_cache/`，preview 建置也不可清公開快取（已在 build.py 處理）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
