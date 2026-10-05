@@ -340,6 +340,10 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   https://claude.ai/artifact/FJmk7vLnNMxHZq52mBnYhd —— 主頁用 `private/preview/index.html` 去掉 doctype/html/head/body 外殼，
   `files` 帶 `weekNN/index.html`。**每次修改講義後都要重新 --preview 並更新這個 artifact。**
   `QDS_NOW=2026-10-07T07:00 python3 build.py` 可模擬某個時間點（測完要再跑一次一般 build 還原）。
+- **老師模式補充**（2026/10/05）：只給老師的講義放 `private/teacher/weekNN/`（`teacher.json` 指定插入既有分頁的片段、或新增分頁與位置），
+  build.py 的 `teacher_extras()` 只在 `--preview` 讀入；不進公開 repo、不進 sealed、舊網站與新網站都沒有。新增分頁插在中間時，
+  原分頁裡的「分頁 N」與 `location.hash` 自動順移。老師模式專用的 Tailwind 快取放 `private/tw_cache_preview/`。
+- **個案客戶名稱**（2026/10/05 老師決定）：第 5 堂兩個個案一律寫 H Company、L Company（對照在 CLAUDE.local.md）；圖片與旗下品牌名暫不處理。
 - 機器人會推 commit 到 main：**本機推送前一定先 `git pull --rebase`**。
 - 某堂公開後：可從 `.gitignore` 移除該堂、把原始檔一般 commit；並更新 Notion 該列「網頁講義」「整理狀態＝已上線」。
 

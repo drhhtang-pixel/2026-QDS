@@ -82,6 +82,7 @@ def inline_imgs(h,d):
 TWCDN='<script src="https://cdn.tailwindcss.com"></script>'
 TWBIN=ROOT/'node_modules'/'.bin'/'tailwindcss'
 TWCACHE=ROOT/'tw_cache'
+TWPRIV=ROOT/'private'/'tw_cache_preview'
 TWVER=json.loads(read(ROOT/'package.json'))['devDependencies']['tailwindcss']
 tw_used=set()
 
@@ -102,10 +103,11 @@ def tailwind(h,name):
         h=h[:m.start()]+h[end+len('</script>'):]
     f=TWCACHE/(hashlib.sha256((TWVER+cfg+h).encode()).hexdigest()[:16]+'.css')
     tw_used.add(f.name)
+    if PREVIEW and not f.exists(): f=TWPRIV/f.name   # 老師模式才有的內容：快取放 private/，不進公開 repo
     if not f.exists():
         if not TWBIN.exists():
             raise SystemExit('「%s」需要重新編譯 Tailwind：請先在專案資料夾執行 npm install（需要 Node.js）'%name)
-        TWCACHE.mkdir(exist_ok=True)
+        f.parent.mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory() as d:
             d=Path(d)
             (d/'page.html').write_text(h,encoding='utf-8')
@@ -113,7 +115,7 @@ def tailwind(h,name):
             (d/'tailwind.config.js').write_text('module.exports={...(%s),content:[%s]};'%(cfg,json.dumps(str(d/'page.html'))),encoding='utf-8')
             subprocess.run([str(TWBIN),'-c',str(d/'tailwind.config.js'),'-i',str(d/'in.css'),'-o',str(f),'--minify'],
                            check=True,capture_output=True)
-        print('  Tailwind 編譯：%s → tw_cache/%s'%(name,f.name))
+        print('  Tailwind 編譯：%s → %s'%(name,f.relative_to(ROOT)))
     # 跟 CDN 一樣放在 <head> 最後（CDN 是執行時把 <style> 加到 head 尾端），講義自己的樣式順序才不會變
     h=h.replace(TWCDN,'')
     assert h.count('</head>')==1,name
@@ -310,6 +312,27 @@ def opens(n):
         t=datetime.datetime(2000,1,1,tzinfo=TZ); return t,t
     d=datetime.datetime.strptime(SCHEDULE[n-1][0],'%Y/%m/%d').replace(hour=OPEN_HOUR,tzinfo=TZ)
     return d-datetime.timedelta(days=PREP_DAYS),d
+def teacher_extras(n,ds):
+    """老師模式補充（2026/10/05 老師要求）：private/teacher/weekNN/teacher.json 只在 --preview 讀入，
+    內容不進公開 repo、不進加密檔，舊網站與新網站都不會有。片段旁 img/ 的照片照樣內嵌。
+    格式：{"inserts":[{"tab":分頁序號,"before":"原講義中的字串","file":"片段.html","log":[日期,說明]}],
+           "tabs":[{"title","file","pos":插入位置,"log":[[日期,說明],…]}]}（不寫 pos 就加在最後）"""
+    d=ROOT/'private'/'teacher'/('week%02d'%n); f=d/'teacher.json'
+    if not f.exists(): return ds
+    cfg=json.loads(read(f)); ds=list(ds)
+    for x in cfg.get('inserts',[]):
+        t,h,lg=ds[x['tab']-1]; assert h.count(x['before'])==1,(n,x['file'])
+        h=h.replace(x['before'],inline_imgs(read(d/x['file']),d)+x['before'])
+        ds[x['tab']-1]=(t,h,lg+[tuple(x['log'])])
+    for x in cfg.get('tabs',[]):
+        new=(x['title'],plain(d/x['file']),[tuple(y) for y in x['log']])
+        pos=x.get('pos',len(ds)+1)
+        if pos<=len(ds):                 # 插在中間：原有分頁裡的「分頁 N」與跳轉 hash 往後順移（「第X堂分頁 N」不動）
+            sh=lambda m:m.group(1)+str(int(m.group(2))+(int(m.group(2))>=pos))+m.group(3)
+            ds=[(t,re.sub(r"(location\.hash=')(\d+)(')",sh,re.sub(r'((?<!堂)分頁 )(\d+)()',sh,h)),lg) for t,h,lg in ds]
+        ds.insert(pos-1,new)
+    return ds
+
 SRCDOCS={}; HASPREP={}
 for n in WEEKS:
     wdir=SRC/('week%02d'%n)
@@ -321,6 +344,7 @@ for n in WEEKS:
     if HASPREP[n]:
         pl=json.loads(read(wdir/'tabs.json'))['prep_log']
         ds=[('課前準備',plain(prep),[tuple(x) for x in pl])]+ds
+    if PREVIEW: ds=teacher_extras(n,ds)
     SRCDOCS[n]=ds
 lint=[e for n,ds in SRCDOCS.items() for i,(t,h,lg) in enumerate(ds,1) for e in apa_lint(n,i,h)]
 if lint:
@@ -445,7 +469,7 @@ home=home.replace('/*UPDATED*/',max(b[2] for b in built.values()))
 OUT.mkdir(parents=True,exist_ok=True)
 (OUT/'index.html').write_text(home,encoding='utf-8')
 print('%s  課程目錄%s'%('index.html' if not PREVIEW else 'private/preview/index.html','（預覽：全部內容）' if PREVIEW else ''))
-if len(SRCDOCS)==len(WEEKS):             # 清掉已不再使用的舊快取（有未解開的加密講義時不清，以免刪掉它們的快取）
+if len(SRCDOCS)==len(WEEKS) and not PREVIEW:   # 清掉已不再使用的舊快取（有未解開的加密講義時不清，以免刪掉它們的快取）
     for f in TWCACHE.glob('*.css'):
         if f.name not in tw_used: f.unlink()
 
