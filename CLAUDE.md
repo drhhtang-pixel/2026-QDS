@@ -197,7 +197,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 ### 在 Google Drive 建立存檔區（已完成，2026/09/26）
 - 位置：老師公司帳號的「我的雲端硬碟」根目錄（老師選擇另建，不放進共用雲端硬碟既有的「2026 QDS」）。
-- 內容：week01～week16（2026/10/05 起不再分子資料夾，檔案直接放在各週第一層）、Papers、notion-export、students、private-backup、Google 文件「README｜存檔區使用說明」。
+- 內容：week01～week17（week17 於 2026/10/05 補建；2026/10/05 起不再分子資料夾，檔案直接放在各週第一層）、Papers、notion-export、students、private-backup、Google 文件「README｜存檔區使用說明」。
 - 權限：只有老師本人（owner），未分享給任何人。
 - 第四堂論文 PDF 已由老師上傳到 `week04/2018 Design Thinking Review.pdf`（原在 week04/papers/，2026/10/05 移到第一層）；
   同資料夾另有老師放入的 Auernhammer (2021) Stanford design thinking、2024 AI 與美妝消費兩篇 PDF。
