@@ -18,6 +18,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
+    # 只在公開 repo 執行：新網站的私有 repo 是從這裡複製的，也帶有本檔，但沒有解密金鑰（2026/10/07 曾因此失敗）
+    if: github.repository == 'drhhtang-pixel/2026-QDS'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
