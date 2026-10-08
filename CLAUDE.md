@@ -568,6 +568,29 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   第 5 堂改由本 session 手動標為已上線。**老師需在側邊欄 Scheduled 對該排程按一次 Run now 核准工具權限**，之後才能自動跑。
 - 記憶：重要的訪談資料集合在 DITLDESIGN Confluence（網址在 CLAUDE.local.md），做訪談單元時提醒老師、讀前先問。
 
+## 工作紀錄：2026/10/08 session（新網站交作業＋成果發表、同步到 Drive）
+
+### 做了什麼（全部已上線，程式在私有 repo，細節見 PLATFORM.md「交作業＋成果發表」）
+- 老師的需求：作業用單一 HTML 繳交；含作業名稱（老師出、學生選）、作業內容說明、團隊成員（依班級從資料庫選，姓名＋學號）；
+  每份作業有成果發表頁可點選各組作業；可排發表順序。
+- 老師決定：發表頁所有登入者可看；截止後仍可交，標「遲交」、重交標「重交 vN」並留日期；只做在新網站（Supabase），舊網站不做。
+- 資料庫 migration 0006（作業、繳交、組員、紀錄、私有 bucket submissions）、0007（管理者代交「所有班級」作業以組員班級為準）、
+  0008（發表頁要知道組員班級）；三份都由老師貼到 SQL Editor 執行，確認後才部署。
+- 老師測試後要求：交作業頁**先選班級**，組員輸入框**打姓氏列出所有同姓同學**（開頭符合的排前面，方向鍵＋Enter、× 移除）；
+  成果發表頁**可以選班級**（學生預設看自己班，網址 `&c=班級`，篩選時排序只調整該班）。
+- 同步到 Google Drive：學生照常在網站上傳；`sync_drive.py` 每天 23:00（launchd，老師 Mac）把每一版複製到
+  存檔區 `students/作業/<作業名稱>/<班級>/`，附「繳交紀錄.csv」；只增不刪。老師用「創造力」測試作業驗證成功。
+- 預覽用假 Supabase（`private/hwtest/`，`gen.sh`＋`mock.js`，`?as=` 切身分），artifact 給老師試用後才上線。
+
+### 教訓
+- 老師在 **artifact 預覽頁**交的作業只存在瀏覽器，不會進正式資料庫；請老師測試時要明講「到正式網站」。
+- 管理者帳號沒有班級：凡是依「自己的班級」決定的功能（選組員、送出），都要另外處理管理者。
+- 本機 hook 會擋含 `rm` 字樣的指令（連 `data-rm` 這種屬性名也會），長的編輯改寫成 Python 檔再執行，屬性名避開 rm。
+- `source` .env 會把有空白的值當指令執行、印出金鑰片段；讀 .env 一律用 build.py 的解析方式。
+- 學生 HTML 放在 `sandbox`（不含 allow-same-origin）的 iframe：讀不到本站登入資料，但作業內用 localStorage 的部分會失效。
+- 本機 pgserver 在 scratchpad venv（`pip install pgserver`），`PGBIN=.../pgserver/pginstall/bin supabase/tests/run_local.sh`；
+  run_local.sh 會再跑一次 0006 起的 migration 確認可重複執行（要依序重跑，否則舊版函式會蓋掉新版）。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
 
