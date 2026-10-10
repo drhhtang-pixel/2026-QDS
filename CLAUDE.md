@@ -495,7 +495,8 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 老師在後台「作業」分頁出作業（名稱、說明、班級、截止時間、公開）；學生在「交作業」選作業、寫作業內容說明、勾同班組員（姓名＋學號）、上傳單一 HTML（10 MB 內）。
 - 截止後仍可交，標「遲交」；第二次起標「重交」並留每次日期。同一作業一人只能在一組。
 - 「成果發表」頁所有登入者可看，點組別顯示該組 HTML（沙箱 iframe）；老師可排順序或隨機排序。學號只給同班與老師看。
-- 作業檔案每天 23:00 由老師 Mac 自動複製到 Google Drive 存檔區 students/作業/<作業名稱>/<班級>/（每版都留，附繳交紀錄.csv）。
+- 作業檔案每天 23:00 由 Claude App 排程「【每天 23:00】QDS 作業同步到 Drive」複製到 Google Drive 存檔區 students/作業/<作業名稱>/<班級>/（每版都留，附繳交紀錄.csv；App 要開著）。
+- 學生可自己退出組別（2026/10/11，0009）：隨時可退、留紀錄；別人不能把退出的人加回；全部退出的組只給老師看。
 - 細節（資料表、RPC、測試方式）在 PLATFORM.md；舊網站（GitHub Pages）不做。
 
 ### 切換舊網站（等老師通知，尚未執行）
@@ -578,7 +579,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   0008（發表頁要知道組員班級）；三份都由老師貼到 SQL Editor 執行，確認後才部署。
 - 老師測試後要求：交作業頁**先選班級**，組員輸入框**打姓氏列出所有同姓同學**（開頭符合的排前面，方向鍵＋Enter、× 移除）；
   成果發表頁**可以選班級**（學生預設看自己班，網址 `&c=班級`，篩選時排序只調整該班）。
-- 同步到 Google Drive：學生照常在網站上傳；`sync_drive.py` 每天 23:00（launchd，老師 Mac）把每一版複製到
+- 同步到 Google Drive：學生照常在網站上傳；`sync_drive.py` 每天 23:00（2026/10/11 起改用 Claude App 排程）把每一版複製到
   存檔區 `students/作業/<作業名稱>/<班級>/`，附「繳交紀錄.csv」；只增不刪。老師用「創造力」測試作業驗證成功。
 - 預覽用假 Supabase（`private/hwtest/`，`gen.sh`＋`mock.js`，`?as=` 切身分），artifact 給老師試用後才上線。
 
@@ -587,6 +588,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 管理者帳號沒有班級：凡是依「自己的班級」決定的功能（選組員、送出），都要另外處理管理者。
 - 本機 hook 會擋含 `rm` 字樣的指令（連 `data-rm` 這種屬性名也會），長的編輯改寫成 Python 檔再執行，屬性名避開 rm。
 - `source` .env 會把有空白的值當指令執行、印出金鑰片段；讀 .env 一律用 build.py 的解析方式。
+- **launchd 排程的 python 寫得了新檔、但讀不了 Google Drive 資料夾裡既有的檔案**（Operation not permitted）；老師不想給 python 完整磁碟取用權限，改用 Claude App 排程。
 - 學生 HTML 放在 `sandbox`（不含 allow-same-origin）的 iframe：讀不到本站登入資料，但作業內用 localStorage 的部分會失效。
 - 本機 pgserver 在 scratchpad venv（`pip install pgserver`），`PGBIN=.../pgserver/pginstall/bin supabase/tests/run_local.sh`；
   run_local.sh 會再跑一次 0006 起的 migration 確認可重複執行（要依序重跑，否則舊版函式會蓋掉新版）。
