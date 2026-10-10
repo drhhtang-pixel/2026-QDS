@@ -591,7 +591,20 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - **launchd 排程的 python 寫得了新檔、但讀不了 Google Drive 資料夾裡既有的檔案**（Operation not permitted）；老師不想給 python 完整磁碟取用權限，改用 Claude App 排程。
 - 學生 HTML 放在 `sandbox`（不含 allow-same-origin）的 iframe：讀不到本站登入資料，但作業內用 localStorage 的部分會失效。
 - 本機 pgserver 在 scratchpad venv（`pip install pgserver`），`PGBIN=.../pgserver/pginstall/bin supabase/tests/run_local.sh`；
-  run_local.sh 會再跑一次 0006 起的 migration 確認可重複執行（要依序重跑，否則舊版函式會蓋掉新版）。
+  run_local.sh 最後會再跑一次**最新一份** migration 確認可重複執行（0009 改了函式回傳欄位，舊的 0006 不能再重跑）。
+
+### 2026/10/11 追加：退出組別、Drive 同步改用 App 排程
+- 老師的問題：同學可能被別人加進組別。老師決定「可自己退出」（不採加入要本人確認）、隨時可退並留紀錄、全部退出的組留在後台由老師處理。
+- migration 0009（老師已執行）：`submission_history.action`（submit／leave）、`leave_group()`；別人不能把退出的人加回（老師可以）；
+  `assignment_groups` 多回傳最後送出者姓名，無組員的組只給老師看。交作業頁顯示「你被〇〇加入這一組」與「退出這一組」（頁內確認）；
+  後台與發表頁標「無組員」。
+- Drive 同步：CSV 加「動作」欄；已下載的檔案記在 `private/logs/sync_drive_state.json`（組員變動後檔名不同也不重複下載）。
+- launchd 排程 10/10 兩次失敗（macOS 擋讀取 Drive 既有檔案），老師不給 python 完整磁碟取用權限 →
+  停用 launchd（plist 移到 private/removed/），改用 Claude App 排程「【每天 23:00】QDS 作業同步到 Drive」；
+  老師 10/11 按 Run now 核准（選 Always allow），之後每天自動跑，App 要開著。
+- 教訓：新的 App 排程第一次執行會停在 Bash 權限確認（History 顯示 Running），要請老師點進那次執行、選 Always allow；
+  可用 list_task_runs＋list_events 查看卡在哪裡。
+- 學生退出後讀不到該組的繳交紀錄（RLS：組員或老師才可讀），這是預期行為。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
