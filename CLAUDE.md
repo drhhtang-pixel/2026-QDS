@@ -43,7 +43,7 @@
 ├── index.html       ← 建置產物：課程目錄，不要手動編輯
 ├── week03/index.html ← 建置產物：第三堂，單一自足檔案（約 2.4 MB），不要手動編輯
 ├── week04/index.html ← 建置產物：第四堂
-├── private/         ← （.gitignore 排除，只在老師 Mac；2026/10/05 起備份到 Drive 存檔區 private-backup/）seal.key（加密密鑰）、preview/（老師模式建置）、
+├── private/         ← （.gitignore 排除，只在老師 Mac；2026/10/05 起備份到 Drive 存檔區 private-backup/，**.env 不備份**（2026/10/12 老師決定，指令在 CLAUDE.local.md））seal.key（加密密鑰）、preview/（老師模式建置）、
 │                       teacher/unit1/（從 Notion 下載的照片、PDF、錄影連結 manifest.json，只給老師模式用）、removed/（移除的舊分頁）
 │                       正式存檔區在 Google Drive，見下方「存檔區」；private/ 已備份到存檔區 private-backup/（2026/10/05，改了要再 rsync，指令在 CLAUDE.local.md）
 └── sources/
