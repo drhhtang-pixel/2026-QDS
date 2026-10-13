@@ -619,6 +619,18 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 教訓：加「軟刪除」欄位後，**所有統計、列表的查詢都要逐一檢查是否排除已刪除**（管理者因 RLS 讀得到全部，最容易漏）；
   這次後台與發表頁有排除，只漏了作業列表頁。
 
+### 2026/10/12–13 追加：private/ 備份內容盤點、金鑰與 Drive 備份
+- 老師問 private-backup 的 388 個檔案是什麼：teacher/（256，179 MB：論文副本與頁面圖、單元一／三／四照片與資料、第 5、9 堂老師模式補充）、
+  tw_cache_preview/（54）、logs/（29：盤點報告、Notion 紀錄、同步紀錄）、preview/（23：老師模式網站）、hwtest/（10）、removed/（5）、
+  old_materials/（3）、share/（1）、最上層 5 個（seal.key、.env、publish_state.json、註冊公告、截圖測試頁）。
+- 老師問 .env 其他 Claude session 看不看得到：**本機 Claude（含排程）看得到**（以老師帳號身分執行）；雲端 session 從 GitHub 看不到
+  （已確認 .env、seal.key 從未進過兩個 repo 的歷史）；**有 Google Drive 連接器的 claude.ai 對話技術上讀得到 Drive 備份**
+  （連接器授權是整個帳號，「只在存檔區操作」只是行為規則）。
+- 老師決定：**.env 不放 Drive 備份** → Drive 上那份用連接器移到垃圾桶（老師明確同意；30 天後自動清除，要立刻永久刪除由老師在 Drive 垃圾桶操作），
+  之後備份 rsync 加 `--exclude .env`（指令在 CLAUDE.local.md）。seal.key 繼續備份（弄丟就解不開未公開講義）。
+- 2026/10/13 依新指令再備份：387 個檔案、237 MB，確認沒有 .env。
+- 回答「金鑰在哪」時只給路徑、用 Finder 選取（ccd_host reveal_path），**不印出內容**；提醒 Finder 用 ⌘⇧. 顯示隱藏檔。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
 
