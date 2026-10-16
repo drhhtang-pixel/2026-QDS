@@ -447,7 +447,7 @@ if PREVIEW:
         home=home.replace('</main>','<section style="margin:2rem 0;padding:1rem 1.2rem;border-radius:8px;background:#f3f0ff;border:1px solid #c9bdf5;color:#2d2350">'
             '<h2 style="margin:0 0 .5rem;font-size:1.1rem">教學資料（只有老師看得到）</h2><ul style="margin:0;padding-left:1.2rem;font-size:.9rem">%s</ul></section>\n</main>'%rows,1)
 # 新網站上線公告橫幅（2026/10/02 老師要求；只放舊網站，老師模式與新平台不放）
-NEWSITE='https://ditldesign-users-control.pages.dev/'
+NEWSITE='https://qds.ditldesign.com/'
 if not PREVIEW and '--platform' not in sys.argv:
     home=home.replace('<main class="wrap">','<main class="wrap">\n  <a class="newsite" href="%s" target="_blank" rel="noopener">'
         '<span class="ico" aria-hidden="true">📢</span><span><b>課程講義新網站上線，請註冊</b>'

@@ -463,7 +463,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 
 ## 新網站：登入＋分頁權限（2026/10/01–03 session）
 
-新網站 https://ditldesign-users-control.pages.dev/ 已上線，與本網站（GitHub Pages）**平行運作**。
+新網站 https://qds.ditldesign.com/ 已上線（2026/10/16 起用自訂網域；舊網址 https://ditldesign-users-control.pages.dev/ 仍有效，DNS 與設定細節見 PLATFORM.md），與本網站（GitHub Pages）**平行運作**。
 程式、金鑰、帳號等細節**不寫在這裡**（公開 repo）：說明在私有 repo 的 `PLATFORM.md`，本機重點在 `CLAUDE.local.md`。
 
 ### 老師的需求與決定
