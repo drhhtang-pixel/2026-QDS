@@ -678,7 +678,9 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   - 課堂抽籤 `draw_names.html`：一人一組；碩士班 DT5516701、在職專班 DT5516702。名單由講義 script 透過外框的 `window.parent.QDS.sb`
     呼叫既有 RPC `classmates` 即時讀取（只顯示姓名，**不寫進講義檔與 repo**）；老師兩班都讀得到，同學只讀得到自己班。
     不在新網站（老師模式預覽）時讀不到名單，改顯示貼名單框。
-- 2026/10/27 private 備份失敗：Drive 上的舊備份檔是「只在雲端」（dataless），Google Drive 桌面版抓不下來而逾時；請老師檢查 Drive 桌面版後再備份。
+- 2026/10/27 private 備份：rsync 一直失敗（mmap: Operation timed out），因為 Drive 上的舊備份檔是「只在雲端」（dataless），
+  讀它會逾時。寫新檔不受影響，所以改用「找出有變的檔案 → 複製成暫存檔名 → 改名覆蓋」，不讀 Drive 上的舊檔，34 個檔案全部完成。
+  rsync 再失敗時照這個做法（腳本思路：`rsync -ani` 列出 `>f` 開頭的檔案，`shutil.copy2` 到 `.tmp_` 檔再 `os.replace`）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
