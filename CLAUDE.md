@@ -651,6 +651,24 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   一位沒填學號、單位為公司名，已提醒老師可能是在職生／旁聽（老師仍設為上課的同學）。
 - 之後盤點時記得檢查：`role='student'` 且 `class_code` 為空的帳號。
 
+## 2026/10/27：第 8 堂新增三分頁、第 9／10 堂對調
+
+- **第 8 堂**（10/28 開放）分頁改為：1 課前考試：創造力與文化（老師出的三題，提示連第 6 堂）→ 2 Darmok：故事是溝通的捷徑
+  → 3 Critical Form → 4 訪談分析：認知心理學與語言類比 → 5 讀論文的提醒 → 6 課後作業。
+  - 分頁 2、4 來自老師提供的兩份 HTML（放在 private/incoming/，下載資料夾 Claude 讀不到，請老師用 mv 指令搬進專案），
+    改成全站風格；引用改 `Eckert & Stacey (2000)`、頁碼 `pp. x–y`；6 筆 DOI 驗證，Clark & Brennan (1991) 補正式 DOI 10.1037/10096-006。
+  - Darmok 兩張 StarTrek.com 劇照：老師決定保留（`sources/week08/img/darmok_*.jpg`，標來源與「僅供課堂教學使用」）。
+  - 讀論文的提醒裡的「分頁 1」與 `location.hash` 改為 3。
+- **第 7 堂**課後作業（已公開）加：第 8 堂課前考試預告三題、第 9 堂兩篇論文閱讀提醒。
+- **第 9、10 堂對調**（老師決定）：`sources/week09`↔`week10` 資料夾對調，**課後作業留在原堂次**（第 9 堂仍指定 Park-Lee、Steen；第 10 堂仍指定 Suwa）；
+  SCHEDULE 對調；Critical Form 頁首堂次與日期、個案練習、第 14／17 堂交叉引用、老師模式 HBR 清單（移到 private/teacher/week10）一併改。
+  閱讀只剩一週（少於提前兩週原則，老師知道）：第 7、8 堂課後作業寫「只有一週，請盡早閱讀」，用頁內 script 在
+  **2026-10-28 23:59 後自動隱藏**（`data-oneweek`／`data-afterweek`），改顯示「請在上課前讀完」，不必再部署。
+- 新網站 `deploy.sh --content` 後，第 10 堂殘留舊分頁「Critical Form：境隨心轉」（storage `qds-2026/w10/75ffa82a.html`），
+  已用 service key 從 tabs 表與 handouts 儲存區刪除，並移除 publish_state.json 對應項目。**堂次對調後一定要查殘留分頁。**
+- Notion：資料庫兩列改日期與 week、頁首加調整說明；總覽歷程與公開時程已更新。Drive 存檔區資料夾互換名稱（week09 個案、week10 Case Study），檔案跟著內容走。
+- main 不再 commit 建置產物（index.html、weekNN/）：舊網站已停用，week05 以後的 HTML 只放新網站（有登入權限）。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
 
