@@ -651,36 +651,53 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   一位沒填學號、單位為公司名，已提醒老師可能是在職生／旁聽（老師仍設為上課的同學）。
 - 之後盤點時記得檢查：`role='student'` 且 `class_code` 為空的帳號。
 
-## 2026/10/27：第 8 堂新增三分頁、第 9／10 堂對調
+## 2026/10/27：第 8 堂改為 9 個分頁、第 9／10 堂對調
 
-- **第 8 堂**（10/28 開放）分頁改為：1 課前考試：創造力與文化（老師出的三題，提示連第 6 堂）→ 2 Darmok：故事是溝通的捷徑
-  → 3 Critical Form → 4 訪談分析：認知心理學與語言類比 → 5 讀論文的提醒 → 6 課後作業。
-  - 分頁 2、4 來自老師提供的兩份 HTML（放在 private/incoming/，下載資料夾 Claude 讀不到，請老師用 mv 指令搬進專案），
-    改成全站風格；引用改 `Eckert & Stacey (2000)`、頁碼 `pp. x–y`；6 筆 DOI 驗證，Clark & Brennan (1991) 補正式 DOI 10.1037/10096-006。
-  - Darmok 兩張 StarTrek.com 劇照：老師決定保留（`sources/week08/img/darmok_*.jpg`，標來源與「僅供課堂教學使用」）。
-  - 讀論文的提醒裡的「分頁 1」與 `location.hash` 改為 3。
-- **第 7 堂**課後作業（已公開）加：第 8 堂課前考試預告三題、第 9 堂兩篇論文閱讀提醒。
-- **第 9、10 堂對調**（老師決定）：`sources/week09`↔`week10` 資料夾對調，**課後作業留在原堂次**（第 9 堂仍指定 Park-Lee、Steen；第 10 堂仍指定 Suwa）；
+### 第 8 堂（10/28 07:00 開放）最後的分頁
+| # | 分頁 | 來源檔 | 說明 |
+|---|---|---|---|
+| 1 | Memo | memo.html | 老師的話三點（AI 是現代的個人化工具、讀 paper 多輪後問自己兩件事、數位產業的競爭）。**刻意與全站不同的手寫筆記風格**：米黃顆粒橫線紙（SVG feTurbulence 雜訊）、霞鶩文楷＋Caveat、紅圈編號、螢光筆與波浪底線，署名「— drhhtang」＋星星。老師的話照原文，只改「Apple Store」→「App Store」（請老師確認過理由） |
+| 2 | 課前考試：創造力與文化 | pre_exam.html | 老師出的三題，提示連第 6 堂分頁 1 |
+| 3 | Darmok：故事是溝通的捷徑 | darmok_shared_stories.html | 老師提供的 HTML 改成全站風格；兩張 StarTrek.com 劇照老師決定保留（標來源、僅供教學） |
+| 4 | 課堂抽籤 | draw_names.html | 見下方 |
+| 5 | Critical Form：Ethnographies in the Front End | Rosenthal_Capper_critical_form.html | Rosenthal & Capper (2006)，第 7 堂的閱讀；agent 依原文 PDF 撰寫，4 個表格重建，5 筆 DOI 驗證；原文表 2 與內文的樣本數（18／12）、週數（6／8）不一致，筆記已標出 |
+| 6 | Critical Form：Sources of Inspiration | Eckert_Stacey_critical_form.html | 原有 |
+| 7 | 訪談分析：認知心理學與語言類比 | interview_analysis_cognition_language.html | 老師提供的 HTML 改成全站風格；「見本堂分頁 3」＝Darmok；Clark & Brennan (1991) 補 DOI 10.1037/10096-006 |
+| 8 | 讀論文的提醒 | reading_papers_tips.html | 「見分頁 6」「回到分頁 6」＝Eckert & Stacey |
+| 9 | 課後作業 | homework.html | 第 9 堂兩篇論文（課程調整，只剩一週） |
+
+- **課堂抽籤**（老師要求「第 4 堂的抽籤機複製一份＋放碩士班名字、一人一組」）：第 4 堂是外部網站，無法預先帶名單，改為自製。
+  - 兩個按鈕：碩士班 DT5516701、在職專班 DT5516702（老師確認）。抽一位（滾動動畫）／一次排好全部順序／重新開始；名單上點一下可排除缺席者。
+  - 名單由講義 script 透過外框的 `window.parent.QDS.sb` 呼叫既有 RPC `classmates` 即時讀取，**只顯示姓名，不寫進講義檔與 repo**，資料庫不用改。
+    老師帳號兩班都讀得到；同學只讀得到自己班（課堂上用老師帳號操作）。不在新網站（老師模式預覽）時讀不到名單，顯示黃色說明與貼名單框。
+  - 右上保留第 4 堂外部抽籤機的連結。
+- 老師手寫簽名去背檔留在 `private/incoming/signature.png`（深藍墨色、透明背景），老師最後選用英文署名，沒有用。
+- 改分頁順序時頁內的「分頁 N」與 `location.hash` 都要跟著改；這次改了三輪（3→4→5→6），每次都有更新紀錄。
+
+### 第 7 堂（已公開）
+- 課後作業加：第 8 堂課前考試預告三題、第 9 堂兩篇論文閱讀提醒。
+
+### 第 9、10 堂對調（老師決定）
+- `sources/week09`↔`week10` 資料夾對調，**課後作業留在原堂次**（第 9 堂仍指定 Park-Lee、Steen；第 10 堂仍指定 Suwa）；
   SCHEDULE 對調；Critical Form 頁首堂次與日期、個案練習、第 14／17 堂交叉引用、老師模式 HBR 清單（移到 private/teacher/week10）一併改。
-  閱讀只剩一週（少於提前兩週原則，老師知道）：第 7、8 堂課後作業寫「只有一週，請盡早閱讀」，用頁內 script 在
+- 閱讀只剩一週（少於提前兩週原則，老師知道）：第 7、8 堂課後作業寫「只有一週，請盡早閱讀」，用頁內 script 在
   **2026-10-28 23:59 後自動隱藏**（`data-oneweek`／`data-afterweek`），改顯示「請在上課前讀完」，不必再部署。
-- 新網站 `deploy.sh --content` 後，第 10 堂殘留舊分頁「Critical Form：境隨心轉」（storage `qds-2026/w10/75ffa82a.html`），
-  已用 service key 從 tabs 表與 handouts 儲存區刪除，並移除 publish_state.json 對應項目。**堂次對調後一定要查殘留分頁。**
-- Notion：資料庫兩列改日期與 week、頁首加調整說明；總覽歷程與公開時程已更新。Drive 存檔區資料夾互換名稱（week09 個案、week10 Case Study），檔案跟著內容走。
-- main 不再 commit 建置產物（index.html、weekNN/）：舊網站已停用，week05 以後的 HTML 只放新網站（有登入權限）。
-- 同日追加：第 8 堂新增分頁 3「Critical Form：Ethnographies in the Front End」（Rosenthal & Capper, 2006，第 7 堂的閱讀；
-  `sources/week08/Rosenthal_Capper_critical_form.html`，agent 依原文 PDF 撰寫，PDF 老師放在存檔區 week08，本機副本 private/incoming/）。
-  Eckert & Stacey 改為分頁 4，第 8 堂共 7 個分頁；讀論文的提醒裡的分頁連結改 4。原文表 2 與內文樣本數、週數不一致，筆記已標出。
-  教訓：老師放在 Google Drive 存檔區的檔案，Claude 可以用本機路徑 cp 讀取（下載資料夾不行）。
-- 同日再追加，第 8 堂最後定為 9 個分頁：1 Memo（老師的話，手寫筆記風格：米黃顆粒橫線紙、霞鶩文楷、螢光筆，署名 drhhtang；
-  老師手寫簽名去背檔留在 private/incoming/signature.png，老師最後選不用）→ 2 課前考試 → 3 Darmok → 4 課堂抽籤 → 5 CF Rosenthal & Capper
-  → 6 CF Eckert & Stacey → 7 訪談分析 → 8 讀論文的提醒（連結指分頁 6）→ 9 課後作業。
-  - 課堂抽籤 `draw_names.html`：一人一組；碩士班 DT5516701、在職專班 DT5516702。名單由講義 script 透過外框的 `window.parent.QDS.sb`
-    呼叫既有 RPC `classmates` 即時讀取（只顯示姓名，**不寫進講義檔與 repo**）；老師兩班都讀得到，同學只讀得到自己班。
-    不在新網站（老師模式預覽）時讀不到名單，改顯示貼名單框。
-- 2026/10/27 private 備份：rsync 一直失敗（mmap: Operation timed out），因為 Drive 上的舊備份檔是「只在雲端」（dataless），
-  讀它會逾時。寫新檔不受影響，所以改用「找出有變的檔案 → 複製成暫存檔名 → 改名覆蓋」，不讀 Drive 上的舊檔，34 個檔案全部完成。
-  rsync 再失敗時照這個做法（腳本思路：`rsync -ani` 列出 `>f` 開頭的檔案，`shutil.copy2` 到 `.tmp_` 檔再 `os.replace`）。
+- 新網站 `deploy.sh --content` 後，第 10 堂殘留舊分頁「Critical Form：境隨心轉」，已用 service key 從 tabs 表與 handouts 儲存區刪除，
+  並移除 publish_state.json 對應項目。**堂次對調後一定要查殘留分頁**（第 8 堂這次只有新增與換順序，查過沒有殘留）。
+- Notion：資料庫兩列改日期與 week、頁首加調整說明；總覽歷程與公開時程已更新。Drive 存檔區資料夾互換名稱（week09 個案、week10 Case Study）。
+
+### 其他
+- main 不再 commit 建置產物（index.html、weekNN/）：舊網站已停用，week05 以後的 HTML 只放新網站（有登入權限）。build 後用 `git checkout -- index.html` 還原。
+- **private 備份**：rsync 一直失敗（mmap: Operation timed out），因為 Drive 上的舊備份檔是「只在雲端」（dataless），讀它會逾時；寫新檔不受影響。
+  改用「`rsync -ani` 列出 `>f` 開頭的檔案 → `shutil.copy2` 成 `.tmp_` 檔 → `os.replace` 覆蓋」，不讀 Drive 上的舊檔，34 個檔案全部完成，.env 不在內。
+  本機 400 個、Drive 402 個（多的是只增不刪留下的舊檔）。
+
+### 教訓
+- 老師放在**下載資料夾**的檔案 Claude 讀不到；老師在對話框用 `!` 執行 mv 也一樣被擋（跑在 Claude 的環境）。請老師用 macOS「終端機」或 Finder 拖曳；
+  **放在 Google Drive 存檔區的檔案 Claude 可以用本機路徑直接 cp**，以後論文請老師直接放存檔區該週資料夾。
+- `plain()` 要求講義裡恰好有一個 Font Awesome `<link>`（沒有用到圖示也要放），否則 build 會 AssertionError；它只內嵌 `img/*.jpg`，PNG 要自己寫成 data URI。
+- Shell 迴圈用 `cut -c` 切 rsync 輸出的檔名會切錯，結果在 Drive 建出空資料夾（已清掉）；改用 `split(' ', 1)`，而且先 dry-run 印出路徑再執行。
+- 在 artifact 預覽頁裡讀不到新網站的資料（如修課名單），功能看起來「不會動」；這類功能要先講清楚只能在正式網站測，或先部署讓老師用老師帳號測（學生在開放時間前看不到）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
