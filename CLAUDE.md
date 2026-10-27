@@ -668,6 +668,10 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   已用 service key 從 tabs 表與 handouts 儲存區刪除，並移除 publish_state.json 對應項目。**堂次對調後一定要查殘留分頁。**
 - Notion：資料庫兩列改日期與 week、頁首加調整說明；總覽歷程與公開時程已更新。Drive 存檔區資料夾互換名稱（week09 個案、week10 Case Study），檔案跟著內容走。
 - main 不再 commit 建置產物（index.html、weekNN/）：舊網站已停用，week05 以後的 HTML 只放新網站（有登入權限）。
+- 同日追加：第 8 堂新增分頁 3「Critical Form：Ethnographies in the Front End」（Rosenthal & Capper, 2006，第 7 堂的閱讀；
+  `sources/week08/Rosenthal_Capper_critical_form.html`，agent 依原文 PDF 撰寫，PDF 老師放在存檔區 week08，本機副本 private/incoming/）。
+  Eckert & Stacey 改為分頁 4，第 8 堂共 7 個分頁；讀論文的提醒裡的分頁連結改 4。原文表 2 與內文樣本數、週數不一致，筆記已標出。
+  教訓：老師放在 Google Drive 存檔區的檔案，Claude 可以用本機路徑 cp 讀取（下載資料夾不行）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
