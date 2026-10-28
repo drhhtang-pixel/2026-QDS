@@ -75,6 +75,10 @@ def inline_imgs(h,d):
     def img(m):
         f=d/'img'/m.group(1); assert f.exists(),f
         return 'src="data:image/jpeg;base64,'+base64.b64encode(f.read_bytes()).decode()+'"'
+    def pdf(m):   # 講義旁 files/ 的 PDF（老師同意給學生下載的個案講義）內嵌成可下載的 data URI
+        f=d/'files'/m.group(1); assert f.exists(),f
+        return 'href="data:application/pdf;base64,'+base64.b64encode(f.read_bytes()).decode()+'"'
+    h=re.sub(r'href="files/([^"]+\.pdf)"',pdf,h)
     return re.sub(r'src="img/([^"]+\.jpg)"',img,h)
 
 # ─── Tailwind 預先編譯 ───────────────────────────────────────
