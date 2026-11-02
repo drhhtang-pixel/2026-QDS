@@ -9,11 +9,10 @@
 
 - 使用者：授課老師本人（olddrhhtang）。溝通語言：**繁體中文**（偶爾用英文下指令）。
 - **老師要求（2026/09/26）：每次修改完，一定要先把改好的頁面給老師看，等老師確認後才繼續下一步**
-  （例如合併到 main、上線、再做其他修改）。老師偏好 **Artifact 卡片**（按 Open 就能看）：
-  把 `weekNN/index.html` 去掉 `<!DOCTYPE>`/`<html>`/`<head>` 外殼後用 Artifact 工具發布。
-  第四堂預覽 artifact：https://claude.ai/artifact/G2AEarTPktir4aeMDPED5D （之後更新請傳 `url` 發布到同一個網址）。
-  第三堂預覽 artifact：https://claude.ai/artifact/RGT8xyprcgDfPYmopeRYp9 （同上）。
-  Artifact 版的「課程目錄」連結與 SKILL 下載無作用，只供預覽；正式網站仍是 GitHub Pages。
+  （例如合併到 main、上線、再做其他修改）。
+  **2026/11/02 起（老師決定，老師模式已移除）**：還沒開放的堂次 → 直接 `deploy.sh --content`，老師用管理者帳號在新網站看
+  （管理者看得到未開放分頁，學生要到開放時間才看得到）；已開放的堂次（部署＝立刻上線）→ 先把該頁發成臨時 Artifact 卡片
+  （`weekNN/index.html` 去掉外殼），老師確認後上線，並刪除那張臨時 Artifact。舊的各堂預覽 Artifact 已於 2026/10/31 全部刪除。
 - 讀者：研究所學生，會用電腦與手機瀏覽。
 - 發布方式：GitHub Pages（此資料夾即 repository 根目錄）。
 - 網址結構（老師選定 `/weekNN/`）：
@@ -21,8 +20,6 @@
     已開放講義的堂次可點，JS 依今天日期標「本週」）
   - `/2026-QDS/week03/` → 第三堂；`/2026-QDS/week03/#2` → 第三堂第 2 份講義
   - 舊網址 `/2026-QDS/#2` 會自動轉到 `/2026-QDS/week03/#2`（home.html 開頭的腳本）
-  另有一份 claude.ai 上的 artifact 版本：https://claude.ai/artifact/ENDbtkShVQv5TY8SW2iusV
-  （Claude Code 無法更新該 artifact，以 GitHub Pages 為主要發布管道。）
 
 ## 檔案結構
 
@@ -336,14 +333,14 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - `.github/workflows/release.yml`：每週三 07:05／07:25／07:50 解密、建置、有新內容才推送，並開一則 issue 通知老師（GitHub email）。
   可在 Actions 頁手動執行（workflow_dispatch）。雲端建置沒有 Node.js，所以 **tw_cache/ 要包含所有講義（含未公開）的快取**，本機正常 build 一次即可。
 - 老師授權：講義到時間**自動公開、不必事先同意，事後告知**。其他推送（build.py、內容修正等）照舊先給老師看。
-- 預覽／**老師模式**：`python3 build.py --preview` 把全部內容建置到 `private/preview/`（不影響正式產物）：卡片連到
-  `weekNN/index.html`、標出學生目前狀態與公開時間，頁首有「老師模式」提示。老師模式 artifact（只有老師看得到）：
-  https://claude.ai/artifact/FJmk7vLnNMxHZq52mBnYhd —— 主頁用 `private/preview/index.html` 去掉 doctype/html/head/body 外殼，
-  `files` 帶 `weekNN/index.html`。**每次修改講義後都要重新 --preview 並更新這個 artifact。**
+- **老師模式已移除（2026/11/02 老師決定）**：老師模式 Artifact 已刪除；只給老師的資料（錄影連結、老師投影片、期刊全文、
+  第 5 堂老師補充、HBR 候選清單、上課照片原檔）都放 Google Drive 存檔區各週資料夾（第 5、10 堂另有「老師版講義」單一 HTML），
+  老師自己在 Drive 看。之後新的老師專用資料直接放存檔區，**不再放 `private/teacher/`、不再做老師模式網站**。
+  `python3 build.py --preview` 與 `teacher_extras()` 還在（沒有 private/teacher/ 時就只是全部堂次的預覽建置，可用 `check_doi.py --preview`）。
   `QDS_NOW=2026-10-07T07:00 python3 build.py` 可模擬某個時間點（測完要再跑一次一般 build 還原）。
-- **老師模式補充**（2026/10/05）：只給老師的講義放 `private/teacher/weekNN/`（`teacher.json` 指定插入既有分頁的片段、或新增分頁與位置），
-  build.py 的 `teacher_extras()` 只在 `--preview` 讀入；不進公開 repo、不進 sealed、舊網站與新網站都沒有。新增分頁插在中間時，
-  原分頁裡的「分頁 N」與 `location.hash` 自動順移。老師模式專用的 Tailwind 快取放 `private/tw_cache_preview/`。
+- **本機 private/ 整理（2026/11/02）**：只留 `.env`、`seal.key`、`publish_state.json`、`logs/sync_drive*`、`hwtest/`；
+  其餘搬到存檔區（紀錄在存檔區「工作紀錄（private 整理 2026-11）/搬移紀錄_2026-11-02.txt」）。
+  Claude 的沙箱寫不進 Drive 本機路徑，終端機的 python 也沒有 Drive 權限：要寫 Drive 的批次工作寫成 zsh 腳本（cp／stat），請老師在終端機執行。
 - **個案客戶名稱**（2026/10/05 老師決定）：第 5 堂兩個個案一律寫 H Company、L Company（對照在 CLAUDE.local.md）；圖片與旗下品牌名暫不處理。
 - 機器人會推 commit 到 main：**本機推送前一定先 `git pull --rebase`**。
 - 某堂公開後：可從 `.gitignore` 移除該堂、把原始檔一般 commit；並更新 Notion 該列「網頁講義」「整理狀態＝已上線」。
@@ -370,8 +367,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - **講義上課當天（週三）07:00 自動公開，不必事先同意，事後告知**；還沒公開的原始檔不可出現在公開 repo。
 - **每一堂最後一個分頁是「課後作業」＝下一堂要討論的內容；論文閱讀提前兩週**（第 N 堂要討論的論文放第 N−2 堂的課後作業）。
   不再用「課前準備」分頁。自由作業要標示「自由作業」。
-- **老師模式**：顯示全部內容與學生公開狀態；錄影連結、老師投影片、期刊全文 PDF 只放老師模式（來自 `private/teacher/`，不進 repo 也不進 sealed）。
-  每次修改講義後都要重新 `--preview` 並更新老師模式 artifact。
+- ~~老師模式~~（2026/11/02 移除，見「定時公開」一節）：錄影連結、老師投影片、期刊全文 PDF 改放 Drive 存檔區，不進 repo 也不進 sealed。
 - **客戶名稱**：單元一講義一律用一般化例子，不出現客戶名稱（老師：學生版匿名、老師講義用全名）。第 5 堂兩個個案 2026/10/05 起改寫 H Company、L Company（取代先前的真名）。
 - **APA**：年代照原文獻著錄（民國年不改）；圖與表的編號與標題依 APA 7 都放在上方（講義已加說明）；Scopus 說法照網站（期刊、會議、叢書）。
 - 講義內容以「上課補充」標籤標出由 Notion 筆記整理加入的部分；原始上傳檔（第三堂分頁 1～6）不直接改，用 build.py 插入片段。
