@@ -45,4 +45,5 @@ sources/week14/
 sources/week15/
 sources/week16/
 sources/week17/
+sources/week18/
 # 預覽建置（python3 build.py --preview）的產物在 private/preview/，已由 private/ 排除
