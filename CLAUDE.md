@@ -707,7 +707,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - 新網站：publish.py 不刪分頁，第 12 堂原有 3 個分頁只會被「停課公告」取代 1 個 → `private/cleanup_w12.py --apply` 刪除殘留（在部署腳本裡）。
   第 18 堂是新堂次，開放時間與預設權限由 publish.py 依日期帶入（1/20 07:00，上課的同學、付費的同學、付費的老師）。
 - 同一天：第 9～11 堂最前面加分頁「課堂抽籤」（複製第 8 堂 draw_names.html，預覽提示改成「開這一堂」）。
-- Drive 存檔區資料夾改名跟著內容走（week12 口語分析→week15、week15→week16、week16→week17、week17 總結→week18），新建「week12 停課（唐老師出國公假）」。
+- Drive 存檔區資料夾改名跟著內容走（week12 口語分析→week15、week15→week16、week16→week17、week17 總結→week18）。不建停課資料夾（老師決定：存檔區以課程內容為主）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
