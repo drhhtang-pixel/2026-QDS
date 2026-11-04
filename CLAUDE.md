@@ -714,6 +714,16 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
 - Drive 存檔區資料夾名稱依新堂名改（week05 訪談方法介紹 … week18 課程總結）；資料夾跟著內容走（原 week12→15、15→16、16→17、17→18）；不建停課資料夾。
 - 教訓：Python 字串裡寫「細節」時誤打成簡體「节」並上線（第 16 堂課後作業），已改正；寫完要掃一次簡體字。
 
+## 2026/11/04 課程調整：teamLab 移到第 11 堂、第 16 堂併入第 15 堂、課程總結提前到第 17 堂
+
+- 第 11 堂（11/18）改名「個案討論：teamLab」：分頁＝課堂抽籤、HBR 個案：teamLab（`teamlab_case.html`，中文整理＋討論問題；英文個案與 Teaching Note 有版權，只在存檔區）、
+  補充資料：Contexts of Briefing、補充資料：Benefits of Co-design、課後作業。老師版教學指引（依 Teaching Note 整理）只放存檔區 week11，不上網。
+- 第 10 堂：分頁 4 改名「個案練習：公共設計案」（刪除趨勢段落）；分頁 3「四種個案研究設計」加整體／嵌入說明；課後作業改為第 11 堂 teamLab 準備。
+- 第 15 堂（12/23）＝口語分析的做法 → 課堂練習：放聲思考 → Suwa & Tversky → 口語分析入門 → 課後作業（Valkenburg 第 16 堂、期末預告）；
+  第 16 堂（1/06）「口語分析研究」＝Valkenburg；第 17 堂（1/13）「課程總結」＝總結＋期末作業；**取消第 18 堂，TOTAL=17**。「口語分析實務」堂名不再使用。
+- 新網站：`private/cleanup_1104.py` 刪除第 10～17 堂 tabs.json 沒有的殘留分頁，並整堂刪除第 18 堂（已執行）。舊檔備份在 `private/removed/restructure_2026-11-04/`。
+- worktree 的 `sources/week18` symlink 現在指向不存在的資料夾（無害，TOTAL=17 不會讀）。
+
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
 
