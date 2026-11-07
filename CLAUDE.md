@@ -723,6 +723,7 @@ python3 build.py      # 產生 index.html 與各 weekNN/index.html（Python 只�
   第 16 堂（1/06）「口語分析研究」＝Valkenburg；第 17 堂（1/13）「課程總結」＝總結＋期末作業；**取消第 18 堂，TOTAL=17**。「口語分析實務」堂名不再使用。
 - 新網站：`private/cleanup_1104.py` 刪除第 10～17 堂 tabs.json 沒有的殘留分頁，並整堂刪除第 18 堂（已執行）。舊檔備份在 `private/removed/restructure_2026-11-04/`。
 - worktree 的 `sources/week18` symlink 現在指向不存在的資料夾（無害，TOTAL=17 不會讀）。
+- **教訓（2026/11/07 發現）**：`./deploy.sh --content` 只上傳講義，**首頁卡片的堂名、日期與各堂標題列寫在網站外框裡，不會更新**；10/27 以來的改名一直沒出現在首頁，11/07 做完整部署 `./deploy.sh` 才更新。改 SCHEDULE（堂名、日期、堂數）後一定要完整部署（需要 Cloudflare 登入，帳號見 CLAUDE.local.md）。
 
 ## 待決事項 / 建議（尚未執行，需老師同意）
 - 停止舊網站並轉址到新網站（時間由老師決定，見「新網站」一節）。
